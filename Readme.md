@@ -24,7 +24,7 @@ var elements = $('div.authentication .form-container.authentication input[type=t
 
 > I cannot stress enough how important it is to understand the fact that **everytime** you call the **$** global function you will create a new object that will take up memory - ZebraJS does not cache selectors! Therefore, you should **never** use it in an event handler or a function that gets called multiple times over the lifetime of a page and instead **cache those selectors outside those functions!** Yes, this true for jQuery, also.
 
-Once you grab hold of one or more elements (we call this *wrapping elements* because we *wrap* the ZebraJS object over the selected elements) you can call any of ZebraJS's methods.
+Once you grab hold of one or more elements (we call this *wrapping elements* because we *wrap* the ZebraJS object over the selected elements) you can call any of [ZebraJS's methods](https://stefangabos.github.io/zebrajs/index.html).
 
 ## Where to use ZebraJS
 
