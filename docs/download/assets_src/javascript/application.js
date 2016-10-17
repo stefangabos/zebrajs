@@ -14,7 +14,7 @@ $(document).ready(function() {
         // extract all the available methods
         extract_methods = function() {
 
-            var source = '@import "../../../dist/zebra.min.js"',
+            var source = '@import "../../../../dist/zebra.min.js"',
                 source_length = source.length,
                 i, tmp = '', matches, matching_brackets = false, method_name, methods = {};
 

@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="public/css/screen.css">
+	<title>ZebraJS - A modular, jQuery compatible, JavaScript micro-library for modern browsers</title>
+</head>
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="docs/index.html" class="navbar-brand">ZebraJS</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li><a href="docs/index.html">Documentation</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Customize your download</h1>
+        </div>
+        <div class="row">
+        	<div class="col-lg-12">
+                <form action="" id="packager">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="object">Main object's name</label>
+                                <input type="text" id="object" class="form-control" value="$">
+                                <span id="helpBlock" class="help-block">
+                                    The "$" in <code>$('selector')</code>.<br>
+                                </span>
+                            </div>
+                            <div class="form-group required-modules">
+                                <label for="">Required functionality</label>
+                            </div>
+                            <div class="clearfix">
+                                <label class="pull-left"><strong>Optional functionality</strong></label>
+                                <div class="pull-right">
+                                    <a href="javascript:void(0)">Select all</a>&nbsp;&nbsp;|&nbsp;
+                                    <a href="javascript:void(0)">Deselect all</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="" class="result">Result (<strong><span>0</span> bytes</strong>)</label>
+                                <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="public/javascript/jquery.min.js"></script>
+    <script type="text/javascript" src="public/javascript/application.min.js"></script>
+    <script type="text/template" id="template">
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="form-group">
+                <div class="well">
+                    <div class="checkbox">
+                        <label for="method_{{method}}"><input type="checkbox" id="method_{{method}}"><strong>{{method}}</strong></label><br>
+                        {{size}} bytes | <a href="docs/$.html#{{method}}">documentation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+</body>
+</html>

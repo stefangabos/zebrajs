@@ -47,8 +47,8 @@ module.exports = function(grunt) {
                     debug: false
                 },
                 files: [{
-                    src: 'site/public/javascript/application.min.js',
-                    dest: 'site/public/javascript/application.min.js'
+                    src: 'docs/download/public/javascript/application.min.js',
+                    dest: 'docs/download/public/javascript/application.min.js'
                 }]
             }
         },
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
             },
             build: {
                 files: {
-                    'site/public/css/screen.css': 'site/assets_src/css/**/*.scss'
+                    'docs/download/public/css/screen.css': 'docs/download/assets_src/css/**/*.scss'
                 }
             }
         },
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
                 src: ['src/**/*.js']
             },
             site: {
-                src: ['site/assets_src/javascript/**/*.js']
+                src: ['docs/download/assets_src/javascript/**/*.js']
             }
         },
 
@@ -114,7 +114,7 @@ module.exports = function(grunt) {
                 src: ['src/**/*.js']
             },
             site: {
-                src: ['site/assets_src/**/*.js']
+                src: ['docs/download/assets_src/**/*.js']
             }
         },
 
@@ -126,7 +126,7 @@ module.exports = function(grunt) {
             build : {
                 src: ['dist/zebra.src.js'],
                 options: {
-                    destination: 'docs/docs',
+                    destination: 'docs',
                     template : "node_modules/docdash",
                     configure : "jsdoc.json",
                     readme: "Readme.md"
@@ -146,7 +146,7 @@ module.exports = function(grunt) {
             },
             site: {
                 files: [
-                    {src: 'site/assets_src/javascript/application.js', dest: 'site/public/javascript/application.min.js'}
+                    {src: 'docs/download/assets_src/javascript/application.js', dest: 'docs/download/public/javascript/application.min.js'}
                 ]
             }
         },
@@ -164,14 +164,14 @@ module.exports = function(grunt) {
                 }
             },
             site_js: {
-                files: ['site/assets_src/javascript/**/*.js'],
+                files: ['docs/download/assets_src/javascript/**/*.js'],
                 tasks: ['newer:eslint:site', 'newer:jshint:site', 'newer:uglify:site', 'includes:site', 'notify:done'],
                 options: {
                     livereload: true
                 }
             },
             site_css: {
-                files: ['site/assets_src/css/**/*.scss'],
+                files: ['docs/download/assets_src/css/**/*.scss'],
                 tasks: ['newer:sass', 'notify:done'],
                 options: {
                     livereload: true
