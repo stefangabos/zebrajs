@@ -176,6 +176,10 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true
                 }
+            },
+            readme: {
+                files: ['Readme.md'],
+                tasks: ['jsdoc']
             }
         }
 
