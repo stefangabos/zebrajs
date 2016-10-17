@@ -152,6 +152,9 @@ $(document).ready(function() {
     // toggling a checkbox, means generating the source code and updating the downloadable size
     $('.well').on('change', 'input', manage_modules);
 
+    // update source code when global object's name is changed
+    global_object.on('blur', manage_modules);
+
     // now that all modules were added cache them
     modules = $('.well input');
 
