@@ -12,7 +12,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  var element = $('selector');
  *
  *  // get the element's outer height
  *  var height = element.outerHeight();

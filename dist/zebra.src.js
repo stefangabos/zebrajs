@@ -574,7 +574,7 @@ $ = function(selector, parent, first_only) {
          *
          *  // always cache selectors
          *  // to avoid DOM scanning over and over again
-         *  var element = $('#selector');
+         *  var element = $('selector');
          *
          *  // get the element's outer height
          *  var height = element.outerHeight();
@@ -619,7 +619,7 @@ $ = function(selector, parent, first_only) {
          *
          *  // always cache selectors
          *  // to avoid DOM scanning over and over again
-         *  var element = $('#selector');
+         *  var element = $('selector');
          *
          *  // get the element's outer width
          *  var height = element.outerWidth();
