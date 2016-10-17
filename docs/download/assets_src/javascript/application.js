@@ -149,14 +149,50 @@ $(document).ready(function() {
 
         }
 
+    // now that all modules were added cache them
+    modules = $('.well input');
+
     // toggling a checkbox, means generating the source code and updating the downloadable size
     $('.well').on('change', 'input', manage_modules);
 
     // update source code when global object's name is changed
     global_object.on('blur', manage_modules);
 
-    // now that all modules were added cache them
-    modules = $('.well input');
+    // select all
+    $('a.select-all').on('click', function(e) {
+
+        e.preventDefault();
+
+        // iterate over all available modules
+        modules.each(function() {
+
+            // check each module, unless this is the global object
+            if (this.getAttribute('id') !== 'method_$') this.checked = true;
+
+        });
+
+        // generate source code
+        manage_modules();
+
+    });
+
+    // deselect all
+    $('a.deselect-all').on('click', function(e) {
+
+        e.preventDefault();
+
+        // iterate over all available modules
+        modules.each(function() {
+
+            // uncheck each module, unless this is the global object
+            if (this.getAttribute('id') !== 'method_$') this.checked = false;
+
+        });
+
+        // generate source code
+        manage_modules();
+
+    });
 
     // generate initial source code
     manage_modules();
