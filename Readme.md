@@ -44,4 +44,4 @@ From this point on, when you edit the project's files in the `/src` folder, Grun
 
 You can help by writing actual code for the methods listed in the `/src` folder and which don't have yet been written. The methods are included in the main `_$.js` file via comments looking like `// import "_methodName.js"`.
 
-Alternatively, you can help improving the library's website in the `/site` folder. This implies altering JavaScript and CSS files in the `/site/assets_src` folder and the actual `index.html` in `/site`.
+Alternatively, you can help improving the library's website in the `/docs/download` folder. This implies altering JavaScript and CSS files in the `/docs/download/assets_src` folder and the actual `index.html` in `/docs/download`.
