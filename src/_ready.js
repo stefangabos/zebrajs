@@ -1,5 +1,5 @@
 /**
- *  @todo   Needs to be written!
+ *  @todo   Needs documentation!
  */
 this.ready = function(callback) {
 

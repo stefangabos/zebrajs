@@ -103,7 +103,7 @@ $ = function(selector, parent, first_only) {
             collection = (selector instanceof Element ? [selector] : [].concat(selector));
 
         /**
-         *  This is a function
+         *  @todo   Needs documentation!
          *
          *  @access public
          */
@@ -638,7 +638,7 @@ $ = function(selector, parent, first_only) {
         }
 
         /**
-         *  @todo   Needs to be written!
+         *  @todo   Needs documentation!
          */
         this.ready = function(callback) {
 
