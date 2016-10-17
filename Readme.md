@@ -1,4 +1,4 @@
-[Download](../index.html)
+[Download](https://stefangabos.github.io/zebrajs/download/)
 
 # ZebraJS
 
