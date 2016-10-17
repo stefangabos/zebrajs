@@ -1,5 +1,3 @@
-[Download](https://stefangabos.github.io/zebrajs/download/)
-
 # ZebraJS
 
 A modular JavaScript micro-library for modern browsers (IE 9+) meant to simplify the interaction with the DOM in the *post-jQuery* world, now that there are there are less and less differences between how browsers handle various JavaScript-related aspects and offer native support for most of the things that [jQuery](http://jquery.com/) had to tackle and take care for us, behind the scenes, since its first release [back in 2006](https://en.wikipedia.org/wiki/JQuery).
@@ -34,10 +32,9 @@ I use this to fuel my (small) pet projects where jQuery is overkill and plain Ja
 
 Keep in mind that this library is currently in its infancy so adjust your expectations accordingly.
 
-
 ## Installing
 
-Download the full library from GitHub or go on and get your customized version.
+Download the [full library](https://github.com/stefangabos/zebrajs/archive/master.zip) from GitHub (and use either `dist/zebra.min.js` or `/dist/zebra.src.js`), or go on and [get your customized version](https://stefangabos.github.io/zebrajs/download/).
 
 ## Contributing
 
