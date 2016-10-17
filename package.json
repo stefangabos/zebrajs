@@ -1,0 +1,39 @@
+{
+  "name": "zebrajs",
+  "version": "0.0.1",
+  "main": "dest/zebra.min.js",
+  "homepage": "http://www.stefangabos.ro/jquery/zebra-datepicker/",
+  "author": {
+    "name": "Stefan Gabos",
+    "email": "contact@stefangabos.ro"
+  },
+  "description": "A JavaScript library for modern browsers",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stefangabos/Zebra_Datepicker.git"
+  },
+  "bugs": {
+    "url": "http://github.com/stefangabos/Zebra_Datepicker/issues",
+    "email": "contact@stefangabos.ro"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "license": "LGPL-3.0",
+  "devDependencies": {
+    "docdash": "https://github.com/stefangabos/docdash.git",
+    "grunt": "*",
+    "grunt-cli": "*",
+    "grunt-newer": "*",
+    "time-grunt": "*",
+    "grunt-notify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-sass": "*",
+    "grunt-eslint": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-includes": "*",
+    "grunt-jsdoc": "*",
+    "jsdoc": "*"
+  }
+}
