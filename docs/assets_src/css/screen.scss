@@ -1,0 +1,36 @@
+@import 'vendor/_bootstrap.scss';
+
+body {
+    padding-top: 35px;
+}
+
+a, a:hover {
+    color: #606;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+    &:hover {
+        border-bottom: 1px solid #606;
+    }
+}
+
+.navbar-default {
+    background: #6d426d;
+    box-shadow: 0 1px 5px #666;
+    border-width: 0;
+    .navbar-brand,
+    ul.navbar-nav a,
+    ul.navbar-nav a:focus {
+        color: #FFF;
+        border-width: 0;
+        &:hover,
+        &:active {
+            color: #cbefb6;
+        }
+    }
+}
+
+.well {
+    box-shadow: none;
+    background: #FAFAFA;
+    padding: 5px 20px;
+}

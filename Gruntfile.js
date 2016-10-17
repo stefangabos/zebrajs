@@ -126,7 +126,7 @@ module.exports = function(grunt) {
             build : {
                 src: ['dist/zebra.src.js'],
                 options: {
-                    destination: 'site/docs',
+                    destination: 'docs/docs',
                     template : "node_modules/docdash",
                     configure : "jsdoc.json",
                     readme: "Readme.md"
