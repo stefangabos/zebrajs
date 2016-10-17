@@ -29,13 +29,9 @@
         <script type="text/javascript" src="../dist/zebra.min.js"></script>
         <script type="text/javascript">
 
-        $('#test1').css({
-            backgroundColor: 'red',
-            borderWidth: '10px',
-            borderStyle: 'solid'
-        });
-
-        console.log($('#test1').css('borderTopWidth'));
+        var elements = $('.test');
+        elements.addClass('some');
+        elements.toggleClass('someother');
 
         </script>
     </body>
