@@ -18,7 +18,7 @@
  *
  *  // get the HTML content of the first
  *  // element in the set of matched elements
- *  elements.html();
+ *  var content = elements.html();
  *
  *  // since this method returns the set of matched elements,
  *  // we can use chaining

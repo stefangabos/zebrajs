@@ -367,7 +367,7 @@ $ = function(selector, parent, first_only) {
          *  var elements = $('selector');
          *
          *  // check if matched elements have a certain class
-         *  console.log(elements.hasClass('some-class'));
+         *  var class_exists = elements.hasClass('some-class');
          *
          *  // since this method returns the set of matched elements, we can use chaining
          *  elements.toggleClass('some-class');
@@ -472,7 +472,7 @@ $ = function(selector, parent, first_only) {
          *
          *  // get the HTML content of the first
          *  // element in the set of matched elements
-         *  elements.html();
+         *  var content = elements.html();
          *
          *  // since this method returns the set of matched elements,
          *  // we can use chaining
