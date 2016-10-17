@@ -231,7 +231,7 @@ $ = function(selector, parent, first_only) {
          *  // set a single CSS property
          *  $('selector').css('position', 'absolute');
          *
-         *  // set a multiple CSS properties
+         *  // set multiple CSS properties
          *  $('selector').css({
          *      position: 'absolute',
          *      left: 0,
@@ -811,7 +811,7 @@ $ = function(selector, parent, first_only) {
         }
 
         /**
-         *  Add or removes one or more classes from each element in the set of matched elements, depending on the presence of
+         *  Adds or removes one or more classes from each element in the set of matched elements, depending on the presence of
          *  each class name given as argument.
          *
          *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.contains},

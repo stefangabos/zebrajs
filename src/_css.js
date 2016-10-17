@@ -11,7 +11,7 @@
  *  // set a single CSS property
  *  $('selector').css('position', 'absolute');
  *
- *  // set a multiple CSS properties
+ *  // set multiple CSS properties
  *  $('selector').css({
  *      position: 'absolute',
  *      left: 0,
