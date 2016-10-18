@@ -29,12 +29,12 @@
  */
 this.each = function(callback) {
 
-    // iterate through the matched elements
-    for (var i in collection)
+    // iterate through the set of matched elements
+    for (var i in elements)
 
         //  apply the callback function (the index is the argument to the function, while the "this" keyword
         //  inside the callback function refers to wrapped element (in a "$" object)
         //  returning false from the callback function exists the loop
-        if (callback.call(new $(collection[i]), i) === false) return;
+        if (callback.call(new $(elements[i]), i) === false) return;
 
 }

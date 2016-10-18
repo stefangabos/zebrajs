@@ -45,30 +45,30 @@ this.css = function(property, value) {
     // if "property" is an object and "value" is not set
     if (typeof property === 'object')
 
-        // iterate through the collection of elements
-        for (i in collection)
+        // iterate through the set of matched elements
+        for (i in elements)
 
             // iterate through the "properties" object
             for (j in property)
 
                 // set each style property
-                collection[i].style[j] = property[j];
+                elements[i].style[j] = property[j];
 
     // if "property" is not an object, and "value" argument is set
     else if (value)
 
-        // iterate through the collection of elements
-        for (i in collection)
+        // iterate through the set of matched elements
+        for (i in elements)
 
             // set the respective style property
-            collection[i].style[property] = value;
+            elements[i].style[property] = value;
 
     // if "property" is not an object and "value" is not set
     // return the value of the given CSS property, or "undefined" if property is not available
     else {
 
         // get the first element's computed styles
-        computedStyle = window.getComputedStyle(collection[0]);
+        computedStyle = window.getComputedStyle(elements[0]);
 
         // return the sought property's value
         return computedStyle[property];

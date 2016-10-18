@@ -14,20 +14,20 @@ this.append = function(element) {
     // if element to append is not a string, don't go further
     else if (typeof element !== 'string') return false;
 
-    // iterate through the collection of elements
-    for (i in collection)
+    // iterate through the set of matched elements
+    for (i in elements)
 
         // if element to append is actually a string
         if (typeof element === 'string')
 
             // add it like this
-            collection[i].insertAdjacentHTML('beforeend', element);
+            elements[i].insertAdjacentHTML('beforeend', element);
 
         // since element has to be an array of DOM elements
         // iterate over the array of DOM elements
         else for (j in element)
 
             // append each node to the parent
-            collection[i].appendChild(element[j]);
+            elements[i].appendChild(element[j]);
 
 }

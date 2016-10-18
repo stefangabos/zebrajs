@@ -3,7 +3,7 @@
  */
 this.on = function(event_name, callback) {
 
-    for (var i in collection)
-        collection[i].addEventListener(event_name, callback.call(this));
+    for (var i in elements)
+        elements[i].addEventListener(event_name, callback.call(this));
 
 }

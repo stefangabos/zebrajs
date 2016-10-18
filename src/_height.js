@@ -52,6 +52,6 @@ this.height = function(height) {
 
     // if "height" is not given, return the height of the first element in the set
     // or 0 if that yields NaN
-    return parseFloat(window.getComputedStyle(collection[0], null).height) || 0;
+    return parseFloat(window.getComputedStyle(elements[0], null).height) || 0;
 
 }

@@ -39,15 +39,15 @@ this.html = function(content) {
     // if content is provided
     if (content)
 
-        // iterate through the matched elements
-        for (i in collection)
+        // iterate through the set of matched elements
+        for (i in elements)
 
             // set the HTML content of each element
-            collection[i].innerHTML = content;
+            elements[i].innerHTML = content;
 
     // if content is not provided
     // return the content of the first element in the set of matched elements
-    else return collection[0].innerHTML;
+    else return elements[0].innerHTML;
 
     // return the set of matched elements, for chaining
     return $this;

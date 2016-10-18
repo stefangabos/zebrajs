@@ -52,6 +52,6 @@ this.width = function(width) {
 
     // if "width" is not given, return the width of the first element in the set
     // or 0 if that yields NaN
-    return parseFloat(window.getComputedStyle(collection[0], null).width) || 0;
+    return parseFloat(window.getComputedStyle(elements[0], null).width) || 0;
 
 }

@@ -32,14 +32,14 @@ this.addClass = function(class_name) {
     // split by space and create an array
     class_name = class_name.split(' ');
 
-    // iterate through the matched elements
-    for (i in collection)
+    // iterate through the set of matched elements
+    for (i in elements)
 
         // iterate through the class names to add
         for (j in class_name)
 
             // add class
-            collection[i].classList.add(class_name[j]);
+            elements[i].classList.add(class_name[j]);
 
     // return the set of matched elements, for chaining
     return $this;

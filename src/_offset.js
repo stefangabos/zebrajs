@@ -3,7 +3,7 @@
  */
 this.offset = function() {
 
-    var i = collection[0].getBoundingClientRect();
+    var i = elements[0].getBoundingClientRect();
 
     return {
         top: i.top + window.pageYOffset - document.documentElement.clientTop,

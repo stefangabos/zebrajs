@@ -32,14 +32,14 @@ this.removeClass = function(class_name) {
     // split by space and create an array
     class_name = class_name.split(' ');
 
-    // iterate through the matched elements
-    for (i in collection)
+    // iterate through the set of matched elements
+    for (i in elements)
 
         // iterate through the class names to remove
         for (j in class_name)
 
             // remove class
-            collection[i].classList.remove(class_name[j]);
+            elements[i].classList.remove(class_name[j]);
 
     // return the set of matched elements, for chaining
     return $this;

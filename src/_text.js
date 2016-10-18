@@ -36,16 +36,16 @@ this.text = function(content) {
     // if content is provided
     if (content)
 
-        // iterate through the matched elements
-        for (i in collection)
+        // iterate through the set of matched elements
+        for (i in elements)
 
             // set the text content of each element
-            collection[i].textContent = content;
+            elements[i].textContent = content;
 
     // if content is not provided
     // return the text content of the first element in the set of matched elements
     // (combined with the text content of all its descendants)
-    else return collection[0].textContent;
+    else return elements[0].textContent;
 
     // return the set of matched elements, for chaining
     return $this;

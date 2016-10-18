@@ -100,7 +100,7 @@ $ = function(selector, parent, first_only) {
         var $this = this,
 
             // the set of matched elements
-            collection = (selector instanceof Element ? [selector] : [].concat(selector));
+            elements = (selector instanceof Element ? [selector] : [].concat(selector));
 
         /**
          *  @todo   Needs documentation!
@@ -108,7 +108,7 @@ $ = function(selector, parent, first_only) {
          *  @access public
          */
         this.get = function() {
-            return collection;
+            return elements;
         }
 
         /**
@@ -145,14 +145,14 @@ $ = function(selector, parent, first_only) {
             // split by space and create an array
             class_name = class_name.split(' ');
 
-            // iterate through the matched elements
-            for (i in collection)
+            // iterate through the set of matched elements
+            for (i in elements)
 
                 // iterate through the class names to add
                 for (j in class_name)
 
                     // add class
-                    collection[i].classList.add(class_name[j]);
+                    elements[i].classList.add(class_name[j]);
 
             // return the set of matched elements, for chaining
             return $this;
@@ -183,21 +183,21 @@ $ = function(selector, parent, first_only) {
             // if element to append is not a string, don't go further
             else if (typeof element !== 'string') return false;
 
-            // iterate through the collection of elements
-            for (i in collection)
+            // iterate through the set of matched elements
+            for (i in elements)
 
                 // if element to append is actually a string
                 if (typeof element === 'string')
 
                     // add it like this
-                    collection[i].insertAdjacentHTML('beforeend', element);
+                    elements[i].insertAdjacentHTML('beforeend', element);
 
                 // since element has to be an array of DOM elements
                 // iterate over the array of DOM elements
                 else for (j in element)
 
                     // append each node to the parent
-                    collection[i].appendChild(element[j]);
+                    elements[i].appendChild(element[j]);
 
         }
 
@@ -208,13 +208,13 @@ $ = function(selector, parent, first_only) {
 
             var i, j;
 
-            for (i in collection)
+            for (i in elements)
 
                 for (j in attribute)
 
-                    collection[i].setAttribute(j, attribute[j]);
+                    elements[i].setAttribute(j, attribute[j]);
 
-            return collection;
+            return elements;
 
         }
 
@@ -265,30 +265,30 @@ $ = function(selector, parent, first_only) {
             // if "property" is an object and "value" is not set
             if (typeof property === 'object')
 
-                // iterate through the collection of elements
-                for (i in collection)
+                // iterate through the set of matched elements
+                for (i in elements)
 
                     // iterate through the "properties" object
                     for (j in property)
 
                         // set each style property
-                        collection[i].style[j] = property[j];
+                        elements[i].style[j] = property[j];
 
             // if "property" is not an object, and "value" argument is set
             else if (value)
 
-                // iterate through the collection of elements
-                for (i in collection)
+                // iterate through the set of matched elements
+                for (i in elements)
 
                     // set the respective style property
-                    collection[i].style[property] = value;
+                    elements[i].style[property] = value;
 
             // if "property" is not an object and "value" is not set
             // return the value of the given CSS property, or "undefined" if property is not available
             else {
 
                 // get the first element's computed styles
-                computedStyle = window.getComputedStyle(collection[0]);
+                computedStyle = window.getComputedStyle(elements[0]);
 
                 // return the sought property's value
                 return computedStyle[property];
@@ -338,13 +338,13 @@ $ = function(selector, parent, first_only) {
          */
         this.each = function(callback) {
 
-            // iterate through the matched elements
-            for (var i in collection)
+            // iterate through the set of matched elements
+            for (var i in elements)
 
                 //  apply the callback function (the index is the argument to the function, while the "this" keyword
                 //  inside the callback function refers to wrapped element (in a "$" object)
                 //  returning false from the callback function exists the loop
-                if (callback.call(new $(collection[i]), i) === false) return;
+                if (callback.call(new $(elements[i]), i) === false) return;
 
         }
 
@@ -383,11 +383,11 @@ $ = function(selector, parent, first_only) {
 
             var i, j;
 
-            // iterate through the matched elements
-            for (i in collection)
+            // iterate through the set of matched elements
+            for (i in elements)
 
                 // if sought class exists, return TRUE
-                if (collection[i].classList.contains(class_name)) return true;
+                if (elements[i].classList.contains(class_name)) return true;
 
             // return FALSE if we get this far
             return false;
@@ -448,7 +448,7 @@ $ = function(selector, parent, first_only) {
 
             // if "height" is not given, return the height of the first element in the set
             // or 0 if that yields NaN
-            return parseFloat(window.getComputedStyle(collection[0], null).height) || 0;
+            return parseFloat(window.getComputedStyle(elements[0], null).height) || 0;
 
         }
 
@@ -493,15 +493,15 @@ $ = function(selector, parent, first_only) {
             // if content is provided
             if (content)
 
-                // iterate through the matched elements
-                for (i in collection)
+                // iterate through the set of matched elements
+                for (i in elements)
 
                     // set the HTML content of each element
-                    collection[i].innerHTML = content;
+                    elements[i].innerHTML = content;
 
             // if content is not provided
             // return the content of the first element in the set of matched elements
-            else return collection[0].innerHTML;
+            else return elements[0].innerHTML;
 
             // return the set of matched elements, for chaining
             return $this;
@@ -541,7 +541,7 @@ $ = function(selector, parent, first_only) {
          */
         this.offset = function() {
 
-            var i = collection[0].getBoundingClientRect();
+            var i = elements[0].getBoundingClientRect();
 
             return {
                 top: i.top + window.pageYOffset - document.documentElement.clientTop,
@@ -555,8 +555,8 @@ $ = function(selector, parent, first_only) {
          */
         this.on = function(event_name, callback) {
 
-            for (var i in collection)
-                collection[i].addEventListener(event_name, callback.call(this));
+            for (var i in elements)
+                elements[i].addEventListener(event_name, callback.call(this));
 
         }
 
@@ -589,7 +589,7 @@ $ = function(selector, parent, first_only) {
             // get the values of all the CSS properties of the element
             // after applying the active stylesheets and resolving any
             // basic computation those values may contain
-            var computed_style = window.getComputedStyle(collection[0]);
+            var computed_style = window.getComputedStyle(elements[0]);
 
             // return the result of inner height together with
             return (parseFloat(computed_style.height) +
@@ -634,7 +634,7 @@ $ = function(selector, parent, first_only) {
             // get the values of all the CSS properties of the element
             // after applying the active stylesheets and resolving any
             // basic computation those values may contain
-            var computed_styles = window.getComputedStyle(collection[0]);
+            var computed_styles = window.getComputedStyle(elements[0]);
 
             // return the result of inner width together with
             return (parseFloat(computed_styles.width) +
@@ -663,8 +663,8 @@ $ = function(selector, parent, first_only) {
         this.position = function() {
 
             return {
-                left: parseFloat(collection[0].offsetLeft),
-                top: parseFloat(collection[0].offsetTop)
+                left: parseFloat(elements[0].offsetLeft),
+                top: parseFloat(elements[0].offsetTop)
             }
 
         }
@@ -721,14 +721,14 @@ $ = function(selector, parent, first_only) {
             // split by space and create an array
             class_name = class_name.split(' ');
 
-            // iterate through the matched elements
-            for (i in collection)
+            // iterate through the set of matched elements
+            for (i in elements)
 
                 // iterate through the class names to remove
                 for (j in class_name)
 
                     // remove class
-                    collection[i].classList.remove(class_name[j]);
+                    elements[i].classList.remove(class_name[j]);
 
             // return the set of matched elements, for chaining
             return $this;
@@ -794,16 +794,16 @@ $ = function(selector, parent, first_only) {
             // if content is provided
             if (content)
 
-                // iterate through the matched elements
-                for (i in collection)
+                // iterate through the set of matched elements
+                for (i in elements)
 
                     // set the text content of each element
-                    collection[i].textContent = content;
+                    elements[i].textContent = content;
 
             // if content is not provided
             // return the text content of the first element in the set of matched elements
             // (combined with the text content of all its descendants)
-            else return collection[0].textContent;
+            else return elements[0].textContent;
 
             // return the set of matched elements, for chaining
             return $this;
@@ -848,17 +848,17 @@ $ = function(selector, parent, first_only) {
             // split by space and create an array
             class_name = class_name.split(' ');
 
-            // iterate through the matched elements
-            for (i in collection)
+            // iterate through the set of matched elements
+            for (i in elements)
 
                 // iterate through the class names to remove
                 for (j in class_name)
 
                     // if class is present, remove it
-                    if (collection[i].classList.contains(class_name[j])) collection[i].classList.remove(class_name[j]);
+                    if (elements[i].classList.contains(class_name[j])) elements[i].classList.remove(class_name[j]);
 
                     // if class is not present, add it
-                    else collection[i].classList.add(class_name[j]);
+                    else elements[i].classList.add(class_name[j]);
 
             // return the set of matched elements, for chaining
             return $this;
@@ -940,7 +940,7 @@ $ = function(selector, parent, first_only) {
 
             // if "width" is not given, return the width of the first element in the set
             // or 0 if that yields NaN
-            return parseFloat(window.getComputedStyle(collection[0], null).width) || 0;
+            return parseFloat(window.getComputedStyle(elements[0], null).width) || 0;
 
         }
 

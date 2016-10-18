@@ -100,7 +100,7 @@ $ = function(selector, parent, first_only) {
         var $this = this,
 
             // the set of matched elements
-            collection = (selector instanceof Element ? [selector] : [].concat(selector));
+            elements = (selector instanceof Element ? [selector] : [].concat(selector));
 
         /**
          *  @todo   Needs documentation!
@@ -108,7 +108,7 @@ $ = function(selector, parent, first_only) {
          *  @access public
          */
         this.get = function() {
-            return collection;
+            return elements;
         }
 
         // import "_addClass.js"
