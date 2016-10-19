@@ -570,7 +570,7 @@
 
     
 
-    <h4 class="name" id="attr"><span class="type-signature"></span>attr<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="attr"><span class="type-signature"></span>attr<span class="signature">(attribute, value<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="$.html">$</a>|mixed}</span></h4>
 
     
 
@@ -582,7 +582,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line207">line 207</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line257">line 257</a>
     </li></ul></dd>
     
 
@@ -615,19 +615,166 @@
     
 
     
-    <dt class="tag-todo">To Do:</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>Needs to be written!</li>
-        </ul>
-    </dd>
-    
 </dl>
 
 
 
 
 
+<div class="description">
+    <p>Gets the value of an attribute for the first element in the set of matched elements, or sets one or more attributes
+ for every matched element.</p>
+<blockquote>
+<p>This method uses JavaScript's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute">setAttribute</a>,
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute">getAttribute</a> and
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttribute">removeAttribute</a>.</p>
+</blockquote>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // get the value of an attribute for the first
+ // element in the set of matched elements
+ elements.attr('id');
+
+ // set a single attribute
+ elements.attr('title', 'title');
+
+ // set multiple attributes
+ elements.attr({
+     title: 'title',
+     href: 'href'
+ });
+
+ // remove an attribute
+ elements.attr('title', false);
+
+ // since this method returns the set of matched elements, we can use chaining
+ elements.attr('title', 'title').removeClass('classname');
+
+ </code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>attribute</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>If given as a <code>string</code> representing an attribute and <code>value</code> <strong>is not</strong> set, this
+                                     method will return that particular attribute's value for the first element in the
+                                     set of matched elements.
+                                     <br><br>
+                                     If given as a <code>string</code> representing an attribute and <code>value</code> <strong>is</strong> set, this
+                                     method will set that particular attribute's value for all the elements in the
+                                     set of matched elements.
+                                     <br><br>
+                                     If given as an <code>object</code>, this method will set the given attributes to the given
+                                     values for all the elements in the set of matched elements.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The value to be set for the attribute given as argument. <em>Only used if <code>attribute</code>
+                                     is not an object!</em>
+                                     <br><br>
+                                     Setting it to <code>false</code> or <code>null</code> will instead <strong>remove</strong> the attribute from the
+                                     set of matched elements.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -642,14 +789,32 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>When <code>setting</code> attributes, this method returns the set of matched elements, for chaining.
+                     When <code>reading</code> attributes, this method returns the value of the required attribute.</p>
+</div>
 
 
 
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="$.html">$</a></span>
+|
+
+<span class="param-type">mixed</span>
 
 
+    </dd>
+</dl>
 
-
-
+    
 
 
         
@@ -669,7 +834,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line261">line 261</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line347">line 347</a>
     </li></ul></dd>
     
 
@@ -723,22 +888,26 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// get the value of a computed style property
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // get the value of a computed style property
  // for the first element in the set of matched elements
- $('selector').css('width');
+ elements.css('width');
 
  // set a single CSS property
- $('selector').css('position', 'absolute');
+ elements.css('position', 'absolute');
 
  // set multiple CSS properties
- $('selector').css({
+ elements.css({
      position: 'absolute',
      left: 0,
      top: 0
  });
 
  // since this method returns the set of matched elements, we can use chaining
- $('selector').css('position', 'absolute').removeClass('some-class');
+ elements.css('position', 'absolute').removeClass('classname');
 
  </code></pre>
 
@@ -866,7 +1035,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line306">line 306</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line392">line 392</a>
     </li></ul></dd>
     
 
@@ -953,7 +1122,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line339">line 339</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line425">line 425</a>
     </li></ul></dd>
     
 
@@ -1111,7 +1280,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line354">line 354</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line440">line 440</a>
     </li></ul></dd>
     
 
@@ -1285,7 +1454,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line382">line 382</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line468">line 468</a>
     </li></ul></dd>
     
 
@@ -1466,7 +1635,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line443">line 443</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line527">line 527</a>
     </li></ul></dd>
     
 
@@ -1685,7 +1854,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line489">line 489</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line573">line 573</a>
     </li></ul></dd>
     
 
@@ -1884,7 +2053,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line514">line 514</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line598">line 598</a>
     </li></ul></dd>
     
 
@@ -1971,7 +2140,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line521">line 521</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line605">line 605</a>
     </li></ul></dd>
     
 
@@ -2058,7 +2227,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line528">line 528</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line612">line 612</a>
     </li></ul></dd>
     
 
@@ -2145,7 +2314,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line535">line 535</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line619">line 619</a>
     </li></ul></dd>
     
 
@@ -2232,7 +2401,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line542">line 542</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line626">line 626</a>
     </li></ul></dd>
     
 
@@ -2319,7 +2488,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line556">line 556</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line640">line 640</a>
     </li></ul></dd>
     
 
@@ -2406,7 +2575,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line587">line 587</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line671">line 671</a>
     </li></ul></dd>
     
 
@@ -2588,7 +2757,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line632">line 632</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line716">line 716</a>
     </li></ul></dd>
     
 
@@ -2770,7 +2939,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line656">line 656</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line740">line 740</a>
     </li></ul></dd>
     
 
@@ -2857,7 +3026,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line663">line 663</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line747">line 747</a>
     </li></ul></dd>
     
 
@@ -2944,7 +3113,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line675">line 675</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line759">line 759</a>
     </li></ul></dd>
     
 
@@ -3031,7 +3200,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line686">line 686</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line770">line 770</a>
     </li></ul></dd>
     
 
@@ -3118,7 +3287,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line717">line 717</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line801">line 801</a>
     </li></ul></dd>
     
 
@@ -3302,7 +3471,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line741">line 741</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line825">line 825</a>
     </li></ul></dd>
     
 
@@ -3389,7 +3558,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line748">line 748</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line832">line 832</a>
     </li></ul></dd>
     
 
@@ -3476,7 +3645,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line755">line 755</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line839">line 839</a>
     </li></ul></dd>
     
 
@@ -3563,7 +3732,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line790">line 790</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line874">line 874</a>
     </li></ul></dd>
     
 
@@ -3760,7 +3929,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line844">line 844</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line928">line 928</a>
     </li></ul></dd>
     
 
@@ -3948,7 +4117,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line871">line 871</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line955">line 955</a>
     </li></ul></dd>
     
 
@@ -4035,7 +4204,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line878">line 878</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line962">line 962</a>
     </li></ul></dd>
     
 
@@ -4122,7 +4291,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line885">line 885</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line969">line 969</a>
     </li></ul></dd>
     
 
@@ -4209,7 +4378,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line935">line 935</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1019">line 1019</a>
     </li></ul></dd>
     
 
@@ -4428,7 +4597,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line950">line 950</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1034">line 1034</a>
     </li></ul></dd>
     
 
@@ -4516,7 +4685,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Tue Oct 18 2016 08:46:50 GMT+0300 (GTB Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Wed Oct 19 2016 18:30:58 GMT+0300 (GTB Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
