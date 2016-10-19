@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     cwd: 'src/',
-                    src: '_$.js',
+                    src: '$.js',
                     dest: 'dist/zebra.src.js'
                 }]
             },
