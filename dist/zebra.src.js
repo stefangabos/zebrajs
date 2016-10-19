@@ -324,6 +324,9 @@ $ = function(selector, parent, first_only) {
          *      top: 0
          *  });
          *
+         *  // remove a property
+         *  elements.attr('position', false);
+         *
          *  // since this method returns the set of matched elements, we can use chaining
          *  elements.css('position', 'absolute').removeClass('classname');
          *
