@@ -811,6 +811,13 @@ $ = function(selector, parent, first_only) {
         }
 
         /**
+         *  @todo   Needs to be written!
+         */
+        this.prepend = function() {
+
+        }
+
+        /**
          *  @todo   Needs documentation!
          */
         this.ready = function(callback) {

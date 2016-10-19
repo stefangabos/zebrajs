@@ -132,6 +132,7 @@ $ = function(selector, parent, first_only) {
         // import "outerWidth.js"
         // import "parent.js"
         // import "position.js"
+        // import "prepend.js"
         // import "ready.js"
         // import "remove.js"
         // import "removeClass.js"
