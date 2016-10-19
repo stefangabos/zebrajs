@@ -4,22 +4,26 @@
  *
  *  @example
  *
+ *  // always cache selectors
+ *  // to avoid DOM scanning over and over again
+ *  var elements = $('selector');
+ *
  *  // get the value of a computed style property
  *  // for the first element in the set of matched elements
- *  $('selector').css('width');
+ *  elements.css('width');
  *
  *  // set a single CSS property
- *  $('selector').css('position', 'absolute');
+ *  elements.css('position', 'absolute');
  *
  *  // set multiple CSS properties
- *  $('selector').css({
+ *  elements.css({
  *      position: 'absolute',
  *      left: 0,
  *      top: 0
  *  });
  *
  *  // since this method returns the set of matched elements, we can use chaining
- *  $('selector').css('position', 'absolute').removeClass('some-class');
+ *  elements.css('position', 'absolute').removeClass('classname');
  *
  *  @param  {string|object} property    If given as a `string` representing a CSS property and `value` **is not** set,
  *                                      this method will return the computed style of that particular property for the
