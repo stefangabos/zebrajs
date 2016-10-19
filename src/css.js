@@ -39,6 +39,12 @@
  *                                      When reading CSS properties, this method acts as a wrapper for
  *                                      {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle window.getComputedStyle}
  *
+ *  @param  {string}        [value]     The value to be set for the CSS property given as argument. *Only used if `property`
+ *                                      is not an object!*
+ *                                      <br><br>
+ *                                      Setting it to `false` or `null` will instead **remove** the CSS property from the
+ *                                      set of matched elements.
+ *
  *  @return {$|mixed}   When `setting` CSS properties, this method returns the set of matched elements, for chaining.
  *                      When `reading` CSS properties, this method returns the value(s) of the required computed style(s).
  */
@@ -59,13 +65,19 @@ this.css = function(property, value) {
                 elements[i].style[j] = property[j];
 
     // if "property" is not an object, and "value" argument is set
-    else if (value)
+    else if (undefined !== value)
 
         // iterate through the set of matched elements
         for (i in elements)
 
+            // if value argument's value is FALSE or NULL
+            if (value === false || value === null)
+
+                // remove the CSS property
+                elements[i].style[property] = null
+
             // set the respective style property
-            elements[i].style[property] = value;
+            else elements[i].style[property] = value;
 
     // if "property" is not an object and "value" is not set
     // return the value of the given CSS property, or "undefined" if property is not available
