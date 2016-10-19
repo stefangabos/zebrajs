@@ -162,13 +162,13 @@ $ = function(selector, parent, first_only) {
          *  var elements = $('selector');
          *
          *  // add a single class
-         *  elements.addClass('some-class');
+         *  elements.addClass('classname');
          *
          *  // add multiple classes
-         *  elements.addClass('some-class some-other-class');
+         *  elements.addClass('classname otherclassname');
          *
          *  // since this method returns the set of matched elements, we can use chaining
-         *  elements.addClass('some-class some-other-class').css('display', 'none');
+         *  elements.addClass('classname otherclassname').css('display', 'none');
 
          *  @param  {string}    class_name  One or more space-separated class names to be added to each element in the
          *                                  set of matched elements.
@@ -507,10 +507,10 @@ $ = function(selector, parent, first_only) {
          *  var elements = $('selector');
          *
          *  // check if matched elements have a certain class
-         *  var class_exists = elements.hasClass('some-class');
+         *  var class_exists = elements.hasClass('classname');
          *
          *  // since this method returns the set of matched elements, we can use chaining
-         *  elements.toggleClass('some-class');
+         *  elements.toggleClass('classname');
          *
          *  @param  {string}    class_name  The name of a class to be checked if it exists on *any* of the elements in the set
          *                                  of matched elements.
@@ -562,7 +562,7 @@ $ = function(selector, parent, first_only) {
          *  elements.height('5em');
          *
          *  // when setting the height, you can use chaining
-         *  elements.height(200).addClass('some-class');
+         *  elements.height(200).addClass('classname');
          *
          *  @param  {undefined|number|string}   [height]    If not given, the method will return the computed **inner**
          *                                                  height (without `padding`, `border` and `margin`) for the first
@@ -614,7 +614,7 @@ $ = function(selector, parent, first_only) {
          *
          *  // since this method returns the set of matched elements,
          *  // we can use chaining
-         *  elements.html('&lt;p>Hello&lt;/p>').addClass('some-class');
+         *  elements.html('&lt;p>Hello&lt;/p>').addClass('classname');
 
          *  @param  {string}    [content]   The HTML content to set as the content of all the matched elements. Note that any
          *                                  content that was previously in that element is completely replaced by the new
@@ -837,13 +837,13 @@ $ = function(selector, parent, first_only) {
          *  var elements = $('selector');
          *
          *  // remove a single class
-         *  elements.removeClass('some-class');
+         *  elements.removeClass('classname');
          *
          *  // remove multiple classes
-         *  elements.removeClass('some-class some-other-class');
+         *  elements.removeClass('classname otherclassname');
          *
          *  // since this method returns the set of matched elements, we can use chaining
-         *  elements.removeClass('some-class some-other-class').css('display', 'none');
+         *  elements.removeClass('classname otherclassname').css('display', 'none');
          *
          *  @param  {string}    class_name  One or more space-separated class names to be removed from each element in
          *                                  the set of matched elements.
@@ -915,7 +915,7 @@ $ = function(selector, parent, first_only) {
          *
          *  // since this method returns the set of matched elements,
          *  // we can use chaining
-         *  elements.text('Hello').addClass('some-class');
+         *  elements.text('Hello').addClass('classname');
 
          *  @param  {string}    [content]   The text to set as the content of all the matched elements. Note that any text
          *                                  content that was previously in that element is completely replaced by the new
@@ -963,14 +963,14 @@ $ = function(selector, parent, first_only) {
          *  var elements = $('selector');
          *
          *  // set a random class
-         *  elements.addClass('some-class');
+         *  elements.addClass('classname');
          *
          *  // toggle classes
-         *  // the result will be that "some-class" will be removed from the matched elements while the "other-class" will be added
-         *  elements.toggleClass('some-class other-class');
+         *  // the result will be that "classname" will be removed from the matched elements while the "otherclassname" will be added
+         *  elements.toggleClass('classname otherclassname');
          *
          *  // since this method returns the set of matched elements, we can use chaining
-         *  elements.toggleClass('some-class').css('display', 'none');
+         *  elements.toggleClass('classnamess').css('display', 'none');
          *
          *  @param  {string}    class_name  One or more space-separated class names to be toggled for each element in the set of
          *                                  matched elements.
@@ -1054,7 +1054,7 @@ $ = function(selector, parent, first_only) {
          *  elements.width('5em');
          *
          *  // when setting the width, you can use chaining
-         *  elements.width(200).addClass('some-class');
+         *  elements.width(200).addClass('classname');
          *
          *  @param  {undefined|number|string}   [width]     If not given, this method will return the computed **inner**
          *                                                  width (without `padding`, `border` and `margin`) of the first
@@ -1105,7 +1105,7 @@ $ = function(selector, parent, first_only) {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Wed Oct 19 2016 18:56:31 GMT+0300 (GTB Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Wed Oct 19 2016 21:13:04 GMT+0300 (GTB Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

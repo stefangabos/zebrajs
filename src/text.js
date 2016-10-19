@@ -19,7 +19,7 @@
  *
  *  // since this method returns the set of matched elements,
  *  // we can use chaining
- *  elements.text('Hello').addClass('some-class');
+ *  elements.text('Hello').addClass('classname');
 
  *  @param  {string}    [content]   The text to set as the content of all the matched elements. Note that any text
  *                                  content that was previously in that element is completely replaced by the new

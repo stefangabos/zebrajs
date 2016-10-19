@@ -37,8 +37,16 @@
         <script type="text/javascript" src="../dist/zebra.min.js"></script>
         <script type="text/javascript">
 
-        var elements = $('#test3');
-        console.log(elements.text());
+        var elements = $('.test');
+        elements.css('backgroundColor', 'red');
+        elements.css('backgroundColor', false);
+
+//         elements.attr({
+//             id: 'someid',
+//             class: 'something',
+//             rel: 'someother'
+//         });
+//         console.log(elements.text());
 
         </script>
     </body>

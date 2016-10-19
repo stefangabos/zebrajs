@@ -10,13 +10,13 @@
  *  var elements = $('selector');
  *
  *  // remove a single class
- *  elements.removeClass('some-class');
+ *  elements.removeClass('classname');
  *
  *  // remove multiple classes
- *  elements.removeClass('some-class some-other-class');
+ *  elements.removeClass('classname otherclassname');
  *
  *  // since this method returns the set of matched elements, we can use chaining
- *  elements.removeClass('some-class some-other-class').css('display', 'none');
+ *  elements.removeClass('classname otherclassname').css('display', 'none');
  *
  *  @param  {string}    class_name  One or more space-separated class names to be removed from each element in
  *                                  the set of matched elements.

@@ -22,7 +22,7 @@
  *
  *  // since this method returns the set of matched elements,
  *  // we can use chaining
- *  elements.html('<p>Hello</p>').addClass('some-class');
+ *  elements.html('<p>Hello</p>').addClass('classname');
 
  *  @param  {string}    [content]   The HTML content to set as the content of all the matched elements. Note that any
  *                                  content that was previously in that element is completely replaced by the new

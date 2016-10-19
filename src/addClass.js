@@ -10,13 +10,13 @@
  *  var elements = $('selector');
  *
  *  // add a single class
- *  elements.addClass('some-class');
+ *  elements.addClass('classname');
  *
  *  // add multiple classes
- *  elements.addClass('some-class some-other-class');
+ *  elements.addClass('classname otherclassname');
  *
  *  // since this method returns the set of matched elements, we can use chaining
- *  elements.addClass('some-class some-other-class').css('display', 'none');
+ *  elements.addClass('classname otherclassname').css('display', 'none');
 
  *  @param  {string}    class_name  One or more space-separated class names to be added to each element in the
  *                                  set of matched elements.

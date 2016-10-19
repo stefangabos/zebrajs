@@ -28,7 +28,7 @@
  *  elements.width('5em');
  *
  *  // when setting the width, you can use chaining
- *  elements.width(200).addClass('some-class');
+ *  elements.width(200).addClass('classname');
  *
  *  @param  {undefined|number|string}   [width]     If not given, this method will return the computed **inner**
  *                                                  width (without `padding`, `border` and `margin`) of the first

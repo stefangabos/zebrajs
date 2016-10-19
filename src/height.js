@@ -28,7 +28,7 @@
  *  elements.height('5em');
  *
  *  // when setting the height, you can use chaining
- *  elements.height(200).addClass('some-class');
+ *  elements.height(200).addClass('classname');
  *
  *  @param  {undefined|number|string}   [height]    If not given, the method will return the computed **inner**
  *                                                  height (without `padding`, `border` and `margin`) for the first
