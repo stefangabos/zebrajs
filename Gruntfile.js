@@ -139,15 +139,21 @@ module.exports = function(grunt) {
          *  https://npmjs.org/package/grunt-contrib-uglify
          **************************************************************************************************************/
         'uglify': {
+            options: {
+                sourceMap: true,
+                sourceMapIncludeSources: true
+            },
             library: {
-                files: [
-                    {src: 'dist/zebra.src.js', dest: 'dist/zebra.min.js'}
-                ]
+                files: [{
+                    src: 'dist/zebra.src.js',
+                    dest: 'dist/zebra.min.js'
+                }]
             },
             site: {
-                files: [
-                    {src: 'docs/download/assets_src/javascript/application.js', dest: 'docs/download/public/javascript/application.min.js'}
-                ]
+                files: [{
+                    src: 'docs/download/assets_src/javascript/application.js',
+                    dest: 'docs/download/public/javascript/application.min.js'
+                }]
             }
         },
 
