@@ -2,11 +2,6 @@
  *  Returns the current computed **inner** width (without `padding`, `border` and `margin`) of the first element
  *  in the set of matched elements as `float`, or sets the `width` CSS property of every element in the set.
  *
- *  > When retrieving the width, this method uses the {@link $#css .css} method (which use JavaScript's
- *  {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle window.getComputedStyle}), and uses
- *  JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style style} when setting the width
- *  of elements.
- *
  *  See {@link $#outerWidth .outerWidth()} for getting the width including `padding`, `border` and, optionally,
  *  `margin`.
  *

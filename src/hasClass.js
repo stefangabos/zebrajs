@@ -1,8 +1,6 @@
 /**
  *  Checks whether *any* of the matched elements have the given class.
  *
- *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.contains}
- *
  *  @example
  *
  *  // always cache selectors

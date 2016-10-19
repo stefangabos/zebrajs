@@ -38,9 +38,6 @@
  *                                      <br><br>
  *                                      If given as an `object`, this method will set the given CSS properties to the
  *                                      given values for all the elements in the set of matched elements.
- *                                      <br><br>
- *                                      When reading CSS properties, this method acts as a wrapper for
- *                                      {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle window.getComputedStyle}
  *
  *  @param  {string}        [value]     The value to be set for the CSS property given as argument. *Only used if `property`
  *                                      is not an object!*

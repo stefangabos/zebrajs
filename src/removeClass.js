@@ -1,8 +1,6 @@
 /**
  *  Removes one or more classes from each element in the set of matched elements.
  *
- *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.remove}
- *
  *  @example
  *
  *  // always cache selectors

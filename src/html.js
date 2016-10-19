@@ -2,8 +2,6 @@
  *  Gets the HTML content of the first element in the set of matched elements, or set the HTML content of every matched
  *  element.
  *
- *  > This method is a wrapper for JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML innerHTML}
- *
  *  > There are some {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML#Security_considerations security considerations}
  *  that you should be aware of when using this method.
  *

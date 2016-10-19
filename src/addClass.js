@@ -1,8 +1,6 @@
 /**
  *  Adds one or more classes to each element in the set of matched elements.
  *
- *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.add}
- *
  *  @example
  *
  *  // always cache selectors

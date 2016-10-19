@@ -2,8 +2,6 @@
  *  Gets the text content of the first element in the set of matched elements (combined with the text content of all its
  *  descendants), or sets the text contents of the matched elements.
  *
- *  > This method is a wrapper for JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent textContent}
- *
  *  @example
  *
  *  // always cache selectors

@@ -2,8 +2,6 @@
  *  Returns the current computed width for the first element in the set of matched elements, including `padding`,
  *  `border` and, optionally, `margin`.
  *
- *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle window.getComputedStyle}.
- *
  *  > For hidden elements the returned value is `0`!
  *
  *  See {@link $#width .width()} for getting the **inner** width without `padding`, `border` and `margin`.

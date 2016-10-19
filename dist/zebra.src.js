@@ -114,8 +114,6 @@ $ = function(selector, parent, first_only) {
         /**
          *  Adds one or more classes to each element in the set of matched elements.
          *
-         *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.add}
-         *
          *  @example
          *
          *  // always cache selectors
@@ -246,10 +244,6 @@ $ = function(selector, parent, first_only) {
         /**
          *  Gets the value of an attribute for the first element in the set of matched elements, or sets one or more attributes
          *  for every matched element.
-         *
-         *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute setAttribute},
-         *  > {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute getAttribute} and
-         *  > {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttribute removeAttribute}.
          *
          *  @example
          *
@@ -382,9 +376,6 @@ $ = function(selector, parent, first_only) {
          *                                      <br><br>
          *                                      If given as an `object`, this method will set the given CSS properties to the
          *                                      given values for all the elements in the set of matched elements.
-         *                                      <br><br>
-         *                                      When reading CSS properties, this method acts as a wrapper for
-         *                                      {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle window.getComputedStyle}
          *
          *  @param  {string}        [value]     The value to be set for the CSS property given as argument. *Only used if `property`
          *                                      is not an object!*
@@ -501,8 +492,6 @@ $ = function(selector, parent, first_only) {
         /**
          *  Checks whether *any* of the matched elements have the given class.
          *
-         *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.contains}
-         *
          *  @example
          *
          *  // always cache selectors
@@ -538,11 +527,6 @@ $ = function(selector, parent, first_only) {
         /**
          *  Returns the current computed **inner** height (without `padding`, `border` and `margin`) of the first element
          *  in the set of matched elements as `float`, or sets the `height` CSS property of every element in the set.
-         *
-         *  > When retrieving the height, this method uses the {@link $#css .css} method (which use JavaScript's
-         *  {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle window.getComputedStyle}), and uses
-         *  JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style style} when setting the height
-         *  of elements.
          *
          *  See {@link $#outerHeight .outerHeight()} for getting the height including `padding`, `border` and, optionally,
          *  `margin`.
@@ -596,8 +580,6 @@ $ = function(selector, parent, first_only) {
         /**
          *  Gets the HTML content of the first element in the set of matched elements, or set the HTML content of every matched
          *  element.
-         *
-         *  > This method is a wrapper for JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML innerHTML}
          *
          *  > There are some {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML#Security_considerations security considerations}
          *  that you should be aware of when using this method.
@@ -705,8 +687,6 @@ $ = function(selector, parent, first_only) {
          *  Returns the current computed height for the first element in the set of matched elements, including `padding`,
          *  `border` and, optionally, `margin`.
          *
-         *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle window.getComputedStyle}.
-         *
          *  > For hidden elements the returned value is `0`!
          *
          *  See {@link $#height .height()} for getting the **inner** height without `padding`, `border` and `margin`.
@@ -749,8 +729,6 @@ $ = function(selector, parent, first_only) {
         /**
          *  Returns the current computed width for the first element in the set of matched elements, including `padding`,
          *  `border` and, optionally, `margin`.
-         *
-         *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle window.getComputedStyle}.
          *
          *  > For hidden elements the returned value is `0`!
          *
@@ -838,8 +816,6 @@ $ = function(selector, parent, first_only) {
         /**
          *  Removes one or more classes from each element in the set of matched elements.
          *
-         *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.remove}
-         *
          *  @example
          *
          *  // always cache selectors
@@ -908,8 +884,6 @@ $ = function(selector, parent, first_only) {
          *  Gets the text content of the first element in the set of matched elements (combined with the text content of all its
          *  descendants), or sets the text contents of the matched elements.
          *
-         *  > This method is a wrapper for JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent textContent}
-         *
          *  @example
          *
          *  // always cache selectors
@@ -961,10 +935,6 @@ $ = function(selector, parent, first_only) {
         /**
          *  Adds or removes one or more classes from each element in the set of matched elements, depending on the presence of
          *  each class name given as argument.
-         *
-         *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.contains},
-         *  > {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.add} and
-         *  > {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.remove}.
          *
          *  @example
          *
@@ -1037,11 +1007,6 @@ $ = function(selector, parent, first_only) {
         /**
          *  Returns the current computed **inner** width (without `padding`, `border` and `margin`) of the first element
          *  in the set of matched elements as `float`, or sets the `width` CSS property of every element in the set.
-         *
-         *  > When retrieving the width, this method uses the {@link $#css .css} method (which use JavaScript's
-         *  {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle window.getComputedStyle}), and uses
-         *  JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style style} when setting the width
-         *  of elements.
          *
          *  See {@link $#outerWidth .outerWidth()} for getting the width including `padding`, `border` and, optionally,
          *  `margin`.

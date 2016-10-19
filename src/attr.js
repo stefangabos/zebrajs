@@ -2,10 +2,6 @@
  *  Gets the value of an attribute for the first element in the set of matched elements, or sets one or more attributes
  *  for every matched element.
  *
- *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute setAttribute},
- *  > {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute getAttribute} and
- *  > {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttribute removeAttribute}.
- *
  *  @example
  *
  *  // always cache selectors

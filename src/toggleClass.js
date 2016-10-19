@@ -2,10 +2,6 @@
  *  Adds or removes one or more classes from each element in the set of matched elements, depending on the presence of
  *  each class name given as argument.
  *
- *  > This method uses JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.contains},
- *  > {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.add} and
- *  > {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList classList.remove}.
- *
  *  @example
  *
  *  // always cache selectors

@@ -2,11 +2,6 @@
  *  Returns the current computed **inner** height (without `padding`, `border` and `margin`) of the first element
  *  in the set of matched elements as `float`, or sets the `height` CSS property of every element in the set.
  *
- *  > When retrieving the height, this method uses the {@link $#css .css} method (which use JavaScript's
- *  {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle window.getComputedStyle}), and uses
- *  JavaScript's {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style style} when setting the height
- *  of elements.
- *
  *  See {@link $#outerHeight .outerHeight()} for getting the height including `padding`, `border` and, optionally,
  *  `margin`.
  *
