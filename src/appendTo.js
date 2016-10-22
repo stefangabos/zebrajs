@@ -33,9 +33,9 @@
  *  // append a text node we create on the fly
  *  $(document.createTextNode('hello')).appendTo(parent);
  *
- *  @param  {mixed}     parent      A ZebraJS object at end of which to insert each element in the set of matched elements.
+ *  @param  {$}     parent      A ZebraJS object at end of which to insert each element in the set of matched elements.
  *
- *  @return {$}         Returns the ZebraJS object you are appending to.
+ *  @return {$}     Returns the ZebraJS object you are appending to.
  */
 this.appendTo = function(parent) {
 
