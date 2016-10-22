@@ -3,7 +3,7 @@
  *
  *  Both this and the {@link $#insertAfter .insertAfter()} method perform the same task, the main difference being in the
  *  placement of the content and the target. With `.after()`, the selector expression preceding the method is the target
- *  after which the content is to be inserted. On the other hand, with `.insertInto()`, the content precedes the method,
+ *  after which the content is to be inserted. On the other hand, with `.insertAfter()`, the content precedes the method,
  *  and it is the one inserted after the target container.
  *
  *  > If there is more than one target element, clones of the inserted element will be created after each target except
