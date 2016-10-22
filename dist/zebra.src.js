@@ -81,7 +81,7 @@ $ = function(selector, parent, first_only) {
             }
 
         // if selector is a DOM node, the Document or Window object, wrap it and return the new "$" object
-        } else if (typeof selector === 'object' && (selector instanceof Element || selector instanceof Document || selector instanceof Window)) return new $(selector);
+        } else if (typeof selector === 'object' && (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window)) return new $(selector);
 
         // if we're calling $() on an "$" object, simply return the original object
         else if (selector instanceof $) return selector;
