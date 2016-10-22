@@ -161,6 +161,13 @@ $ = function(selector, parent, first_only) {
         /**
          *  @todo   Needs to be written!
          */
+        this.after = function() {
+
+        }
+
+        /**
+         *  @todo   Needs to be written!
+         */
         this.ajax = function() {
 
         }
@@ -384,6 +391,13 @@ $ = function(selector, parent, first_only) {
 
             // if we get this far, return the set of matched elements, for chaining
             return elements;
+
+        }
+
+        /**
+         *  @todo   Needs to be written!
+         */
+        this.before = function() {
 
         }
 

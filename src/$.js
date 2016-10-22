@@ -112,10 +112,12 @@ $ = function(selector, parent, first_only) {
         }
 
         // import "addClass.js"
+        // import "after.js"
         // import "ajax.js"
         // import "append.js"
         // import "appendTo.js"
         // import "attr.js"
+        // import "before.js"
         // import "css.js"
         // import "data.js"
         // import "each.js"
