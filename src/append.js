@@ -30,9 +30,6 @@
  *  // each target except for the last one; for the last target, the original list will be moved
  *  parent.append($('ul'));
  *
- *  // append a text node we create on the fly
- *  parent.append(document.createTextNode('hello'));
- *
  *  // append a string (which will be transformed in HTML)
  *  // this is more efficient memory wise
  *  parent.append('<div>hello</div>');

@@ -30,9 +30,6 @@
  *  // each target except for the last one; for the last target, the original list will be moved
  *  $('ul').appendTo(parent);
  *
- *  // append a text node we create on the fly
- *  $(document.createTextNode('hello')).appendTo(parent);
- *
  *  @param  {$}     parent      A ZebraJS object at end of which to insert each element in the set of matched elements.
  *
  *  @return {$}     Returns the ZebraJS object you are appending to.

@@ -30,9 +30,6 @@
  *  // each target, except for the last one; the original list will be moved after the last target
  *  target.after($('ul'));
  *
- *  // insert a text node we create on the fly
- *  target.append(document.createTextNode('hello'));
- *
  *  // insert a string (which will be transformed in HTML)
  *  // this is more efficient memory wise
  *  target.append('<div>hello</div>');
