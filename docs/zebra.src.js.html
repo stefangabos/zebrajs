@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="$.html">$</a><ul class='methods'><li data-type='method'><a href="$.html#addClass">addClass</a></li><li data-type='method'><a href="$.html#ajax">ajax</a></li><li data-type='method'><a href="$.html#append">append</a></li><li data-type='method'><a href="$.html#attr">attr</a></li><li data-type='method'><a href="$.html#css">css</a></li><li data-type='method'><a href="$.html#data">data</a></li><li data-type='method'><a href="$.html#each">each</a></li><li data-type='method'><a href="$.html#first">first</a></li><li data-type='method'><a href="$.html#get">get</a></li><li data-type='method'><a href="$.html#hasClass">hasClass</a></li><li data-type='method'><a href="$.html#height">height</a></li><li data-type='method'><a href="$.html#html">html</a></li><li data-type='method'><a href="$.html#insertAfter">insertAfter</a></li><li data-type='method'><a href="$.html#insertBefore">insertBefore</a></li><li data-type='method'><a href="$.html#mq">mq</a></li><li data-type='method'><a href="$.html#off">off</a></li><li data-type='method'><a href="$.html#offset">offset</a></li><li data-type='method'><a href="$.html#on">on</a></li><li data-type='method'><a href="$.html#outerHeight">outerHeight</a></li><li data-type='method'><a href="$.html#outerWidth">outerWidth</a></li><li data-type='method'><a href="$.html#parent">parent</a></li><li data-type='method'><a href="$.html#position">position</a></li><li data-type='method'><a href="$.html#prepend">prepend</a></li><li data-type='method'><a href="$.html#ready">ready</a></li><li data-type='method'><a href="$.html#remove">remove</a></li><li data-type='method'><a href="$.html#removeClass">removeClass</a></li><li data-type='method'><a href="$.html#scrollLeft">scrollLeft</a></li><li data-type='method'><a href="$.html#scrollTop">scrollTop</a></li><li data-type='method'><a href="$.html#serialize">serialize</a></li><li data-type='method'><a href="$.html#text">text</a></li><li data-type='method'><a href="$.html#toggleClass">toggleClass</a></li><li data-type='method'><a href="$.html#trigger">trigger</a></li><li data-type='method'><a href="$.html#unwrap">unwrap</a></li><li data-type='method'><a href="$.html#val">val</a></li><li data-type='method'><a href="$.html#width">width</a></li><li data-type='method'><a href="$.html#wrap">wrap</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="$.html">$</a><ul class='methods'><li data-type='method'><a href="$.html#addClass">addClass</a></li><li data-type='method'><a href="$.html#ajax">ajax</a></li><li data-type='method'><a href="$.html#append">append</a></li><li data-type='method'><a href="$.html#appendTo">appendTo</a></li><li data-type='method'><a href="$.html#attr">attr</a></li><li data-type='method'><a href="$.html#css">css</a></li><li data-type='method'><a href="$.html#data">data</a></li><li data-type='method'><a href="$.html#each">each</a></li><li data-type='method'><a href="$.html#first">first</a></li><li data-type='method'><a href="$.html#get">get</a></li><li data-type='method'><a href="$.html#hasClass">hasClass</a></li><li data-type='method'><a href="$.html#height">height</a></li><li data-type='method'><a href="$.html#html">html</a></li><li data-type='method'><a href="$.html#insertAfter">insertAfter</a></li><li data-type='method'><a href="$.html#insertBefore">insertBefore</a></li><li data-type='method'><a href="$.html#mq">mq</a></li><li data-type='method'><a href="$.html#off">off</a></li><li data-type='method'><a href="$.html#offset">offset</a></li><li data-type='method'><a href="$.html#on">on</a></li><li data-type='method'><a href="$.html#outerHeight">outerHeight</a></li><li data-type='method'><a href="$.html#outerWidth">outerWidth</a></li><li data-type='method'><a href="$.html#parent">parent</a></li><li data-type='method'><a href="$.html#parents">parents</a></li><li data-type='method'><a href="$.html#position">position</a></li><li data-type='method'><a href="$.html#prepend">prepend</a></li><li data-type='method'><a href="$.html#prependTo">prependTo</a></li><li data-type='method'><a href="$.html#ready">ready</a></li><li data-type='method'><a href="$.html#remove">remove</a></li><li data-type='method'><a href="$.html#removeClass">removeClass</a></li><li data-type='method'><a href="$.html#scrollLeft">scrollLeft</a></li><li data-type='method'><a href="$.html#scrollTop">scrollTop</a></li><li data-type='method'><a href="$.html#serialize">serialize</a></li><li data-type='method'><a href="$.html#text">text</a></li><li data-type='method'><a href="$.html#toggleClass">toggleClass</a></li><li data-type='method'><a href="$.html#trigger">trigger</a></li><li data-type='method'><a href="$.html#unwrap">unwrap</a></li><li data-type='method'><a href="$.html#val">val</a></li><li data-type='method'><a href="$.html#width">width</a></li><li data-type='method'><a href="$.html#wrap">wrap</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -277,6 +277,52 @@ $ = function(selector, parent, first_only) {
 
             // return the set of matched elements, for chaining
             return $this;
+
+        }
+
+        /**
+         *  Inserts every element in the set of matched elements to the end of the parent element, specified by the argument.
+         *
+         *  Both this and the {@link $#append .append()} method perform the same task, the main difference being in the placement
+         *  of the content and the target. With `.append()`, the selector expression preceding the method is the container into
+         *  which the content is to be inserted. On the other hand, with `.appendTo()`, the content precedes the method, and it
+         *  is inserted into the target container.
+         *
+         *  > If there is more than one target element, clones of the inserted element will be created for each target except for
+         *  the last one. For the last target, the original item will be inserted.
+         *
+         *  > If an element selected this way is inserted elsewhere in the DOM, clones of the inserted element will be created for
+         *  each target except for the last one. For the last target, the original item will be moved (not cloned).
+         *
+         *  @example
+         *
+         *  // always cache selectors
+         *  // to avoid DOM scanning over and over again
+         *  var parent = $('#selector');
+         *
+         *  // append a div that we create on the fly
+         *  $('&lt;div>').text('hello').appendTo(parent);
+         *
+         *  // same thing as above
+         *  $('&lt;div>hello&lt;/div>').appendTo(parent);
+         *
+         *  // append one or more elements that already exist on the page
+         *  // if "parent" is a single element than the list will be moved inside the parent element
+         *  // if "parent" is a collection of elements, clones of the list element will be created for
+         *  // each target except for the last one; for the last target, the original list will be moved
+         *  $('ul').appendTo(parent);
+         *
+         *  // append a text node we create on the fly
+         *  $(document.createTextNode('hello')).appendTo(parent);
+         *
+         *  @param  {mixed}     parent      A ZebraJS object at end of which to insert each element in the set of matched elements.
+         *
+         *  @return {$}         Returns the ZebraJS object you are appending to.
+         */
+        this.appendTo = function(parent) {
+
+            // reverse the arguments and call the "append" method
+            return $(parent).append(this);
 
         }
 
@@ -818,6 +864,13 @@ $ = function(selector, parent, first_only) {
         /**
          *  @todo   Needs to be written!
          */
+        this.parents = function() {
+
+        }
+
+        /**
+         *  @todo   Needs to be written!
+         */
         this.position = function() {
 
             return {
@@ -831,6 +884,13 @@ $ = function(selector, parent, first_only) {
          *  @todo   Needs to be written!
          */
         this.prepend = function() {
+
+        }
+
+        /**
+         *  @todo   Needs to be written!
+         */
+        this.prependTo = function() {
 
         }
 
@@ -1119,7 +1179,7 @@ $ = function(selector, parent, first_only) {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Thu Oct 20 2016 00:10:32 GMT+0300 (GTB Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Sat Oct 22 2016 20:47:01 GMT+0300 (GTB Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
