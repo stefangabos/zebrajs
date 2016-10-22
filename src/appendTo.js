@@ -1,5 +1,5 @@
 /**
- *  Inserts every element in the set of matched elements to the end of the parent element, specified by the argument.
+ *  Inserts every element in the set of matched elements to the end of the parent element(s), specified by the argument.
  *
  *  Both this and the {@link $#append .append()} method perform the same task, the main difference being in the placement
  *  of the content and the target. With `.append()`, the selector expression preceding the method is the container into
