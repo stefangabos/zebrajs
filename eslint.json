@@ -20,7 +20,7 @@
         "curly": ["warn", "multi"],
         "dot-location": ["warn", "property"],
         "eol-last": ["warn", "always"],
-        "indent": ["warn", 4],
+        "indent": ["warn", 4, {"SwitchCase": 1}],
         "keyword-spacing":  ["warn", {
             "before": true,
             "after": true
