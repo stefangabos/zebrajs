@@ -27,7 +27,8 @@
         }],
         "func-call-spacing": ["warn", "never"],
         "key-spacing": ["warn", {
-            "beforeColon": false
+            "beforeColon": false,
+            "mode": "minimum"
         }],
         "lines-around-comment": ["warn", {
             "beforeBlockComment": true,
