@@ -1,0 +1,1 @@
+- the width and height method, see https://github.com/oneuijs/You-Dont-Need-jQuery#css--style as they seem to be more complex and also different code for getting the width and height for document and window
