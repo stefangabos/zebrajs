@@ -44,34 +44,7 @@
  */
 this.after = function(content) {
 
-    var i, j;
-
-    // if element to insert is an $ object, we'll use the array of DOM elements
-    if (content instanceof $) content = content.get();
-
-    // if content to insert is a DOM element or a text node, wrap it in an array
-    else if (content instanceof Element || content instanceof Text) content = [content];
-
-    // if content to insert is not a string, don't go further
-    else if (typeof content !== 'string') return false;
-
-    // iterate through the set of matched elements
-    for (i in elements)
-
-        // if content to insert is a string (plain text or HTML)
-        if (typeof content === 'string')
-
-            // insert it like this
-            elements[i].insertAdjacentHTML('afterend', content);
-
-        // since content is an array of DOM elements or text nodes
-        // iterate over the array
-        else for (j in content)
-
-            // insert a clone to each parent except for the last one where we move the element itself
-            elements[i].parentNode.insertBefore(i < elements.length - 1 ? content[j].cloneNode(true) : content[j], elements[i].nextSibling);
-
-    // return the set of matched elements, for chaining
-    return $this;
+    // call the "_dom_insert" private method with these arguments
+    return this._dom_insert(content, 'after');
 
 }

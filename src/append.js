@@ -44,34 +44,7 @@
  */
 this.append = function(content) {
 
-    var i, j;
-
-    // if element to append is an $ object, we'll use the array of DOM elements
-    if (content instanceof $) content = content.get();
-
-    // if content to append is a DOM element or a text node, wrap it in an array
-    else if (content instanceof Element || content instanceof Text) content = [content];
-
-    // if content to append is not a string, don't go further
-    else if (typeof content !== 'string') return false;
-
-    // iterate through the set of matched elements
-    for (i in elements)
-
-        // if content to append is a string (plain text or HTML)
-        if (typeof content === 'string')
-
-            // add it like this
-            elements[i].insertAdjacentHTML('beforeend', content);
-
-        // since content is an array of DOM elements or text nodes
-        // iterate over the array
-        else for (j in content)
-
-            // add a clone to each parent except for the last one where we add the element itself
-            elements[i].appendChild(i < elements.length - 1 ? content[j].cloneNode(true) : content[j]);
-
-    // return the set of matched elements, for chaining
-    return $this;
+    // call the "_dom_insert" private method with these arguments
+    return this._dom_insert(content, 'append');
 
 }

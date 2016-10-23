@@ -36,7 +36,7 @@
  */
 this.appendTo = function(parent) {
 
-    // reverse the arguments and call the "append" method
-    return $(parent).append(this);
+    // call the "_dom_insert" private method with these arguments
+    return $(parent)._dom_insert(this, 'append');
 
 }

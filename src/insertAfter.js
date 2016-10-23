@@ -36,7 +36,7 @@
  */
 this.insertAfter = function(target) {
 
-    // reverse the arguments and call the "append" method
-    return $(target).after(this);
+    // call the "_dom_insert" private method with these arguments
+    return $(target)._dom_insert(this, 'after');
 
 }
