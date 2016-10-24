@@ -9,7 +9,20 @@ $(document).ready(function() {
         global_object = $('#object'),
         modules_container = $('#packager .row:first-child'),
         total_download_size_container = $('.result strong span'),
+        checkboxes,
         downloadable_content = $('textarea'),
+
+        // todo: this needs to be built automatically
+        dependencies = {
+            'append':       ['_dom_insert'],
+            'appendTo':     ['_dom_insert'],
+            'after':        ['_dom_insert'],
+            'height':       ['css'],
+            'insertAfter':  ['_dom_insert'],
+            'width':        ['css']
+        },
+
+        reverse_dependencies = {},
 
         // extract all the available methods
         extract_methods = function() {
@@ -81,11 +94,60 @@ $(document).ready(function() {
         // get an object with the existing methods
         methods = extract_methods(),
 
-        modules, block, i,
+        modules, block, i, j,
 
-        manage_modules = function() {
+        manage_dependencies = function(module, checked) {
+
+            var i;
+
+            // if module was specified
+            if (undefined === module)
+
+                // iterate over the existing modules
+                modules.each(function() {
+
+                    // the ID of the current module
+                    var id = this.getAttribute('id').replace(/method\_/, '');
+
+                    // if checkbox is checked
+                    if (this.checked) manage_dependencies(id, true);
+
+                });
+
+            // if this module requires other modules and we've just checked it
+            else if (undefined !== dependencies[module] && checked)
+
+                // iterate over the rules
+                for (i in dependencies[module])
+
+                    // iterate over the existing checkboxes
+                    checkboxes.each(function() {
+
+                        // check the modules required by this module
+                        if (this.getAttribute('id') === 'method_' + dependencies[module][i]) this.checked = true;
+
+                    });
+
+            // if there are modules requiring this module and we've just unchecked it
+            else if (undefined !== reverse_dependencies[module] && !checked)
+
+                // iterate over the rules
+                for (i in reverse_dependencies[module])
+
+                    // uncheck all the modules that require this module
+                    checkboxes.each(function() {
+                        if (this.getAttribute('id') === 'method_' + reverse_dependencies[module][i]) this.checked = false;
+                    });
+
+        },
+
+        manage_modules = function(e) {
 
             var code = '', global_object_name = global_object.val().trim();
+
+            if (undefined !== e) manage_dependencies(e.target.getAttribute('id').replace(/^method\_/, ''), e.target.checked);
+
+            else manage_dependencies();
 
             // iterate over the existing modules
             modules.each(function() {
@@ -193,6 +255,21 @@ $(document).ready(function() {
         manage_modules();
 
     });
+
+    // cache all the checkboxes
+    checkboxes = $('input[type="checkbox"]');
+
+    // iterate over the existing dependencies
+    for (i in dependencies)
+
+        // iterate over the associated methods
+        for (j in dependencies[i]) {
+
+            // create a reverse lookup array to be used when deselecting a method that it is used by other methods,
+            // so we can also deselect those
+            if (undefined === reverse_dependencies[dependencies[i][j]]) reverse_dependencies[dependencies[i][j]] = [];
+            if (reverse_dependencies[dependencies[i][j]].indexOf(i) === -1) reverse_dependencies[dependencies[i][j]].push(i);
+        }
 
     // generate initial source code
     manage_modules();
