@@ -108,6 +108,7 @@ module.exports = function(grunt) {
                 freeze:     true,       //  this options prohibits overwriting prototypes of native objects such as Array, Date and so on
                 latedef:    true,       //  this option prohibits the use of a variable before it was defined
                 nonew:      true,       //  this option prohibits the use of constructor functions without assigning them to a variable
+                loopfunc:   true,       //  allow functions to be defined inside loops
                 undef:      true        //  this option prohibits the use of explicitly undeclared variables
             },
             library: {
