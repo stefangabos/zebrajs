@@ -146,22 +146,8 @@ $ = function(selector, parent, first_only) {
                 // if content to append is a string (plain text or HTML)
                 if (typeof content === 'string')
 
-                    // where the content needs to be moved in the DOM
-                    switch (where) {
-
-                        // if content is to be inserted after an element
-                        case 'after': elements[i].insertAdjacentHTML('afterend', content); break;
-
-                        // if content is to be appended into an element
-                        case 'append': elements[i].insertAdjacentHTML('beforeend', content); break;
-
-                        // if content is to be inserted before an element
-                        case 'before': elements[i].insertAdjacentHTML('beforebegin', content); break;
-
-                        // if content is to be prepended into an element
-                        case 'prepend': elements[i].insertAdjacentHTML('afterbegin', content); break;
-
-                    }
+                    // insert content like this
+                    elements[i].insertAdjacentHTML((where === 'after' || where === 'prepend' ? 'after' : 'before') + (where === 'after' || where === 'append' ? 'end' : 'begin'), content);
 
                 // since content is an array of DOM elements or text nodes
                 // iterate over the array
