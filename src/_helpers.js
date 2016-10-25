@@ -35,11 +35,14 @@ this._dom_insert = function(content, where) {
             // where the content needs to be moved in the DOM
             switch (where) {
 
+                // if content is to be inserted after an element
+                case 'after': elements[i].insertAdjacentHTML('afterend', content); break;
+
                 // if content is to be appended into an element
                 case 'append': elements[i].insertAdjacentHTML('beforeend', content); break;
 
-                // if content is to be inserted after an element
-                case 'after': elements[i].insertAdjacentHTML('afterend', content);
+                // if content is to be inserted before an element
+                case 'before': elements[i].insertAdjacentHTML('beforebegin', content); break;
 
             }
 
@@ -50,11 +53,14 @@ this._dom_insert = function(content, where) {
             // where the content needs to be moved in the DOM
             switch (where) {
 
+                // insert a clone after each target except for the last one after which we insert the original content
+                case 'after': elements[i].parentNode.insertBefore(i < elements.length - 1 ? content[j].cloneNode(true) : content[j], elements[i].nextSibling); break;
+
                 // add a clone to each parent except for the last one where we add the original content
                 case 'append': elements[i].appendChild(i < elements.length - 1 ? content[j].cloneNode(true) : content[j]); break;
 
-                // insert a clone after each parent except for the last one after which we insert the original content
-                case 'after': elements[i].parentNode.insertBefore(i < elements.length - 1 ? content[j].cloneNode(true) : content[j], elements[i].nextSibling); break;
+                // insert a clone before each target except for the last one before which we insert the original content
+                case 'before': elements[i].parentNode.insertBefore(i < elements.length - 1 ? content[j].cloneNode(true) : content[j], elements[i]); break;
 
             }
 
