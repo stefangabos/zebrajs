@@ -20,6 +20,7 @@ $(document).ready(function() {
             'before':       ['_dom_insert'],
             'height':       ['css'],
             'insertAfter':  ['_dom_insert'],
+            'insertBefore': ['_dom_insert'],
             'width':        ['css']
         },
 
