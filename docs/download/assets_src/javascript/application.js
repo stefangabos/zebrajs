@@ -14,9 +14,10 @@ $(document).ready(function() {
 
         // todo: this needs to be built automatically
         dependencies = {
+            'after':        ['_dom_insert'],
             'append':       ['_dom_insert'],
             'appendTo':     ['_dom_insert'],
-            'after':        ['_dom_insert'],
+            'before':       ['_dom_insert'],
             'height':       ['css'],
             'insertAfter':  ['_dom_insert'],
             'width':        ['css']
