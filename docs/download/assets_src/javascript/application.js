@@ -94,7 +94,7 @@ $(document).ready(function() {
         // get an object with the existing methods
         methods = extract_methods(),
 
-        modules, block, i, j,
+        wells, modules, block, i, j,
 
         manage_dependencies = function(module, checked) {
 
@@ -150,16 +150,22 @@ $(document).ready(function() {
             else manage_dependencies();
 
             // iterate over the existing modules
-            modules.each(function() {
+            modules.each(function(index) {
 
                 // the ID of the current module
                 var id = this.getAttribute('id').replace(/method\_/, '');
 
                 // if checkbox is checked
-                if (this.checked)
+                if (this.checked) {
+
+                    // highlight the checkbox's container
+                    wells[index].classList.add('selected');
 
                     // add module's source to the existing source code
                     code += methods[id === '$' ? 'get' : id];
+
+                // if not checked, remove highlight from checkbox's container
+                } else wells[index].classList.remove('selected');
 
             });
 
@@ -210,6 +216,9 @@ $(document).ready(function() {
             });
 
         }
+
+    // the wells containing the checkboxes
+    wells = $('.well');
 
     // now that all modules were added cache them
     modules = $('.well input');

@@ -33,4 +33,7 @@ a, a:hover {
     box-shadow: none;
     background: #FAFAFA;
     padding: 5px 20px;
+    &.selected {
+        background: #d4dfc7;
+    }
 }
