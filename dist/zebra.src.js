@@ -112,15 +112,15 @@ $ = function(selector, parent, first_only) {
         }
 
         /**
-         *  Private helper method used by {@link $#append .append()}, {@link $#appendTo .appendTo()}, {@link $#after .after()} and
-         *  {@link $#insertAfter .insertAfter()} methods.
+         *  Private helper method used by {@link $#append .append()}, {@link $#appendTo .appendTo()}, {@link $#after .after()},
+         *  {@link $#insertAfter .insertAfter()}, {@link $#before .before()} and {@link $#insertBefore .insertBefore()} methods.
          *
          *  @param  {mixed}     content     Depending on the caller method this is the DOM element, text node, HTML string, or
          *                                  ZebraJS object to insert in the DOM.
          *
          *  @param  {string}    where       Indicated where the content should be inserted, relative to the set of matched elements.
          *                                  <br><br>
-         *                                  Posssible values are `append` and `after`.
+         *                                  Posssible values are `after`, `append` and `before`.
          *
          *  @return {$}     Returns the set of matched elements (the parents, not the appended elements), for chaining.
          *
