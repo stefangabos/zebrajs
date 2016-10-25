@@ -4,7 +4,7 @@
  *  Both this and the {@link $#after .after()} method perform the same task, the main difference being in the
  *  placement of the content and the target. With `.after()`, the selector expression preceding the method is the target
  *  after which the content is to be inserted. On the other hand, with `.insertAfter()`, the content precedes the method,
- *  and it is the one inserted after the target container.
+ *  and it is the one inserted after the target element(s).
  *
  *  > If there is more than one target element, clones of the inserted element will be created after each target except
  *  for the last one. The original item will be inserted after the last target.
@@ -32,7 +32,7 @@
  *
  *  @param  {$}     target  A ZebraJS object after which to insert each element in the set of matched elements.
  *
- *  @return {$}     Returns the ZebraJS object you are inserting your elements after.
+ *  @return {$}     Returns the ZebraJS object after the content is inserted.
  */
 this.insertAfter = function(target) {
 
