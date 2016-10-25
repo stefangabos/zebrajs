@@ -21,6 +21,8 @@ $(document).ready(function() {
             'height':       ['css'],
             'insertAfter':  ['_dom_insert'],
             'insertBefore': ['_dom_insert'],
+            'prepend':      ['_dom_insert'],
+            'prependTo':    ['_dom_insert'],
             'width':        ['css']
         },
 
