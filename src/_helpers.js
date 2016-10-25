@@ -1,6 +1,7 @@
 /**
  *  Private helper method used by {@link $#append .append()}, {@link $#appendTo .appendTo()}, {@link $#after .after()},
- *  {@link $#insertAfter .insertAfter()}, {@link $#before .before()} and {@link $#insertBefore .insertBefore()} methods.
+ *  {@link $#insertAfter .insertAfter()}, {@link $#before .before()}, {@link $#insertBefore .insertBefore()},
+ *  {@link $#prepend .prepend()} and {@link $#prependTo .prependTo()} methods.
  *
  *  @param  {mixed}     content     Depending on the caller method this is the DOM element, text node, HTML string, or
  *                                  ZebraJS object to insert in the DOM.
@@ -44,6 +45,9 @@ this._dom_insert = function(content, where) {
                 // if content is to be inserted before an element
                 case 'before': elements[i].insertAdjacentHTML('beforebegin', content); break;
 
+                // if content is to be prepended into an element
+                case 'prepend': elements[i].insertAdjacentHTML('afterbegin', content); break;
+
             }
 
         // since content is an array of DOM elements or text nodes
@@ -61,6 +65,9 @@ this._dom_insert = function(content, where) {
 
                 // insert a clone before each target except for the last one before which we insert the original content
                 case 'before': elements[i].parentNode.insertBefore(i < elements.length - 1 ? content[j].cloneNode(true) : content[j], elements[i]); break;
+
+                // prepend a clone to each parent except for the last one where we add the original content
+                case 'prepend': elements[i].insertBefore(i < elements.length - 1 ? content[j].cloneNode(true) : content[j], elements[i].firstChild); break;
 
             }
 
