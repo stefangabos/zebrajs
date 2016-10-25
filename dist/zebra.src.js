@@ -1212,6 +1212,13 @@ $ = function(selector, parent, first_only) {
         /**
          *  @todo   Needs to be written!
          */
+        this.replaceWith = function() {
+
+        }
+
+        /**
+         *  @todo   Needs to be written!
+         */
         this.scrollLeft = function() {
 
         }
