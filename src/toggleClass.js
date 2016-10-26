@@ -27,24 +27,7 @@
  */
 this.toggleClass = function(class_name) {
 
-    var i, j;
-
-    // split by space and create an array
-    class_name = class_name.split(' ');
-
-    // iterate through the set of matched elements
-    for (i in elements)
-
-        // iterate through the class names to remove
-        for (j in class_name)
-
-            // if class is present, remove it
-            if (elements[i].classList.contains(class_name[j])) elements[i].classList.remove(class_name[j]);
-
-            // if class is not present, add it
-            else elements[i].classList.add(class_name[j]);
-
-    // return the set of matched elements, for chaining
-    return $this;
+    // toggle class(es) and return the set of matched elements, for chaining
+    return this._manage_classes(class_name, 'toggle');
 
 }

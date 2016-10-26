@@ -25,21 +25,7 @@
  */
 this.removeClass = function(class_name) {
 
-    var i, j;
-
-    // split by space and create an array
-    class_name = class_name.split(' ');
-
-    // iterate through the set of matched elements
-    for (i in elements)
-
-        // iterate through the class names to remove
-        for (j in class_name)
-
-            // remove class
-            elements[i].classList.remove(class_name[j]);
-
-    // return the set of matched elements, for chaining
-    return $this;
+    // remove class(es) and return the set of matched elements, for chaining
+    return this._manage_classes(class_name, 'remove');
 
 }
