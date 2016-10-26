@@ -521,6 +521,13 @@ $ = function(selector, parent, first_only) {
         }
 
         /**
+         *  @todo   Needs to be written!
+         */
+        this.closest = function() {
+
+        }
+
+        /**
          *  Gets the value of a computed style property for the first element in the set of matched elements, or sets one or more
          *  CSS properties for every matched element.
          *
@@ -663,6 +670,13 @@ $ = function(selector, parent, first_only) {
                 //  inside the callback function refers to wrapped element (in a "$" object)
                 //  returning false from the callback function exists the loop
                 if (callback.call(new $(elements[i]), i) === false) return;
+
+        }
+
+        /**
+         *  @todo   Needs to be written!
+         */
+        this.find = function() {
 
         }
 
@@ -911,6 +925,13 @@ $ = function(selector, parent, first_only) {
         /**
          *  @todo   Needs to be written!
          */
+        this.next = function() {
+
+        }
+
+        /**
+         *  @todo   Needs to be written!
+         */
         this.off = function() {
 
         }
@@ -1146,6 +1167,13 @@ $ = function(selector, parent, first_only) {
         }
 
         /**
+         *  @todo   Needs to be written!
+         */
+        this.prev = function() {
+
+        }
+
+        /**
          *  @todo   Needs documentation!
          */
         this.ready = function(callback) {
@@ -1234,6 +1262,13 @@ $ = function(selector, parent, first_only) {
          *  @todo   Needs to be written!
          */
         this.serialize = function() {
+
+        }
+
+        /**
+         *  @todo   Needs to be written!
+         */
+        this.siblings = function() {
 
         }
 
