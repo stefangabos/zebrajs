@@ -124,11 +124,8 @@ $ = function(selector, parent, first_only) {
                 // iterate through the class names to add
                 for (j in class_name)
 
-                    // class(es) need to be added
-                    if (action === 'add' || (action === 'toggle' && !elements[i].classList.contains(class_name[j]))) elements[i].classList.add(class_name[j]);
-
-                    // class(es) need to be removed
-                    else if (action === 'remove' || (action === 'toggle' && elements[i].classList.contains(class_name[j]))) elements[i].classList.remove(class_name[j]);
+                    // add or remove class(es)
+                    elements[i].classList[action === 'add' || (action === 'toggle' && !elements[i].classList.contains(class_name[j])) ? 'add' : 'remove'](class_name[j]);
 
             // return the set of matched elements, for chaining
             return $this;
