@@ -119,6 +119,7 @@ $ = function(selector, parent, first_only) {
         // import "appendTo.js"
         // import "attr.js"
         // import "before.js"
+        // import "children.js"
         // import "closest.js"
         // import "css.js"
         // import "data.js"
