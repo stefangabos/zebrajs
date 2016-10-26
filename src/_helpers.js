@@ -1,3 +1,27 @@
+this._manage_classes = function(class_name, action) {
+
+    var i, j;
+
+    // split by space and create an array
+    class_name = class_name.split(' ');
+
+    // iterate through the set of matched elements
+    for (i in elements)
+
+        // iterate through the class names to add
+        for (j in class_name)
+
+            // class(es) need to be added
+            if (action === 'add' || (action === 'toggle' && !elements[i].classList.contains(class_name[j]))) elements[i].classList.add(class_name[j]);
+
+            // class(es) need to be removed
+            else if (action === 'remove' || (action === 'toggle' && elements[i].classList.contains(class_name[j]))) elements[i].classList.remove(class_name[j]);
+
+    // return the set of matched elements, for chaining
+    return $this;
+
+}
+
 /**
  *  Private helper method used by {@link $#append .append()}, {@link $#appendTo .appendTo()}, {@link $#after .after()},
  *  {@link $#insertAfter .insertAfter()}, {@link $#before .before()}, {@link $#insertBefore .insertBefore()},
