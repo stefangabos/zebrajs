@@ -111,6 +111,30 @@ $ = function(selector, parent, first_only) {
             return elements;
         }
 
+        this._manage_classes = function(class_name, action) {
+
+            var i, j;
+
+            // split by space and create an array
+            class_name = class_name.split(' ');
+
+            // iterate through the set of matched elements
+            for (i in elements)
+
+                // iterate through the class names to add
+                for (j in class_name)
+
+                    // class(es) need to be added
+                    if (action === 'add' || (action === 'toggle' && !elements[i].classList.contains(class_name[j]))) elements[i].classList.add(class_name[j]);
+
+                    // class(es) need to be removed
+                    else if (action === 'remove' || (action === 'toggle' && elements[i].classList.contains(class_name[j]))) elements[i].classList.remove(class_name[j]);
+
+            // return the set of matched elements, for chaining
+            return $this;
+
+        }
+
         /**
          *  Private helper method used by {@link $#append .append()}, {@link $#appendTo .appendTo()}, {@link $#after .after()},
          *  {@link $#insertAfter .insertAfter()}, {@link $#before .before()}, {@link $#insertBefore .insertBefore()},
@@ -202,22 +226,8 @@ $ = function(selector, parent, first_only) {
          */
         this.addClass = function(class_name) {
 
-            var i, j;
-
-            // split by space and create an array
-            class_name = class_name.split(' ');
-
-            // iterate through the set of matched elements
-            for (i in elements)
-
-                // iterate through the class names to add
-                for (j in class_name)
-
-                    // add class
-                    elements[i].classList.add(class_name[j]);
-
-            // return the set of matched elements, for chaining
-            return $this;
+            // add class(es) and return the set of matched elements, for chaining
+            return this._manage_classes(class_name, 'add');
 
         };
 
@@ -517,6 +527,13 @@ $ = function(selector, parent, first_only) {
 
             // call the "_dom_insert" private method with these arguments
             return this._dom_insert(content, 'before');
+
+        }
+
+        /**
+         *  @todo   Needs to be written!
+         */
+        this.children = function() {
 
         }
 
@@ -1218,22 +1235,8 @@ $ = function(selector, parent, first_only) {
          */
         this.removeClass = function(class_name) {
 
-            var i, j;
-
-            // split by space and create an array
-            class_name = class_name.split(' ');
-
-            // iterate through the set of matched elements
-            for (i in elements)
-
-                // iterate through the class names to remove
-                for (j in class_name)
-
-                    // remove class
-                    elements[i].classList.remove(class_name[j]);
-
-            // return the set of matched elements, for chaining
-            return $this;
+            // remove class(es) and return the set of matched elements, for chaining
+            return this._manage_classes(class_name, 'remove');
 
         }
 
@@ -1353,25 +1356,8 @@ $ = function(selector, parent, first_only) {
          */
         this.toggleClass = function(class_name) {
 
-            var i, j;
-
-            // split by space and create an array
-            class_name = class_name.split(' ');
-
-            // iterate through the set of matched elements
-            for (i in elements)
-
-                // iterate through the class names to remove
-                for (j in class_name)
-
-                    // if class is present, remove it
-                    if (elements[i].classList.contains(class_name[j])) elements[i].classList.remove(class_name[j]);
-
-                    // if class is not present, add it
-                    else elements[i].classList.add(class_name[j]);
-
-            // return the set of matched elements, for chaining
-            return $this;
+            // toggle class(es) and return the set of matched elements, for chaining
+            return this._manage_classes(class_name, 'toggle');
 
         }
 
