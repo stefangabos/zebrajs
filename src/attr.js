@@ -89,6 +89,6 @@ this.attr = function(attribute, value) {
             return elements[0].getAttribute(attribute);
 
     // if we get this far, return the set of matched elements, for chaining
-    return elements;
+    return $this;
 
 }
