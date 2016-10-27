@@ -23,7 +23,7 @@
 this.hasClass = function(class_name) {
 
     // iterate through the set of matched elements
-    for (var i in elements)
+    for (var i = 0; i < elements.length; i++)
 
         // if sought class exists, return TRUE
         if (elements[i].classList.contains(class_name)) return true;

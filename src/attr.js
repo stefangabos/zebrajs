@@ -55,13 +55,15 @@ this.attr = function(attribute, value) {
     if (typeof attribute === 'object')
 
         // iterate over the set of matched elements
-        for (i in elements)
+        elements.forEach(function(element) {
 
             // iterate over the attributes
-            for (j in attribute)
+            for (i in attribute)
 
                 // set each attribute
-                elements[i].setAttribute(j, attribute[j]);
+                element.setAttribute(j, attribute[j]);
+
+        });
 
     // if attribute argument is a string
     else if (typeof attribute === 'string')
@@ -70,16 +72,18 @@ this.attr = function(attribute, value) {
         if (undefined !== value)
 
             // iterate over the set of matched elements
-            for (i in elements)
+            elements.forEach(function(element) {
 
                 // if value argument's value is FALSE or NULL
                 if (value === false || value === null)
 
                     // remove the attribute
-                    elements[i].removeAttribute(attribute);
+                    element[i].removeAttribute(attribute);
 
                 // for other values, set the attribute's property
-                else elements[i].setAttribute(attribute, value);
+                else element[i].setAttribute(attribute, value);
+
+            });
 
         // if the value argument is not provided
         else

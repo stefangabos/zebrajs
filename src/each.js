@@ -30,7 +30,7 @@
 this.each = function(callback) {
 
     // iterate through the set of matched elements
-    for (var i in elements)
+    for (var i = 0; i < elements.length; i++)
 
         //  apply the callback function (the index is the argument to the function, while the "this" keyword
         //  inside the callback function refers to wrapped element (in a "$" object)

@@ -29,16 +29,16 @@
  */
 this.text = function(content) {
 
-    var i;
-
     // if content is provided
     if (content)
 
         // iterate through the set of matched elements
-        for (i in elements)
+        elements.forEach(function(element) {
 
             // set the text content of each element
-            elements[i].textContent = content;
+            element.textContent = content;
+
+        });
 
     // if content is not provided
     // return the text content of the first element in the set of matched elements

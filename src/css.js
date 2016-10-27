@@ -56,28 +56,32 @@ this.css = function(property, value) {
     if (typeof property === 'object')
 
         // iterate through the set of matched elements
-        for (i in elements)
+        elements.forEach(function(element) {
 
             // iterate through the "properties" object
             for (j in property)
 
                 // set each style property
-                elements[i].style[j] = property[j];
+                element.style[j] = property[j];
+
+        });
 
     // if "property" is not an object, and "value" argument is set
     else if (undefined !== value)
 
         // iterate through the set of matched elements
-        for (i in elements)
+        elements.forEach(function(element) {
 
             // if value argument's value is FALSE or NULL
             if (value === false || value === null)
 
                 // remove the CSS property
-                elements[i].style[property] = null
+                element.style[property] = null
 
             // set the respective style property
-            else elements[i].style[property] = value;
+            else element.style[property] = value;
+
+        });
 
     // if "property" is not an object and "value" is not set
     // return the value of the given CSS property, or "undefined" if property is not available

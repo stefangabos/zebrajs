@@ -111,21 +111,23 @@ $ = function(selector, parent, first_only) {
             return elements;
         }
 
-        this._manage_classes = function(class_name, action) {
-
-            var i, j;
+        this._manage_classes = function(class_names, action) {
 
             // split by space and create an array
-            class_name = class_name.split(' ');
+            class_names = class_names.split(' ');
 
             // iterate through the set of matched elements
-            for (i in elements)
+            elements.forEach(function(element) {
 
                 // iterate through the class names to add
-                for (j in class_name)
+                class_names.forEach(function(class_name) {
 
                     // add or remove class(es)
-                    elements[i].classList[action === 'add' || (action === 'toggle' && !elements[i].classList.contains(class_name[j])) ? 'add' : 'remove'](class_name[j]);
+                    element.classList[action === 'add' || (action === 'toggle' && !element.classList.contains(class_name)) ? 'add' : 'remove'](class_name);
+
+                });
+
+            });
 
             // return the set of matched elements, for chaining
             return $this;
@@ -150,8 +152,6 @@ $ = function(selector, parent, first_only) {
          */
         this._dom_insert = function(content, where) {
 
-            var i, j;
-
             // if element to append is an $ object, we'll use the array of DOM elements
             if (content instanceof $) content = content.get();
 
@@ -162,34 +162,38 @@ $ = function(selector, parent, first_only) {
             else if (typeof content !== 'string') return false;
 
             // iterate through the set of matched elements
-            for (i in elements)
+            elements.forEach(function(element) {
 
                 // if content to append is a string (plain text or HTML)
                 if (typeof content === 'string')
 
                     // insert content like this
-                    elements[i].insertAdjacentHTML((where === 'after' || where === 'prepend' ? 'after' : 'before') + (where === 'after' || where === 'append' ? 'end' : 'begin'), content);
+                    element.insertAdjacentHTML((where === 'after' || where === 'prepend' ? 'after' : 'before') + (where === 'after' || where === 'append' ? 'end' : 'begin'), content);
 
                 // since content is an array of DOM elements or text nodes
                 // iterate over the array
-                else for (j in content)
+                else content.forEach(function(item, index) {
 
                     // where the content needs to be moved in the DOM
                     switch (where) {
 
                         // insert a clone after each target except for the last one after which we insert the original content
-                        case 'after': elements[i].parentNode.insertBefore(i < elements.length - 1 ? content[j].cloneNode(true) : content[j], elements[i].nextSibling); break;
+                        case 'after': element.parentNode.insertBefore(index < elements.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
 
                         // add a clone to each parent except for the last one where we add the original content
-                        case 'append': elements[i].appendChild(i < elements.length - 1 ? content[j].cloneNode(true) : content[j]); break;
+                        case 'append': element.appendChild(index < elements.length - 1 ? item.cloneNode(true) : item); break;
 
                         // insert a clone before each target except for the last one before which we insert the original content
-                        case 'before': elements[i].parentNode.insertBefore(i < elements.length - 1 ? content[j].cloneNode(true) : content[j], elements[i]); break;
+                        case 'before': element.parentNode.insertBefore(index < elements.length - 1 ? item.cloneNode(true) : item, element); break;
 
                         // prepend a clone to each parent except for the last one where we add the original content
-                        case 'prepend': elements[i].insertBefore(i < elements.length - 1 ? content[j].cloneNode(true) : content[j], elements[i].firstChild); break;
+                        case 'prepend': element.insertBefore(index < elements.length - 1 ? item.cloneNode(true) : item, element.firstChild); break;
 
                     }
+
+                });
+
+            });
 
             // return the set of matched elements, for chaining
             return $this;
@@ -438,13 +442,15 @@ $ = function(selector, parent, first_only) {
             if (typeof attribute === 'object')
 
                 // iterate over the set of matched elements
-                for (i in elements)
+                elements.forEach(function(element) {
 
                     // iterate over the attributes
-                    for (j in attribute)
+                    for (i in attribute)
 
                         // set each attribute
-                        elements[i].setAttribute(j, attribute[j]);
+                        element.setAttribute(j, attribute[j]);
+
+                });
 
             // if attribute argument is a string
             else if (typeof attribute === 'string')
@@ -453,16 +459,18 @@ $ = function(selector, parent, first_only) {
                 if (undefined !== value)
 
                     // iterate over the set of matched elements
-                    for (i in elements)
+                    elements.forEach(function(element) {
 
                         // if value argument's value is FALSE or NULL
                         if (value === false || value === null)
 
                             // remove the attribute
-                            elements[i].removeAttribute(attribute);
+                            element[i].removeAttribute(attribute);
 
                         // for other values, set the attribute's property
-                        else elements[i].setAttribute(attribute, value);
+                        else element[i].setAttribute(attribute, value);
+
+                    });
 
                 // if the value argument is not provided
                 else
@@ -472,7 +480,7 @@ $ = function(selector, parent, first_only) {
                     return elements[0].getAttribute(attribute);
 
             // if we get this far, return the set of matched elements, for chaining
-            return elements;
+            return $this;
 
         }
 
@@ -599,28 +607,32 @@ $ = function(selector, parent, first_only) {
             if (typeof property === 'object')
 
                 // iterate through the set of matched elements
-                for (i in elements)
+                elements.forEach(function(element) {
 
                     // iterate through the "properties" object
                     for (j in property)
 
                         // set each style property
-                        elements[i].style[j] = property[j];
+                        element.style[j] = property[j];
+
+                });
 
             // if "property" is not an object, and "value" argument is set
             else if (undefined !== value)
 
                 // iterate through the set of matched elements
-                for (i in elements)
+                elements.forEach(function(element) {
 
                     // if value argument's value is FALSE or NULL
                     if (value === false || value === null)
 
                         // remove the CSS property
-                        elements[i].style[property] = null
+                        element.style[property] = null
 
                     // set the respective style property
-                    else elements[i].style[property] = value;
+                    else element.style[property] = value;
+
+                });
 
             // if "property" is not an object and "value" is not set
             // return the value of the given CSS property, or "undefined" if property is not available
@@ -678,7 +690,7 @@ $ = function(selector, parent, first_only) {
         this.each = function(callback) {
 
             // iterate through the set of matched elements
-            for (var i in elements)
+            for (var i = 0; i < elements.length; i++)
 
                 //  apply the callback function (the index is the argument to the function, while the "this" keyword
                 //  inside the callback function refers to wrapped element (in a "$" object)
@@ -726,7 +738,7 @@ $ = function(selector, parent, first_only) {
         this.hasClass = function(class_name) {
 
             // iterate through the set of matched elements
-            for (var i in elements)
+            for (var i = 0; i < elements.length; i++)
 
                 // if sought class exists, return TRUE
                 if (elements[i].classList.contains(class_name)) return true;
@@ -823,16 +835,16 @@ $ = function(selector, parent, first_only) {
          */
         this.html = function(content) {
 
-            var i;
-
             // if content is provided
             if (content)
 
                 // iterate through the set of matched elements
-                for (i in elements)
+                elements.forEach(function(element) {
 
                     // set the HTML content of each element
-                    elements[i].innerHTML = content;
+                    element.innerHTML = content;
+
+                });
 
             // if content is not provided
             // return the content of the first element in the set of matched elements
@@ -1303,16 +1315,16 @@ $ = function(selector, parent, first_only) {
          */
         this.text = function(content) {
 
-            var i;
-
             // if content is provided
             if (content)
 
                 // iterate through the set of matched elements
-                for (i in elements)
+                elements.forEach(function(element) {
 
                     // set the text content of each element
-                    elements[i].textContent = content;
+                    element.textContent = content;
+
+                });
 
             // if content is not provided
             // return the text content of the first element in the set of matched elements
