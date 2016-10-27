@@ -5,6 +5,16 @@
     </head>
     <body>
 
+            <ul>
+            	<li>
+            		atom
+            	</li>
+            	<li>
+            		vue
+            	</li>
+            </ul>
+
+
         <div class="test" id="test1">
             Lorem ipsum dolor sit amet consectetuer lorem tristique nec et euismod. At Donec nunc Morbi Sed Curabitur lobortis
             leo porttitor Aenean nibh. Sed Curabitur dignissim nibh ac pretium tempus interdum Curabitur Vestibulum Morbi. Lacinia
@@ -24,29 +34,15 @@
             leo porttitor Aenean nibh. Sed Curabitur dignissim nibh ac pretium tempus interdum Curabitur Vestibulum Morbi. Lacinia
             in ante porta quis Vestibulum Nullam enim laoreet enim accumsan. Et non Proin semper rutrum sapien lorem in sit et
             auctor. Quis sem pellentesque quis dui ligula vitae leo velit semper euismod.
-            <ul>
-            	<li>
-            		atom
-            	</li>
-            	<li>
-            		vue
-            	</li>
-            </ul>
         </div>
 
-        <script type="text/javascript" src="../dist/zebra.min.js"></script>
+        <script type="text/javascript" src="../dist/zebra.src.js"></script>
         <script type="text/javascript">
 
-        var elements = $('.test');
-        elements.css('backgroundColor', 'red');
-        elements.css('backgroundColor', false);
+            var elements = $('.test');
+            console.log(elements.hasClass('test'));
 
-//         elements.attr({
-//             id: 'someid',
-//             class: 'something',
-//             rel: 'someother'
-//         });
-//         console.log(elements.text());
+//             $('<div>').text('hello').prependTo(parents);
 
         </script>
     </body>
