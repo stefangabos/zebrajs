@@ -50,7 +50,7 @@
  */
 this.css = function(property, value) {
 
-    var i, j, computedStyle;
+    var i, computedStyle;
 
     // if "property" is an object and "value" is not set
     if (typeof property === 'object')
@@ -59,10 +59,10 @@ this.css = function(property, value) {
         elements.forEach(function(element) {
 
             // iterate through the "properties" object
-            for (j in property)
+            for (i in property)
 
                 // set each style property
-                element.style[j] = property[j];
+                element.style[i] = property[i];
 
         });
 
