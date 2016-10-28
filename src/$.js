@@ -43,7 +43,7 @@ $ = function(selector, parent, first_only) {
             if (!parent) parent = document;
 
             // if parent is set but is a "$" object, refer to the DOM elements instead of the "$" object
-            else if (parent instanceof $) parent = parent.get()[0];
+            else if (parent instanceof $) parent = parent.get(0);
 
             // if the selector is an ID
             // select the matching element and create and return a new "$" object
@@ -109,15 +109,15 @@ $ = function(selector, parent, first_only) {
         var $this = this,
 
             // the set of matched elements
-            elements = (selector instanceof Element ? [selector] : [].concat(selector));
+            elements = (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window ? [selector] : [].concat(selector));
 
         /**
          *  @todo   Needs documentation!
          *
          *  @access public
          */
-        this.get = function() {
-            return elements;
+        this.get = function(index) {
+            return index !== undefined ? elements[index] : elements;
         }
 
         // import "_helpers.js"
