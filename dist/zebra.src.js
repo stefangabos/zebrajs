@@ -43,7 +43,7 @@ $ = function(selector, parent, first_only) {
             if (!parent) parent = document;
 
             // if parent is set but is a "$" object, refer to the DOM elements instead of the "$" object
-            else if (parent instanceof $) parent = parent.get()[0];
+            else if (parent instanceof $) parent = parent.get(0);
 
             // if the selector is an ID
             // select the matching element and create and return a new "$" object
@@ -80,8 +80,17 @@ $ = function(selector, parent, first_only) {
 
             }
 
-        // if selector is a DOM node, the Document or Window object, wrap it and return the new "$" object
-        } else if (typeof selector === 'object' && (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window)) return new $(selector);
+        // if
+        } else if (
+
+            // selector is a the Document object, a DOM node, the Window object or a text node OR
+            (typeof selector === 'object' && (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window)) ||
+
+            // an array of DOM elements
+            Array.isArray(selector)
+
+        // return the new "$" object
+        ) return new $(selector);
 
         // if we're calling $() on an "$" object, simply return the original object
         else if (selector instanceof $) return selector;
@@ -100,15 +109,15 @@ $ = function(selector, parent, first_only) {
         var $this = this,
 
             // the set of matched elements
-            elements = (selector instanceof Element ? [selector] : [].concat(selector));
+            elements = (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window ? [selector] : [].concat(selector));
 
         /**
          *  @todo   Needs documentation!
          *
          *  @access public
          */
-        this.get = function() {
-            return elements;
+        this.get = function(index) {
+            return index !== undefined ? elements[index] : elements;
         }
 
         this._manage_classes = function(class_names, action) {
@@ -601,7 +610,7 @@ $ = function(selector, parent, first_only) {
          */
         this.css = function(property, value) {
 
-            var i, j, computedStyle;
+            var i, computedStyle;
 
             // if "property" is an object and "value" is not set
             if (typeof property === 'object')
@@ -610,10 +619,10 @@ $ = function(selector, parent, first_only) {
                 elements.forEach(function(element) {
 
                     // iterate through the "properties" object
-                    for (j in property)
+                    for (i in property)
 
                         // set each style property
-                        element.style[j] = property[j];
+                        element.style[i] = property[i];
 
                 });
 
@@ -1281,6 +1290,24 @@ $ = function(selector, parent, first_only) {
          *  @todo   Needs to be written!
          */
         this.siblings = function() {
+
+            var result = [];
+
+            // iterate through the set of matched elements
+            elements.forEach(function(element) {
+
+                // get the element's parent's children nodes that are not the current element, and add them to the results array
+                result = result.concat(Array.prototype.filter.call(element.parentNode.children, function(child) {
+
+                    // skip the current element
+                    return child !== element;
+
+                }));
+
+            });
+
+            // return the result, as a ZebraJS object
+            return $(result);
 
         }
 
