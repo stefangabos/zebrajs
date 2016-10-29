@@ -5694,7 +5694,7 @@
 
     
 
-    <h4 class="name" id="siblings"><span class="type-signature"></span>siblings<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="siblings"><span class="type-signature"></span>siblings<span class="signature">(selector)</span><span class="type-signature"> &rarr; {<a href="$.html">$</a>}</span></h4>
 
     
 
@@ -5706,7 +5706,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1292">line 1292</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1313">line 1313</a>
     </li></ul></dd>
     
 
@@ -5739,19 +5739,79 @@
     
 
     
-    <dt class="tag-todo">To Do:</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>Needs to be written!</li>
-        </ul>
-    </dd>
-    
 </dl>
 
 
 
 
 
+<div class="description">
+    <p>Gets the siblings of each element in the set of matched elements, optionally filtered by a selector.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get all the siblings of the element var siblings_all = element.siblings(); // get all the "div" siblings of the element var siblings_filtered = element.siblings('div'); // since this method returns a ZebraJS object, we can use chaining element.siblings('div').addClass('someclass'); </code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>selector</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>If the selector is supplied, the elements will be filtered by testing whether they
+                                 match it.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -5766,14 +5826,29 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Returns the siblings of each element in the set of matched elements, as a ZebraJS object, so you
+                     can use chaining.</p>
+</div>
 
 
 
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="$.html">$</a></span>
 
 
+    </dd>
+</dl>
 
-
-
+    
 
 
         
@@ -5793,7 +5868,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1343">line 1343</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1365">line 1365</a>
     </li></ul></dd>
     
 
@@ -5987,7 +6062,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1393">line 1393</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1415">line 1415</a>
     </li></ul></dd>
     
 
@@ -6170,7 +6245,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1403">line 1403</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1425">line 1425</a>
     </li></ul></dd>
     
 
@@ -6257,7 +6332,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1410">line 1410</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1432">line 1432</a>
     </li></ul></dd>
     
 
@@ -6344,7 +6419,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1417">line 1417</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1439">line 1439</a>
     </li></ul></dd>
     
 
@@ -6431,7 +6506,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1462">line 1462</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1484">line 1484</a>
     </li></ul></dd>
     
 
@@ -6644,7 +6719,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1477">line 1477</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1499">line 1499</a>
     </li></ul></dd>
     
 
@@ -6732,7 +6807,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Fri Oct 28 2016 23:41:55 GMT+0300 (GTB Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Sat Oct 29 2016 19:28:48 GMT+0300 (GTB Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
