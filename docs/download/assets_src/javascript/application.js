@@ -25,6 +25,7 @@ $(document).ready(function() {
             'prepend':      ['_dom_insert'],
             'prependTo':    ['_dom_insert'],
             'removeClass':  ['_manage_classes'],
+            'siblings':     ['_random'],
             'toggleClass':  ['_manage_classes'],
             'width':        ['css']
         },
