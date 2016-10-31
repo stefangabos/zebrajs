@@ -109,7 +109,10 @@ $ = function(selector, parent, first_only) {
         var $this = this,
 
             // the set of matched elements
-            elements = (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window ? [selector] : [].concat(selector));
+            elements = (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window ? [selector] : [].concat(selector)),
+
+            // we'll use this when generating random IDs
+            internal_counter = 0;
 
         /**
          *  @todo   Needs documentation!
@@ -118,6 +121,15 @@ $ = function(selector, parent, first_only) {
          */
         this.get = function(index) {
             return index !== undefined ? elements[index] : elements;
+        }
+
+        this._random = function(prefix) {
+
+            // if the internal counter is too large, reset it
+            if (internal_counter > Number.MAX_VALUE) internal_counter = 0;
+
+            // return a pseudo-random string by incrementing the internal counter
+            return prefix + '_' + internal_counter++;
         }
 
         this._manage_classes = function(class_names, action) {
@@ -1312,19 +1324,35 @@ $ = function(selector, parent, first_only) {
          */
         this.siblings = function(selector) {
 
-            var result = [];
+            var result = [], remove_id;
 
             // iterate through the set of matched elements
             elements.forEach(function(element) {
 
+                remove_id = false;
+
+                // if selector is specified and element does not have an ID
+                if (selector && null === element.getAttribute('id')) {
+
+                    // generate and set a random ID for the element
+                    element.setAttribute('id', $this._random('id'));
+
+                    // set this flag so that we know to remove the randomly generated ID when we're done
+                    remove_id = true;
+
+                }
+
                 // get the element's parent's children nodes which, optionally, match a given selector
                 // and add them to the results array
-                result = result.concat(Array.prototype.filter.call(selector ? element.parentNode.querySelectorAll(selector) : element.parentNode.children, function(child) {
+                result = result.concat(Array.prototype.filter.call(selector ? element.parentNode.querySelectorAll('#' + element.id + '~' + selector) : element.parentNode.children, function(child) {
 
                     // skip the current element
                     return child !== element;
 
                 }));
+
+                // if present, remove the randomly generated ID
+                if (remove_id) element.removeAttribute('id');
 
             });
 
