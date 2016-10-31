@@ -95,11 +95,12 @@ module.exports = function(grunt) {
                 strict:     false,       //  requires all functions to run in ECMAScript 5's strict mode
                 asi:        true,       //  suppresses warnings about missing semicolons
                 globals: {              //  white list of global variables that are not formally defined in the source code
-                    '$':            true,
-                    'elements':     true,
-                    '$this':        true,
-                    'console':      true,
-                    'alert':        true
+                    '$':                true,
+                    '$this':            true,
+                    'alert':            true,
+                    'console':          true,
+                    'elements':         true,
+                    'internal_counter': true
                 },
                 browser:    true,       //  defines globals exposed by modern browsers (like `document` and `navigator`)
                 bitwise:    true,       //  prohibits the use of bitwise operators such as ^ (XOR), | (OR) and others
