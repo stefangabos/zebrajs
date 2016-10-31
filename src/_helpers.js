@@ -1,3 +1,12 @@
+this._random = function(prefix) {
+
+    // if the internal counter is too large, reset it
+    if (internal_counter > Number.MAX_VALUE) internal_counter = 0;
+
+    // return a pseudo-random string by incrementing the internal counter
+    return prefix + '_' + internal_counter++;
+}
+
 this._manage_classes = function(class_names, action) {
 
     // split by space and create an array
