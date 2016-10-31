@@ -109,7 +109,10 @@ $ = function(selector, parent, first_only) {
         var $this = this,
 
             // the set of matched elements
-            elements = (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window ? [selector] : [].concat(selector));
+            elements = (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window ? [selector] : [].concat(selector)),
+
+            // we'll use this when generating random IDs
+            internal_counter = 0;
 
         /**
          *  @todo   Needs documentation!
