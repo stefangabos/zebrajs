@@ -20,6 +20,7 @@ $(document).ready(function() {
             'append':       ['_dom_insert'],
             'appendTo':     ['_dom_insert'],
             'before':       ['_dom_insert'],
+            'children':     ['_random'],
             'height':       ['css'],
             'insertAfter':  ['_dom_insert'],
             'insertBefore': ['_dom_insert'],
