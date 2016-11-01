@@ -28,6 +28,6 @@
 this.toggleClass = function(class_name) {
 
     // toggle class(es) and return the set of matched elements, for chaining
-    return this._manage_classes(class_name, 'toggle');
+    return this._class('toggle', class_name);
 
 }

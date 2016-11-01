@@ -26,7 +26,7 @@
 this.addClass = function(class_name) {
 
     // add class(es) and return the set of matched elements, for chaining
-    return this._manage_classes(class_name, 'add');
+    return this._class('add', class_name);
 
 };
 

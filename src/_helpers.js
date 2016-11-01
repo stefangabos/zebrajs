@@ -7,7 +7,21 @@ this._random = function(prefix) {
     return prefix + '_' + internal_counter++;
 }
 
-this._manage_classes = function(class_names, action) {
+/**
+ *  Private helper method used by {@link $#height .height()} and {@link $#width .width()} methods.
+ *
+ *  @param  {string}    action      What to do with the class(es)
+ *                                  <br><br>
+ *                                  Posssible values are `add`, `remove` and `toggle`.
+ *
+ *  @param  {string}    class_names One or more space-separated class names to be added/removed/toggled for each element
+ *                                  in the set of matched elements.
+ *
+ *  @return {$}     Returns the set of matched elements (the parents, not the appended elements), for chaining.
+ *
+ *  @access private
+ */
+this._class = function(action, class_names) {
 
     // split by space and create an array
     class_names = class_names.split(' ');

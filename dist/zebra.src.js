@@ -132,7 +132,21 @@ $ = function(selector, parent, first_only) {
             return prefix + '_' + internal_counter++;
         }
 
-        this._manage_classes = function(class_names, action) {
+        /**
+         *  Private helper method used by {@link $#height .height()} and {@link $#width .width()} methods.
+         *
+         *  @param  {string}    action      What to do with the class(es)
+         *                                  <br><br>
+         *                                  Posssible values are `add`, `remove` and `toggle`.
+         *
+         *  @param  {string}    class_names One or more space-separated class names to be added/removed/toggled for each element
+         *                                  in the set of matched elements.
+         *
+         *  @return {$}     Returns the set of matched elements (the parents, not the appended elements), for chaining.
+         *
+         *  @access private
+         */
+        this._class = function(action, class_names) {
 
             // split by space and create an array
             class_names = class_names.split(' ');
@@ -249,7 +263,7 @@ $ = function(selector, parent, first_only) {
         this.addClass = function(class_name) {
 
             // add class(es) and return the set of matched elements, for chaining
-            return this._manage_classes(class_name, 'add');
+            return this._class('add', class_name);
 
         };
 
@@ -1266,7 +1280,7 @@ $ = function(selector, parent, first_only) {
         this.removeClass = function(class_name) {
 
             // remove class(es) and return the set of matched elements, for chaining
-            return this._manage_classes(class_name, 'remove');
+            return this._class('remove', class_name);
 
         }
 
@@ -1443,7 +1457,7 @@ $ = function(selector, parent, first_only) {
         this.toggleClass = function(class_name) {
 
             // toggle class(es) and return the set of matched elements, for chaining
-            return this._manage_classes(class_name, 'toggle');
+            return this._class('toggle', class_name);
 
         }
 

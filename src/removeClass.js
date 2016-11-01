@@ -26,6 +26,6 @@
 this.removeClass = function(class_name) {
 
     // remove class(es) and return the set of matched elements, for chaining
-    return this._manage_classes(class_name, 'remove');
+    return this._class('remove', class_name);
 
 }
