@@ -37,3 +37,11 @@ a, a:hover {
         background: #d4dfc7;
     }
 }
+
+.optional-methods + .col-lg-12 > label {
+    margin-bottom: 0;
+    & + span {
+        margin: 0 0 1em;
+        font-style: italic;
+    }
+}

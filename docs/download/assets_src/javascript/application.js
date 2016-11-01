@@ -7,7 +7,8 @@ $(document).ready(function() {
 
         // cache some selectors
         global_object = $('#object'),
-        modules_container = $('#packager .row:first-child'),
+        modules_container = $('#packager .optional-methods'),
+        helper_modules_container = $('#packager .private-methods'),
         total_download_size_container = $('.result strong span'),
         checkboxes,
         downloadable_content = $('textarea'),
@@ -30,14 +31,14 @@ $(document).ready(function() {
             'width':        ['css']
         },
 
-        reverse_dependencies = {},
+        reversed_dependencies = {}, methods = {}, private_methods = {},
 
         // extract all the available methods
         extract_methods = function() {
 
             var source = '@import "../../../../dist/zebra.min.js"',
                 source_length = source.length,
-                i, tmp = '', matches, matching_brackets = false, method_name, methods = {};
+                i, tmp = '', is_private_method, matches, matching_brackets = false, method_name;
 
             // go over the source code, character by character
             for (i = 0; i < source_length; i++) {
@@ -64,10 +65,16 @@ $(document).ready(function() {
                     // this is the method's name
                     method_name = matches[0].match(/^this\.(.*?)\=/)[1];
 
+                    // is this a private method? (starting with an underscore)
+                    is_private_method = method_name.indexOf('_') === 0;
+
                     // add the global function this way
                     if (method_name === 'get') methods[method_name] = (source.substr(0, i) + '}}};').trim();
 
-                    // add the methods
+                    // store private methods
+                    else if (is_private_method) private_methods[method_name] = matches[0] + tmp + ';';
+
+                    // store public methods
                     else methods[method_name] = matches[0] + tmp + ';';
 
                     // start looking for other methods
@@ -98,9 +105,6 @@ $(document).ready(function() {
             return content;
 
         },
-
-        // get an object with the existing methods
-        methods = extract_methods(),
 
         wells, modules, block, i, j,
 
@@ -137,14 +141,14 @@ $(document).ready(function() {
                     });
 
             // if there are modules requiring this module and we've just unchecked it
-            else if (undefined !== reverse_dependencies[module] && !checked)
+            else if (undefined !== reversed_dependencies[module] && !checked)
 
                 // iterate over the rules
-                for (i in reverse_dependencies[module])
+                for (i in reversed_dependencies[module])
 
                     // uncheck all the modules that require this module
                     checkboxes.each(function() {
-                        if (this.getAttribute('id') === 'method_' + reverse_dependencies[module][i]) this.checked = false;
+                        if (this.getAttribute('id') === 'method_' + reversed_dependencies[module][i]) this.checked = false;
                     });
 
         },
@@ -153,8 +157,10 @@ $(document).ready(function() {
 
             var code = '', global_object_name = global_object.val().trim();
 
+            // if this method is called when selecting/deselecting a module, compute the module's dependencies
             if (undefined !== e) manage_dependencies(e.target.getAttribute('id').replace(/^method\_/, ''), e.target.checked);
 
+            // scan all modules and handle the dependencies for all of them, depending on their state
             else manage_dependencies();
 
             // iterate over the existing modules
@@ -191,7 +197,10 @@ $(document).ready(function() {
 
         };
 
-    // iterate over the available methods
+    // get an object with the existing methods
+    extract_methods();
+
+    // iterate over the available public methods
     for (i in methods)
 
         // if this is not the global object
@@ -225,19 +234,30 @@ $(document).ready(function() {
 
         }
 
+    // iterate over the available private methods
+    for (i in private_methods)
+
+        // generate the HTML for the module, based on the template
+        block = $(parse_template({
+            method: private_methods[i].match(/^this\.(.*?)\=/)[1],
+            size: private_methods[i].length
+
+        // ...and add it to the section of optional modules
+        })).appendTo(helper_modules_container);
+
     // the wells containing the checkboxes
     wells = $('.well');
 
     // now that all modules were added cache them
     modules = $('.well input');
 
-    // toggling a checkbox, means generating the source code and updating the downloadable size
+    // toggling a checkbox, means generating the source code, selecting/deselecting dependencies and updating the downloadable size
     $('.well').on('change', 'input', manage_modules);
 
     // update source code when global object's name is changed
     global_object.on('blur', manage_modules);
 
-    // select all
+    // handle "select all" button
     $('a.select-all').on('click', function(e) {
 
         e.preventDefault();
@@ -255,7 +275,7 @@ $(document).ready(function() {
 
     });
 
-    // deselect all
+    // handle "deselect all" button
     $('a.deselect-all').on('click', function(e) {
 
         e.preventDefault();
@@ -284,8 +304,8 @@ $(document).ready(function() {
 
             // create a reverse lookup array to be used when deselecting a method that it is used by other methods,
             // so we can also deselect those
-            if (undefined === reverse_dependencies[dependencies[i][j]]) reverse_dependencies[dependencies[i][j]] = [];
-            if (reverse_dependencies[dependencies[i][j]].indexOf(i) === -1) reverse_dependencies[dependencies[i][j]].push(i);
+            if (undefined === reversed_dependencies[dependencies[i][j]]) reversed_dependencies[dependencies[i][j]] = [];
+            if (reversed_dependencies[dependencies[i][j]].indexOf(i) === -1) reversed_dependencies[dependencies[i][j]].push(i);
         }
 
     // generate initial source code
