@@ -1,8 +1,8 @@
 {
   "name": "zebrajs",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "dest/zebra.min.js",
-  "homepage": "http://www.stefangabos.ro/jquery/zebra-datepicker/",
+  "homepage": "https://github.com/stefangabos/zebrajs",
   "author": {
     "name": "Stefan Gabos",
     "email": "contact@stefangabos.ro"
@@ -10,10 +10,10 @@
   "description": "A JavaScript library for modern browsers",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stefangabos/Zebra_Datepicker.git"
+    "url": "https://github.com/stefangabos/zebrajs.git"
   },
   "bugs": {
-    "url": "http://github.com/stefangabos/Zebra_Datepicker/issues",
+    "url": "https://github.com/stefangabos/zebrajs",
     "email": "contact@stefangabos.ro"
   },
   "keywords": [
