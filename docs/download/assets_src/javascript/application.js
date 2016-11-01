@@ -15,7 +15,7 @@ $(document).ready(function() {
 
         // todo: this needs to be built automatically
         dependencies = {
-            'addClass':     ['_manage_classes'],
+            'addClass':     ['_class'],
             'after':        ['_dom_insert'],
             'append':       ['_dom_insert'],
             'appendTo':     ['_dom_insert'],
@@ -25,9 +25,9 @@ $(document).ready(function() {
             'insertBefore': ['_dom_insert'],
             'prepend':      ['_dom_insert'],
             'prependTo':    ['_dom_insert'],
-            'removeClass':  ['_manage_classes'],
+            'removeClass':  ['_class'],
             'siblings':     ['_random'],
-            'toggleClass':  ['_manage_classes'],
+            'toggleClass':  ['_class'],
             'width':        ['css']
         },
 
