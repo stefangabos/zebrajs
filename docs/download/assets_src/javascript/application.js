@@ -176,7 +176,7 @@ $(document).ready(function() {
                     wells[index].classList.add('selected');
 
                     // add module's source to the existing source code
-                    code += methods[id === '$' ? 'get' : id];
+                    code += id.indexOf('_') === 0 ? private_methods[id] : (methods[id === '$' ? 'get' : id]);
 
                 // if not checked, remove highlight from checkbox's container
                 } else wells[index].classList.remove('selected');
