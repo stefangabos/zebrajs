@@ -1,12 +1,3 @@
-this._random = function(prefix) {
-
-    // if the internal counter is too large, reset it
-    if (internal_counter > Number.MAX_VALUE) internal_counter = 0;
-
-    // return a pseudo-random string by incrementing the internal counter
-    return prefix + '_' + internal_counter++;
-}
-
 /**
  *  Private helper method used by {@link $#addClas .addCLass()}, {@link $#removeClass .removeClass()} and
  *  {@link $#toggleClass .toggleClass()} methods.
@@ -109,4 +100,81 @@ this._dom_insert = function(content, where) {
     // return the set of matched elements, for chaining
     return $this;
 
+}
+
+/**
+ *  Private helper method used by {@link $#children .children()} and {@link $#siblings .siblings()} methods.
+ *
+ *  @param  {string}    action      Specified what type of elements to look for
+ *                                  <br><br>
+ *                                  Posssible values are `children` and `siblings`.
+ *
+ *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
+ *                                  match it.
+ *
+ *  @return {$}     Returns the found elements, as a ZebraJS object
+ *
+ *  @access private
+ */
+this._dom_search = function(action, selector) {
+
+    var result = [], remove_id;
+
+    // iterate through the set of matched elements
+    elements.forEach(function(element) {
+
+        remove_id = false;
+
+        // if selector is specified and element does not have an ID
+        if (selector && null === element.getAttribute('id')) {
+
+            // generate and set a random ID for the element
+            element.setAttribute('id', $this._random('id'));
+
+            // set this flag so that we know to remove the randomly generated ID when we're done
+            remove_id = true;
+
+        }
+
+        // if we're looking for siblings
+        if (action === 'siblings')
+
+            // get the element's parent's children nodes which, optionally, match a given selector
+            // and add them to the results array
+            result = result.concat(Array.prototype.filter.call(selector ? element.parentNode.querySelectorAll('#' + element.id + '~' + selector) : element.parentNode.children, function(child) {
+
+                // skip the current element
+                return child !== element;
+
+            }));
+
+        // if we're looking for children
+        else if (action === 'children')
+
+            // get the element's children nodes which, optionally, match a given selector
+            // and add them to the results array
+            result = result.concat(Array.prototype.slice.call(selector ? element.parentNode.querySelectorAll('#' + element.id + '>' + selector) : element.children));
+
+        // if present, remove the randomly generated ID
+        if (remove_id) element.removeAttribute('id');
+
+    });
+
+    // return the result, as a ZebraJS object
+    return $(result);
+
+}
+
+/**
+ *  Private helper method
+ *
+ *  @access private
+ */
+this._random = function(prefix) {
+
+    // if the internal counter is too large, reset it
+    if (internal_counter > Number.MAX_VALUE) internal_counter = 0;
+
+    // return a pseudo-random string by incrementing the internal counter
+    return prefix + '_' + internal_counter++;
 }
