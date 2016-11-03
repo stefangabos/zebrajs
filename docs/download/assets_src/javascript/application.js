@@ -15,20 +15,19 @@ $(document).ready(function() {
 
         // todo: this needs to be built automatically
         dependencies = {
-            '_dom_search':  ['_random'],
             'addClass':     ['_class'],
             'after':        ['_dom_insert'],
             'append':       ['_dom_insert'],
             'appendTo':     ['_dom_insert'],
             'before':       ['_dom_insert'],
-            'children':     ['_dom_search'],
+            'children':     ['_dom_search', '_random'],
             'height':       ['css'],
             'insertAfter':  ['_dom_insert'],
             'insertBefore': ['_dom_insert'],
             'prepend':      ['_dom_insert'],
             'prependTo':    ['_dom_insert'],
             'removeClass':  ['_class'],
-            'siblings':     ['_dom_search'],
+            'siblings':     ['_dom_search', '_random'],
             'toggleClass':  ['_class'],
             'width':        ['css']
         },
