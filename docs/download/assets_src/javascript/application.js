@@ -26,6 +26,7 @@ $(document).ready(function() {
             'insertBefore': ['_dom_insert'],
             'prepend':      ['_dom_insert'],
             'prependTo':    ['_dom_insert'],
+            'prev':         ['_dom_search', '_random'],
             'removeClass':  ['_class'],
             'siblings':     ['_dom_search', '_random'],
             'toggleClass':  ['_class'],
