@@ -118,18 +118,27 @@ this._dom_insert = function(content, where) {
  */
 this._dom_search = function(action, selector) {
 
-    var result = [], remove_id;
+    var result = [], remove_id, tmp;
 
     // iterate through the set of matched elements
     elements.forEach(function(element) {
 
         remove_id = false;
 
-        // if selector is specified and element does not have an ID
-        if (selector && null === element.getAttribute('id')) {
+        // if selector is specified
+        if (selector) {
 
-            // generate and set a random ID for the element
-            element.setAttribute('id', $this._random('id'));
+            // if we're looking for children nodes and element does not have an ID
+            if (action === 'children' && null === element.getAttribute('id'))
+
+                 // generate and set a random ID for the element
+                element.setAttribute('id', $this._random('id'));
+
+            // if we're looking for sibling nodes or an element's previous node, and element's parent does not have an ID
+            else if ((action === 'siblings' || action === 'previous') && null === element.parentNode.getAttribute('id'))
+
+                 // generate and set a random ID for the element's parent node
+                element.parentNode.setAttribute('id', $this._random('id'));
 
             // set this flag so that we know to remove the randomly generated ID when we're done
             remove_id = true;
@@ -141,7 +150,7 @@ this._dom_search = function(action, selector) {
 
             // get the element's parent's children nodes which, optionally, match a given selector
             // and add them to the results array
-            result = result.concat(Array.prototype.filter.call(selector ? element.parentNode.querySelectorAll('#' + element.id + '~' + selector) : element.parentNode.children, function(child) {
+            result = result.concat(Array.prototype.filter.call(selector ? element.parentNode.querySelectorAll('#' + element.parentNode.id + '>' + selector) : element.parentNode.children, function(child) {
 
                 // skip the current element
                 return child !== element;
@@ -155,8 +164,44 @@ this._dom_search = function(action, selector) {
             // and add them to the results array
             result = result.concat(Array.prototype.slice.call(selector ? element.parentNode.querySelectorAll('#' + element.id + '>' + selector) : element.children));
 
+        // if we're looking for children
+        else if (action === 'previous')
+
+            // if there's no selector specified
+            if (!selector) {
+
+                // a previous sibling exists
+                if ((tmp = element.previousElementSibling))
+
+                    // add it to the results array
+                    result = result.concat([tmp]);
+
+            // if selector is specified
+            } else {
+
+                tmp = [];
+
+                // get the element's sibling nodes which, optionally, match a given selector and add them to the results array
+                Array.prototype.filter.call(element.parentNode.querySelectorAll('#' + element.parentNode.id + '>' + selector), function(child) {
+
+                    // add all elements that are before the current element
+                    return (tmp.indexOf(element) === -1 && tmp.push(child));
+
+                });
+
+                // add to the results array
+                result = result.concat(tmp.length >= 2 ? tmp[tmp.length - 2] : []);
+
+            }
+
         // if present, remove the randomly generated ID
-        if (remove_id) element.removeAttribute('id');
+        if (remove_id)
+
+            // if action was "children", we remove the randomly generated ID from the element
+            if (action === 'children') element.removeAttribute('id');
+
+            // otherwise, we remove the randomly generated ID from the element's parent
+            else element.parentNode.removeAttribute('id');
 
     });
 
