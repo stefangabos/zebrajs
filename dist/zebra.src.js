@@ -228,7 +228,8 @@ $ = function(selector, parent, first_only) {
         }
 
         /**
-         *  Private helper method used by {@link $#children .children()} and {@link $#siblings .siblings()} methods.
+         *  Private helper method used by {@link $#children .children()}, {@link $#siblings .siblings()}, {@link $#nexr .next()}
+         *  and {@link $#prev .prev()} methods.
          *
          *  @param  {string}    action      Specified what type of elements to look for
          *                                  <br><br>
