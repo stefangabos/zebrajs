@@ -129,7 +129,7 @@ $ = function(selector, parent, first_only) {
          *
          *  @param  {string}    action      What to do with the class(es)
          *                                  <br><br>
-         *                                  Posssible values are `add`, `remove` and `toggle`.
+         *                                  Possible values are `add`, `remove` and `toggle`.
          *
          *  @param  {string}    class_names One or more space-separated class names to be added/removed/toggled for each element
          *                                  in the set of matched elements.
@@ -171,7 +171,7 @@ $ = function(selector, parent, first_only) {
          *
          *  @param  {string}    where       Indicated where the content should be inserted, relative to the set of matched elements.
          *                                  <br><br>
-         *                                  Posssible values are `after`, `append` and `before`.
+         *                                  Possible values are `after`, `append` and `before`.
          *
          *  @return {$}     Returns the set of matched elements (the parents, not the appended elements), for chaining.
          *
@@ -232,7 +232,7 @@ $ = function(selector, parent, first_only) {
          *
          *  @param  {string}    action      Specified what type of elements to look for
          *                                  <br><br>
-         *                                  Posssible values are `children` and `siblings`.
+         *                                  Possible values are `children` and `siblings`.
          *
          *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
          *                                  match it.
@@ -260,7 +260,7 @@ $ = function(selector, parent, first_only) {
                         element.setAttribute('id', $this._random('id'));
 
                     // if we're looking for sibling nodes or an element's previous node, and element's parent does not have an ID
-                    else if ((action === 'siblings' || action === 'previous') && null === element.parentNode.getAttribute('id'))
+                    else if ((action === 'siblings' || action === 'previous' || action === 'next') && null === element.parentNode.getAttribute('id'))
 
                          // generate and set a random ID for the element's parent node
                         element.parentNode.setAttribute('id', $this._random('id'));
@@ -289,14 +289,14 @@ $ = function(selector, parent, first_only) {
                     // and add them to the results array
                     result = result.concat(Array.prototype.slice.call(selector ? element.parentNode.querySelectorAll('#' + element.id + '>' + selector) : element.children));
 
-                // if we're looking for children
-                else if (action === 'previous')
+                // if we're looking next/previous sibling
+                else if (action === 'previous' || action === 'next')
 
                     // if there's no selector specified
                     if (!selector) {
 
-                        // a previous sibling exists
-                        if ((tmp = element.previousElementSibling))
+                        // a previous/next sibling exists
+                        if ((tmp = element[action === 'next' ? 'nextElementSibling' : 'previousElementSibling']))
 
                             // add it to the results array
                             result = result.concat([tmp]);
@@ -309,8 +309,8 @@ $ = function(selector, parent, first_only) {
                         // get the element's sibling nodes which, optionally, match a given selector and add them to the results array
                         Array.prototype.filter.call(element.parentNode.querySelectorAll('#' + element.parentNode.id + '>' + selector), function(child) {
 
-                            // add all elements that are before the current element
-                            return (tmp.indexOf(element) === -1 && tmp.push(child));
+                            // add all elements that are after (when looking for next sibling) or before (when looking for previous sibling) the current element
+                            return (action === 'next' ? (child === element || tmp.indexOf(element) > -1) && tmp.push(child) : tmp.indexOf(element) === -1 && tmp.push(child));
 
                         });
 
@@ -1122,9 +1122,35 @@ $ = function(selector, parent, first_only) {
         }
 
         /**
-         *  @todo   Needs to be written!
+         *  Gets the immediately preceding sibling of each element in the set of matched elements. If a selector is provided,
+         *  it retrieves the previous sibling only if it matches that selector.
+         *
+         *  @example
+         *
+         *  // always cache selectors
+         *  // to avoid DOM scanning over and over again
+         *  var element = $('#selector');
+         *
+         *  // get the previous element
+         *  var prev = element.prev();
+         *
+         *  // get the previous element only if it matches the selector
+         *  var prev = element.prev('div');
+         *
+         *  // since this method returns a ZebraJS object, we can use chaining
+         *  element.prev().addClass('someclass');
+         *
+         *  @param  {string}    selector    If the selector is provided, the method will retrieve the previous sibling only if
+         *                                  it matches the selector
+         *
+         *  @return {$}         Returns the immediately preceding sibling of each element in the set of matched elements,
+         *                      optionally filtered by a selector, as a ZebraJS object, so you can use chaining.
          */
-        this.next = function() {
+        this.next = function(selector) {
+
+            // get the immediately preceding sibling of each element in the set of matched elements,
+            // optionally filtered by a selector
+            return this._dom_search('next', selector);
 
         }
 
