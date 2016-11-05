@@ -4,7 +4,7 @@
  *
  *  @param  {string}    action      What to do with the class(es)
  *                                  <br><br>
- *                                  Posssible values are `add`, `remove` and `toggle`.
+ *                                  Possible values are `add`, `remove` and `toggle`.
  *
  *  @param  {string}    class_names One or more space-separated class names to be added/removed/toggled for each element
  *                                  in the set of matched elements.
@@ -46,7 +46,7 @@ this._class = function(action, class_names) {
  *
  *  @param  {string}    where       Indicated where the content should be inserted, relative to the set of matched elements.
  *                                  <br><br>
- *                                  Posssible values are `after`, `append` and `before`.
+ *                                  Possible values are `after`, `append` and `before`.
  *
  *  @return {$}     Returns the set of matched elements (the parents, not the appended elements), for chaining.
  *
@@ -107,7 +107,7 @@ this._dom_insert = function(content, where) {
  *
  *  @param  {string}    action      Specified what type of elements to look for
  *                                  <br><br>
- *                                  Posssible values are `children` and `siblings`.
+ *                                  Possible values are `children` and `siblings`.
  *
  *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
  *                                  match it.
@@ -135,7 +135,7 @@ this._dom_search = function(action, selector) {
                 element.setAttribute('id', $this._random('id'));
 
             // if we're looking for sibling nodes or an element's previous node, and element's parent does not have an ID
-            else if ((action === 'siblings' || action === 'previous') && null === element.parentNode.getAttribute('id'))
+            else if ((action === 'siblings' || action === 'previous' || action === 'next') && null === element.parentNode.getAttribute('id'))
 
                  // generate and set a random ID for the element's parent node
                 element.parentNode.setAttribute('id', $this._random('id'));
@@ -164,14 +164,14 @@ this._dom_search = function(action, selector) {
             // and add them to the results array
             result = result.concat(Array.prototype.slice.call(selector ? element.parentNode.querySelectorAll('#' + element.id + '>' + selector) : element.children));
 
-        // if we're looking for children
-        else if (action === 'previous')
+        // if we're looking next/previous sibling
+        else if (action === 'previous' || action === 'next')
 
             // if there's no selector specified
             if (!selector) {
 
-                // a previous sibling exists
-                if ((tmp = element.previousElementSibling))
+                // a previous/next sibling exists
+                if ((tmp = element[action === 'next' ? 'nextElementSibling' : 'previousElementSibling']))
 
                     // add it to the results array
                     result = result.concat([tmp]);
@@ -184,8 +184,8 @@ this._dom_search = function(action, selector) {
                 // get the element's sibling nodes which, optionally, match a given selector and add them to the results array
                 Array.prototype.filter.call(element.parentNode.querySelectorAll('#' + element.parentNode.id + '>' + selector), function(child) {
 
-                    // add all elements that are before the current element
-                    return (tmp.indexOf(element) === -1 && tmp.push(child));
+                    // add all elements that are after (when looking for next sibling) or before (when looking for previous sibling) the current element
+                    return (action === 'next' ? (child === element || tmp.indexOf(element) > -1) && tmp.push(child) : tmp.indexOf(element) === -1 && tmp.push(child));
 
                 });
 
