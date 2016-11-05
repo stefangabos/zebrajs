@@ -1,6 +1,6 @@
 /**
- *  Gets the immediately preceding sibling of each element in the set of matched elements. If a selector is provided,
- *  it retrieves the previous sibling only if it matches that selector.
+ *  Gets the immediately following sibling of each element in the set of matched elements. If a selector is provided,
+ *  it retrieves the following sibling only if it matches that selector.
  *
  *  @example
  *
@@ -8,19 +8,19 @@
  *  // to avoid DOM scanning over and over again
  *  var element = $('#selector');
  *
- *  // get the previous element
- *  var prev = element.prev();
+ *  // get the next sibling
+ *  var next = element.next();
  *
- *  // get the previous element only if it matches the selector
- *  var prev = element.prev('div');
+ *  // get the following sibling only if it matches the selector
+ *  var next = element.next('div');
  *
  *  // since this method returns a ZebraJS object, we can use chaining
- *  element.prev().addClass('someclass');
+ *  element.next().addClass('someclass');
  *
- *  @param  {string}    selector    If the selector is provided, the method will retrieve the previous sibling only if
+ *  @param  {string}    selector    If the selector is provided, the method will retrieve the following sibling only if
  *                                  it matches the selector
  *
- *  @return {$}         Returns the immediately preceding sibling of each element in the set of matched elements,
+ *  @return {$}         Returns the immediately following sibling of each element in the set of matched elements,
  *                      optionally filtered by a selector, as a ZebraJS object, so you can use chaining.
  */
 this.next = function(selector) {
