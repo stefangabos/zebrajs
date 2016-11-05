@@ -8,10 +8,10 @@
  *  // to avoid DOM scanning over and over again
  *  var element = $('#selector');
  *
- *  // get the previous element
+ *  // get the previous sibgling
  *  var prev = element.prev();
  *
- *  // get the previous element only if it matches the selector
+ *  // get the previous sibling only if it matches the selector
  *  var prev = element.prev('div');
  *
  *  // since this method returns a ZebraJS object, we can use chaining
