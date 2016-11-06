@@ -1027,6 +1027,13 @@ $ = function(selector, parent, first_only) {
         }
 
         /**
+         *  @todo   Needs to be written!
+         */
+        this.inArray = function() {
+
+        }
+
+        /**
          *  Inserts every element in the set of matched elements after the parent element(s), specified by the argument.
          *
          *  Both this and the {@link $#after .after()} method perform the same task, the main difference being in the

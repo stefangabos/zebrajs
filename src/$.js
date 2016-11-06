@@ -141,6 +141,7 @@ $ = function(selector, parent, first_only) {
         // import "hasClass.js"
         // import "height.js"
         // import "html.js"
+        // import "inArray.js"
         // import "insertAfter.js"
         // import "insertBefore.js"
         // import "mq.js"
