@@ -25,6 +25,6 @@
 this.children = function(selector) {
 
     // get the children of each element in the set of matched elements, optionally filtered by a selector
-    return this._dom_search('siblings', selector);
+    return this._dom_search('children', selector);
 
 }
