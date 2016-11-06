@@ -294,16 +294,13 @@ $ = function(selector, parent, first_only) {
                 else if (action === 'previous' || action === 'next')
 
                     // if there's no selector specified
-                    if (!selector) {
+                    if (!selector)
 
-                        // a previous/next sibling exists
-                        if ((tmp = element[action === 'next' ? 'nextElementSibling' : 'previousElementSibling']))
-
-                            // add it to the results array
-                            result = result.concat([tmp]);
+                        // add it to the results array
+                        result = result.concat([element[(action === 'next' ? 'next' : 'previous') + 'ElementSibling']]);
 
                     // if selector is specified
-                    } else {
+                    else {
 
                         tmp = [];
 
@@ -712,7 +709,7 @@ $ = function(selector, parent, first_only) {
         this.children = function(selector) {
 
             // get the children of each element in the set of matched elements, optionally filtered by a selector
-            return this._dom_search('siblings', selector);
+            return this._dom_search('children', selector);
 
         }
 
