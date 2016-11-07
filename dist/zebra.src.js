@@ -1266,9 +1266,45 @@ $ = function(selector, parent, first_only) {
         }
 
         /**
-         *  @todo   Needs to be written!
+         *  Gets the immediate parent of each element in the current set of matched elements, optionally filtered by a selector.
+         *
+         *  This method is similar to {@link $#parents .parents()}, except .parent() only travels a single level up the DOM tree.
+         *
+         *  @example
+         *
+         *  // always cache selectors
+         *  // to avoid DOM scanning over and over again
+         *  var element = $('#selector');
+         *
+         *  // get the element's parent
+         *  var parent = element.parent();
+         *
+         *  // get the element's parent *only* if it is a div
+         *  var parent = element.parent('div');
+         *
+         *  // since this method returns a ZebraJS object, we can use chaining
+         *  element.parent().addClass('someclass');
+         *
+         *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
+         *                                  match it.
+         *
+         *  @return {$}         Returns the immediate parent of each element in the current set of matched elements, optionally
+         *                      filtered by a selector., as a ZebraJS object, so you can use chaining.
          */
-        this.parent = function() {
+        this.parent = function(selector) {
+
+            var result = [];
+
+            // iterate through the set of matched elements
+            elements.forEach(function(element) {
+
+                // if no selector is provided or it is and the parent matches it, add element to the array
+                if (!selector || element.parentNode.matches(selector)) result.push(element.parentNode);
+
+            });
+
+            // return the resulting array
+            return $(result);
 
         }
 
