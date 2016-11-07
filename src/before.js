@@ -34,13 +34,13 @@
  *  // this is more efficient memory wise
  *  target.append('<div>hello</div>');
  *
- *  // since this method returns the set of matched elements, we can use chaining
+ *  // chaining
  *  target.append($('div')).addClass('classname');
  *
  *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to be inserted before each
  *                                  element in the set of matched elements.
  *
- *  @return {$}         Returns the set of matched elements (the parents, not the inserted elements), for chaining.
+ *  @return {$}         Returns the set of matched elements (the parents, not the inserted elements).
  */
 this.before = function(content) {
 

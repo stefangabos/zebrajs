@@ -14,14 +14,14 @@
  *  // get the following sibling only if it matches the selector
  *  var next = element.next('div');
  *
- *  // since this method returns a ZebraJS object, we can use chaining
+ *  // chaining
  *  element.next().addClass('someclass');
  *
  *  @param  {string}    selector    If the selector is provided, the method will retrieve the following sibling only if
  *                                  it matches the selector
  *
  *  @return {$}         Returns the immediately following sibling of each element in the set of matched elements,
- *                      optionally filtered by a selector, as a ZebraJS object, so you can use chaining.
+ *                      optionally filtered by a selector, as a ZebraJS object.
  */
 this.next = function(selector) {
 

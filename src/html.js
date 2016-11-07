@@ -18,17 +18,16 @@
  *  // element in the set of matched elements
  *  var content = elements.html();
  *
- *  // since this method returns the set of matched elements,
- *  // we can use chaining
+ *  // chaining
  *  elements.html('<p>Hello</p>').addClass('classname');
 
  *  @param  {string}    [content]   The HTML content to set as the content of all the matched elements. Note that any
  *                                  content that was previously in that element is completely replaced by the new
  *                                  content.
  *
- *  @return {$|string}              When the `content` argument is provided, this method returns the set of matched elements,
- *                                  for chaining. Otherwise it returns the HTML content of the first element in the set
- *                                  of matched elements.
+ *  @return {$|string}              When the `content` argument is provided, this method returns the set of matched
+ *                                  elements. Otherwise it returns the HTML content of the first element in the set of
+ *                                  matched elements.
  */
 this.html = function(content) {
 
@@ -47,7 +46,7 @@ this.html = function(content) {
     // return the content of the first element in the set of matched elements
     else return elements[0].innerHTML;
 
-    // return the set of matched elements, for chaining
+    // return the set of matched elements
     return $this;
 
 }

@@ -13,7 +13,7 @@
  *  // remove multiple classes
  *  elements.removeClass('classname otherclassname');
  *
- *  // since this method returns the set of matched elements, we can use chaining
+ *  // since this method returns the set of matched elements
  *  elements.removeClass('classname otherclassname').css('display', 'none');
  *
  *  @param  {string}    class_name  One or more space-separated class names to be removed from each element in
@@ -21,11 +21,11 @@
  *
  *  @todo               This method currently doesn't work on IE9
  *
- *  @return {$}         Returns the set of matched elements, for chaining.
+ *  @return {$}         Returns the set of matched elements.
  */
 this.removeClass = function(class_name) {
 
-    // remove class(es) and return the set of matched elements, for chaining
+    // remove class(es) and return the set of matched elements
     return this._class('remove', class_name);
 
 }

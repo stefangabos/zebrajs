@@ -355,7 +355,7 @@ $ = function(selector, parent, first_only) {
          *  // add multiple classes
          *  elements.addClass('classname otherclassname');
          *
-         *  // since this method returns the set of matched elements, we can use chaining
+         *  // chaining
          *  elements.addClass('classname otherclassname').css('display', 'none');
 
          *  @param  {string}    class_name  One or more space-separated class names to be added to each element in the
@@ -363,11 +363,11 @@ $ = function(selector, parent, first_only) {
          *
          *  @todo               This method currently doesn't work on IE9
          *
-         *  @return {$}         Returns the set of matched elements, for chaining.
+         *  @return {$}         Returns the set of matched elements.
          */
         this.addClass = function(class_name) {
 
-            // add class(es) and return the set of matched elements, for chaining
+            // add class(es) and return the set of matched elements
             return this._class('add', class_name);
 
         };
@@ -409,13 +409,13 @@ $ = function(selector, parent, first_only) {
          *  // this is more efficient memory wise
          *  target.append('<div>hello</div>');
          *
-         *  // since this method returns the set of matched elements, we can use chaining
+         *  // chaining
          *  target.append($('div')).addClass('classname');
          *
          *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to be inserted after each
          *                                  element in the set of matched elements.
          *
-         *  @return {$}         Returns the set of matched elements (the parents, not the inserted elements), for chaining.
+         *  @return {$}         Returns the set of matched elements (the parents, not the inserted elements).
          */
         this.after = function(content) {
 
@@ -467,13 +467,13 @@ $ = function(selector, parent, first_only) {
          *  // this is more efficient memory wise
          *  parent.append('<div>hello</div>');
          *
-         *  // since this method returns the set of matched elements, we can use chaining
+         *  // chaining
          *  parent.append($('div')).addClass('classname');
          *
          *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the end of each
          *                                  element in the set of matched elements.
          *
-         *  @return {$}         Returns the set of matched elements (the parents, not the appended elements), for chaining.
+         *  @return {$}         Returns the set of matched elements (the parents, not the appended elements).
          */
         this.append = function(content) {
 
@@ -551,7 +551,7 @@ $ = function(selector, parent, first_only) {
          *  // remove an attribute
          *  elements.attr('title', false);
          *
-         *  // since this method returns the set of matched elements, we can use chaining
+         *  // chaining
          *  elements.attr('title', 'title').removeClass('classname');
          *
          *  @param  {string|object} attribute   If given as a `string` representing an attribute and `value` **is not** set, this
@@ -571,7 +571,7 @@ $ = function(selector, parent, first_only) {
          *                                      Setting it to `false` or `null` will instead **remove** the attribute from the
          *                                      set of matched elements.
          *
-         *  @return {$|mixed}   When `setting` attributes, this method returns the set of matched elements, for chaining.
+         *  @return {$|mixed}   When `setting` attributes, this method returns the set of matched elements.
          *                      When `reading` attributes, this method returns the value of the required attribute.
          */
         this.attr = function(attribute, value) {
@@ -619,7 +619,7 @@ $ = function(selector, parent, first_only) {
                     // of the first element in the set of matched elements
                     return elements[0].getAttribute(attribute);
 
-            // if we get this far, return the set of matched elements, for chaining
+            // if we get this far, return the set of matched elements
             return $this;
 
         }
@@ -660,13 +660,13 @@ $ = function(selector, parent, first_only) {
          *  // this is more efficient memory wise
          *  target.append('<div>hello</div>');
          *
-         *  // since this method returns the set of matched elements, we can use chaining
+         *  // chaining
          *  target.append($('div')).addClass('classname');
          *
          *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to be inserted before each
          *                                  element in the set of matched elements.
          *
-         *  @return {$}         Returns the set of matched elements (the parents, not the inserted elements), for chaining.
+         *  @return {$}         Returns the set of matched elements (the parents, not the inserted elements).
          */
         this.before = function(content) {
 
@@ -690,14 +690,13 @@ $ = function(selector, parent, first_only) {
          *  // get all the "div" children of the element
          *  var children_filtered = element.children('div');
          *
-         *  // since this method returns a ZebraJS object, we can use chaining
+         *  // chaining
          *  element.children('div').addClass('someclass');
          *
          *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
          *                                  match it.
          *
-         *  @return {$}         Returns the children of each element in the set of matched elements, as a ZebraJS object, so you
-         *                      can use chaining.
+         *  @return {$}         Returns the children of each element in the set of matched elements, as a ZebraJS object.
          */
         this.children = function(selector) {
 
@@ -740,7 +739,7 @@ $ = function(selector, parent, first_only) {
          *  // remove a property
          *  elements.attr('position', false);
          *
-         *  // since this method returns the set of matched elements, we can use chaining
+         *  // chaining
          *  elements.css('position', 'absolute').removeClass('classname');
          *
          *  @param  {string|object} property    If given as a `string` representing a CSS property and `value` **is not** set,
@@ -760,7 +759,7 @@ $ = function(selector, parent, first_only) {
          *                                      Setting it to `false` or `null` will instead **remove** the CSS property from the
          *                                      set of matched elements.
          *
-         *  @return {$|mixed}   When `setting` CSS properties, this method returns the set of matched elements, for chaining.
+         *  @return {$|mixed}   When `setting` CSS properties, this method returns the set of matched elements.
          *                      When `reading` CSS properties, this method returns the value(s) of the required computed style(s).
          */
         this.css = function(property, value) {
@@ -810,7 +809,7 @@ $ = function(selector, parent, first_only) {
 
             }
 
-            // if we get this far, return the matched elements, for chaining
+            // if we get this far, return the matched elements
             return $this;
 
         }
@@ -899,7 +898,7 @@ $ = function(selector, parent, first_only) {
          *  // check if matched elements have a certain class
          *  var class_exists = elements.hasClass('classname');
          *
-         *  // since this method returns the set of matched elements, we can use chaining
+         *  // chaining
          *  elements.toggleClass('classname');
          *
          *  @param  {string}    class_name  The name of a class to be checked if it exists on *any* of the elements in the set
@@ -946,7 +945,7 @@ $ = function(selector, parent, first_only) {
          *  // sets the "height" CSS property of all elements in the set to 5em
          *  elements.height('5em');
          *
-         *  // when setting the height, you can use chaining
+         *  // chaining
          *  elements.height(200).addClass('classname');
          *
          *  @param  {undefined|number|string}   [height]    If not given, the method will return the computed **inner**
@@ -959,7 +958,7 @@ $ = function(selector, parent, first_only) {
          *
          *  > For hidden elements the returned value is `0`!
          *
-         *  @return {$|float}   When **setting** the `height`, this method returns the set of matched elements, for chaining.
+         *  @return {$|float}   When **setting** the `height`, this method returns the set of matched elements.
          *                      Otherwise, it returns the current computed **inner** height (without `padding`, `border` and
          *                      `margin`) of the first element in the set of matched elements, as `float`.
          */
@@ -995,17 +994,16 @@ $ = function(selector, parent, first_only) {
          *  // element in the set of matched elements
          *  var content = elements.html();
          *
-         *  // since this method returns the set of matched elements,
-         *  // we can use chaining
+         *  // chaining
          *  elements.html('<p>Hello</p>').addClass('classname');
 
          *  @param  {string}    [content]   The HTML content to set as the content of all the matched elements. Note that any
          *                                  content that was previously in that element is completely replaced by the new
          *                                  content.
          *
-         *  @return {$|string}              When the `content` argument is provided, this method returns the set of matched elements,
-         *                                  for chaining. Otherwise it returns the HTML content of the first element in the set
-         *                                  of matched elements.
+         *  @return {$|string}              When the `content` argument is provided, this method returns the set of matched
+         *                                  elements. Otherwise it returns the HTML content of the first element in the set of
+         *                                  matched elements.
          */
         this.html = function(content) {
 
@@ -1024,7 +1022,7 @@ $ = function(selector, parent, first_only) {
             // return the content of the first element in the set of matched elements
             else return elements[0].innerHTML;
 
-            // return the set of matched elements, for chaining
+            // return the set of matched elements
             return $this;
 
         }
@@ -1145,14 +1143,14 @@ $ = function(selector, parent, first_only) {
          *  // get the following sibling only if it matches the selector
          *  var next = element.next('div');
          *
-         *  // since this method returns a ZebraJS object, we can use chaining
+         *  // chaining
          *  element.next().addClass('someclass');
          *
          *  @param  {string}    selector    If the selector is provided, the method will retrieve the following sibling only if
          *                                  it matches the selector
          *
          *  @return {$}         Returns the immediately following sibling of each element in the set of matched elements,
-         *                      optionally filtered by a selector, as a ZebraJS object, so you can use chaining.
+         *                      optionally filtered by a selector, as a ZebraJS object.
          */
         this.next = function(selector) {
 
@@ -1296,14 +1294,14 @@ $ = function(selector, parent, first_only) {
          *  // get the element's parent *only* if it is a div
          *  var parent = element.parent('div');
          *
-         *  // since this method returns a ZebraJS object, we can use chaining
+         *  // chaining
          *  element.parent().addClass('someclass');
          *
          *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
          *                                  match it.
          *
          *  @return {$}         Returns the immediate parent of each element in the current set of matched elements, optionally
-         *                      filtered by a selector., as a ZebraJS object, so you can use chaining.
+         *                      filtered by a selector, as a ZebraJS object.
          */
         this.parent = function(selector) {
 
@@ -1377,13 +1375,13 @@ $ = function(selector, parent, first_only) {
          *  // this is more efficient memory wise
          *  parent.prepend('<div>hello</div>');
          *
-         *  // since this method returns the set of matched elements, we can use chaining
+         *  // chaining
          *  parent.prepend($('div')).addClass('classname');
          *
          *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the beginning
          *                                  of each element in the set of matched elements.
          *
-         *  @return {$}         Returns the set of matched elements (the parents, not the prepended elements), for chaining.
+         *  @return {$}         Returns the set of matched elements (the parents, not the prepended elements).
          */
         this.prepend = function(content) {
 
@@ -1451,14 +1449,14 @@ $ = function(selector, parent, first_only) {
          *  // get the previous sibling only if it matches the selector
          *  var prev = element.prev('div');
          *
-         *  // since this method returns a ZebraJS object, we can use chaining
+         *  // since this method returns a ZebraJS object
          *  element.prev().addClass('someclass');
          *
          *  @param  {string}    selector    If the selector is provided, the method will retrieve the previous sibling only if
          *                                  it matches the selector
          *
          *  @return {$}         Returns the immediately preceding sibling of each element in the set of matched elements,
-         *                      optionally filtered by a selector, as a ZebraJS object, so you can use chaining.
+         *                      optionally filtered by a selector, as a ZebraJS object.
          */
         this.prev = function(selector) {
 
@@ -1501,7 +1499,7 @@ $ = function(selector, parent, first_only) {
          *  // remove multiple classes
          *  elements.removeClass('classname otherclassname');
          *
-         *  // since this method returns the set of matched elements, we can use chaining
+         *  // since this method returns the set of matched elements
          *  elements.removeClass('classname otherclassname').css('display', 'none');
          *
          *  @param  {string}    class_name  One or more space-separated class names to be removed from each element in
@@ -1509,11 +1507,11 @@ $ = function(selector, parent, first_only) {
          *
          *  @todo               This method currently doesn't work on IE9
          *
-         *  @return {$}         Returns the set of matched elements, for chaining.
+         *  @return {$}         Returns the set of matched elements.
          */
         this.removeClass = function(class_name) {
 
-            // remove class(es) and return the set of matched elements, for chaining
+            // remove class(es) and return the set of matched elements
             return this._class('remove', class_name);
 
         }
@@ -1561,14 +1559,13 @@ $ = function(selector, parent, first_only) {
          *  // get all the "div" siblings of the element
          *  var siblings_filtered = element.siblings('div');
          *
-         *  // since this method returns a ZebraJS object, we can use chaining
+         *  // since this method returns a ZebraJS object
          *  element.siblings('div').addClass('someclass');
          *
          *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
          *                                  match it.
          *
-         *  @return {$}         Returns the siblings of each element in the set of matched elements, as a ZebraJS object, so you
-         *                      can use chaining.
+         *  @return {$}         Returns the siblings of each element in the set of matched elements, as a ZebraJS object
          */
         this.siblings = function(selector) {
 
@@ -1594,17 +1591,16 @@ $ = function(selector, parent, first_only) {
          *  // set of matched elements (including its descendants)
          *  var content = elements.text();
          *
-         *  // since this method returns the set of matched elements,
-         *  // we can use chaining
+         *  // chaining
          *  elements.text('Hello').addClass('classname');
 
          *  @param  {string}    [content]   The text to set as the content of all the matched elements. Note that any text
          *                                  content that was previously in that element is completely replaced by the new
          *                                  content.
          *
-         *  @return {$|string}              When the `content` argument is provided, this method returns the set of matched elements,
-         *                                  for chaining. Otherwise it returns the text content of the first element in the set
-         *                                  of matched elements (combined with the text content of all its descendants)
+         *  @return {$|string}              When the `content` argument is provided, this method returns the set of matched
+         *                                  elements. Otherwise it returns the text content of the first element in the set of
+         *                                  matched elements (combined with the text content of all its descendants)
          */
         this.text = function(content) {
 
@@ -1624,7 +1620,7 @@ $ = function(selector, parent, first_only) {
             // (combined with the text content of all its descendants)
             else return elements[0].textContent;
 
-            // return the set of matched elements, for chaining
+            // return the set of matched elements
             return $this;
 
         }
@@ -1646,7 +1642,7 @@ $ = function(selector, parent, first_only) {
          *  // the result will be that "classname" will be removed from the matched elements while the "otherclassname" will be added
          *  elements.toggleClass('classname otherclassname');
          *
-         *  // since this method returns the set of matched elements, we can use chaining
+         *  // chaining
          *  elements.toggleClass('classname').css('display', 'none');
          *
          *  @param  {string}    class_name  One or more space-separated class names to be toggled for each element in the set of
@@ -1654,11 +1650,11 @@ $ = function(selector, parent, first_only) {
          *
          *  @todo               This method currently doesn't work on IE9
          *
-         *  @return {$}         Returns the set of matched elements, for chaining.
+         *  @return {$}         Returns the set of matched elements.
          */
         this.toggleClass = function(class_name) {
 
-            // toggle class(es) and return the set of matched elements, for chaining
+            // toggle class(es) and return the set of matched elements
             return this._class('toggle', class_name);
 
         }
@@ -1708,7 +1704,7 @@ $ = function(selector, parent, first_only) {
          *  // sets the "width" CSS property of all elements in the set to 5em
          *  elements.width('5em');
          *
-         *  // when setting the width, you can use chaining
+         *  // chaining
          *  elements.width(200).addClass('classname');
          *
          *  @param  {undefined|number|string}   [width]     If not given, this method will return the computed **inner**
@@ -1721,9 +1717,9 @@ $ = function(selector, parent, first_only) {
          *
          *  > For hidden elements the returned value is `0`!
          *
-         *  @return {$|float}   When **setting** the `width`, this method returns the set of matched elements, for chaining.
-         *                      Otherwise, it returns the current computed **inner** width (without `padding`, `border` and
-         *                      `margin`) of the first element in the set of matched elements, as `float`.
+         *  @return {$|float}   When **setting** the `width`, this method returns the set of matched elements. Otherwise, it
+         *                      returns the current computed **inner** width (without `padding`, `border` and `margin`) of the
+         *                      first element in the set of matched elements, as `float`.
          */
         this.width = function(width) {
 

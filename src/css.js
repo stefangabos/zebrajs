@@ -25,7 +25,7 @@
  *  // remove a property
  *  elements.attr('position', false);
  *
- *  // since this method returns the set of matched elements, we can use chaining
+ *  // chaining
  *  elements.css('position', 'absolute').removeClass('classname');
  *
  *  @param  {string|object} property    If given as a `string` representing a CSS property and `value` **is not** set,
@@ -45,7 +45,7 @@
  *                                      Setting it to `false` or `null` will instead **remove** the CSS property from the
  *                                      set of matched elements.
  *
- *  @return {$|mixed}   When `setting` CSS properties, this method returns the set of matched elements, for chaining.
+ *  @return {$|mixed}   When `setting` CSS properties, this method returns the set of matched elements.
  *                      When `reading` CSS properties, this method returns the value(s) of the required computed style(s).
  */
 this.css = function(property, value) {
@@ -95,7 +95,7 @@ this.css = function(property, value) {
 
     }
 
-    // if we get this far, return the matched elements, for chaining
+    // if we get this far, return the matched elements
     return $this;
 
 }

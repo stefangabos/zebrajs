@@ -34,13 +34,13 @@
  *  // this is more efficient memory wise
  *  parent.prepend('<div>hello</div>');
  *
- *  // since this method returns the set of matched elements, we can use chaining
+ *  // chaining
  *  parent.prepend($('div')).addClass('classname');
  *
  *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the beginning
  *                                  of each element in the set of matched elements.
  *
- *  @return {$}         Returns the set of matched elements (the parents, not the prepended elements), for chaining.
+ *  @return {$}         Returns the set of matched elements (the parents, not the prepended elements).
  */
 this.prepend = function(content) {
 

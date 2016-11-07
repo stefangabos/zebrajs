@@ -10,7 +10,7 @@
  *  // check if matched elements have a certain class
  *  var class_exists = elements.hasClass('classname');
  *
- *  // since this method returns the set of matched elements, we can use chaining
+ *  // chaining
  *  elements.toggleClass('classname');
  *
  *  @param  {string}    class_name  The name of a class to be checked if it exists on *any* of the elements in the set

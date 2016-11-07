@@ -926,7 +926,7 @@
  // add multiple classes
  elements.addClass('classname otherclassname');
 
- // since this method returns the set of matched elements, we can use chaining
+ // chaining
  elements.addClass('classname otherclassname').css('display', 'none');
  </code></pre>
 
@@ -999,7 +999,7 @@
 
         
 <div class="param-desc">
-    <p>Returns the set of matched elements, for chaining.</p>
+    <p>Returns the set of matched elements.</p>
 </div>
 
 
@@ -1099,7 +1099,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var target = $('#selector'); // insert a div that we create on the fly target.after($('&lt;div>').text('hello')); // same thing as above target.after($('&lt;div>hello&lt;/div>')); // use one or more elements that already exist on the page // if "target" is a single element than the list will be moved after the target element // if "parent" is a collection of elements, clones of the list element will be created after // each target, except for the last one; the original list will be moved after the last target target.after($('ul')); // insert a string (which will be transformed in HTML) // this is more efficient memory wise target.append('&lt;div>hello&lt;/div>'); // since this method returns the set of matched elements, we can use chaining target.append($('div')).addClass('classname'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var target = $('#selector'); // insert a div that we create on the fly target.after($('&lt;div>').text('hello')); // same thing as above target.after($('&lt;div>hello&lt;/div>')); // use one or more elements that already exist on the page // if "target" is a single element than the list will be moved after the target element // if "parent" is a collection of elements, clones of the list element will be created after // each target, except for the last one; the original list will be moved after the last target target.after($('ul')); // insert a string (which will be transformed in HTML) // this is more efficient memory wise target.append('&lt;div>hello&lt;/div>'); // chaining target.append($('div')).addClass('classname'); </code></pre>
 
 
 
@@ -1170,7 +1170,7 @@
 
         
 <div class="param-desc">
-    <p>Returns the set of matched elements (the parents, not the inserted elements), for chaining.</p>
+    <p>Returns the set of matched elements (the parents, not the inserted elements).</p>
 </div>
 
 
@@ -1357,7 +1357,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var parent = $('#selector'); // append a div that we create on the fly parent.append($('&lt;div>').text('hello')); // same thing as above parent.append($('&lt;div>hello&lt;/div>')); // append one or more elements that already exist on the page // if "parent" is a single element than the list will be moved inside the parent element // if "parent" is a collection of elements, clones of the list element will be created for // each target except for the last one; for the last target, the original list will be moved parent.append($('ul')); // append a string (which will be transformed in HTML) // this is more efficient memory wise parent.append('&lt;div>hello&lt;/div>'); // since this method returns the set of matched elements, we can use chaining parent.append($('div')).addClass('classname'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var parent = $('#selector'); // append a div that we create on the fly parent.append($('&lt;div>').text('hello')); // same thing as above parent.append($('&lt;div>hello&lt;/div>')); // append one or more elements that already exist on the page // if "parent" is a single element than the list will be moved inside the parent element // if "parent" is a collection of elements, clones of the list element will be created for // each target except for the last one; for the last target, the original list will be moved parent.append($('ul')); // append a string (which will be transformed in HTML) // this is more efficient memory wise parent.append('&lt;div>hello&lt;/div>'); // chaining parent.append($('div')).addClass('classname'); </code></pre>
 
 
 
@@ -1428,7 +1428,7 @@
 
         
 <div class="param-desc">
-    <p>Returns the set of matched elements (the parents, not the appended elements), for chaining.</p>
+    <p>Returns the set of matched elements (the parents, not the appended elements).</p>
 </div>
 
 
@@ -1709,7 +1709,7 @@
  // remove an attribute
  elements.attr('title', false);
 
- // since this method returns the set of matched elements, we can use chaining
+ // chaining
  elements.attr('title', 'title').removeClass('classname');
 
  </code></pre>
@@ -1841,7 +1841,7 @@
 
         
 <div class="param-desc">
-    <p>When <code>setting</code> attributes, this method returns the set of matched elements, for chaining.
+    <p>When <code>setting</code> attributes, this method returns the set of matched elements.
                      When <code>reading</code> attributes, this method returns the value of the required attribute.</p>
 </div>
 
@@ -1945,7 +1945,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var target = $('#selector'); // insert a div that we create on the fly target.before($('&lt;div>').text('hello')); // same thing as above target.before($('&lt;div>hello&lt;/div>')); // use one or more elements that already exist on the page // if "target" is a single element than the list will be moved before the target element // if "parent" is a collection of elements, clones of the list element will be created before // each target, except for the last one; the original list will be moved before the last target target.before($('ul')); // insert a string (which will be transformed in HTML) // this is more efficient memory wise target.append('&lt;div>hello&lt;/div>'); // since this method returns the set of matched elements, we can use chaining target.append($('div')).addClass('classname'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var target = $('#selector'); // insert a div that we create on the fly target.before($('&lt;div>').text('hello')); // same thing as above target.before($('&lt;div>hello&lt;/div>')); // use one or more elements that already exist on the page // if "target" is a single element than the list will be moved before the target element // if "parent" is a collection of elements, clones of the list element will be created before // each target, except for the last one; the original list will be moved before the last target target.before($('ul')); // insert a string (which will be transformed in HTML) // this is more efficient memory wise target.append('&lt;div>hello&lt;/div>'); // chaining target.append($('div')).addClass('classname'); </code></pre>
 
 
 
@@ -2016,7 +2016,7 @@
 
         
 <div class="param-desc">
-    <p>Returns the set of matched elements (the parents, not the inserted elements), for chaining.</p>
+    <p>Returns the set of matched elements (the parents, not the inserted elements).</p>
 </div>
 
 
@@ -2053,7 +2053,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line702">line 702</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line701">line 701</a>
     </li></ul></dd>
     
 
@@ -2106,7 +2106,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get all the element's children var children_all = element.children(); // get all the "div" children of the element var children_filtered = element.children('div'); // since this method returns a ZebraJS object, we can use chaining element.children('div').addClass('someclass'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get all the element's children var children_all = element.children(); // get all the "div" children of the element var children_filtered = element.children('div'); // chaining element.children('div').addClass('someclass'); </code></pre>
 
 
 
@@ -2177,8 +2177,7 @@
 
         
 <div class="param-desc">
-    <p>Returns the children of each element in the set of matched elements, as a ZebraJS object, so you
-                     can use chaining.</p>
+    <p>Returns the children of each element in the set of matched elements, as a ZebraJS object.</p>
 </div>
 
 
@@ -2215,7 +2214,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line712">line 712</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line711">line 711</a>
     </li></ul></dd>
     
 
@@ -2302,7 +2301,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line766">line 766</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line765">line 765</a>
     </li></ul></dd>
     
 
@@ -2377,7 +2376,7 @@
  // remove a property
  elements.attr('position', false);
 
- // since this method returns the set of matched elements, we can use chaining
+ // chaining
  elements.css('position', 'absolute').removeClass('classname');
 
  </code></pre>
@@ -2509,7 +2508,7 @@
 
         
 <div class="param-desc">
-    <p>When <code>setting</code> CSS properties, this method returns the set of matched elements, for chaining.
+    <p>When <code>setting</code> CSS properties, this method returns the set of matched elements.
                      When <code>reading</code> CSS properties, this method returns the value(s) of the required computed style(s).</p>
 </div>
 
@@ -2550,7 +2549,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line821">line 821</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line820">line 820</a>
     </li></ul></dd>
     
 
@@ -2637,7 +2636,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line850">line 850</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line849">line 849</a>
     </li></ul></dd>
     
 
@@ -2809,7 +2808,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line865">line 865</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line864">line 864</a>
     </li></ul></dd>
     
 
@@ -2896,7 +2895,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line883">line 883</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line882">line 882</a>
     </li></ul></dd>
     
 
@@ -3101,7 +3100,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line912">line 912</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line911">line 911</a>
     </li></ul></dd>
     
 
@@ -3168,7 +3167,7 @@
  // check if matched elements have a certain class
  var class_exists = elements.hasClass('classname');
 
- // since this method returns the set of matched elements, we can use chaining
+ // chaining
  elements.toggleClass('classname');
 
  </code></pre>
@@ -3279,7 +3278,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line966">line 966</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line965">line 965</a>
     </li></ul></dd>
     
 
@@ -3350,7 +3349,7 @@
  // sets the "height" CSS property of all elements in the set to 5em
  elements.height('5em');
 
- // when setting the height, you can use chaining
+ // chaining
  elements.height(200).addClass('classname');
 
  </code></pre>
@@ -3450,7 +3449,7 @@
 
         
 <div class="param-desc">
-    <p>When <strong>setting</strong> the <code>height</code>, this method returns the set of matched elements, for chaining.
+    <p>When <strong>setting</strong> the <code>height</code>, this method returns the set of matched elements.
                      Otherwise, it returns the current computed <strong>inner</strong> height (without <code>padding</code>, <code>border</code> and
                      <code>margin</code>) of the first element in the set of matched elements, as <code>float</code>.</p>
 </div>
@@ -3492,7 +3491,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1010">line 1010</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1008">line 1008</a>
     </li></ul></dd>
     
 
@@ -3561,8 +3560,7 @@
  // element in the set of matched elements
  var content = elements.html();
 
- // since this method returns the set of matched elements,
- // we can use chaining
+ // chaining
  elements.html('&lt;p>Hello&lt;/p>').addClass('classname');
  </code></pre>
 
@@ -3648,9 +3646,9 @@
 
         
 <div class="param-desc">
-    <p>When the <code>content</code> argument is provided, this method returns the set of matched elements,
-                                 for chaining. Otherwise it returns the HTML content of the first element in the set
-                                 of matched elements.</p>
+    <p>When the <code>content</code> argument is provided, this method returns the set of matched
+                                 elements. Otherwise it returns the HTML content of the first element in the set of
+                                 matched elements.</p>
 </div>
 
 
@@ -3690,7 +3688,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1035">line 1035</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1033">line 1033</a>
     </li></ul></dd>
     
 
@@ -3777,7 +3775,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1075">line 1075</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1073">line 1073</a>
     </li></ul></dd>
     
 
@@ -3947,7 +3945,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1118">line 1118</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1116">line 1116</a>
     </li></ul></dd>
     
 
@@ -4133,7 +4131,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1128">line 1128</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1126">line 1126</a>
     </li></ul></dd>
     
 
@@ -4220,7 +4218,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1157">line 1157</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1155">line 1155</a>
     </li></ul></dd>
     
 
@@ -4284,7 +4282,7 @@
  // get the following sibling only if it matches the selector
  var next = element.next('div');
 
- // since this method returns a ZebraJS object, we can use chaining
+ // chaining
  element.next().addClass('someclass');
 
  </code></pre>
@@ -4359,7 +4357,7 @@
         
 <div class="param-desc">
     <p>Returns the immediately following sibling of each element in the set of matched elements,
-                     optionally filtered by a selector, as a ZebraJS object, so you can use chaining.</p>
+                     optionally filtered by a selector, as a ZebraJS object.</p>
 </div>
 
 
@@ -4396,7 +4394,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1168">line 1168</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1166">line 1166</a>
     </li></ul></dd>
     
 
@@ -4483,7 +4481,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1175">line 1175</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1173">line 1173</a>
     </li></ul></dd>
     
 
@@ -4570,7 +4568,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1189">line 1189</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1187">line 1187</a>
     </li></ul></dd>
     
 
@@ -4657,7 +4655,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1218">line 1218</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1216">line 1216</a>
     </li></ul></dd>
     
 
@@ -4838,7 +4836,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1261">line 1261</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1259">line 1259</a>
     </li></ul></dd>
     
 
@@ -5019,7 +5017,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1308">line 1308</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1306">line 1306</a>
     </li></ul></dd>
     
 
@@ -5083,7 +5081,7 @@
  // get the element's parent *only* if it is a div
  var parent = element.parent('div');
 
- // since this method returns a ZebraJS object, we can use chaining
+ // chaining
  element.parent().addClass('someclass');
 
  </code></pre>
@@ -5158,7 +5156,7 @@
         
 <div class="param-desc">
     <p>Returns the immediate parent of each element in the current set of matched elements, optionally
-                     filtered by a selector., as a ZebraJS object, so you can use chaining.</p>
+                     filtered by a selector, as a ZebraJS object.</p>
 </div>
 
 
@@ -5195,7 +5193,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1328">line 1328</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1326">line 1326</a>
     </li></ul></dd>
     
 
@@ -5282,7 +5280,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1335">line 1335</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1333">line 1333</a>
     </li></ul></dd>
     
 
@@ -5369,7 +5367,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1388">line 1388</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1386">line 1386</a>
     </li></ul></dd>
     
 
@@ -5452,7 +5450,7 @@
  // this is more efficient memory wise
  parent.prepend('&lt;div>hello&lt;/div>');
 
- // since this method returns the set of matched elements, we can use chaining
+ // chaining
  parent.prepend($('div')).addClass('classname');
 
  </code></pre>
@@ -5526,7 +5524,7 @@
 
         
 <div class="param-desc">
-    <p>Returns the set of matched elements (the parents, not the prepended elements), for chaining.</p>
+    <p>Returns the set of matched elements (the parents, not the prepended elements).</p>
 </div>
 
 
@@ -5563,7 +5561,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1431">line 1431</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1429">line 1429</a>
     </li></ul></dd>
     
 
@@ -5749,7 +5747,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1463">line 1463</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1461">line 1461</a>
     </li></ul></dd>
     
 
@@ -5813,7 +5811,7 @@
  // get the previous sibling only if it matches the selector
  var prev = element.prev('div');
 
- // since this method returns a ZebraJS object, we can use chaining
+ // since this method returns a ZebraJS object
  element.prev().addClass('someclass');
 
  </code></pre>
@@ -5888,7 +5886,7 @@
         
 <div class="param-desc">
     <p>Returns the immediately preceding sibling of each element in the set of matched elements,
-                     optionally filtered by a selector, as a ZebraJS object, so you can use chaining.</p>
+                     optionally filtered by a selector, as a ZebraJS object.</p>
 </div>
 
 
@@ -5925,7 +5923,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1474">line 1474</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1472">line 1472</a>
     </li></ul></dd>
     
 
@@ -6012,7 +6010,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1485">line 1485</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1483">line 1483</a>
     </li></ul></dd>
     
 
@@ -6099,7 +6097,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1514">line 1514</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1512">line 1512</a>
     </li></ul></dd>
     
 
@@ -6169,7 +6167,7 @@
  // remove multiple classes
  elements.removeClass('classname otherclassname');
 
- // since this method returns the set of matched elements, we can use chaining
+ // since this method returns the set of matched elements
  elements.removeClass('classname otherclassname').css('display', 'none');
 
  </code></pre>
@@ -6243,7 +6241,7 @@
 
         
 <div class="param-desc">
-    <p>Returns the set of matched elements, for chaining.</p>
+    <p>Returns the set of matched elements.</p>
 </div>
 
 
@@ -6280,7 +6278,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1524">line 1524</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1522">line 1522</a>
     </li></ul></dd>
     
 
@@ -6367,7 +6365,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1531">line 1531</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1529">line 1529</a>
     </li></ul></dd>
     
 
@@ -6454,7 +6452,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1538">line 1538</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1536">line 1536</a>
     </li></ul></dd>
     
 
@@ -6541,7 +6539,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1545">line 1545</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1543">line 1543</a>
     </li></ul></dd>
     
 
@@ -6628,7 +6626,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1573">line 1573</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1570">line 1570</a>
     </li></ul></dd>
     
 
@@ -6681,7 +6679,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get all the siblings of the element var siblings_all = element.siblings(); // get all the "div" siblings of the element var siblings_filtered = element.siblings('div'); // since this method returns a ZebraJS object, we can use chaining element.siblings('div').addClass('someclass'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get all the siblings of the element var siblings_all = element.siblings(); // get all the "div" siblings of the element var siblings_filtered = element.siblings('div'); // since this method returns a ZebraJS object element.siblings('div').addClass('someclass'); </code></pre>
 
 
 
@@ -6752,8 +6750,7 @@
 
         
 <div class="param-desc">
-    <p>Returns the siblings of each element in the set of matched elements, as a ZebraJS object, so you
-                     can use chaining.</p>
+    <p>Returns the siblings of each element in the set of matched elements, as a ZebraJS object</p>
 </div>
 
 
@@ -6790,7 +6787,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1609">line 1609</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1605">line 1605</a>
     </li></ul></dd>
     
 
@@ -6855,8 +6852,7 @@
  // set of matched elements (including its descendants)
  var content = elements.text();
 
- // since this method returns the set of matched elements,
- // we can use chaining
+ // chaining
  elements.text('Hello').addClass('classname');
  </code></pre>
 
@@ -6942,9 +6938,9 @@
 
         
 <div class="param-desc">
-    <p>When the <code>content</code> argument is provided, this method returns the set of matched elements,
-                                 for chaining. Otherwise it returns the text content of the first element in the set
-                                 of matched elements (combined with the text content of all its descendants)</p>
+    <p>When the <code>content</code> argument is provided, this method returns the set of matched
+                                 elements. Otherwise it returns the text content of the first element in the set of
+                                 matched elements (combined with the text content of all its descendants)</p>
 </div>
 
 
@@ -6984,7 +6980,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1659">line 1659</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1655">line 1655</a>
     </li></ul></dd>
     
 
@@ -7056,7 +7052,7 @@
  // the result will be that "classname" will be removed from the matched elements while the "otherclassname" will be added
  elements.toggleClass('classname otherclassname');
 
- // since this method returns the set of matched elements, we can use chaining
+ // chaining
  elements.toggleClass('classname').css('display', 'none');
 
  </code></pre>
@@ -7130,7 +7126,7 @@
 
         
 <div class="param-desc">
-    <p>Returns the set of matched elements, for chaining.</p>
+    <p>Returns the set of matched elements.</p>
 </div>
 
 
@@ -7167,7 +7163,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1669">line 1669</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1665">line 1665</a>
     </li></ul></dd>
     
 
@@ -7254,7 +7250,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1676">line 1676</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1672">line 1672</a>
     </li></ul></dd>
     
 
@@ -7341,7 +7337,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1683">line 1683</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1679">line 1679</a>
     </li></ul></dd>
     
 
@@ -7428,7 +7424,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1728">line 1728</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1724">line 1724</a>
     </li></ul></dd>
     
 
@@ -7499,7 +7495,7 @@
  // sets the "width" CSS property of all elements in the set to 5em
  elements.width('5em');
 
- // when setting the width, you can use chaining
+ // chaining
  elements.width(200).addClass('classname');
 
  </code></pre>
@@ -7599,9 +7595,9 @@
 
         
 <div class="param-desc">
-    <p>When <strong>setting</strong> the <code>width</code>, this method returns the set of matched elements, for chaining.
-                     Otherwise, it returns the current computed <strong>inner</strong> width (without <code>padding</code>, <code>border</code> and
-                     <code>margin</code>) of the first element in the set of matched elements, as <code>float</code>.</p>
+    <p>When <strong>setting</strong> the <code>width</code>, this method returns the set of matched elements. Otherwise, it
+                     returns the current computed <strong>inner</strong> width (without <code>padding</code>, <code>border</code> and <code>margin</code>) of the
+                     first element in the set of matched elements, as <code>float</code>.</p>
 </div>
 
 
@@ -7641,7 +7637,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1743">line 1743</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1739">line 1739</a>
     </li></ul></dd>
     
 
@@ -7729,7 +7725,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Mon Nov 07 2016 20:25:27 GMT+0200 (GTB Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Mon Nov 07 2016 20:33:23 GMT+0200 (GTB Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

@@ -15,17 +15,16 @@
  *  // set of matched elements (including its descendants)
  *  var content = elements.text();
  *
- *  // since this method returns the set of matched elements,
- *  // we can use chaining
+ *  // chaining
  *  elements.text('Hello').addClass('classname');
 
  *  @param  {string}    [content]   The text to set as the content of all the matched elements. Note that any text
  *                                  content that was previously in that element is completely replaced by the new
  *                                  content.
  *
- *  @return {$|string}              When the `content` argument is provided, this method returns the set of matched elements,
- *                                  for chaining. Otherwise it returns the text content of the first element in the set
- *                                  of matched elements (combined with the text content of all its descendants)
+ *  @return {$|string}              When the `content` argument is provided, this method returns the set of matched
+ *                                  elements. Otherwise it returns the text content of the first element in the set of
+ *                                  matched elements (combined with the text content of all its descendants)
  */
 this.text = function(content) {
 
@@ -45,7 +44,7 @@ this.text = function(content) {
     // (combined with the text content of all its descendants)
     else return elements[0].textContent;
 
-    // return the set of matched elements, for chaining
+    // return the set of matched elements
     return $this;
 
 }

@@ -13,14 +13,13 @@
  *  // get all the "div" children of the element
  *  var children_filtered = element.children('div');
  *
- *  // since this method returns a ZebraJS object, we can use chaining
+ *  // chaining
  *  element.children('div').addClass('someclass');
  *
  *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
  *                                  match it.
  *
- *  @return {$}         Returns the children of each element in the set of matched elements, as a ZebraJS object, so you
- *                      can use chaining.
+ *  @return {$}         Returns the children of each element in the set of matched elements, as a ZebraJS object.
  */
 this.children = function(selector) {
 

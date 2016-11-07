@@ -14,14 +14,14 @@
  *  // get the previous sibling only if it matches the selector
  *  var prev = element.prev('div');
  *
- *  // since this method returns a ZebraJS object, we can use chaining
+ *  // since this method returns a ZebraJS object
  *  element.prev().addClass('someclass');
  *
  *  @param  {string}    selector    If the selector is provided, the method will retrieve the previous sibling only if
  *                                  it matches the selector
  *
  *  @return {$}         Returns the immediately preceding sibling of each element in the set of matched elements,
- *                      optionally filtered by a selector, as a ZebraJS object, so you can use chaining.
+ *                      optionally filtered by a selector, as a ZebraJS object.
  */
 this.prev = function(selector) {
 

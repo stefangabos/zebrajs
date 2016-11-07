@@ -34,13 +34,13 @@
  *  // this is more efficient memory wise
  *  parent.append('<div>hello</div>');
  *
- *  // since this method returns the set of matched elements, we can use chaining
+ *  // chaining
  *  parent.append($('div')).addClass('classname');
  *
  *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the end of each
  *                                  element in the set of matched elements.
  *
- *  @return {$}         Returns the set of matched elements (the parents, not the appended elements), for chaining.
+ *  @return {$}         Returns the set of matched elements (the parents, not the appended elements).
  */
 this.append = function(content) {
 

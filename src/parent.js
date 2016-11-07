@@ -15,14 +15,14 @@
  *  // get the element's parent *only* if it is a div
  *  var parent = element.parent('div');
  *
- *  // since this method returns a ZebraJS object, we can use chaining
+ *  // chaining
  *  element.parent().addClass('someclass');
  *
  *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
  *                                  match it.
  *
  *  @return {$}         Returns the immediate parent of each element in the current set of matched elements, optionally
- *                      filtered by a selector., as a ZebraJS object, so you can use chaining.
+ *                      filtered by a selector, as a ZebraJS object.
  */
 this.parent = function(selector) {
 

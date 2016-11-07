@@ -22,7 +22,7 @@
  *  // sets the "height" CSS property of all elements in the set to 5em
  *  elements.height('5em');
  *
- *  // when setting the height, you can use chaining
+ *  // chaining
  *  elements.height(200).addClass('classname');
  *
  *  @param  {undefined|number|string}   [height]    If not given, the method will return the computed **inner**
@@ -35,7 +35,7 @@
  *
  *  > For hidden elements the returned value is `0`!
  *
- *  @return {$|float}   When **setting** the `height`, this method returns the set of matched elements, for chaining.
+ *  @return {$|float}   When **setting** the `height`, this method returns the set of matched elements.
  *                      Otherwise, it returns the current computed **inner** height (without `padding`, `border` and
  *                      `margin`) of the first element in the set of matched elements, as `float`.
  */

@@ -24,7 +24,7 @@
  *  // remove an attribute
  *  elements.attr('title', false);
  *
- *  // since this method returns the set of matched elements, we can use chaining
+ *  // chaining
  *  elements.attr('title', 'title').removeClass('classname');
  *
  *  @param  {string|object} attribute   If given as a `string` representing an attribute and `value` **is not** set, this
@@ -44,7 +44,7 @@
  *                                      Setting it to `false` or `null` will instead **remove** the attribute from the
  *                                      set of matched elements.
  *
- *  @return {$|mixed}   When `setting` attributes, this method returns the set of matched elements, for chaining.
+ *  @return {$|mixed}   When `setting` attributes, this method returns the set of matched elements.
  *                      When `reading` attributes, this method returns the value of the required attribute.
  */
 this.attr = function(attribute, value) {
@@ -92,7 +92,7 @@ this.attr = function(attribute, value) {
             // of the first element in the set of matched elements
             return elements[0].getAttribute(attribute);
 
-    // if we get this far, return the set of matched elements, for chaining
+    // if we get this far, return the set of matched elements
     return $this;
 
 }

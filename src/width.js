@@ -22,7 +22,7 @@
  *  // sets the "width" CSS property of all elements in the set to 5em
  *  elements.width('5em');
  *
- *  // when setting the width, you can use chaining
+ *  // chaining
  *  elements.width(200).addClass('classname');
  *
  *  @param  {undefined|number|string}   [width]     If not given, this method will return the computed **inner**
@@ -35,9 +35,9 @@
  *
  *  > For hidden elements the returned value is `0`!
  *
- *  @return {$|float}   When **setting** the `width`, this method returns the set of matched elements, for chaining.
- *                      Otherwise, it returns the current computed **inner** width (without `padding`, `border` and
- *                      `margin`) of the first element in the set of matched elements, as `float`.
+ *  @return {$|float}   When **setting** the `width`, this method returns the set of matched elements. Otherwise, it
+ *                      returns the current computed **inner** width (without `padding`, `border` and `margin`) of the
+ *                      first element in the set of matched elements, as `float`.
  */
 this.width = function(width) {
 
