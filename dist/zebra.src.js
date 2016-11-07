@@ -244,7 +244,7 @@ $ = function(selector, parent, first_only) {
          */
         this._dom_search = function(action, selector) {
 
-            var result = [], remove_id, tmp;
+            var result = [], remove_id, root, tmp;
 
             // iterate through the set of matched elements
             elements.forEach(function(element) {
@@ -254,17 +254,15 @@ $ = function(selector, parent, first_only) {
                 // if selector is specified
                 if (selector) {
 
-                    // if we're looking for children nodes and element does not have an ID
-                    if (action === 'children' && null === element.getAttribute('id'))
+                    // if we're looking for children nodes, the root element is the element itself
+                    if (action === 'children') root = element;
 
-                         // generate and set a random ID for the element
-                        element.setAttribute('id', $this._random('id'));
+                    // otherwise, the root element is the element's parent node
+                    else root = element.parentNode;
 
-                    // if we're looking for sibling nodes or an element's previous node, and element's parent does not have an ID
-                    else if ((action === 'siblings' || action === 'previous' || action === 'next') && null === element.parentNode.getAttribute('id'))
-
-                         // generate and set a random ID for the element's parent node
-                        element.parentNode.setAttribute('id', $this._random('id'));
+                    // if the root element doesn't have an ID,
+                    // generate and set a random ID for the element's parent node
+                    if (null === root.getAttribute('id')) root.setAttribute('id', $this._random('id'));
 
                     // set this flag so that we know to remove the randomly generated ID when we're done
                     remove_id = true;
@@ -318,13 +316,8 @@ $ = function(selector, parent, first_only) {
                     }
 
                 // if present, remove the randomly generated ID
-                if (remove_id)
-
-                    // if action was "children", we remove the randomly generated ID from the element
-                    if (action === 'children') element.removeAttribute('id');
-
-                    // otherwise, we remove the randomly generated ID from the element's parent
-                    else element.parentNode.removeAttribute('id');
+                // we remove the randomly generated ID from the element
+                if (remove_id) root.removeAttribute('id');
 
             });
 
