@@ -605,10 +605,10 @@ $ = function(selector, parent, first_only) {
                         if (value === false || value === null)
 
                             // remove the attribute
-                            element[i].removeAttribute(attribute);
+                            element.removeAttribute(attribute);
 
                         // for other values, set the attribute's property
-                        else element[i].setAttribute(attribute, value);
+                        else element.setAttribute(attribute, value);
 
                     });
 
