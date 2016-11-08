@@ -83,7 +83,7 @@ $ = function(selector, parent, first_only) {
         // if
         } else if (
 
-            // selector is a the Document object, a DOM node, the Window object or a text node OR
+            // selector is the Document object, a DOM node, the Window object or a text node OR
             (typeof selector === 'object' && (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window)) ||
 
             // an array of DOM elements
