@@ -61,7 +61,7 @@ this._dom_insert = function(content, where) {
     else if (content instanceof Element || content instanceof Text) content = [content];
 
     // if action is "wrap" and content is given as a string, wrap it in a ZebraJS object
-    else if (where === 'wrap' && typeof content === 'string') content = $(content).get();
+    else if ((where === 'wrap' || where === 'replace') && typeof content === 'string') content = $(content).get();
 
     // if content to append is not a string, don't go further
     else if (typeof content !== 'string') return false;
@@ -70,20 +70,21 @@ this._dom_insert = function(content, where) {
     elements.forEach(function(element) {
 
         // if content to append is a string (plain text or HTML)
-        if (typeof content === 'string') {
+        if (typeof content === 'string')
 
             // insert content like this
-            element.insertAdjacentHTML((where === 'after' || where === 'prepend' || where === 'wrap' ? 'after' : 'before') + (where === 'after' || where === 'append' || where === 'wrap' ? 'end' : 'begin'), content);
+            element.insertAdjacentHTML((where === 'append' ? 'before' : 'after') + (where === 'before' || where === 'prepend' ? 'begin' : 'end'), content);
 
         // since content is an array of DOM elements or text nodes
         // iterate over the array
-        } else content.forEach(function(item, index) {
+        else content.forEach(function(item, index) {
 
             // where the content needs to be moved in the DOM
             switch (where) {
 
                 // insert a clone after each target except for the last one after which we insert the original content
                 case 'after':
+                case 'replace':
                 case 'wrap': element.parentNode.insertBefore(index < elements.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
 
                 // add a clone to each parent except for the last one where we add the original content
@@ -98,13 +99,13 @@ this._dom_insert = function(content, where) {
             }
 
             // if we're wrapping the element
-            if (where === 'wrap') {
+            if (where === 'wrap' || where === 'replace') {
 
                 // remove the original element
                 element.parentNode.removeChild(element);
 
-                // now insert it into the container
-                item.appendChild(element);
+                // for the "wrap" method, insert the removed element back into the container
+                if (where === 'wrap') item.appendChild(element);
 
             }
 

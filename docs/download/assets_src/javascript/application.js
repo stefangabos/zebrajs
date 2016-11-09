@@ -29,6 +29,7 @@ $(document).ready(function() {
             'prependTo':    ['_dom_insert'],
             'prev':         ['_dom_search', '_random'],
             'removeClass':  ['_class'],
+            'replaceWith':  ['_dom_insert'],
             'siblings':     ['_dom_search', '_random'],
             'toggleClass':  ['_class'],
             'width':        ['css'],
