@@ -132,6 +132,7 @@ $ = function(selector, parent, first_only) {
         // import "attr.js"
         // import "before.js"
         // import "children.js"
+        // import "clone.js"
         // import "closest.js"
         // import "css.js"
         // import "data.js"
