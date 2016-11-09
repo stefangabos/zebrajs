@@ -31,7 +31,8 @@ $(document).ready(function() {
             'removeClass':  ['_class'],
             'siblings':     ['_dom_search', '_random'],
             'toggleClass':  ['_class'],
-            'width':        ['css']
+            'width':        ['css'],
+            'wrap':         ['_dom_insert']
         },
 
         reversed_dependencies = {}, methods = {}, private_methods = {},

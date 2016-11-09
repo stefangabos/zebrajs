@@ -39,14 +39,14 @@ this._class = function(action, class_names) {
 /**
  *  Private helper method used by {@link $#append .append()}, {@link $#appendTo .appendTo()}, {@link $#after .after()},
  *  {@link $#insertAfter .insertAfter()}, {@link $#before .before()}, {@link $#insertBefore .insertBefore()},
- *  {@link $#prepend .prepend()} and {@link $#prependTo .prependTo()} methods.
+ *  {@link $#prepend .prepend()}, {@link $#prependTo .prependTo()} and {@link $#wrap .wrap()} methods.
  *
  *  @param  {mixed}     content     Depending on the caller method this is the DOM element, text node, HTML string, or
  *                                  ZebraJS object to insert in the DOM.
  *
  *  @param  {string}    where       Indicated where the content should be inserted, relative to the set of matched elements.
  *                                  <br><br>
- *                                  Possible values are `after`, `append` and `before`.
+ *                                  Possible values are `after`, `append`, `before`, `prepend` and `wrap`.
  *
  *  @return {$}     Returns the set of matched elements (the parents, not the appended elements), for chaining.
  *
@@ -60,6 +60,9 @@ this._dom_insert = function(content, where) {
     // if content to append is a DOM element or a text node, wrap it in an array
     else if (content instanceof Element || content instanceof Text) content = [content];
 
+    // if action is "wrap" and content is given as a string, wrap it in a ZebraJS object
+    else if (where === 'wrap' && typeof content === 'string') content = $(content).get();
+
     // if content to append is not a string, don't go further
     else if (typeof content !== 'string') return false;
 
@@ -67,20 +70,21 @@ this._dom_insert = function(content, where) {
     elements.forEach(function(element) {
 
         // if content to append is a string (plain text or HTML)
-        if (typeof content === 'string')
+        if (typeof content === 'string') {
 
             // insert content like this
-            element.insertAdjacentHTML((where === 'after' || where === 'prepend' ? 'after' : 'before') + (where === 'after' || where === 'append' ? 'end' : 'begin'), content);
+            element.insertAdjacentHTML((where === 'after' || where === 'prepend' || where === 'wrap' ? 'after' : 'before') + (where === 'after' || where === 'append' || where === 'wrap' ? 'end' : 'begin'), content);
 
         // since content is an array of DOM elements or text nodes
         // iterate over the array
-        else content.forEach(function(item, index) {
+        } else content.forEach(function(item, index) {
 
             // where the content needs to be moved in the DOM
             switch (where) {
 
                 // insert a clone after each target except for the last one after which we insert the original content
-                case 'after': element.parentNode.insertBefore(index < elements.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
+                case 'after':
+                case 'wrap': element.parentNode.insertBefore(index < elements.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
 
                 // add a clone to each parent except for the last one where we add the original content
                 case 'append': element.appendChild(index < elements.length - 1 ? item.cloneNode(true) : item); break;
@@ -90,6 +94,17 @@ this._dom_insert = function(content, where) {
 
                 // prepend a clone to each parent except for the last one where we add the original content
                 case 'prepend': element.insertBefore(index < elements.length - 1 ? item.cloneNode(true) : item, element.firstChild); break;
+
+            }
+
+            // if we're wrapping the element
+            if (where === 'wrap') {
+
+                // remove the original element
+                element.parentNode.removeChild(element);
+
+                // now insert it into the container
+                item.appendChild(element);
 
             }
 
