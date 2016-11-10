@@ -23,7 +23,7 @@
  *  elements.height('5em');
  *
  *  // chaining
- *  elements.height(200).addClass('classname');
+ *  elements.height(200).addClass('foo');
  *
  *  @param  {undefined|number|string}   [height]    If not given, the method will return the computed **inner**
  *                                                  height (without `padding`, `border` and `margin`) for the first

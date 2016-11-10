@@ -9,14 +9,14 @@
  *  var elements = $('selector');
  *
  *  // set a random class
- *  elements.addClass('classname');
+ *  elements.addClass('foo');
  *
  *  // toggle classes
- *  // the result will be that "classname" will be removed from the matched elements while the "otherclassname" will be added
- *  elements.toggleClass('classname otherclassname');
+ *  // the result will be that "foo" will be removed from the matched elements while the "baz" will be added
+ *  elements.toggleClass('foo baz');
  *
  *  // chaining
- *  elements.toggleClass('classname').css('display', 'none');
+ *  elements.toggleClass('foo').css('display', 'none');
  *
  *  @param  {string}    class_name  One or more space-separated class names to be toggled for each element in the set of
  *                                  matched elements.

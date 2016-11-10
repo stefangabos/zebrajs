@@ -26,7 +26,7 @@
  *  elements.attr('position', false);
  *
  *  // chaining
- *  elements.css('position', 'absolute').removeClass('classname');
+ *  elements.css('position', 'absolute').removeClass('foo');
  *
  *  @param  {string|object} property    If given as a `string` representing a CSS property and `value` **is not** set,
  *                                      this method will return the computed style of that particular property for the

@@ -23,7 +23,7 @@
  *  elements.width('5em');
  *
  *  // chaining
- *  elements.width(200).addClass('classname');
+ *  elements.width(200).addClass('foo');
  *
  *  @param  {undefined|number|string}   [width]     If not given, this method will return the computed **inner**
  *                                                  width (without `padding`, `border` and `margin`) of the first

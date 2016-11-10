@@ -16,7 +16,7 @@
  *  var content = elements.text();
  *
  *  // chaining
- *  elements.text('Hello').addClass('classname');
+ *  elements.text('Hello').addClass('foo');
 
  *  @param  {string}    [content]   The text to set as the content of all the matched elements. Note that any text
  *                                  content that was previously in that element is completely replaced by the new

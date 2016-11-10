@@ -8,10 +8,10 @@
  *  var elements = $('selector');
  *
  *  // check if matched elements have a certain class
- *  var class_exists = elements.hasClass('classname');
+ *  var class_exists = elements.hasClass('foo');
  *
  *  // chaining
- *  elements.toggleClass('classname');
+ *  elements.toggleClass('foo');
  *
  *  @param  {string}    class_name  The name of a class to be checked if it exists on *any* of the elements in the set
  *                                  of matched elements.

@@ -2,7 +2,7 @@
  *  Replaces each element in the set of matched elements with the provided new content and returns the set of elements
  *  that was removed.
  *
- *  > Note that if the method's argument is a selector then clones of the element described by the selector will be
+ *  > Note that if the method's argument is a selector, then clones of the element described by the selector will be
  *  created and used for replacing each element in the set of matched elements, except for the last one. The original item
  *  will be moved (not cloned) and used to replace the last target.
  *
@@ -21,10 +21,10 @@
  *  // using an existing element as the wrapper
  *  element.replaceWith($('#element-from-the-page'));
  *
- *  @param  {mixed} element     A string, a ZebraJS object or a DOM element with which to replace each element in the
+ *  @param  {mixed} element     A string, a ZebraJS object or a DOM element to use as replacement for each element in the
  *                              set of matched elements.
  *
- *  @return {$}     Returns the set of matched elements (the replaced elements, that is).
+ *  @return {$}     Returns the set of matched elements.
  */
 this.replaceWith = function(element) {
 

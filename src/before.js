@@ -35,7 +35,7 @@
  *  target.append('<div>hello</div>');
  *
  *  // chaining
- *  target.append($('div')).addClass('classname');
+ *  target.append($('div')).addClass('foo');
  *
  *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to be inserted before each
  *                                  element in the set of matched elements.

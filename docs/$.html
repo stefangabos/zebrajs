@@ -921,13 +921,13 @@
  var elements = $('selector');
 
  // add a single class
- elements.addClass('classname');
+ elements.addClass('foo');
 
  // add multiple classes
- elements.addClass('classname otherclassname');
+ elements.addClass('foo baz');
 
  // chaining
- elements.addClass('classname otherclassname').css('display', 'none');
+ elements.addClass('foo baz').css('display', 'none');
  </code></pre>
 
 
@@ -1036,7 +1036,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line436">line 436</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line433">line 433</a>
     </li></ul></dd>
     
 
@@ -1076,16 +1076,17 @@
 
 
 <div class="description">
-    <p>Inserts content, specified by the argument, after each element in the set of matched elements.</p>
+    <p>Inserts content specified by the argument after each element in the set of matched elements.</p>
 <p> Both this and the <a href="$.html#insertAfter">.insertAfter()</a> method perform the same task, the main difference being in the
  placement of the content and the target. With <code>.after()</code>, the selector expression preceding the method is the target
- after which the content is to be inserted. On the other hand, with <code>.insertAfter()</code>, the content precedes the method,
+ after which the content is to be inserted. On the other hand, with <code>.insertAfter()</code>, the content precedes the method
  and it is the one inserted after the target element.</p>
 <blockquote>
-<p>If there is more than one target element, clones of the inserted element will be created after each target except
- for the last one. The original item will be inserted after the last target.</p>
-<p>If an element selected this way is inserted elsewhere in the DOM, clones of the inserted element will be created
- after each target except for the last one. The original item will be moved (not cloned) after the last target.</p>
+<p>Clones of the inserted element will be created after each element in the set of matched elements, except for the last
+ one. The original item will be inserted after the last element.</p>
+<p>If the content to be inserted is an element existing on the page, clones of the element will be created after each
+ element in the set of matched elements, except for the last one. The original item will be moved (not cloned) after
+ the last element.</p>
 </blockquote>
 </div>
 
@@ -1099,7 +1100,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var target = $('#selector'); // insert a div that we create on the fly target.after($('&lt;div>').text('hello')); // same thing as above target.after($('&lt;div>hello&lt;/div>')); // use one or more elements that already exist on the page // if "target" is a single element than the list will be moved after the target element // if "parent" is a collection of elements, clones of the list element will be created after // each target, except for the last one; the original list will be moved after the last target target.after($('ul')); // insert a string (which will be transformed in HTML) // this is more efficient memory wise target.append('&lt;div>hello&lt;/div>'); // chaining target.append($('div')).addClass('classname'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var target = $('#selector'); // insert a div that we create on the fly target.after($('&lt;div>').text('hello')); // same thing as above target.after($('&lt;div>hello&lt;/div>')); // inserting elements already existing on the page target.after($('ul')); // insert a string (which will be transformed in HTML) target.after('&lt;div>hello&lt;/div>'); // chaining target.append($('div')).addClass('foo'); </code></pre>
 
 
 
@@ -1145,7 +1146,7 @@
 
             
 
-            <td class="description last"><p>DOM element, text node, HTML string, or ZebraJS object to be inserted after each
+            <td class="description last"><p>DOM element, text node, HTML string or ZebraJS object to be inserted after each
                                  element in the set of matched elements.</p></td>
         </tr>
 
@@ -1170,7 +1171,7 @@
 
         
 <div class="param-desc">
-    <p>Returns the set of matched elements (the parents, not the inserted elements).</p>
+    <p>Returns the set of matched elements.</p>
 </div>
 
 
@@ -1207,7 +1208,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line446">line 446</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line443">line 443</a>
     </li></ul></dd>
     
 
@@ -1294,7 +1295,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line494">line 494</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line491">line 491</a>
     </li></ul></dd>
     
 
@@ -1357,7 +1358,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var parent = $('#selector'); // append a div that we create on the fly parent.append($('&lt;div>').text('hello')); // same thing as above parent.append($('&lt;div>hello&lt;/div>')); // append one or more elements that already exist on the page // if "parent" is a single element than the list will be moved inside the parent element // if "parent" is a collection of elements, clones of the list element will be created for // each target except for the last one; for the last target, the original list will be moved parent.append($('ul')); // append a string (which will be transformed in HTML) // this is more efficient memory wise parent.append('&lt;div>hello&lt;/div>'); // chaining parent.append($('div')).addClass('classname'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var parent = $('#selector'); // append a div that we create on the fly parent.append($('&lt;div>').text('hello')); // same thing as above parent.append($('&lt;div>hello&lt;/div>')); // append one or more elements that already exist on the page // if "parent" is a single element than the list will be moved inside the parent element // if "parent" is a collection of elements, clones of the list element will be created for // each target except for the last one; for the last target, the original list will be moved parent.append($('ul')); // append a string (which will be transformed in HTML) // this is more efficient memory wise parent.append('&lt;div>hello&lt;/div>'); // chaining parent.append($('div')).addClass('foo'); </code></pre>
 
 
 
@@ -1465,7 +1466,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line537">line 537</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line534">line 534</a>
     </li></ul></dd>
     
 
@@ -1635,7 +1636,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line593">line 593</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line590">line 590</a>
     </li></ul></dd>
     
 
@@ -1710,7 +1711,7 @@
  elements.attr('title', false);
 
  // chaining
- elements.attr('title', 'title').removeClass('classname');
+ elements.attr('title', 'title').removeClass('foo');
 
  </code></pre>
 
@@ -1882,7 +1883,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line687">line 687</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line684">line 684</a>
     </li></ul></dd>
     
 
@@ -1945,7 +1946,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var target = $('#selector'); // insert a div that we create on the fly target.before($('&lt;div>').text('hello')); // same thing as above target.before($('&lt;div>hello&lt;/div>')); // use one or more elements that already exist on the page // if "target" is a single element than the list will be moved before the target element // if "parent" is a collection of elements, clones of the list element will be created before // each target, except for the last one; the original list will be moved before the last target target.before($('ul')); // insert a string (which will be transformed in HTML) // this is more efficient memory wise target.append('&lt;div>hello&lt;/div>'); // chaining target.append($('div')).addClass('classname'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var target = $('#selector'); // insert a div that we create on the fly target.before($('&lt;div>').text('hello')); // same thing as above target.before($('&lt;div>hello&lt;/div>')); // use one or more elements that already exist on the page // if "target" is a single element than the list will be moved before the target element // if "parent" is a collection of elements, clones of the list element will be created before // each target, except for the last one; the original list will be moved before the last target target.before($('ul')); // insert a string (which will be transformed in HTML) // this is more efficient memory wise target.append('&lt;div>hello&lt;/div>'); // chaining target.append($('div')).addClass('foo'); </code></pre>
 
 
 
@@ -2053,7 +2054,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line717">line 717</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line714">line 714</a>
     </li></ul></dd>
     
 
@@ -2214,7 +2215,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line727">line 727</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line724">line 724</a>
     </li></ul></dd>
     
 
@@ -2301,7 +2302,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line734">line 734</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line731">line 731</a>
     </li></ul></dd>
     
 
@@ -2388,7 +2389,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line788">line 788</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line785">line 785</a>
     </li></ul></dd>
     
 
@@ -2464,7 +2465,7 @@
  elements.attr('position', false);
 
  // chaining
- elements.css('position', 'absolute').removeClass('classname');
+ elements.css('position', 'absolute').removeClass('foo');
 
  </code></pre>
 
@@ -2636,7 +2637,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line843">line 843</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line840">line 840</a>
     </li></ul></dd>
     
 
@@ -2723,7 +2724,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line872">line 872</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line869">line 869</a>
     </li></ul></dd>
     
 
@@ -2895,7 +2896,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line907">line 907</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line904">line 904</a>
     </li></ul></dd>
     
 
@@ -3069,7 +3070,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line962">line 962</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line959">line 959</a>
     </li></ul></dd>
     
 
@@ -3274,7 +3275,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line991">line 991</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line988">line 988</a>
     </li></ul></dd>
     
 
@@ -3339,10 +3340,10 @@
  var elements = $('selector');
 
  // check if matched elements have a certain class
- var class_exists = elements.hasClass('classname');
+ var class_exists = elements.hasClass('foo');
 
  // chaining
- elements.toggleClass('classname');
+ elements.toggleClass('foo');
 
  </code></pre>
 
@@ -3452,7 +3453,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1045">line 1045</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1042">line 1042</a>
     </li></ul></dd>
     
 
@@ -3524,7 +3525,7 @@
  elements.height('5em');
 
  // chaining
- elements.height(200).addClass('classname');
+ elements.height(200).addClass('foo');
 
  </code></pre>
 
@@ -3665,7 +3666,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1088">line 1088</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1085">line 1085</a>
     </li></ul></dd>
     
 
@@ -3735,7 +3736,7 @@
  var content = elements.html();
 
  // chaining
- elements.html('&lt;p>Hello&lt;/p>').addClass('classname');
+ elements.html('&lt;p>Hello&lt;/p>').addClass('foo');
  </code></pre>
 
 
@@ -3862,7 +3863,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1113">line 1113</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1110">line 1110</a>
     </li></ul></dd>
     
 
@@ -3949,7 +3950,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1153">line 1153</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1150">line 1150</a>
     </li></ul></dd>
     
 
@@ -4119,7 +4120,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1196">line 1196</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1193">line 1193</a>
     </li></ul></dd>
     
 
@@ -4305,7 +4306,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1206">line 1206</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1203">line 1203</a>
     </li></ul></dd>
     
 
@@ -4392,7 +4393,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1235">line 1235</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1232">line 1232</a>
     </li></ul></dd>
     
 
@@ -4568,7 +4569,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1246">line 1246</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1243">line 1243</a>
     </li></ul></dd>
     
 
@@ -4655,7 +4656,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1253">line 1253</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1250">line 1250</a>
     </li></ul></dd>
     
 
@@ -4742,7 +4743,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1267">line 1267</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1264">line 1264</a>
     </li></ul></dd>
     
 
@@ -4829,7 +4830,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1296">line 1296</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1293">line 1293</a>
     </li></ul></dd>
     
 
@@ -5010,7 +5011,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1339">line 1339</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1336">line 1336</a>
     </li></ul></dd>
     
 
@@ -5191,7 +5192,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1386">line 1386</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1383">line 1383</a>
     </li></ul></dd>
     
 
@@ -5367,7 +5368,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1406">line 1406</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1403">line 1403</a>
     </li></ul></dd>
     
 
@@ -5454,7 +5455,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1413">line 1413</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1410">line 1410</a>
     </li></ul></dd>
     
 
@@ -5541,7 +5542,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1466">line 1466</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1463">line 1463</a>
     </li></ul></dd>
     
 
@@ -5625,7 +5626,7 @@
  parent.prepend('&lt;div>hello&lt;/div>');
 
  // chaining
- parent.prepend($('div')).addClass('classname');
+ parent.prepend($('div')).addClass('foo');
 
  </code></pre>
 
@@ -5735,7 +5736,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1509">line 1509</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1506">line 1506</a>
     </li></ul></dd>
     
 
@@ -5921,7 +5922,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1541">line 1541</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1538">line 1538</a>
     </li></ul></dd>
     
 
@@ -6097,7 +6098,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1552">line 1552</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1549">line 1549</a>
     </li></ul></dd>
     
 
@@ -6184,7 +6185,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1563">line 1563</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1560">line 1560</a>
     </li></ul></dd>
     
 
@@ -6271,7 +6272,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1592">line 1592</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1589">line 1589</a>
     </li></ul></dd>
     
 
@@ -6336,13 +6337,13 @@
  var elements = $('selector');
 
  // remove a single class
- elements.removeClass('classname');
+ elements.removeClass('foo');
 
  // remove multiple classes
- elements.removeClass('classname otherclassname');
+ elements.removeClass('foo baz');
 
  // since this method returns the set of matched elements
- elements.removeClass('classname otherclassname').css('display', 'none');
+ elements.removeClass('foo baz').css('display', 'none');
 
  </code></pre>
 
@@ -6452,7 +6453,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1627">line 1627</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1624">line 1624</a>
     </li></ul></dd>
     
 
@@ -6495,7 +6496,7 @@
     <p>Replaces each element in the set of matched elements with the provided new content and returns the set of elements
  that was removed.</p>
 <blockquote>
-<p>Note that if the method's argument is a selector then clones of the element described by the selector will be
+<p>Note that if the method's argument is a selector, then clones of the element described by the selector will be
  created and used for replacing each element in the set of matched elements, except for the last one. The original item
  will be moved (not cloned) and used to replace the last target.</p>
 </blockquote>
@@ -6570,7 +6571,7 @@
 
             
 
-            <td class="description last"><p>A string, a ZebraJS object or a DOM element with which to replace each element in the
+            <td class="description last"><p>A string, a ZebraJS object or a DOM element to use as replacement for each element in the
                              set of matched elements.</p></td>
         </tr>
 
@@ -6595,7 +6596,7 @@
 
         
 <div class="param-desc">
-    <p>Returns the set of matched elements (the replaced elements, that is).</p>
+    <p>Returns the set of matched elements.</p>
 </div>
 
 
@@ -6632,7 +6633,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1637">line 1637</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1634">line 1634</a>
     </li></ul></dd>
     
 
@@ -6719,7 +6720,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1644">line 1644</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1641">line 1641</a>
     </li></ul></dd>
     
 
@@ -6806,7 +6807,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1651">line 1651</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1648">line 1648</a>
     </li></ul></dd>
     
 
@@ -6893,7 +6894,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1678">line 1678</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1675">line 1675</a>
     </li></ul></dd>
     
 
@@ -7054,7 +7055,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1713">line 1713</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1710">line 1710</a>
     </li></ul></dd>
     
 
@@ -7120,7 +7121,7 @@
  var content = elements.text();
 
  // chaining
- elements.text('Hello').addClass('classname');
+ elements.text('Hello').addClass('foo');
  </code></pre>
 
 
@@ -7247,7 +7248,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1763">line 1763</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1760">line 1760</a>
     </li></ul></dd>
     
 
@@ -7313,14 +7314,14 @@
  var elements = $('selector');
 
  // set a random class
- elements.addClass('classname');
+ elements.addClass('foo');
 
  // toggle classes
- // the result will be that "classname" will be removed from the matched elements while the "otherclassname" will be added
- elements.toggleClass('classname otherclassname');
+ // the result will be that "foo" will be removed from the matched elements while the "baz" will be added
+ elements.toggleClass('foo baz');
 
  // chaining
- elements.toggleClass('classname').css('display', 'none');
+ elements.toggleClass('foo').css('display', 'none');
 
  </code></pre>
 
@@ -7430,7 +7431,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1773">line 1773</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1770">line 1770</a>
     </li></ul></dd>
     
 
@@ -7517,7 +7518,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1780">line 1780</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1777">line 1777</a>
     </li></ul></dd>
     
 
@@ -7604,7 +7605,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1787">line 1787</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1784">line 1784</a>
     </li></ul></dd>
     
 
@@ -7691,7 +7692,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1832">line 1832</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1829">line 1829</a>
     </li></ul></dd>
     
 
@@ -7763,7 +7764,7 @@
  elements.width('5em');
 
  // chaining
- elements.width(200).addClass('classname');
+ elements.width(200).addClass('foo');
 
  </code></pre>
 
@@ -7904,7 +7905,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1871">line 1871</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line1868">line 1868</a>
     </li></ul></dd>
     
 
@@ -8084,7 +8085,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Wed Nov 09 2016 21:34:47 GMT+0200 (GTB Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Thu Nov 10 2016 09:50:34 GMT+0200 (GTB Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

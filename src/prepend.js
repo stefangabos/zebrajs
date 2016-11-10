@@ -35,7 +35,7 @@
  *  parent.prepend('<div>hello</div>');
  *
  *  // chaining
- *  parent.prepend($('div')).addClass('classname');
+ *  parent.prepend($('div')).addClass('foo');
  *
  *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the beginning
  *                                  of each element in the set of matched elements.

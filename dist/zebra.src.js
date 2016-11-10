@@ -366,13 +366,13 @@ $ = function(selector, parent, first_only) {
          *  var elements = $('selector');
          *
          *  // add a single class
-         *  elements.addClass('classname');
+         *  elements.addClass('foo');
          *
          *  // add multiple classes
-         *  elements.addClass('classname otherclassname');
+         *  elements.addClass('foo baz');
          *
          *  // chaining
-         *  elements.addClass('classname otherclassname').css('display', 'none');
+         *  elements.addClass('foo baz').css('display', 'none');
 
          *  @param  {string}    class_name  One or more space-separated class names to be added to each element in the
          *                                  set of matched elements.
@@ -390,18 +390,19 @@ $ = function(selector, parent, first_only) {
 
 
         /**
-         *  Inserts content, specified by the argument, after each element in the set of matched elements.
+         *  Inserts content specified by the argument after each element in the set of matched elements.
          *
          *  Both this and the {@link $#insertAfter .insertAfter()} method perform the same task, the main difference being in the
          *  placement of the content and the target. With `.after()`, the selector expression preceding the method is the target
-         *  after which the content is to be inserted. On the other hand, with `.insertAfter()`, the content precedes the method,
+         *  after which the content is to be inserted. On the other hand, with `.insertAfter()`, the content precedes the method
          *  and it is the one inserted after the target element.
          *
-         *  > If there is more than one target element, clones of the inserted element will be created after each target except
-         *  for the last one. The original item will be inserted after the last target.
+         *  > Clones of the inserted element will be created after each element in the set of matched elements, except for the last
+         *  one. The original item will be inserted after the last element.
          *
-         *  > If an element selected this way is inserted elsewhere in the DOM, clones of the inserted element will be created
-         *  after each target except for the last one. The original item will be moved (not cloned) after the last target.
+         *  > If the content to be inserted is an element existing on the page, clones of the element will be created after each
+         *  element in the set of matched elements, except for the last one. The original item will be moved (not cloned) after
+         *  the last element.
          *
          *  @example
          *
@@ -415,23 +416,19 @@ $ = function(selector, parent, first_only) {
          *  // same thing as above
          *  target.after($('<div>hello</div>'));
          *
-         *  // use one or more elements that already exist on the page
-         *  // if "target" is a single element than the list will be moved after the target element
-         *  // if "parent" is a collection of elements, clones of the list element will be created after
-         *  // each target, except for the last one; the original list will be moved after the last target
+         *  // inserting elements already existing on the page
          *  target.after($('ul'));
          *
          *  // insert a string (which will be transformed in HTML)
-         *  // this is more efficient memory wise
-         *  target.append('<div>hello</div>');
+         *  target.after('<div>hello</div>');
          *
          *  // chaining
-         *  target.append($('div')).addClass('classname');
+         *  target.append($('div')).addClass('foo');
          *
-         *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to be inserted after each
+         *  @param  {mixed}     content     DOM element, text node, HTML string or ZebraJS object to be inserted after each
          *                                  element in the set of matched elements.
          *
-         *  @return {$}         Returns the set of matched elements (the parents, not the inserted elements).
+         *  @return {$}         Returns the set of matched elements.
          */
         this.after = function(content) {
 
@@ -484,7 +481,7 @@ $ = function(selector, parent, first_only) {
          *  parent.append('<div>hello</div>');
          *
          *  // chaining
-         *  parent.append($('div')).addClass('classname');
+         *  parent.append($('div')).addClass('foo');
          *
          *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the end of each
          *                                  element in the set of matched elements.
@@ -568,7 +565,7 @@ $ = function(selector, parent, first_only) {
          *  elements.attr('title', false);
          *
          *  // chaining
-         *  elements.attr('title', 'title').removeClass('classname');
+         *  elements.attr('title', 'title').removeClass('foo');
          *
          *  @param  {string|object} attribute   If given as a `string` representing an attribute and `value` **is not** set, this
          *                                      method will return that particular attribute's value for the first element in the
@@ -677,7 +674,7 @@ $ = function(selector, parent, first_only) {
          *  target.append('<div>hello</div>');
          *
          *  // chaining
-         *  target.append($('div')).addClass('classname');
+         *  target.append($('div')).addClass('foo');
          *
          *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to be inserted before each
          *                                  element in the set of matched elements.
@@ -763,7 +760,7 @@ $ = function(selector, parent, first_only) {
          *  elements.attr('position', false);
          *
          *  // chaining
-         *  elements.css('position', 'absolute').removeClass('classname');
+         *  elements.css('position', 'absolute').removeClass('foo');
          *
          *  @param  {string|object} property    If given as a `string` representing a CSS property and `value` **is not** set,
          *                                      this method will return the computed style of that particular property for the
@@ -976,10 +973,10 @@ $ = function(selector, parent, first_only) {
          *  var elements = $('selector');
          *
          *  // check if matched elements have a certain class
-         *  var class_exists = elements.hasClass('classname');
+         *  var class_exists = elements.hasClass('foo');
          *
          *  // chaining
-         *  elements.toggleClass('classname');
+         *  elements.toggleClass('foo');
          *
          *  @param  {string}    class_name  The name of a class to be checked if it exists on *any* of the elements in the set
          *                                  of matched elements.
@@ -1026,7 +1023,7 @@ $ = function(selector, parent, first_only) {
          *  elements.height('5em');
          *
          *  // chaining
-         *  elements.height(200).addClass('classname');
+         *  elements.height(200).addClass('foo');
          *
          *  @param  {undefined|number|string}   [height]    If not given, the method will return the computed **inner**
          *                                                  height (without `padding`, `border` and `margin`) for the first
@@ -1075,7 +1072,7 @@ $ = function(selector, parent, first_only) {
          *  var content = elements.html();
          *
          *  // chaining
-         *  elements.html('<p>Hello</p>').addClass('classname');
+         *  elements.html('<p>Hello</p>').addClass('foo');
 
          *  @param  {string}    [content]   The HTML content to set as the content of all the matched elements. Note that any
          *                                  content that was previously in that element is completely replaced by the new
@@ -1456,7 +1453,7 @@ $ = function(selector, parent, first_only) {
          *  parent.prepend('<div>hello</div>');
          *
          *  // chaining
-         *  parent.prepend($('div')).addClass('classname');
+         *  parent.prepend($('div')).addClass('foo');
          *
          *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the beginning
          *                                  of each element in the set of matched elements.
@@ -1574,13 +1571,13 @@ $ = function(selector, parent, first_only) {
          *  var elements = $('selector');
          *
          *  // remove a single class
-         *  elements.removeClass('classname');
+         *  elements.removeClass('foo');
          *
          *  // remove multiple classes
-         *  elements.removeClass('classname otherclassname');
+         *  elements.removeClass('foo baz');
          *
          *  // since this method returns the set of matched elements
-         *  elements.removeClass('classname otherclassname').css('display', 'none');
+         *  elements.removeClass('foo baz').css('display', 'none');
          *
          *  @param  {string}    class_name  One or more space-separated class names to be removed from each element in
          *                                  the set of matched elements.
@@ -1600,7 +1597,7 @@ $ = function(selector, parent, first_only) {
          *  Replaces each element in the set of matched elements with the provided new content and returns the set of elements
          *  that was removed.
          *
-         *  > Note that if the method's argument is a selector then clones of the element described by the selector will be
+         *  > Note that if the method's argument is a selector, then clones of the element described by the selector will be
          *  created and used for replacing each element in the set of matched elements, except for the last one. The original item
          *  will be moved (not cloned) and used to replace the last target.
          *
@@ -1619,10 +1616,10 @@ $ = function(selector, parent, first_only) {
          *  // using an existing element as the wrapper
          *  element.replaceWith($('#element-from-the-page'));
          *
-         *  @param  {mixed} element     A string, a ZebraJS object or a DOM element with which to replace each element in the
+         *  @param  {mixed} element     A string, a ZebraJS object or a DOM element to use as replacement for each element in the
          *                              set of matched elements.
          *
-         *  @return {$}     Returns the set of matched elements (the replaced elements, that is).
+         *  @return {$}     Returns the set of matched elements.
          */
         this.replaceWith = function(element) {
 
@@ -1700,7 +1697,7 @@ $ = function(selector, parent, first_only) {
          *  var content = elements.text();
          *
          *  // chaining
-         *  elements.text('Hello').addClass('classname');
+         *  elements.text('Hello').addClass('foo');
 
          *  @param  {string}    [content]   The text to set as the content of all the matched elements. Note that any text
          *                                  content that was previously in that element is completely replaced by the new
@@ -1744,14 +1741,14 @@ $ = function(selector, parent, first_only) {
          *  var elements = $('selector');
          *
          *  // set a random class
-         *  elements.addClass('classname');
+         *  elements.addClass('foo');
          *
          *  // toggle classes
-         *  // the result will be that "classname" will be removed from the matched elements while the "otherclassname" will be added
-         *  elements.toggleClass('classname otherclassname');
+         *  // the result will be that "foo" will be removed from the matched elements while the "baz" will be added
+         *  elements.toggleClass('foo baz');
          *
          *  // chaining
-         *  elements.toggleClass('classname').css('display', 'none');
+         *  elements.toggleClass('foo').css('display', 'none');
          *
          *  @param  {string}    class_name  One or more space-separated class names to be toggled for each element in the set of
          *                                  matched elements.
@@ -1813,7 +1810,7 @@ $ = function(selector, parent, first_only) {
          *  elements.width('5em');
          *
          *  // chaining
-         *  elements.width(200).addClass('classname');
+         *  elements.width(200).addClass('foo');
          *
          *  @param  {undefined|number|string}   [width]     If not given, this method will return the computed **inner**
          *                                                  width (without `padding`, `border` and `margin`) of the first

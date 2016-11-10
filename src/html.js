@@ -19,7 +19,7 @@
  *  var content = elements.html();
  *
  *  // chaining
- *  elements.html('<p>Hello</p>').addClass('classname');
+ *  elements.html('<p>Hello</p>').addClass('foo');
 
  *  @param  {string}    [content]   The HTML content to set as the content of all the matched elements. Note that any
  *                                  content that was previously in that element is completely replaced by the new

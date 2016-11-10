@@ -35,7 +35,7 @@
  *  parent.append('<div>hello</div>');
  *
  *  // chaining
- *  parent.append($('div')).addClass('classname');
+ *  parent.append($('div')).addClass('foo');
  *
  *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the end of each
  *                                  element in the set of matched elements.

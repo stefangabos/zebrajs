@@ -25,7 +25,7 @@
  *  elements.attr('title', false);
  *
  *  // chaining
- *  elements.attr('title', 'title').removeClass('classname');
+ *  elements.attr('title', 'title').removeClass('foo');
  *
  *  @param  {string|object} attribute   If given as a `string` representing an attribute and `value` **is not** set, this
  *                                      method will return that particular attribute's value for the first element in the

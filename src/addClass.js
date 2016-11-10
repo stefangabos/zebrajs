@@ -8,13 +8,13 @@
  *  var elements = $('selector');
  *
  *  // add a single class
- *  elements.addClass('classname');
+ *  elements.addClass('foo');
  *
  *  // add multiple classes
- *  elements.addClass('classname otherclassname');
+ *  elements.addClass('foo baz');
  *
  *  // chaining
- *  elements.addClass('classname otherclassname').css('display', 'none');
+ *  elements.addClass('foo baz').css('display', 'none');
 
  *  @param  {string}    class_name  One or more space-separated class names to be added to each element in the
  *                                  set of matched elements.
