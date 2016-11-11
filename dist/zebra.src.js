@@ -596,7 +596,7 @@
              */
             this.attr = function(attribute, value) {
 
-                var i, j;
+                var i;
 
                 // if attribute argument is an object
                 if (typeof attribute === 'object')
@@ -608,7 +608,7 @@
                         for (i in attribute)
 
                             // set each attribute
-                            element.setAttribute(j, attribute[j]);
+                            element.setAttribute(i, attribute[i]);
 
                     });
 
