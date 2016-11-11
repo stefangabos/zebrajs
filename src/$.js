@@ -3,7 +3,7 @@
  *  @fileOverview
  *  @name       ZebraJS
  *  @author     Stefan Gabos <contact@stefangabos.ro>
- *  @version    0.0.1 (last revision: October 17th, 2016)
+ *  @version    1.0.0
  *  @copyright  (c) 2016 Stefan Gabos
  *  @license    LGPL-3.0
  *

@@ -28,5 +28,4 @@ this.addClass = function(class_name) {
     // add class(es) and return the set of matched elements
     return this._class('add', class_name);
 
-};
-
+}
