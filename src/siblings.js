@@ -14,7 +14,7 @@
  *  var siblings_filtered = element.siblings('div');
  *
  *  // since this method returns a ZebraJS object
- *  element.siblings('div').addClass('someclass');
+ *  element.siblings('div').addClass('foo');
  *
  *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
  *                                  match it.

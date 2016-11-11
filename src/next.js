@@ -15,7 +15,7 @@
  *  var next = element.next('div');
  *
  *  // chaining
- *  element.next().addClass('someclass');
+ *  element.next().addClass('foo');
  *
  *  @param  {string}    selector    If the selector is provided, the method will retrieve the following sibling only if
  *                                  it matches the selector

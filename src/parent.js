@@ -16,7 +16,7 @@
  *  var parent = element.parent('div');
  *
  *  // chaining
- *  element.parent().addClass('someclass');
+ *  element.parent().addClass('foo');
  *
  *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
  *                                  match it.

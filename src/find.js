@@ -12,7 +12,7 @@
  *  var target = element.find('div');
  *
  *  // chaining
- *  element.find('div').addClass('someclass');
+ *  element.find('div').addClass('foo');
  *
  *  @param  {string}    selector    A selector to filter descendant elements by. It can be a query selector, a ZebraJS
  *                                  object, or an element you'd get by using document.getElementById.

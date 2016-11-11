@@ -14,7 +14,7 @@
  *  var children_filtered = element.children('div');
  *
  *  // chaining
- *  element.children('div').addClass('someclass');
+ *  element.children('div').addClass('foo');
  *
  *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
  *                                  match it.

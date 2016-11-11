@@ -15,7 +15,7 @@
  *  var prev = element.prev('div');
  *
  *  // since this method returns a ZebraJS object
- *  element.prev().addClass('someclass');
+ *  element.prev().addClass('foo');
  *
  *  @param  {string}    selector    If the selector is provided, the method will retrieve the previous sibling only if
  *                                  it matches the selector
