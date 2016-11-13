@@ -50,11 +50,7 @@
  */
 this.on = function(event_type, selector, callback) {
 
-    var namespace = event_type.split('.'), actual_callback, event_types = event_type.split(' ');
-
-    // handle namespacing
-    event_type = namespace[0];
-    namespace = namespace[1] || '';
+    var event_types = event_type.split(' '), namespace, actual_callback;
 
     // if method is called with just 2 arguments,
     // the seconds argument is the callback not a selector
@@ -65,6 +61,13 @@ this.on = function(event_type, selector, callback) {
 
         // iterate through the event types we have to attach the handler to
         event_types.forEach(function(event_type) {
+
+            actual_callback = false;
+
+            // handle namespacing
+            namespace = event_type.split('.')
+            event_type = namespace[0];
+            namespace = namespace[1] || '';
 
             // if this is the first time we have this event type
             if (undefined === event_listeners[event_type])

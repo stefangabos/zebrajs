@@ -33,11 +33,7 @@
  */
 this.off = function(event_type, callback) {
 
-    var namespace = event_type.split('.'), event_types = event_type.split(' ');
-
-    // handle namespacing
-    event_type = namespace[1];
-    namespace = namespace[1] || '';
+    var event_types = event_type ? event_type.split(' ') : Object.keys(event_listeners), namespace, remove_all_event_handlers = !event_type;
 
     // iterate through the set of matched elements
     elements.forEach(function(element) {
@@ -45,10 +41,15 @@ this.off = function(event_type, callback) {
         // iterate through the event types we have to remove the handler from
         event_types.forEach(function(event_type) {
 
-            // if this is the first time we have this event type
+            // handle namespacing
+            namespace = event_type.split('.')
+            event_type = namespace[0];
+            namespace = namespace[1] || '';
+
+            // if we have registered event of this type
             if (undefined !== event_listeners[event_type])
 
-                // iterate through the registered event of this type
+                // iterate through the registered events of this type
                 event_listeners[event_type].forEach(function(entry) {
 
                     // if
@@ -61,12 +62,18 @@ this.off = function(event_type, callback) {
                         // callback is given and we've just found it
                         (undefined === callback || callback === entry[1]) &&
 
-                        // we're looking at the right namespace
-                        namespace === entry[2]
-                    )
+                        // we're looking at the right namespace (or we need to remove all event handlers)
+                        (remove_all_event_handlers || namespace === entry[2])
+
+                    ) {
 
                         // remove the event listener
                         element.removeEventListener(event_type, entry[3] || entry[1]);
+
+                        // don't look further
+                        return;
+
+                    }
 
                 });
 
