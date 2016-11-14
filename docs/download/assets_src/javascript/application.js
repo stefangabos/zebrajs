@@ -32,6 +32,7 @@ $(document).ready(function() {
             'replaceWith':  ['_dom_insert'],
             'siblings':     ['_dom_search', '_random'],
             'toggleClass':  ['_class'],
+            'unwrap':       ['replaceWith', '_dom_insert', 'parent'],
             'width':        ['css'],
             'wrap':         ['_dom_insert']
         },
