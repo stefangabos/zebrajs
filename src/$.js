@@ -153,7 +153,6 @@
             // import "inArray.js"
             // import "insertAfter.js"
             // import "insertBefore.js"
-            // import "mq.js"
             // import "next.js"
             // import "off.js"
             // import "offset.js"
