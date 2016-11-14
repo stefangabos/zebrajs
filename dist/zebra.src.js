@@ -132,7 +132,7 @@
             }
 
             /**
-             *  Private helper method used by {@link $.$#addClas .addCLass()}, {@link $.$#removeClass .removeClass()} and
+             *  Private helper method used by {@link $.$#addClass .addCLass()}, {@link $.$#removeClass .removeClass()} and
              *  {@link $.$#toggleClass .toggleClass()} methods.
              *
              *  @param  {string}    action      What to do with the class(es)
