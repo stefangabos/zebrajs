@@ -1296,7 +1296,7 @@
                         if (undefined !== event_listeners[event_type])
 
                             // iterate through the registered events of this type
-                            event_listeners[event_type].forEach(function(entry) {
+                            event_listeners[event_type].forEach(function(entry, index) {
 
                                 // if
                                 if (
@@ -1315,6 +1315,12 @@
 
                                     // remove the event listener
                                     element.removeEventListener(event_type, entry[3] || entry[1]);
+
+                                    // remove entry from the event listeners array
+                                    event_listeners[event_type].splice(index, 1);
+
+                                    // if nothing left for this event type then also remove the event type's entry
+                                    if (event_listeners[event_type].length === 0) delete event_listeners[event_type];
 
                                     // don't look further
                                     return;
@@ -1739,9 +1745,65 @@
             }
 
             /**
-             *  @todo   Needs to be written!
+             *  Removes the set of matched elements from the DOM.
+             *
+             *  Use this method when you want to remove the element itself, as well as everything inside it. In addition to the elements
+             *  themselves, all attached event handlers and data attributes associated with the elements are also removed.
+             *
+             *  To remove the elements without removing data and event handlers, use {@link $#detach() .detach()} instead.
+             *
+             *  @example
+             *
+             *  // always cache selectors
+             *  // to avoid DOM scanning over and over again
+             *  var element = $('#selector');
+             *
+             *  // remove the element, its children, and all attached event 
+             *  // handlers and data attributes associated with the elements
+             *  element.remove();
+             *
+             *  @return {$}         Returns the set of matched elements.
              */
             this.remove = function() {
+
+                // iterate over the set of matched elements
+                elements.forEach(function(element) {
+
+                    var
+
+                        // the element as a ZebraJS object
+                        $element = $(element),
+
+                        // the element's children
+                        children = Array.prototype.slice.call(element.querySelectorAll('*'));
+
+                    // iterate over the element's children
+                    children.forEach(function(child) {
+
+                        // the child's ZebraJS form
+                        var $child = $(child);
+
+                        // remove all event handlers
+                        $child.off();
+
+                        // nullify the child to free memory
+                        $child = null;
+
+                    });
+
+                    // remove all attached event handlers
+                    $element.off();
+
+                    // remove element from the DOM (including children)
+                    element.parentNode.removeChild(element);
+
+                    // nullify the object to free memory
+                    $element = null;
+
+                });
+
+                // return the set of matched elements
+                return $this;
 
             }
 
