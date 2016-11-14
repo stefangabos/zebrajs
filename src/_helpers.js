@@ -1,6 +1,6 @@
 /**
- *  Private helper method used by {@link $#addClas .addCLass()}, {@link $#removeClass .removeClass()} and
- *  {@link $#toggleClass .toggleClass()} methods.
+ *  Private helper method used by {@link $.$#addClas .addCLass()}, {@link $.$#removeClass .removeClass()} and
+ *  {@link $.$#toggleClass .toggleClass()} methods.
  *
  *  @param  {string}    action      What to do with the class(es)
  *                                  <br><br>
@@ -37,9 +37,9 @@ this._class = function(action, class_names) {
 }
 
 /**
- *  Private helper method used by {@link $#append .append()}, {@link $#appendTo .appendTo()}, {@link $#after .after()},
- *  {@link $#insertAfter .insertAfter()}, {@link $#before .before()}, {@link $#insertBefore .insertBefore()},
- *  {@link $#prepend .prepend()}, {@link $#prependTo .prependTo()} and {@link $#wrap .wrap()} methods.
+ *  Private helper method used by {@link $.$#append .append()}, {@link $.$#appendTo .appendTo()}, {@link $.$#after .after()},
+ *  {@link $.$#insertAfter .insertAfter()}, {@link $.$#before .before()}, {@link $.$#insertBefore .insertBefore()},
+ *  {@link $.$#prepend .prepend()}, {@link $.$#prependTo .prependTo()} and {@link $.$#wrap .wrap()} methods.
  *
  *  @param  {mixed}     content     Depending on the caller method this is the DOM element, text node, HTML string, or
  *                                  ZebraJS object to insert in the DOM.
@@ -119,8 +119,8 @@ this._dom_insert = function(content, where) {
 }
 
 /**
- *  Private helper method used by {@link $#children .children()}, {@link $#siblings .siblings()}, {@link $#nexr .next()}
- *  and {@link $#prev .prev()} methods.
+ *  Private helper method used by {@link $.$#children .children()}, {@link $.$#siblings .siblings()}, {@link $.$#nexr .next()}
+ *  and {@link $.$#prev .prev()} methods.
  *
  *  @param  {string}    action      Specified what type of elements to look for
  *                                  <br><br>

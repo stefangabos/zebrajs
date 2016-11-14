@@ -4,7 +4,7 @@
  *
  *  > For hidden elements the returned value is `0`!
  *
- *  See {@link $#width .width()} for getting the **inner** width without `padding`, `border` and `margin`.
+ *  See {@link $.$#width .width()} for getting the **inner** width without `padding`, `border` and `margin`.
  *
  *  @example
  *

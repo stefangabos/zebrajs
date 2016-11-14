@@ -2,7 +2,7 @@
  *  Returns the current computed **inner** height (without `padding`, `border` and `margin`) of the first element
  *  in the set of matched elements as `float`, or sets the `height` CSS property of every element in the set.
  *
- *  See {@link $#outerHeight .outerHeight()} for getting the height including `padding`, `border` and, optionally,
+ *  See {@link $.$#outerHeight .outerHeight()} for getting the height including `padding`, `border` and, optionally,
  *  `margin`.
  *
  *  @example

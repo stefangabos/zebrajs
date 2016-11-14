@@ -4,7 +4,7 @@
  *  Use this method when you want to remove the element itself, as well as everything inside it. In addition to the elements
  *  themselves, all attached event handlers and data attributes associated with the elements are also removed.
  *
- *  To remove the elements without removing data and event handlers, use {@link $#detach() .detach()} instead.
+ *  To remove the elements without removing data and event handlers, use {@link $.$#detach() .detach()} instead.
  *
  *  @example
  *

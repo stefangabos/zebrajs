@@ -4,7 +4,7 @@
  *
  *  > For hidden elements the returned value is `0`!
  *
- *  See {@link $#height .height()} for getting the **inner** height without `padding`, `border` and `margin`.
+ *  See {@link $.$#height .height()} for getting the **inner** height without `padding`, `border` and `margin`.
  *
  *  @example
  *

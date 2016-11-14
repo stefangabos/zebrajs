@@ -2,7 +2,7 @@
  *  Returns the current computed **inner** width (without `padding`, `border` and `margin`) of the first element
  *  in the set of matched elements as `float`, or sets the `width` CSS property of every element in the set.
  *
- *  See {@link $#outerWidth .outerWidth()} for getting the width including `padding`, `border` and, optionally,
+ *  See {@link $.$#outerWidth .outerWidth()} for getting the width including `padding`, `border` and, optionally,
  *  `margin`.
  *
  *  @example

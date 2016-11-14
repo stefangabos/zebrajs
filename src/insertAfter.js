@@ -1,7 +1,7 @@
 /**
  *  Inserts every element in the set of matched elements after the parent element(s), specified by the argument.
  *
- *  Both this and the {@link $#after .after()} method perform the same task, the main difference being in the
+ *  Both this and the {@link $.$#after .after()} method perform the same task, the main difference being in the
  *  placement of the content and the target. With `.after()`, the selector expression preceding the method is the target
  *  after which the content is to be inserted. On the other hand, with `.insertAfter()`, the content precedes the method,
  *  and it is the one inserted after the target element(s).

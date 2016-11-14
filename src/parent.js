@@ -1,7 +1,7 @@
 /**
  *  Gets the immediate parent of each element in the current set of matched elements, optionally filtered by a selector.
  *
- *  This method is similar to {@link $#parents .parents()}, except .parent() only travels a single level up the DOM tree.
+ *  This method is similar to {@link $.$#parents .parents()}, except .parent() only travels a single level up the DOM tree.
  *
  *  @example
  *

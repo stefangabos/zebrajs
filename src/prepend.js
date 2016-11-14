@@ -1,10 +1,10 @@
 /**
  *  Inserts content, specified by the argument, to the beginning of each element in the set of matched elements.
  *
- *  Both this and the {@link $#prependTo .prependTo()} method perform the same task, the main difference being in the placement
- *  of the content and the target. With `.prepend()`, the selector expression preceding the method is the container into
- *  which the content is to be inserted. On the other hand, with `.prependTo()`, the content precedes the method, and it
- *  is inserted into the target container.
+ *  Both this and the {@link $.$#prependTo .prependTo()} method perform the same task, the main difference being in the
+ *  placement of the content and the target. With `.prepend()`, the selector expression preceding the method is the
+ *  container into which the content is to be inserted. On the other hand, with `.prependTo()`, the content precedes the
+ *  method, and it is inserted into the target container.
  *
  *  > If there is more than one target element, clones of the inserted element will be created for each target except for
  *  the last one. For the last target, the original item will be inserted.

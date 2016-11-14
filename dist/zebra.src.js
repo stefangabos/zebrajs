@@ -132,8 +132,8 @@
             }
 
             /**
-             *  Private helper method used by {@link $#addClas .addCLass()}, {@link $#removeClass .removeClass()} and
-             *  {@link $#toggleClass .toggleClass()} methods.
+             *  Private helper method used by {@link $.$#addClas .addCLass()}, {@link $.$#removeClass .removeClass()} and
+             *  {@link $.$#toggleClass .toggleClass()} methods.
              *
              *  @param  {string}    action      What to do with the class(es)
              *                                  <br><br>
@@ -170,9 +170,9 @@
             }
 
             /**
-             *  Private helper method used by {@link $#append .append()}, {@link $#appendTo .appendTo()}, {@link $#after .after()},
-             *  {@link $#insertAfter .insertAfter()}, {@link $#before .before()}, {@link $#insertBefore .insertBefore()},
-             *  {@link $#prepend .prepend()}, {@link $#prependTo .prependTo()} and {@link $#wrap .wrap()} methods.
+             *  Private helper method used by {@link $.$#append .append()}, {@link $.$#appendTo .appendTo()}, {@link $.$#after .after()},
+             *  {@link $.$#insertAfter .insertAfter()}, {@link $.$#before .before()}, {@link $.$#insertBefore .insertBefore()},
+             *  {@link $.$#prepend .prepend()}, {@link $.$#prependTo .prependTo()} and {@link $.$#wrap .wrap()} methods.
              *
              *  @param  {mixed}     content     Depending on the caller method this is the DOM element, text node, HTML string, or
              *                                  ZebraJS object to insert in the DOM.
@@ -252,8 +252,8 @@
             }
 
             /**
-             *  Private helper method used by {@link $#children .children()}, {@link $#siblings .siblings()}, {@link $#nexr .next()}
-             *  and {@link $#prev .prev()} methods.
+             *  Private helper method used by {@link $.$#children .children()}, {@link $.$#siblings .siblings()}, {@link $.$#nexr .next()}
+             *  and {@link $.$#prev .prev()} methods.
              *
              *  @param  {string}    action      Specified what type of elements to look for
              *                                  <br><br>
@@ -399,10 +399,10 @@
             /**
              *  Inserts content specified by the argument after each element in the set of matched elements.
              *
-             *  Both this and the {@link $#insertAfter .insertAfter()} method perform the same task, the main difference being in the
-             *  placement of the content and the target. With `.after()`, the selector expression preceding the method is the target
-             *  after which the content is to be inserted. On the other hand, with `.insertAfter()`, the content precedes the method
-             *  and it is the one inserted after the target element.
+             *  Both this and the {@link $.$#insertAfter .insertAfter()} method perform the same task, the main difference being in
+             *  the placement of the content and the target. With `.after()`, the selector expression preceding the method is the
+             *  target after which the content is to be inserted. On the other hand, with `.insertAfter()`, the content precedes the
+             *  method and it is the one inserted after the target element.
              *
              *  > Clones of the inserted element will be created after each element in the set of matched elements, except for the last
              *  one. The original item will be inserted after the last element.
@@ -454,10 +454,10 @@
             /**
              *  Inserts content, specified by the argument, to the end of each element in the set of matched elements.
              *
-             *  Both this and the {@link $#appendTo .appendTo()} method perform the same task, the main difference being in the placement
-             *  of the content and the target. With `.append()`, the selector expression preceding the method is the container into
-             *  which the content is to be inserted. On the other hand, with `.appendTo()`, the content precedes the method, and it
-             *  is inserted into the target container.
+             *  Both this and the {@link $.$#appendTo .appendTo()} method perform the same task, the main difference being in the
+             *  placement of the content and the target. With `.append()`, the selector expression preceding the method is the
+             *  container into which the content is to be inserted. On the other hand, with `.appendTo()`, the content precedes the
+             *  method, and it is inserted into the target container.
              *
              *  > If there is more than one target element, clones of the inserted element will be created for each target except for
              *  the last one. For the last target, the original item will be inserted.
@@ -505,7 +505,7 @@
             /**
              *  Inserts every element in the set of matched elements to the end of the parent element(s), specified by the argument.
              *
-             *  Both this and the {@link $#append .append()} method perform the same task, the main difference being in the placement
+             *  Both this and the {@link $.$#append .append()} method perform the same task, the main difference being in the placement
              *  of the content and the target. With `.append()`, the selector expression preceding the method is the container into
              *  which the content is to be inserted. On the other hand, with `.appendTo()`, the content precedes the method, and it
              *  is inserted into the target container.
@@ -647,10 +647,10 @@
             /**
              *  Inserts content, specified by the argument, before each element in the set of matched elements.
              *
-             *  Both this and the {@link $#insertBefore .insertBefore()} method perform the same task, the main difference being in the
-             *  placement of the content and the target. With `.before()`, the selector expression preceding the method is the target
-             *  before which the content is to be inserted. On the other hand, with `.insertBefore()`, the content precedes the method,
-             *  and it is the one inserted before the target element.
+             *  Both this and the {@link $.$#insertBefore .insertBefore()} method perform the same task, the main difference being
+             *  in the placement of the content and the target. With `.before()`, the selector expression preceding the method is
+             *  the target before which the content is to be inserted. On the other hand, with `.insertBefore()`, the content precedes
+             *  the method, and it is the one inserted before the target element.
              *
              *  > If there is more than one target element, clones of the inserted element will be created before each target except
              *  for the last one. The original item will be inserted before the last target.
@@ -1009,7 +1009,7 @@
              *  Returns the current computed **inner** height (without `padding`, `border` and `margin`) of the first element
              *  in the set of matched elements as `float`, or sets the `height` CSS property of every element in the set.
              *
-             *  See {@link $#outerHeight .outerHeight()} for getting the height including `padding`, `border` and, optionally,
+             *  See {@link $.$#outerHeight .outerHeight()} for getting the height including `padding`, `border` and, optionally,
              *  `margin`.
              *
              *  @example
@@ -1121,7 +1121,7 @@
             /**
              *  Inserts every element in the set of matched elements after the parent element(s), specified by the argument.
              *
-             *  Both this and the {@link $#after .after()} method perform the same task, the main difference being in the
+             *  Both this and the {@link $.$#after .after()} method perform the same task, the main difference being in the
              *  placement of the content and the target. With `.after()`, the selector expression preceding the method is the target
              *  after which the content is to be inserted. On the other hand, with `.insertAfter()`, the content precedes the method,
              *  and it is the one inserted after the target element(s).
@@ -1164,7 +1164,7 @@
             /**
              *  Inserts every element in the set of matched elements before the parent element(s), specified by the argument.
              *
-             *  Both this and the {@link $#before .before()} method perform the same task, the main difference being in the
+             *  Both this and the {@link $.$#before .before()} method perform the same task, the main difference being in the
              *  placement of the content and the target. With `.before()`, the selector expression preceding the method is the target
              *  before which the content is to be inserted. On the other hand, with `.insertBefore()`, the content precedes the method,
              *  and it is the one inserted before the target element(s).
@@ -1457,7 +1457,7 @@
              *
              *  > For hidden elements the returned value is `0`!
              *
-             *  See {@link $#height .height()} for getting the **inner** height without `padding`, `border` and `margin`.
+             *  See {@link $.$#height .height()} for getting the **inner** height without `padding`, `border` and `margin`.
              *
              *  @example
              *
@@ -1500,7 +1500,7 @@
              *
              *  > For hidden elements the returned value is `0`!
              *
-             *  See {@link $#width .width()} for getting the **inner** width without `padding`, `border` and `margin`.
+             *  See {@link $.$#width .width()} for getting the **inner** width without `padding`, `border` and `margin`.
              *
              *  @example
              *
@@ -1540,7 +1540,7 @@
             /**
              *  Gets the immediate parent of each element in the current set of matched elements, optionally filtered by a selector.
              *
-             *  This method is similar to {@link $#parents .parents()}, except .parent() only travels a single level up the DOM tree.
+             *  This method is similar to {@link $.$#parents .parents()}, except .parent() only travels a single level up the DOM tree.
              *
              *  @example
              *
@@ -1602,10 +1602,10 @@
             /**
              *  Inserts content, specified by the argument, to the beginning of each element in the set of matched elements.
              *
-             *  Both this and the {@link $#prependTo .prependTo()} method perform the same task, the main difference being in the placement
-             *  of the content and the target. With `.prepend()`, the selector expression preceding the method is the container into
-             *  which the content is to be inserted. On the other hand, with `.prependTo()`, the content precedes the method, and it
-             *  is inserted into the target container.
+             *  Both this and the {@link $.$#prependTo .prependTo()} method perform the same task, the main difference being in the
+             *  placement of the content and the target. With `.prepend()`, the selector expression preceding the method is the
+             *  container into which the content is to be inserted. On the other hand, with `.prependTo()`, the content precedes the
+             *  method, and it is inserted into the target container.
              *
              *  > If there is more than one target element, clones of the inserted element will be created for each target except for
              *  the last one. For the last target, the original item will be inserted.
@@ -1653,10 +1653,10 @@
             /**
              *  Inserts every element in the set of matched elements to the beginning of the parent element(s), specified by the argument.
              *
-             *  Both this and the {@link $#prepend .prepend()} method perform the same task, the main difference being in the placement
-             *  of the content and the target. With `.prepend()`, the selector expression preceding the method is the container into
-             *  which the content is to be inserted. On the other hand, with `.prependTo()`, the content precedes the method, and it
-             *  is inserted into the target container.
+             *  Both this and the {@link $.$#prepend .prepend()} method perform the same task, the main difference being in the
+             *  placement of the content and the target. With `.prepend()`, the selector expression preceding the method is the
+             *  container into which the content is to be inserted. On the other hand, with `.prependTo()`, the content precedes the
+             *  method, and it is inserted into the target container.
              *
              *  > If there is more than one target element, clones of the inserted element will be created for each target except for
              *  the last one. For the last target, the original item will be inserted.
@@ -1758,7 +1758,7 @@
              *  Use this method when you want to remove the element itself, as well as everything inside it. In addition to the elements
              *  themselves, all attached event handlers and data attributes associated with the elements are also removed.
              *
-             *  To remove the elements without removing data and event handlers, use {@link $#detach() .detach()} instead.
+             *  To remove the elements without removing data and event handlers, use {@link $.$#detach() .detach()} instead.
              *
              *  @example
              *
@@ -2152,7 +2152,7 @@
              *  Returns the current computed **inner** width (without `padding`, `border` and `margin`) of the first element
              *  in the set of matched elements as `float`, or sets the `width` CSS property of every element in the set.
              *
-             *  See {@link $#outerWidth .outerWidth()} for getting the width including `padding`, `border` and, optionally,
+             *  See {@link $.$#outerWidth .outerWidth()} for getting the width including `padding`, `border` and, optionally,
              *  `margin`.
              *
              *  @example

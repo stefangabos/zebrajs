@@ -1,7 +1,7 @@
 /**
  *  Inserts every element in the set of matched elements before the parent element(s), specified by the argument.
  *
- *  Both this and the {@link $#before .before()} method perform the same task, the main difference being in the
+ *  Both this and the {@link $.$#before .before()} method perform the same task, the main difference being in the
  *  placement of the content and the target. With `.before()`, the selector expression preceding the method is the target
  *  before which the content is to be inserted. On the other hand, with `.insertBefore()`, the content precedes the method,
  *  and it is the one inserted before the target element(s).
