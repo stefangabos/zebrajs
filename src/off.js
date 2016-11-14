@@ -50,7 +50,7 @@ this.off = function(event_type, callback) {
             if (undefined !== event_listeners[event_type])
 
                 // iterate through the registered events of this type
-                event_listeners[event_type].forEach(function(entry) {
+                event_listeners[event_type].forEach(function(entry, index) {
 
                     // if
                     if (
@@ -69,6 +69,12 @@ this.off = function(event_type, callback) {
 
                         // remove the event listener
                         element.removeEventListener(event_type, entry[3] || entry[1]);
+
+                        // remove entry from the event listeners array
+                        event_listeners[event_type].splice(index, 1);
+
+                        // if nothing left for this event type then also remove the event type's entry
+                        if (event_listeners[event_type].length === 0) delete event_listeners[event_type];
 
                         // don't look further
                         return;
