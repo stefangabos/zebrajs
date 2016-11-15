@@ -45,8 +45,30 @@ this.width = function(width) {
     // if not otherwise specified
     if (width) return this.css('width', width + (parseFloat(width) === width ? 'px' : ''));
 
-    // if "width" is not given, return the width of the first element in the set
-    // or 0 if that yields NaN
-    return parseFloat(window.getComputedStyle(elements[0], null).width) || 0;
+    // for the "window" 
+    if (this.get()[0] === window) return window.innerWith;
+
+    // for the "document"
+    if (this.get()[0] === document)
+
+        // return width
+        return Math.max(
+            document.body.offsetWidth,
+            document.body.scrollWidth,
+            document.documentElement.clientWidth,
+            document.documentElement.offsetWidth,
+            document.documentElement.scrollWidth
+        );
+
+    // get the first element's width, left/right padding and borders
+    var styles = window.getComputedStyle(elements[0]),
+        offset_width = elements[0].offsetWidth,
+        border_left_width = parseFloat(styles.borderLeftWidth),
+        border_right_width = parseFloat(styles.borderRightWidth),
+        padding_left = parseFloat(styles.paddingLeft),
+        padding_right = parseFloat(styles.paddingRight);
+
+    // return width
+    return offset_width - border_left_width - border_right_width - padding_left - padding_right;
 
 }

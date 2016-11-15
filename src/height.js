@@ -45,8 +45,30 @@ this.height = function(height) {
     // if not otherwise specified
     if (height) return this.css('height', height + (parseFloat(height) === height ? 'px' : ''));
 
-    // if "height" is not given, return the height of the first element in the set
-    // or 0 if that yields NaN
-    return parseFloat(window.getComputedStyle(elements[0], null).height) || 0;
+    // for the "window"
+    if (this.get()[0] === window) return window.innerHeight;
+
+    // for the "document"
+    if (this.get()[0] === document)
+
+        // return height
+        return Math.max(
+            document.body.offsetHeight,
+            document.body.scrollHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.offsetHeight,
+            document.documentElement.scrollHeight
+        );
+
+    // get the first element's height, top/bottom padding and borders
+    var styles = window.getComputedStyle(elements[0]),
+        offset_height = elements[0].offsetHeight,
+        border_top_width = parseFloat(styles.borderTopWidth),
+        border_bottom_width = parseFloat(styles.borderBottomWidth),
+        padding_top = parseFloat(styles.paddingTop),
+        padding_bottom = parseFloat(styles.paddingBottom);
+
+    // return height
+    return offset_height - border_bottom_width - border_top_width - padding_top - padding_bottom;
 
 }
