@@ -893,6 +893,7 @@
                                     element.zjs.data[name] = attribute.value;
 
                                 }
+
                             });
 
                         }
