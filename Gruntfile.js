@@ -126,15 +126,13 @@ module.exports = function(grunt) {
          *  https://www.npmjs.com/package/jsdoc
          **************************************************************************************************************/
         'jsdoc': {
-            build : {
-                src: ['dist/zebra.src.js'],
-                options: {
-                    destination: 'docs',
-                    template : "node_modules/docdash",
-                    configure : "jsdoc.json",
-                    readme: "Readme.md",
-                    private: true
-                }
+            src: ['dist/zebra.src.js'],
+            options: {
+                destination: 'docs',
+                template : "node_modules/docdash",
+                configure : "jsdoc.json",
+                readme: "Readme.md",
+                private: true
             }
         },
 
@@ -164,7 +162,7 @@ module.exports = function(grunt) {
         'watch': {
             library: {
                 files: ['src/**/*.js'],
-                tasks: ['includes:library', 'newer:eslint:library', 'newer:jshint:library', 'jsdoc', 'newer:uglify:library', 'uglify:site', 'includes:site', 'notify:done'],
+                tasks: ['includes:library', 'newer:eslint:library', 'newer:jshint:library', 'newer:uglify:library', 'uglify:site', 'includes:site', 'notify:done'],
                 options: {
                     livereload: true
                 }
@@ -202,17 +200,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    var tasks = [];
+    grunt.registerTask('default', ['includes:library', 'sass', 'eslint', 'jshint', 'uglify', 'includes:site', 'watch']);
 
-    tasks.push('includes:library');
-    tasks.push('sass');
-    tasks.push('eslint');
-    tasks.push('jshint');
-    tasks.push('jsdoc');
-    tasks.push('uglify');
-    tasks.push('includes:site');
-    tasks.push('watch');
-
-    grunt.registerTask('default', tasks);
+    grunt.registerTask('docs', ['jsdoc']);
 
 };
