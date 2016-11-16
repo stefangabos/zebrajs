@@ -1881,7 +1881,7 @@
              *  // to avoid DOM scanning over and over again
              *  var element = $('#selector');
              *
-             *  // remove the element, its children, and all attached event 
+             *  // remove the element, its children, and all attached event
              *  // handlers and data attributes associated with the elements
              *  element.remove();
              *
