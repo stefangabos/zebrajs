@@ -45,7 +45,7 @@ this.width = function(width) {
     // if not otherwise specified
     if (width) return this.css('width', width + (parseFloat(width) === width ? 'px' : ''));
 
-    // for the "window" 
+    // for the "window"
     if (this.get()[0] === window) return window.innerWith;
 
     // for the "document"
