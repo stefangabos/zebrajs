@@ -50,6 +50,7 @@ this.data = function(name, value) {
                         element.zjs.data[name] = attribute.value;
 
                     }
+
                 });
 
             }
