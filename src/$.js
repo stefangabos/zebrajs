@@ -12,11 +12,11 @@
 
     var
 
-        // we'll use this when generating random IDs
-        internal_counter = 0,
-
         // we'll use this to keep track of registered event listeners
-        event_listeners = {};
+        event_listeners = {},
+
+        // we'll use this when generating random IDs
+        internal_counter = 0;
 
     /**
     *  Creates a "$" object which provides methods meant for simplifying the interaction with the set of elements matched
