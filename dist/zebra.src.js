@@ -842,7 +842,31 @@
             }
 
             /**
-             *  @todo   Needs to be written!
+             *  Stores arbitrary data associated with the matched elements, or returns the value at the named data store for the
+             *  first element in the set of matched elements.
+             *
+             *  @example
+             *
+             *  // always cache selectors
+             *  // to avoid DOM scanning over and over again
+             *  var elements = $('selector');
+             *
+             *  // set some data
+             *  elements.data('foo', 'baz');
+             *
+             *  // retrieve previously set data
+             *  elements.data('foo');
+             *
+             *  // set an object as data
+             *  elements.data('foo', {bar: 'baz', qux: 2});
+             *
+             *  @param  {string}    name        A string naming the piece of data to set.
+             *
+             *  @param  {mixed}     value       The value to associate with the data set.
+             *
+             *  @return {$|mixed}   When `setting` data attributes, this method returns the set of matched elements.
+             *                      When `reading` data attributes, this method returns the stored values, or `undefined` if not data
+             *                      found for the requested key.
              */
             this.data = function(name, value) {
 
