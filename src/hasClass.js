@@ -16,8 +16,6 @@
  *  @param  {string}    class_name  The name of a class to be checked if it exists on *any* of the elements in the set
  *                                  of matched elements.
  *
- *  @todo               This method currently doesn't work on IE9
- *
  *  @return {boolean}   Returns TRUE if the sought class exists in *any* of the elements in the set of matched elements.
  */
 this.hasClass = function(class_name) {

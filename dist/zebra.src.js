@@ -385,8 +385,6 @@
              *  @param  {string}    class_name  One or more space-separated class names to be added to each element in the
              *                                  set of matched elements.
              *
-             *  @todo               This method currently doesn't work on IE9
-             *
              *  @return {$}         Returns the set of matched elements.
              */
             this.addClass = function(class_name) {
@@ -1086,8 +1084,6 @@
              *
              *  @param  {string}    class_name  The name of a class to be checked if it exists on *any* of the elements in the set
              *                                  of matched elements.
-             *
-             *  @todo               This method currently doesn't work on IE9
              *
              *  @return {boolean}   Returns TRUE if the sought class exists in *any* of the elements in the set of matched elements.
              */
@@ -1994,8 +1990,6 @@
              *  @param  {string}    class_name  One or more space-separated class names to be removed from each element in
              *                                  the set of matched elements.
              *
-             *  @todo               This method currently doesn't work on IE9
-             *
              *  @return {$}         Returns the set of matched elements.
              */
             this.removeClass = function(class_name) {
@@ -2164,8 +2158,6 @@
              *
              *  @param  {string}    class_name  One or more space-separated class names to be toggled for each element in the set of
              *                                  matched elements.
-             *
-             *  @todo               This method currently doesn't work on IE9
              *
              *  @return {$}         Returns the set of matched elements.
              */

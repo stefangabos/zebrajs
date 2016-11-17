@@ -1,6 +1,6 @@
 # ZebraJS
 
-A modular JavaScript micro-library for modern browsers (IE 9+) meant to simplify the interaction with the DOM in the *post-jQuery* world, now that there are there are less and less differences between how browsers handle various JavaScript-related aspects and offer native support for most of the things that [jQuery](http://jquery.com/) had to tackle and take care for us, behind the scenes, since its first release [back in 2006](https://en.wikipedia.org/wiki/JQuery).
+A modular JavaScript micro-library for modern browsers (IE 10+) meant to simplify the interaction with the DOM in the *post-jQuery* world, now that there are there are less and less differences between how browsers handle various JavaScript-related aspects and offer native support for most of the things that [jQuery](http://jquery.com/) had to tackle and take care for us, behind the scenes, since its first release [back in 2006](https://en.wikipedia.org/wiki/JQuery).
 
 Nevertheless, the need for a library to handle common tasks needed when interacting with the DOM becomes obvious for anyone writing JavaScript on a daily basis, as there's quite some code to write to handle various aspects of DOM manipulation.
 

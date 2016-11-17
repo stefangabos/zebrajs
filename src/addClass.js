@@ -19,8 +19,6 @@
  *  @param  {string}    class_name  One or more space-separated class names to be added to each element in the
  *                                  set of matched elements.
  *
- *  @todo               This method currently doesn't work on IE9
- *
  *  @return {$}         Returns the set of matched elements.
  */
 this.addClass = function(class_name) {
