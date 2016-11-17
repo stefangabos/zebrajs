@@ -162,7 +162,7 @@ module.exports = function(grunt) {
         'watch': {
             library: {
                 files: ['src/**/*.js'],
-                tasks: ['includes:library', 'newer:eslint:library', 'newer:jshint:library', 'newer:uglify:library', 'uglify:site', 'includes:site', 'notify:done'],
+                tasks: ['includes:library', 'newer:eslint:library', 'newer:jshint:library', 'jsdoc', 'newer:uglify:library', 'uglify:site', 'includes:site', 'notify:done'],
                 options: {
                     livereload: true
                 }
@@ -200,8 +200,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['includes:library', 'sass', 'eslint', 'jshint', 'uglify', 'includes:site', 'watch']);
-
-    grunt.registerTask('docs', ['jsdoc']);
+    grunt.registerTask('default', ['includes:library', 'sass', 'eslint', 'jshint', 'jsdoc', 'uglify', 'includes:site', 'watch']);
 
 };
