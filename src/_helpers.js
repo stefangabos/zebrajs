@@ -37,6 +37,53 @@ this._class = function(action, class_names) {
 }
 
 /**
+ *  Private helper method used by {@link $.$#clone .clone()} method when called with the `deep_with_data_and_events`
+ *  argument set to TRUE. It recursivelly attached events and data from an original element's children to it's clone children.
+ *
+ *  @param  {DOM_element}   element     Element that was cloned
+ *
+ *  @param  {DOM_element}   clone       Clone of the element
+ *
+ *  @return {void}
+ *
+ *  @access private
+ */
+this._clone_data_and_events = function(element, clone) {
+
+    // get the original element's and the clone's children
+    var elements = Array.prototype.slice.call(element.children),
+        clones = Array.prototype.slice.call(clone.children);
+
+    // if the original element's has any children
+    if (elements && elements.length)
+
+        // iterate over the original element's children
+        elements.forEach(function(element, index) {
+
+            // iterate over all the existing event listeners
+            Object.keys(event_listeners).forEach(function(event_type) {
+
+                // iterate over the events of current type
+                event_listeners[event_type].forEach(function(properties) {
+
+                    // if this is an event attached to element we've just cloned
+                    if (properties[0] === element)
+
+                        // also add the event to the clone element
+                        $(clones[index]).on(event_type + (properties[2] ? '.' + properties[2] : ''), properties[1]);
+
+                });
+
+            });
+
+            // recursivelly attach events to children's children
+            $this._clone_data_and_events(element, clones[index]);
+
+        });
+
+}
+
+/**
  *  Private helper method used by {@link $.$#append .append()}, {@link $.$#appendTo .appendTo()}, {@link $.$#after .after()},
  *  {@link $.$#insertAfter .insertAfter()}, {@link $.$#before .before()}, {@link $.$#insertBefore .insertBefore()},
  *  {@link $.$#prepend .prepend()}, {@link $.$#prependTo .prependTo()} and {@link $.$#wrap .wrap()} methods.

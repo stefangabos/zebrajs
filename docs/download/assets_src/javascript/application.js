@@ -21,6 +21,7 @@ $(document).ready(function() {
             'appendTo':     ['_dom_insert'],
             'before':       ['_dom_insert'],
             'children':     ['_dom_search', '_random'],
+            'clone':        ['_clone_data_and_events'],
             'height':       ['css'],
             'insertAfter':  ['_dom_insert'],
             'insertBefore': ['_dom_insert'],
