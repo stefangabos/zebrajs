@@ -1111,8 +1111,11 @@
              *  // to avoid DOM scanning over and over again
              *  var element = $('#selector');
              *
-             *  // get find the element's div descendants
+             *  // find the element's div descendants
              *  var target = element.find('div');
+             *
+             *  // this is equivalent with the above
+             *  var target = $('div', element);
              *
              *  // chaining
              *  element.find('div').addClass('foo');
