@@ -200,10 +200,16 @@
                             event_listeners[event_type].forEach(function(properties) {
 
                                 // if this is an event attached to element we've just cloned
-                                if (properties[0] === element)
+                                if (properties[0] === element) {
 
                                     // also add the event to the clone element
                                     $(clones[index]).on(event_type + (properties[2] ? '.' + properties[2] : ''), properties[1]);
+
+                                    // clone data
+                                    clones[index].zjs = {};
+                                    clones[index].zjs.data = element.zjs.data;
+
+                                }
 
                             });
 
@@ -782,6 +788,9 @@
              *  > This method may lead to duplicate element IDs in a document. Where possible, it is recommended to avoid cloning
              *  elements with this attribute or using class attributes as identifiers instead.
              *
+             *  Element data will continue to be shared between the cloned and the original element. To deep copy all data, copy each
+             *  one manually.
+             *
              *  @param  {boolean}   with_data_and_events        Setting this argument to `true` will instruct the method to also copy
              *                                                  event handlers and element data along with the elements.
              *
@@ -813,10 +822,16 @@
                             event_listeners[event_type].forEach(function(properties) {
 
                                 // if this is an event attached to element we've just cloned
-                                if (with_data_and_events && properties[0] === element)
+                                if (with_data_and_events && properties[0] === element) {
 
                                     // also add the event to the clone element
                                     $(clone).on(event_type + (properties[2] ? '.' + properties[2] : ''), properties[1]);
+
+                                    // clone data
+                                    clone.zjs = {};
+                                    clone.zjs.data = element.zjs.data;
+
+                                }
 
                             });
 
