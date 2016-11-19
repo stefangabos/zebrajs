@@ -33,6 +33,8 @@
         // if called without the "new" keyword
         if (!(this instanceof $)) {
 
+            if (selector === 'body') selector = document.body;
+
             // if selector is given as a string
             if (typeof selector === 'string') {
 
