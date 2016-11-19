@@ -67,10 +67,16 @@ this._clone_data_and_events = function(element, clone) {
                 event_listeners[event_type].forEach(function(properties) {
 
                     // if this is an event attached to element we've just cloned
-                    if (properties[0] === element)
+                    if (properties[0] === element) {
 
                         // also add the event to the clone element
                         $(clones[index]).on(event_type + (properties[2] ? '.' + properties[2] : ''), properties[1]);
+
+                        // clone data
+                        clones[index].zjs = {};
+                        clones[index].zjs.data = element.zjs.data;
+
+                    }
 
                 });
 
