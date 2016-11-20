@@ -850,9 +850,54 @@
             }
 
             /**
-             *  @todo   Needs to be written!
+             *  For each element in the set, get the first element that matches the selector by traversing up through its ancestors
+             *  in the DOM tree.
+             *
+             *  Given a ZebraJS object that represents a set of DOM elements, this method searches through the ancestors of these
+             *  elements in the DOM tree and constructs a new ZebraJS object from the matching elements.
+             *
+             *  @example
+             *
+             *  // always cache selectors
+             *  // to avoid DOM scanning over and over again
+             *  var element = $('#selector');
+             *
+             *  // get the first parent that is a div
+             *  var closest = element.closest('div');
+             *
+             *  // chaining
+             *  element.closest('div').addClass('foo');
+             *
+             *  @param  {string}    selector    If the selector is supplied, the parents will be filtered by testing whether they
+             *                                  match it.
+             *
+             *  @return {$}         Returns zero or one element for each element in the original set, as a ZebraJS object
              */
-            this.closest = function() {
+            this.closest = function(selector) {
+
+                var result = [];
+
+                // iterate through the set of matched elements
+                elements.forEach(function(element) {
+
+                    // unless we got to the root of the DOM, get the element's parent
+                    while (!((element = element.parentNode) instanceof Document))
+
+                        // if selector was specified and element matches it, don't look any further
+                        if (element.matches(selector)) {
+
+                            // if not already in the array, add parent to the results array
+                            if (result.indexOf(element) === -1) result.push(element);
+
+                            // don't look any further
+                            break;
+
+                        }
+
+                });
+
+                // return the matched elements, as a ZebraJS object
+                return $(result);
 
             }
 
@@ -1848,6 +1893,21 @@
              *
              *  This method is similar to {@link $.$#parent .parent()}, except .parent() only travels a single level up the DOM tree,
              *  while this method travels all the way up to the DOM root.
+             *
+             *  @example
+             *
+             *  // always cache selectors
+             *  // to avoid DOM scanning over and over again
+             *  var element = $('#selector');
+             *
+             *  // get *all* the element's parent
+             *  var parents = element.parents();
+             *
+             *  // get all the element's parent until the first div (including also that first div)
+             *  var parents = element.parents('div');
+             *
+             *  // chaining
+             *  element.parents('div').addClass('foo');
              *
              *  @param  {string}    selector    If the selector is supplied, the parents will be filtered by testing whether they
              *                                  match it.
