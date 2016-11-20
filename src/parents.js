@@ -9,6 +9,21 @@
  *  This method is similar to {@link $.$#parent .parent()}, except .parent() only travels a single level up the DOM tree,
  *  while this method travels all the way up to the DOM root.
  *
+ *  @example
+ *
+ *  // always cache selectors
+ *  // to avoid DOM scanning over and over again
+ *  var element = $('#selector');
+ *
+ *  // get *all* the element's parent
+ *  var parents = element.parents();
+ *
+ *  // get all the element's parent until the first div (including also that first div)
+ *  var parents = element.parents('div');
+ *
+ *  // chaining
+ *  element.parents('div').addClass('foo');
+ *
  *  @param  {string}    selector    If the selector is supplied, the parents will be filtered by testing whether they
  *                                  match it.
  *
