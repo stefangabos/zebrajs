@@ -11,7 +11,7 @@
  *  // to avoid DOM scanning over and over again
  *  var element = $('#selector');
  *
- *  // handle clicks on element 
+ *  // handle clicks on element
  *  element.on('click', function(e) {
  *
  *      // will return "undefined" when element is clicked

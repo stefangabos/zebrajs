@@ -7,7 +7,7 @@
  *  have a name attribute. Values from checkboxes and radio buttons (inputs of type "radio" or "checkbox") are included
  *  only if they are checked. Data from file select elements is not serialized.
  *
- *  This method creates a text string in standard URL-encoded notation. 
+ *  This method creates a text string in standard URL-encoded notation.
  *
  *  @example
  *
