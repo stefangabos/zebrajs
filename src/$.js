@@ -124,6 +124,28 @@
                 // the set of matched elements
                 elements = (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window ? [selector] : [].concat(selector));
 
+            // for browsers that do not support Element.matches() or Element.matchesSelector(), but carry support for
+            // document.querySelectorAll(), a polyfill exists:
+            if (!Element.prototype.matches)
+
+                Element.prototype.matches =
+
+                    Element.prototype.matchesSelector ||
+                    Element.prototype.mozMatchesSelector ||
+                    Element.prototype.msMatchesSelector ||
+                    Element.prototype.oMatchesSelector ||
+                    Element.prototype.webkitMatchesSelector ||
+
+                    function(s) {
+                        var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+                            i = matches.length;
+
+                        while (--i >= 0 && matches.item(i) !== this) {}
+
+                        return i > -1;
+
+                    };
+
             /**
              *  @todo   Needs documentation!
              *
