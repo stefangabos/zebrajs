@@ -13,6 +13,18 @@
  *  Element data will continue to be shared between the cloned and the original element. To deep copy all data, copy each
  *  one manually.
  *
+ *  @example
+ *
+ *  // always cache selectors
+ *  // to avoid DOM scanning over and over again
+ *  var element = $('#selector');
+ *
+ *  // clone element with data and events, including data and events of children
+ *  var clones = element.clone(true, true)
+ *
+ *  // chaining - clone and insert into the body element
+ *  element.clone(true, true).appendTo($('body'));
+ *
  *  @param  {boolean}   with_data_and_events        Setting this argument to `true` will instruct the method to also copy
  *                                                  event handlers and element data along with the elements.
  *
