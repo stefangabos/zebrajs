@@ -158,7 +158,6 @@
             // import "hasClass.js"
             // import "height.js"
             // import "html.js"
-            // import "inArray.js"
             // import "insertAfter.js"
             // import "insertBefore.js"
             // import "next.js"
@@ -192,6 +191,8 @@
             return elements;
 
         }
+
+    // import "inArray.js"
 
     // for browsers that do not support Element.matches() or Element.matchesSelector(), but carry support for
     // document.querySelectorAll(), a polyfill exists:
