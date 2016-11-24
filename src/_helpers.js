@@ -1,6 +1,6 @@
 /**
- *  Private helper method used by {@link $.$#addClass .addCLass()}, {@link $.$#removeClass .removeClass()} and
- *  {@link $.$#toggleClass .toggleClass()} methods.
+ *  Private helper method used by {@link ZebraJS#addClass .addCLass()}, {@link ZebraJS#removeClass .removeClass()} and
+ *  {@link ZebraJS#toggleClass .toggleClass()} methods.
  *
  *  @param  {string}    action      What to do with the class(es)
  *                                  <br><br>
@@ -9,11 +9,11 @@
  *  @param  {string}    class_names One or more space-separated class names to be added/removed/toggled for each element
  *                                  in the set of matched elements.
  *
- *  @return {$}     Returns the set of matched elements (the parents, not the appended elements), for chaining.
+ *  @return {ZebraJS}   Returns the set of matched elements (the parents, not the appended elements), for chaining.
  *
  *  @access private
  */
-this._class = function(action, class_names) {
+elements._class = function(action, class_names) {
 
     // split by space and create an array
     class_names = class_names.split(' ');
@@ -32,13 +32,14 @@ this._class = function(action, class_names) {
     });
 
     // return the set of matched elements, for chaining
-    return $this;
+    return elements;
 
 }
 
 /**
- *  Private helper method used by {@link $.$#clone .clone()} method when called with the `deep_with_data_and_events`
- *  argument set to TRUE. It recursivelly attached events and data from an original element's children to it's clone children.
+ *  Private helper method used by {@link ZebraJS#clone .clone()} method when called with the `deep_with_data_and_events`
+ *  argument set to TRUE. It recursivelly attached events and data from an original element's children to it's clone
+ *  children.
  *
  *  @param  {DOM_element}   element     Element that was cloned
  *
@@ -48,7 +49,7 @@ this._class = function(action, class_names) {
  *
  *  @access private
  */
-this._clone_data_and_events = function(element, clone) {
+elements._clone_data_and_events = function(element, clone) {
 
     // get the original element's and the clone's children
     var elements = Array.prototype.slice.call(element.children),
@@ -83,54 +84,40 @@ this._clone_data_and_events = function(element, clone) {
             });
 
             // recursivelly attach events to children's children
-            $this._clone_data_and_events(element, clones[index]);
+            elements._clone_data_and_events(element, clones[index]);
 
         });
 
 }
 
 /**
- *  Private helper method used by {@link $.$#append .append()}, {@link $.$#appendTo .appendTo()}, {@link $.$#after .after()},
- *  {@link $.$#insertAfter .insertAfter()}, {@link $.$#before .before()}, {@link $.$#insertBefore .insertBefore()},
- *  {@link $.$#prepend .prepend()}, {@link $.$#prependTo .prependTo()} and {@link $.$#wrap .wrap()} methods.
+ *  Private helper method used by {@link ZebraJS#append .append()}, {@link ZebraJS#appendTo .appendTo()},
+ *  {@link ZebraJS#after .after()}, {@link ZebraJS#insertAfter .insertAfter()}, {@link ZebraJS#before .before()},
+ *  {@link ZebraJS#insertBefore .insertBefore()}, {@link ZebraJS#prepend .prepend()}, {@link ZebraJS#prependTo .prependTo()}
+ *  and {@link ZebraJS#wrap .wrap()} methods.
  *
  *  @param  {mixed}     content     Depending on the caller method this is the DOM element, text node, HTML string, or
- *                                  ZebraJS object to insert in the DOM.
+ *                                  {@link ZebraJS} object to insert in the DOM.
  *
  *  @param  {string}    where       Indicated where the content should be inserted, relative to the set of matched elements.
  *                                  <br><br>
  *                                  Possible values are `after`, `append`, `before`, `prepend` and `wrap`.
  *
- *  @return {$}     Returns the set of matched elements (the parents, not the appended elements), for chaining.
+ *  @return {ZebraJS}   Returns the set of matched elements (the parents, not the appended elements), for chaining.
  *
  *  @access private
  */
-this._dom_insert = function(content, where) {
+elements._dom_insert = function(content, where) {
 
-    // if element to append is an $ object, we'll use the array of DOM elements
-    if (content instanceof $) content = content.get();
-
-    // if content to append is a DOM element or a text node, wrap it in an array
-    else if (content instanceof Element || content instanceof Text) content = [content];
-
-    // if action is "wrap" and content is given as a string, wrap it in a ZebraJS object
-    else if ((where === 'wrap' || where === 'replace') && typeof content === 'string') content = $(content).get();
-
-    // if content to append is not a string, don't go further
-    else if (typeof content !== 'string') return false;
+    // make a ZebraJS object out of whatever given as content
+    content = $(content);
 
     // iterate through the set of matched elements
     elements.forEach(function(element) {
 
-        // if content to append is a string (plain text or HTML)
-        if (typeof content === 'string')
-
-            // insert content like this
-            element.insertAdjacentHTML((where === 'append' ? 'before' : 'after') + (where === 'before' || where === 'prepend' ? 'begin' : 'end'), content);
-
         // since content is an array of DOM elements or text nodes
         // iterate over the array
-        else content.forEach(function(item, index) {
+        content.forEach(function(item, index) {
 
             // where the content needs to be moved in the DOM
             switch (where) {
@@ -167,13 +154,13 @@ this._dom_insert = function(content, where) {
     });
 
     // return the set of matched elements, for chaining
-    return $this;
+    return elements;
 
 }
 
 /**
- *  Private helper method used by {@link $.$#children .children()}, {@link $.$#siblings .siblings()}, {@link $.$#nexr .next()}
- *  and {@link $.$#prev .prev()} methods.
+ *  Private helper method used by {@link ZebraJS#children .children()}, {@link ZebraJS#siblings .siblings()},
+ *  {@link ZebraJS#nexr .next()} and {@link ZebraJS#prev .prev()} methods.
  *
  *  @param  {string}    action      Specified what type of elements to look for
  *                                  <br><br>
@@ -182,11 +169,11 @@ this._dom_insert = function(content, where) {
  *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
  *                                  match it.
  *
- *  @return {$}     Returns the found elements, as a ZebraJS object
+ *  @return {ZebraJS}   Returns the found elements, as a ZebraJS object
  *
  *  @access private
  */
-this._dom_search = function(action, selector) {
+elements._dom_search = function(action, selector) {
 
     var result = [], remove_id, root, tmp;
 
@@ -206,7 +193,7 @@ this._dom_search = function(action, selector) {
 
             // if the root element doesn't have an ID,
             // generate and set a random ID for the element's parent node
-            if (null === root.getAttribute('id')) root.setAttribute('id', $this._random('id'));
+            if (null === root.getAttribute('id')) root.setAttribute('id', elements._random('id'));
 
             // set this flag so that we know to remove the randomly generated ID when we're done
             remove_id = true;
@@ -275,7 +262,7 @@ this._dom_search = function(action, selector) {
  *
  *  @access private
  */
-this._random = function(prefix) {
+elements._random = function(prefix) {
 
     // if the internal counter is too large, reset it
     if (internal_counter > Number.MAX_VALUE) internal_counter = 0;
