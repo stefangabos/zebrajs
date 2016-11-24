@@ -1,7 +1,6 @@
 /**
  *
  *  @fileOverview
- *  @name       ZebraJS
  *  @author     Stefan Gabos <contact@stefangabos.ro>
  *  @version    1.0.0
  *  @copyright  (c) 2016 Stefan Gabos
@@ -10,150 +9,107 @@
  */
 (function() {
 
+    'use strict';
+
     var
 
         // we'll use this to keep track of registered event listeners
         event_listeners = {},
 
         // we'll use this when generating random IDs
-        internal_counter = 0;
+        internal_counter = 0,
 
-    /**
-    *  Creates a "$" object which provides methods meant for simplifying the interaction with the set of elements matched
-    *  by the `selector` argument. This is refered to as `wrapping` those elements.
-    *
-    *  @memberof $
-    *  @param  {string|object|node}    selector
-    *  @class
-    */
-    $ = function(selector, parent, first_only) {
+        // this is the function used internally create ZebraJS objects using the given arguments
+        // at the end of this file we give it a simpler name, like "$", but internally we'll use it like it is
 
-        'use strict';
+        /**
+        *   Creates a "$" object which provides methods meant for simplifying the interaction with the set of elements matched
+        *   by the `selector` argument. This is refered to as `wrapping` those elements.
+        *
+        *   @param  {string|object|node}    selector
+        *
+        *   @alias ZebraJS
+        *   @class
+        *   @static
+        */
+        $ = function(selector, parent, first_only) {
 
-        // if called without the "new" keyword
-        if (!(this instanceof $)) {
+            var elements = [];
 
+            // if selector is given as the string 'body', refer to document.body node
             if (selector === 'body') selector = document.body;
 
             // if selector is given as a string
-            if (typeof selector === 'string') {
+            if (typeof selector === 'string')
 
-                // if we called the method to *create* an HTML node
+                // if it seems that we want to *create* an HTML node
                 if (selector.indexOf('<') === 0) {
 
                     // create a dummy container
                     parent = document.createElement('div');
 
-                    // set its body to the string
+                    // set its body to the selector string
                     parent.innerHTML = selector;
 
-                    // create and return an $ object
-                    return new $(parent.firstChild);
+                    // add created node to the elements array
+                    elements.push(parent.firstChild);
+
+                // if we want to select elements
+                } else {
+
+                    // if parent is not given, consider "document" to be the parent
+                    if (!parent) parent = document;
+
+                    // if parent is set and is a ZebraJS object, refer to the first DOM element from the set instead
+                    else if (parent.version) parent = parent[0];
+
+                    // if the selector is an ID
+                    // select the matching element and add it to the elements array
+                    if (selector.match(/^\#[^\s]+$/)) elements.push(parent.getElementById(selector.substr(1)));
+
+                    // if the "first_only" argument is set
+                    else if (first_only)
+
+                        // try
+                        try {
+
+                            // select the matching element and add it to the elements array
+                            elements.push(parent.querySelector(selector));
+
+                        // if something went wrong (not a valid CSS selector)
+                        } catch (e) {}
+
+                    // if the "first" argument is not set
+                    else
+
+                        // try
+                        try {
+
+                            // select the matching elements and create and add the to the elements array
+                            elements = elements.concat(Array.prototype.slice.call(parent.querySelectorAll(selector)));
+
+                        // if something went wrong (not a valid CSS selector)
+                        } catch (e) {}
 
                 }
 
-                // if parent is not given, consider "document" to be the parent
-                if (!parent) parent = document;
+            // if selector is the Document object, a DOM node, the Window object or a text node OR
+            else if (typeof selector === 'object' && (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window))
 
-                // if parent is set but is a "$" object, refer to the DOM elements instead of the "$" object
-                else if (parent instanceof $) parent = parent.get(0);
+                // add it to the elements array
+                elements.push(selector);
 
-                // if the selector is an ID
-                // select the matching element and create and return a new "$" object
-                if (selector.match(/^\#[^\s]+$/)) return new $(parent.getElementById(selector.substr(1)));
+            // if selector is a NodeList (returned by document.querySelectorAll), add items to the elements array
+            else if (selector instanceof NodeList) elements = elements.concat(Array.prototype.slice.call(selector));
 
-                // if the "first_only" argument is set
-                else if (first_only)
+            // if selector is an array of DOM elements, add them to the elements array
+            else if (Array.isArray(selector)) elements = elements.concat(selector);
 
-                    // try
-                    try {
+            // if the selector is a ZebraJS object, simply return it
+            else if (selector.version) return selector;
 
-                        // select the matching element and create and return a new "$" object
-                        return new $(parent.querySelector(selector));
-
-                    // if something went wrong (not a valid CSS selector)
-                    } catch (e) {
-
-                        // return false
-                        return false;
-
-                    }
-
-                // otherwise
-                try {
-
-                    // select the matching elements and create and return a new "$" object
-                    return new $(Array.prototype.slice.call(parent.querySelectorAll(selector)));
-
-                // if something went wrong (not a valid CSS selector)
-                } catch (e) {
-
-                    // return false
-                    return false;
-
-                }
-
-            // if
-            } else if (
-
-                // selector is the Document object, a DOM node, the Window object or a text node OR
-                (typeof selector === 'object' && (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window)) ||
-
-                // an array of DOM elements
-                Array.isArray(selector)
-
-            // return the new "$" object
-            ) return new $(selector);
-
-            // if we're calling $() on an "$" object, simply return the original object
-            else if (selector instanceof $) return selector;
-
-            // bogus selector, return false
-            return false;
-
-        // if called with the "new" keyword
-        } else {    // eslint-disable-line no-else-return
-
-            // if no elements found, return now
-            if (!selector) return;
-
-            // private properties
-            // reference to the "$" object
-            var $this = this,
-
-                // the set of matched elements
-                elements = (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window ? [selector] : [].concat(selector));
-
-            // for browsers that do not support Element.matches() or Element.matchesSelector(), but carry support for
-            // document.querySelectorAll(), a polyfill exists:
-            if (!Element.prototype.matches)
-
-                Element.prototype.matches =
-
-                    Element.prototype.matchesSelector ||
-                    Element.prototype.mozMatchesSelector ||
-                    Element.prototype.msMatchesSelector ||
-                    Element.prototype.oMatchesSelector ||
-                    Element.prototype.webkitMatchesSelector ||
-
-                    function(s) {
-                        var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-                            i = matches.length;
-
-                        while (--i >= 0 && matches.item(i) !== this) {}
-
-                        return i > -1;
-
-                    };
-
-            /**
-             *  @todo   Needs documentation!
-             *
-             *  @access public
-             */
-            this.get = function(index) {
-                return index !== undefined ? elements[index] : elements;
-            }
+            // we'll use this property to determine if an array is a ZebraJS "object"
+            elements.version = '1.0.0';
 
             // import "_helpers.js"
             // import "addClass.js"
@@ -167,6 +123,7 @@
             // import "clone.js"
             // import "closest.js"
             // import "css.js"
+            // import "get.js"
             // import "data.js"
             // import "each.js"
             // import "find.js"
@@ -205,8 +162,32 @@
             // import "width.js"
             // import "wrap.js"
 
+            return elements;
+
         }
 
-    }
+    // for browsers that do not support Element.matches() or Element.matchesSelector(), but carry support for
+    // document.querySelectorAll(), a polyfill exists:
+    if (!Element.prototype.matches)
+
+        Element.prototype.matches =
+
+            Element.prototype.matchesSelector ||
+            Element.prototype.mozMatchesSelector ||
+            Element.prototype.msMatchesSelector ||
+            Element.prototype.oMatchesSelector ||
+            Element.prototype.webkitMatchesSelector ||
+
+            function(s) {
+                var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+                    i = matches.length;
+
+                while (--i >= 0 && matches.item(i) !== this) {}
+
+                return i > -1;
+
+            };
+
+    window.$ = $;
 
 })();
