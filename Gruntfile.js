@@ -96,7 +96,6 @@ module.exports = function(grunt) {
                 asi:        true,       //  suppresses warnings about missing semicolons
                 globals: {              //  white list of global variables that are not formally defined in the source code
                     '$':                true,
-                    '$this':            true,
                     'alert':            true,
                     'console':          true,
                     'elements':         true,

@@ -1,7 +1,6 @@
 /**
  *
  *  @fileOverview
- *  @name       ZebraJS
  *  @author     Stefan Gabos <contact@stefangabos.ro>
  *  @version    1.0.0
  *  @copyright  (c) 2016 Stefan Gabos
@@ -10,154 +9,111 @@
  */
 (function() {
 
+    'use strict';
+
     var
 
         // we'll use this to keep track of registered event listeners
         event_listeners = {},
 
         // we'll use this when generating random IDs
-        internal_counter = 0;
+        internal_counter = 0,
 
-    /**
-    *  Creates a "$" object which provides methods meant for simplifying the interaction with the set of elements matched
-    *  by the `selector` argument. This is refered to as `wrapping` those elements.
-    *
-    *  @memberof $
-    *  @param  {string|object|node}    selector
-    *  @class
-    */
-    $ = function(selector, parent, first_only) {
+        // this is the function used internally create ZebraJS objects using the given arguments
+        // at the end of this file we give it a simpler name, like "$", but internally we'll use it like it is
 
-        'use strict';
+        /**
+        *   Creates a "$" object which provides methods meant for simplifying the interaction with the set of elements matched
+        *   by the `selector` argument. This is refered to as `wrapping` those elements.
+        *
+        *   @param  {string|object|node}    selector
+        *
+        *   @alias ZebraJS
+        *   @class
+        *   @static
+        */
+        $ = function(selector, parent, first_only) {
 
-        // if called without the "new" keyword
-        if (!(this instanceof $)) {
+            var elements = [];
 
+            // if selector is given as the string 'body', refer to document.body node
             if (selector === 'body') selector = document.body;
 
             // if selector is given as a string
-            if (typeof selector === 'string') {
+            if (typeof selector === 'string')
 
-                // if we called the method to *create* an HTML node
+                // if it seems that we want to *create* an HTML node
                 if (selector.indexOf('<') === 0) {
 
                     // create a dummy container
                     parent = document.createElement('div');
 
-                    // set its body to the string
+                    // set its body to the selector string
                     parent.innerHTML = selector;
 
-                    // create and return an $ object
-                    return new $(parent.firstChild);
+                    // add created node to the elements array
+                    elements.push(parent.firstChild);
+
+                // if we want to select elements
+                } else {
+
+                    // if parent is not given, consider "document" to be the parent
+                    if (!parent) parent = document;
+
+                    // if parent is set and is a ZebraJS object, refer to the first DOM element from the set instead
+                    else if (parent.version) parent = parent[0];
+
+                    // if the selector is an ID
+                    // select the matching element and add it to the elements array
+                    if (selector.match(/^\#[^\s]+$/)) elements.push(parent.getElementById(selector.substr(1)));
+
+                    // if the "first_only" argument is set
+                    else if (first_only)
+
+                        // try
+                        try {
+
+                            // select the matching element and add it to the elements array
+                            elements.push(parent.querySelector(selector));
+
+                        // if something went wrong (not a valid CSS selector)
+                        } catch (e) {}
+
+                    // if the "first" argument is not set
+                    else
+
+                        // try
+                        try {
+
+                            // select the matching elements and create and add the to the elements array
+                            elements = elements.concat(Array.prototype.slice.call(parent.querySelectorAll(selector)));
+
+                        // if something went wrong (not a valid CSS selector)
+                        } catch (e) {}
 
                 }
 
-                // if parent is not given, consider "document" to be the parent
-                if (!parent) parent = document;
+            // if selector is the Document object, a DOM node, the Window object or a text node OR
+            else if (typeof selector === 'object' && (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window))
 
-                // if parent is set but is a "$" object, refer to the DOM elements instead of the "$" object
-                else if (parent instanceof $) parent = parent.get(0);
+                // add it to the elements array
+                elements.push(selector);
 
-                // if the selector is an ID
-                // select the matching element and create and return a new "$" object
-                if (selector.match(/^\#[^\s]+$/)) return new $(parent.getElementById(selector.substr(1)));
+            // if selector is a NodeList (returned by document.querySelectorAll), add items to the elements array
+            else if (selector instanceof NodeList) elements = elements.concat(Array.prototype.slice.call(selector));
 
-                // if the "first_only" argument is set
-                else if (first_only)
+            // if selector is an array of DOM elements, add them to the elements array
+            else if (Array.isArray(selector)) elements = elements.concat(selector);
 
-                    // try
-                    try {
+            // if the selector is a ZebraJS object, simply return it
+            else if (selector.version) return selector;
 
-                        // select the matching element and create and return a new "$" object
-                        return new $(parent.querySelector(selector));
-
-                    // if something went wrong (not a valid CSS selector)
-                    } catch (e) {
-
-                        // return false
-                        return false;
-
-                    }
-
-                // otherwise
-                try {
-
-                    // select the matching elements and create and return a new "$" object
-                    return new $(Array.prototype.slice.call(parent.querySelectorAll(selector)));
-
-                // if something went wrong (not a valid CSS selector)
-                } catch (e) {
-
-                    // return false
-                    return false;
-
-                }
-
-            // if
-            } else if (
-
-                // selector is the Document object, a DOM node, the Window object or a text node OR
-                (typeof selector === 'object' && (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window)) ||
-
-                // an array of DOM elements
-                Array.isArray(selector)
-
-            // return the new "$" object
-            ) return new $(selector);
-
-            // if we're calling $() on an "$" object, simply return the original object
-            else if (selector instanceof $) return selector;
-
-            // bogus selector, return false
-            return false;
-
-        // if called with the "new" keyword
-        } else {    // eslint-disable-line no-else-return
-
-            // if no elements found, return now
-            if (!selector) return;
-
-            // private properties
-            // reference to the "$" object
-            var $this = this,
-
-                // the set of matched elements
-                elements = (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window ? [selector] : [].concat(selector));
-
-            // for browsers that do not support Element.matches() or Element.matchesSelector(), but carry support for
-            // document.querySelectorAll(), a polyfill exists:
-            if (!Element.prototype.matches)
-
-                Element.prototype.matches =
-
-                    Element.prototype.matchesSelector ||
-                    Element.prototype.mozMatchesSelector ||
-                    Element.prototype.msMatchesSelector ||
-                    Element.prototype.oMatchesSelector ||
-                    Element.prototype.webkitMatchesSelector ||
-
-                    function(s) {
-                        var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-                            i = matches.length;
-
-                        while (--i >= 0 && matches.item(i) !== this) {}
-
-                        return i > -1;
-
-                    };
+            // we'll use this property to determine if an array is a ZebraJS "object"
+            elements.version = '1.0.0';
 
             /**
-             *  @todo   Needs documentation!
-             *
-             *  @access public
-             */
-            this.get = function(index) {
-                return index !== undefined ? elements[index] : elements;
-            }
-
-            /**
-             *  Private helper method used by {@link $.$#addClass .addCLass()}, {@link $.$#removeClass .removeClass()} and
-             *  {@link $.$#toggleClass .toggleClass()} methods.
+             *  Private helper method used by {@link ZebraJS#addClass .addCLass()}, {@link ZebraJS#removeClass .removeClass()} and
+             *  {@link ZebraJS#toggleClass .toggleClass()} methods.
              *
              *  @param  {string}    action      What to do with the class(es)
              *                                  <br><br>
@@ -166,11 +122,11 @@
              *  @param  {string}    class_names One or more space-separated class names to be added/removed/toggled for each element
              *                                  in the set of matched elements.
              *
-             *  @return {$}     Returns the set of matched elements (the parents, not the appended elements), for chaining.
+             *  @return {ZebraJS}   Returns the set of matched elements (the parents, not the appended elements), for chaining.
              *
              *  @access private
              */
-            this._class = function(action, class_names) {
+            elements._class = function(action, class_names) {
 
                 // split by space and create an array
                 class_names = class_names.split(' ');
@@ -189,13 +145,14 @@
                 });
 
                 // return the set of matched elements, for chaining
-                return $this;
+                return elements;
 
             }
 
             /**
-             *  Private helper method used by {@link $.$#clone .clone()} method when called with the `deep_with_data_and_events`
-             *  argument set to TRUE. It recursivelly attached events and data from an original element's children to it's clone children.
+             *  Private helper method used by {@link ZebraJS#clone .clone()} method when called with the `deep_with_data_and_events`
+             *  argument set to TRUE. It recursivelly attached events and data from an original element's children to it's clone
+             *  children.
              *
              *  @param  {DOM_element}   element     Element that was cloned
              *
@@ -205,7 +162,7 @@
              *
              *  @access private
              */
-            this._clone_data_and_events = function(element, clone) {
+            elements._clone_data_and_events = function(element, clone) {
 
                 // get the original element's and the clone's children
                 var elements = Array.prototype.slice.call(element.children),
@@ -240,54 +197,40 @@
                         });
 
                         // recursivelly attach events to children's children
-                        $this._clone_data_and_events(element, clones[index]);
+                        elements._clone_data_and_events(element, clones[index]);
 
                     });
 
             }
 
             /**
-             *  Private helper method used by {@link $.$#append .append()}, {@link $.$#appendTo .appendTo()}, {@link $.$#after .after()},
-             *  {@link $.$#insertAfter .insertAfter()}, {@link $.$#before .before()}, {@link $.$#insertBefore .insertBefore()},
-             *  {@link $.$#prepend .prepend()}, {@link $.$#prependTo .prependTo()} and {@link $.$#wrap .wrap()} methods.
+             *  Private helper method used by {@link ZebraJS#append .append()}, {@link ZebraJS#appendTo .appendTo()},
+             *  {@link ZebraJS#after .after()}, {@link ZebraJS#insertAfter .insertAfter()}, {@link ZebraJS#before .before()},
+             *  {@link ZebraJS#insertBefore .insertBefore()}, {@link ZebraJS#prepend .prepend()}, {@link ZebraJS#prependTo .prependTo()}
+             *  and {@link ZebraJS#wrap .wrap()} methods.
              *
              *  @param  {mixed}     content     Depending on the caller method this is the DOM element, text node, HTML string, or
-             *                                  ZebraJS object to insert in the DOM.
+             *                                  {@link ZebraJS} object to insert in the DOM.
              *
              *  @param  {string}    where       Indicated where the content should be inserted, relative to the set of matched elements.
              *                                  <br><br>
              *                                  Possible values are `after`, `append`, `before`, `prepend` and `wrap`.
              *
-             *  @return {$}     Returns the set of matched elements (the parents, not the appended elements), for chaining.
+             *  @return {ZebraJS}   Returns the set of matched elements (the parents, not the appended elements), for chaining.
              *
              *  @access private
              */
-            this._dom_insert = function(content, where) {
+            elements._dom_insert = function(content, where) {
 
-                // if element to append is an $ object, we'll use the array of DOM elements
-                if (content instanceof $) content = content.get();
-
-                // if content to append is a DOM element or a text node, wrap it in an array
-                else if (content instanceof Element || content instanceof Text) content = [content];
-
-                // if action is "wrap" and content is given as a string, wrap it in a ZebraJS object
-                else if ((where === 'wrap' || where === 'replace') && typeof content === 'string') content = $(content).get();
-
-                // if content to append is not a string, don't go further
-                else if (typeof content !== 'string') return false;
+                // make a ZebraJS object out of whatever given as content
+                content = $(content);
 
                 // iterate through the set of matched elements
                 elements.forEach(function(element) {
 
-                    // if content to append is a string (plain text or HTML)
-                    if (typeof content === 'string')
-
-                        // insert content like this
-                        element.insertAdjacentHTML((where === 'append' ? 'before' : 'after') + (where === 'before' || where === 'prepend' ? 'begin' : 'end'), content);
-
                     // since content is an array of DOM elements or text nodes
                     // iterate over the array
-                    else content.forEach(function(item, index) {
+                    content.forEach(function(item, index) {
 
                         // where the content needs to be moved in the DOM
                         switch (where) {
@@ -324,13 +267,13 @@
                 });
 
                 // return the set of matched elements, for chaining
-                return $this;
+                return elements;
 
             }
 
             /**
-             *  Private helper method used by {@link $.$#children .children()}, {@link $.$#siblings .siblings()}, {@link $.$#nexr .next()}
-             *  and {@link $.$#prev .prev()} methods.
+             *  Private helper method used by {@link ZebraJS#children .children()}, {@link ZebraJS#siblings .siblings()},
+             *  {@link ZebraJS#nexr .next()} and {@link ZebraJS#prev .prev()} methods.
              *
              *  @param  {string}    action      Specified what type of elements to look for
              *                                  <br><br>
@@ -339,11 +282,11 @@
              *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
              *                                  match it.
              *
-             *  @return {$}     Returns the found elements, as a ZebraJS object
+             *  @return {ZebraJS}   Returns the found elements, as a ZebraJS object
              *
              *  @access private
              */
-            this._dom_search = function(action, selector) {
+            elements._dom_search = function(action, selector) {
 
                 var result = [], remove_id, root, tmp;
 
@@ -363,7 +306,7 @@
 
                         // if the root element doesn't have an ID,
                         // generate and set a random ID for the element's parent node
-                        if (null === root.getAttribute('id')) root.setAttribute('id', $this._random('id'));
+                        if (null === root.getAttribute('id')) root.setAttribute('id', elements._random('id'));
 
                         // set this flag so that we know to remove the randomly generated ID when we're done
                         remove_id = true;
@@ -432,7 +375,7 @@
              *
              *  @access private
              */
-            this._random = function(prefix) {
+            elements._random = function(prefix) {
 
                 // if the internal counter is too large, reset it
                 if (internal_counter > Number.MAX_VALUE) internal_counter = 0;
@@ -462,20 +405,24 @@
              *  @param  {string}    class_name  One or more space-separated class names to be added to each element in the
              *                                  set of matched elements.
              *
-             *  @return {$}         Returns the set of matched elements.
+             *  @return {ZebraJS}   Returns the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      addClass
+             *  @instance
              */
-            this.addClass = function(class_name) {
+            elements.addClass = function(class_name) {
 
                 // add class(es) and return the set of matched elements
-                return this._class('add', class_name);
+                return elements._class('add', class_name);
 
             }
 
             /**
              *  Inserts content specified by the argument after each element in the set of matched elements.
              *
-             *  Both this and the {@link $.$#insertAfter .insertAfter()} method perform the same task, the main difference being in
-             *  the placement of the content and the target. With `.after()`, the selector expression preceding the method is the
+             *  Both this and the {@link ZebraJS#insertAfter .insertAfter()} method perform the same task, the main difference being
+             *  in the placement of the content and the target. With `.after()`, the selector expression preceding the method is the
              *  target after which the content is to be inserted. On the other hand, with `.insertAfter()`, the content precedes the
              *  method and it is the one inserted after the target element.
              *
@@ -510,26 +457,34 @@
              *  @param  {mixed}     content     DOM element, text node, HTML string or ZebraJS object to be inserted after each
              *                                  element in the set of matched elements.
              *
-             *  @return {$}         Returns the set of matched elements.
+             *  @return {ZebraJS}   Returns the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      after
+             *  @instance
              */
-            this.after = function(content) {
+            elements.after = function(content) {
 
                 // call the "_dom_insert" private method with these arguments
-                return this._dom_insert(content, 'after');
+                return elements._dom_insert(content, 'after');
 
             }
 
             /**
              *  @todo   Needs to be written!
+             *
+             *  @memberof   ZebraJS
+             *  @alias      ajax
+             *  @instance
              */
-            this.ajax = function() {
+            elements.ajax = function() {
 
             }
 
             /**
              *  Inserts content, specified by the argument, to the end of each element in the set of matched elements.
              *
-             *  Both this and the {@link $.$#appendTo .appendTo()} method perform the same task, the main difference being in the
+             *  Both this and the {@link ZebraJS#appendTo .appendTo()} method perform the same task, the main difference being in the
              *  placement of the content and the target. With `.append()`, the selector expression preceding the method is the
              *  container into which the content is to be inserted. On the other hand, with `.appendTo()`, the content precedes the
              *  method, and it is inserted into the target container.
@@ -568,22 +523,26 @@
              *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the end of each
              *                                  element in the set of matched elements.
              *
-             *  @return {$}         Returns the set of matched elements (the parents, not the appended elements).
+             *  @return {ZebraJS}   Returns the set of matched elements (the parents, not the appended elements).
+             *
+             *  @memberof   ZebraJS
+             *  @alias      append
+             *  @instance
              */
-            this.append = function(content) {
+            elements.append = function(content) {
 
                 // call the "_dom_insert" private method with these arguments
-                return this._dom_insert(content, 'append');
+                return elements._dom_insert(content, 'append');
 
             }
 
             /**
              *  Inserts every element in the set of matched elements to the end of the parent element(s), specified by the argument.
              *
-             *  Both this and the {@link $.$#append .append()} method perform the same task, the main difference being in the placement
-             *  of the content and the target. With `.append()`, the selector expression preceding the method is the container into
-             *  which the content is to be inserted. On the other hand, with `.appendTo()`, the content precedes the method, and it
-             *  is inserted into the target container.
+             *  Both this and the {@link ZebraJS#append .append()} method perform the same task, the main difference being in the
+             *  placement of the content and the target. With `.append()`, the selector expression preceding the method is the
+             *  container into which the content is to be inserted. On the other hand, with `.appendTo()`, the content precedes the
+             *  method, and it is inserted into the target container.
              *
              *  > If there is more than one target element, clones of the inserted element will be created for each target except for
              *  the last one. For the last target, the original item will be inserted.
@@ -609,14 +568,18 @@
              *  // each target except for the last one; for the last target, the original list will be moved
              *  $('ul').appendTo(parent);
              *
-             *  @param  {$}     parent      A ZebraJS object at end of which to insert each element in the set of matched elements.
+             *  @param  {ZebraJS}   parent      A ZebraJS object at end of which to insert each element in the set of matched elements.
              *
-             *  @return {$}     Returns the ZebraJS object you are appending to.
+             *  @return {ZebraJS}   Returns the ZebraJS object you are appending to.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      appendTo
+             *  @instance
              */
-            this.appendTo = function(parent) {
+            elements.appendTo = function(parent) {
 
                 // call the "_dom_insert" private method with these arguments
-                return $(parent)._dom_insert(this, 'append');
+                return $(parent)._dom_insert(elements, 'append');
 
             }
 
@@ -666,12 +629,14 @@
              *                                      Setting it to `false` or `null` will instead **remove** the attribute from the
              *                                      set of matched elements.
              *
-             *  @return {$|mixed}   When `setting` attributes, this method returns the set of matched elements.
-             *                      When `reading` attributes, this method returns the value of the required attribute.
+             *  @return {ZebraJS|mixed}             When `setting` attributes, this method returns the set of matched elements.
+             *                                      When `reading` attributes, this method returns the value of the required attribute.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      attr
+             *  @instance
              */
-            this.attr = function(attribute, value) {
-
-                var i;
+            elements.attr = function(attribute, value) {
 
                 // if attribute argument is an object
                 if (typeof attribute === 'object')
@@ -680,7 +645,7 @@
                     elements.forEach(function(element) {
 
                         // iterate over the attributes
-                        for (i in attribute)
+                        for (var i in attribute)
 
                             // set each attribute
                             element.setAttribute(i, attribute[i]);
@@ -715,17 +680,17 @@
                         return elements[0].getAttribute(attribute);
 
                 // if we get this far, return the set of matched elements
-                return $this;
+                return elements;
 
             }
 
             /**
              *  Inserts content, specified by the argument, before each element in the set of matched elements.
              *
-             *  Both this and the {@link $.$#insertBefore .insertBefore()} method perform the same task, the main difference being
-             *  in the placement of the content and the target. With `.before()`, the selector expression preceding the method is
-             *  the target before which the content is to be inserted. On the other hand, with `.insertBefore()`, the content precedes
-             *  the method, and it is the one inserted before the target element.
+             *  Both this and the {@link ZebraJS#insertBefore .insertBefore()} method perform the same task, the main difference
+             *  being in the placement of the content and the target. With `.before()`, the selector expression preceding the method
+             *  is the target before which the content is to be inserted. On the other hand, with `.insertBefore()`, the content
+             *  precedes the method, and it is the one inserted before the target element.
              *
              *  > If there is more than one target element, clones of the inserted element will be created before each target except
              *  for the last one. The original item will be inserted before the last target.
@@ -758,15 +723,19 @@
              *  // chaining
              *  target.append($('div')).addClass('foo');
              *
-             *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to be inserted before each
-             *                                  element in the set of matched elements.
+             *  @param  {mixed}     content     DOM element, text node, HTML string, or {@link ZebraJS} object to be inserted before
+             *                                  each element in the set of matched elements.
              *
-             *  @return {$}         Returns the set of matched elements (the parents, not the inserted elements).
+             *  @return {ZebraJS}   Returns the set of matched elements (the parents, not the inserted elements).
+             *
+             *  @memberof   ZebraJS
+             *  @alias      before
+             *  @instance
              */
-            this.before = function(content) {
+            elements.before = function(content) {
 
                 // call the "_dom_insert" private method with these arguments
-                return this._dom_insert(content, 'before');
+                return elements._dom_insert(content, 'before');
 
             }
 
@@ -791,12 +760,16 @@
              *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
              *                                  match it.
              *
-             *  @return {$}         Returns the children of each element in the set of matched elements, as a ZebraJS object.
+             *  @return {ZebraJS}   Returns the children of each element in the set of matched elements, as a ZebraJS object.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      children
+             *  @instance
              */
-            this.children = function(selector) {
+            elements.children = function(selector) {
 
                 // get the children of each element in the set of matched elements, optionally filtered by a selector
-                return this._dom_search('children', selector);
+                return elements._dom_search('children', selector);
 
             }
 
@@ -833,9 +806,13 @@
              *  @param  {boolean}   deep_with_data_and_events   Setting this argument to `true` will instruct the method to also copy
              *                                                  event handlers and data for all children of the cloned element.
              *
-             *  @return {$}         Returns the cloned elements, as a ZebraJS object.
+             *  @return {ZebraJS}   Returns the cloned elements, as a {@link ZebraJS} object.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      clone
+             *  @instance
              */
-            this.clone = function(with_data_and_events, deep_with_data_and_events) {
+            elements.clone = function(with_data_and_events, deep_with_data_and_events) {
 
                 var result = [];
 
@@ -874,7 +851,7 @@
                         });
 
                     // if event handlers and data for all children of the cloned element should be also copied
-                    if (deep_with_data_and_events) $this._clone_data_and_events(element, clone);
+                    if (deep_with_data_and_events) elements._clone_data_and_events(element, clone);
 
                 });
 
@@ -887,8 +864,8 @@
              *  For each element in the set, get the first element that matches the selector by traversing up through its ancestors
              *  in the DOM tree.
              *
-             *  Given a ZebraJS object that represents a set of DOM elements, this method searches through the ancestors of these
-             *  elements in the DOM tree and constructs a new ZebraJS object from the matching elements.
+             *  Given a {@link ZebraJS} object that represents a set of DOM elements, this method searches through the ancestors of
+             *  these elements in the DOM tree and constructs a new {@link ZebraJS} object from the matching elements.
              *
              *  @example
              *
@@ -905,9 +882,13 @@
              *  @param  {string}    selector    If the selector is supplied, the parents will be filtered by testing whether they
              *                                  match it.
              *
-             *  @return {$}         Returns zero or one element for each element in the original set, as a ZebraJS object
+             *  @return {ZebraJS}   Returns zero or one element for each element in the original set, as a {@link ZebraJS} object
+             *
+             *  @memberof   ZebraJS
+             *  @alias      closest
+             *  @instance
              */
-            this.closest = function(selector) {
+            elements.closest = function(selector) {
 
                 var result = [];
 
@@ -982,10 +963,14 @@
              *                                      Setting it to `false` or `null` will instead **remove** the CSS property from the
              *                                      set of matched elements.
              *
-             *  @return {$|mixed}   When `setting` CSS properties, this method returns the set of matched elements.
-             *                      When `reading` CSS properties, this method returns the value(s) of the required computed style(s).
+             *  @return {ZebraJS|mixed}             When `setting` CSS properties, this method returns the set of matched elements.
+             *                                      When `reading` CSS properties, this method returns the value(s) of the required computed style(s).
+             *
+             *  @memberof   ZebraJS
+             *  @alias      css
+             *  @instance
              */
-            this.css = function(property, value) {
+            elements.css = function(property, value) {
 
                 var i, computedStyle;
 
@@ -1033,7 +1018,20 @@
                 }
 
                 // if we get this far, return the matched elements
-                return $this;
+                return elements;
+
+            }
+
+            /**
+             *  @todo   Needs to be documented!
+             *
+             *  @memberof   ZebraJS
+             *  @alias      get
+             *  @instance
+             */
+            elements.get = function(index) {
+
+                return elements[index];
 
             }
 
@@ -1060,11 +1058,15 @@
              *
              *  @param  {mixed}     value       The value to associate with the data set.
              *
-             *  @return {$|mixed}   When `setting` data attributes, this method returns the set of matched elements.
-             *                      When `reading` data attributes, this method returns the stored values, or `undefined` if not data
-             *                      found for the requested key.
+             *  @return {ZebraJS|mixed}         When `setting` data attributes, this method returns the set of matched elements.
+             *                                  When `reading` data attributes, this method returns the stored values, or `undefined`
+             *                                  if not data found for the requested key.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      data
+             *  @instance
              */
-            this.data = function(name, value) {
+            elements.data = function(name, value) {
 
                 // make sure the name follows the Dataset API specs
                 // http://www.w3.org/TR/html5/dom.html#dom-dataset
@@ -1134,7 +1136,7 @@
                     });
 
                     // return the set of matched elements
-                    return $this;
+                    return elements;
 
                 }
 
@@ -1167,8 +1169,12 @@
              *  });
              *
              *  @return {undefined}
+             *
+             *  @memberof   ZebraJS
+             *  @alias      each
+             *  @instance
              */
-            this.each = function(callback) {
+            elements.each = function(callback) {
 
                 // iterate through the set of matched elements
                 for (var i = 0; i < elements.length; i++)
@@ -1181,8 +1187,8 @@
             }
 
             /**
-             *  Gets the descendants of each element in the current set of matched elements, filtered by a selector, ZebraJS object,
-             *  or an element you'd get by using document.getElementById.
+             *  Gets the descendants of each element in the current set of matched elements, filtered by a selector, {@link ZebraJS}
+             *  object, or a DOM element.
              *
              *  @example
              *
@@ -1199,14 +1205,17 @@
              *  // chaining
              *  element.find('div').addClass('foo');
              *
-             *  @param  {string}    selector    A selector to filter descendant elements by. It can be a query selector, a ZebraJS
-             *                                  object, or an element you'd get by using document.getElementById.
+             *  @param  {string}    selector    A selector to filter descendant elements by. It can be a query selector, a
+             *                                  {@link ZebraJS} object, or a DOM element.
              *
-             *  @return {$}         Returns the descendants of each element in the current set of matched elements, filtered by a
-             *                      selector, ZebraJS object, or an element you'd get by using document.getElementById, as a ZebraJS
-             *                      object.
+             *  @return {ZebraJS}   Returns the descendants of each element in the current set of matched elements, filtered by a
+             *                      selector, {@link ZebraJS} object, or DOM element, as a {@link ZebraJS} object.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      find
+             *  @instance
              */
-            this.find = function(selector) {
+            elements.find = function(selector) {
 
                 var result = [];
 
@@ -1214,10 +1223,10 @@
                 elements.forEach(function(element) {
 
                     // if selector is a ZebraJS object
-                    if (typeof selector === 'object' && selector instanceof $)
+                    if (typeof selector === 'object' && selector.version)
 
                         // iterate through the elements in the object
-                        selector.get().forEach(function(wrapped) {
+                        selector.forEach(function(wrapped) {
 
                             // if the elements are the same, add it to the results array
                             if (wrapped.isSameNode(element)) result.push(element);
@@ -1248,7 +1257,7 @@
             }
 
             /**
-             *  Constructs a new ZebraJS object from the first element in the set of matched elements.
+             *  Constructs a new {@link ZebraJS} object from the first element in the set of matched elements.
              *
              *  @example
              *
@@ -1259,9 +1268,13 @@
              *  // returns the first element from the list of matched elements, as a ZebraJS object
              *  var first = elements.first();
              *
-             *  @return {$}         Returns the first element from the list of matched elements, as a ZebraJS object
+             *  @return {ZebraJS}   Returns the first element from the list of matched elements, as a ZebraJS object
+             *
+             *  @memberof   ZebraJS
+             *  @alias      first
+             *  @instance
              */
-            this.first = function() {
+            elements.first = function() {
 
                 // returns the first element from the list of matched elements, as a ZebraJS object
                 return $(elements[0]);
@@ -1287,8 +1300,12 @@
              *                                  of matched elements.
              *
              *  @return {boolean}   Returns TRUE if the sought class exists in *any* of the elements in the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      hasClass
+             *  @instance
              */
-            this.hasClass = function(class_name) {
+            elements.hasClass = function(class_name) {
 
                 // iterate through the set of matched elements
                 for (var i = 0; i < elements.length; i++)
@@ -1305,7 +1322,7 @@
              *  Returns the current computed **inner** height (without `padding`, `border` and `margin`) of the first element
              *  in the set of matched elements as `float`, or sets the `height` CSS property of every element in the set.
              *
-             *  See {@link $.$#outerHeight .outerHeight()} for getting the height including `padding`, `border` and, optionally,
+             *  See {@link ZebraJS#outerHeight .outerHeight()} for getting the height including `padding`, `border` and, optionally,
              *  `margin`.
              *
              *  @example
@@ -1338,21 +1355,25 @@
              *
              *  > For hidden elements the returned value is `0`!
              *
-             *  @return {$|float}   When **setting** the `height`, this method returns the set of matched elements.
-             *                      Otherwise, it returns the current computed **inner** height (without `padding`, `border` and
-             *                      `margin`) of the first element in the set of matched elements, as `float`.
+             *  @return {ZebraJS|float}     When **setting** the `height`, this method returns the set of matched elements.
+             *                              Otherwise, it returns the current computed **inner** height (without `padding`, `border`
+             *                              and `margin`) of the first element in the set of matched elements, as `float`.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      height
+             *  @instance
              */
-            this.height = function(height) {
+            elements.height = function(height) {
 
                 // if "height" is given, set the height of every matched element, making sure to suffix the value with "px"
                 // if not otherwise specified
                 if (height) return this.css('height', height + (parseFloat(height) === height ? 'px' : ''));
 
                 // for the "window"
-                if (this.get()[0] === window) return window.innerHeight;
+                if (elements[0] === window) return window.innerHeight;
 
                 // for the "document"
-                if (this.get()[0] === document)
+                if (elements[0] === document)
 
                     // return height
                     return Math.max(
@@ -1403,11 +1424,15 @@
              *                                  content that was previously in that element is completely replaced by the new
              *                                  content.
              *
-             *  @return {$|string}              When the `content` argument is provided, this method returns the set of matched
+             *  @return {ZebraJS|string}        When the `content` argument is provided, this method returns the set of matched
              *                                  elements. Otherwise it returns the HTML content of the first element in the set of
              *                                  matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      html
+             *  @instance
              */
-            this.html = function(content) {
+            elements.html = function(content) {
 
                 // if content is provided
                 if (content)
@@ -1425,7 +1450,7 @@
                 else return elements[0].innerHTML;
 
                 // return the set of matched elements
-                return $this;
+                return elements;
 
             }
 
@@ -1439,7 +1464,7 @@
             /**
              *  Inserts every element in the set of matched elements after the parent element(s), specified by the argument.
              *
-             *  Both this and the {@link $.$#after .after()} method perform the same task, the main difference being in the
+             *  Both this and the {@link ZebraJS#after .after()} method perform the same task, the main difference being in the
              *  placement of the content and the target. With `.after()`, the selector expression preceding the method is the target
              *  after which the content is to be inserted. On the other hand, with `.insertAfter()`, the content precedes the method,
              *  and it is the one inserted after the target element(s).
@@ -1468,21 +1493,25 @@
              *  // each target, except for the last one; the original list will be moved after the last target
              *  $('ul').insertAfter(target);
              *
-             *  @param  {$}     target  A ZebraJS object after which to insert each element in the set of matched elements.
+             *  @param  {ZebraJS}   target  A ZebraJS object after which to insert each element in the set of matched elements.
              *
-             *  @return {$}     Returns the ZebraJS object after the content is inserted.
+             *  @return {ZebraJS}   Returns the ZebraJS object after the content is inserted.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      insertAfter
+             *  @instance
              */
-            this.insertAfter = function(target) {
+            elements.insertAfter = function(target) {
 
                 // call the "_dom_insert" private method with these arguments
-                return $(target)._dom_insert(this, 'after');
+                return $(target)._dom_insert(elements, 'after');
 
             }
 
             /**
              *  Inserts every element in the set of matched elements before the parent element(s), specified by the argument.
              *
-             *  Both this and the {@link $.$#before .before()} method perform the same task, the main difference being in the
+             *  Both this and the {@link ZebraJS#before .before()} method perform the same task, the main difference being in the
              *  placement of the content and the target. With `.before()`, the selector expression preceding the method is the target
              *  before which the content is to be inserted. On the other hand, with `.insertBefore()`, the content precedes the method,
              *  and it is the one inserted before the target element(s).
@@ -1511,14 +1540,18 @@
              *  // each target, except for the last one; the original list will be moved before the last target
              *  $('ul').insertBefore(target);
              *
-             *  @param  {$}     target  A ZebraJS object before which to insert each element in the set of matched elements.
+             *  @param  {ZebraJS}   target  A ZebraJS object before which to insert each element in the set of matched elements.
              *
-             *  @return {$}     Returns the ZebraJS object before which the content is inserted.
+             *  @return {ZebraJS}   Returns the ZebraJS object before which the content is inserted.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      insertBefore
+             *  @instance
              */
-            this.insertBefore = function(target) {
+            elements.insertBefore = function(target) {
 
                 // call the "_dom_insert" private method with these arguments
-                return $(target)._dom_insert(this, 'before');
+                return $(target)._dom_insert(elements, 'before');
 
             }
 
@@ -1544,14 +1577,18 @@
              *  @param  {string}    selector    If the selector is provided, the method will retrieve the following sibling only if
              *                                  it matches the selector
              *
-             *  @return {$}         Returns the immediately following sibling of each element in the set of matched elements,
+             *  @return {ZebraJS}   Returns the immediately following sibling of each element in the set of matched elements,
              *                      optionally filtered by a selector, as a ZebraJS object.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      next
+             *  @instance
              */
-            this.next = function(selector) {
+            elements.next = function(selector) {
 
                 // get the immediately preceding sibling of each element in the set of matched elements,
                 // optionally filtered by a selector
-                return this._dom_search('next', selector);
+                return elements._dom_search('next', selector);
 
             }
 
@@ -1586,9 +1623,13 @@
              *
              *  @param  {function}  callback    A function to execute when the event is triggered.
              *
-             *  @return {$}         Returns the set of matched elements.
+             *  @return {ZebraJS}   Returns the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      off
+             *  @instance
              */
-            this.off = function(event_type, callback) {
+            elements.off = function(event_type, callback) {
 
                 var event_types = event_type ? event_type.split(' ') : Object.keys(event_listeners), namespace, remove_all_event_handlers = !event_type;
 
@@ -1645,7 +1686,7 @@
                 });
 
                 // return the set of matched elements, for chaining
-                return $this;
+                return elements;
 
             }
 
@@ -1653,7 +1694,7 @@
              *  Gets the current coordinates of the first element in the set of matched elements, relative to the document.
              *
              *  This method retrieves the current position of an element relative to the document, in contrast with the
-             *  {@link $.$#position .position()} method which retrieves the current position relative to the offset parent.
+             *  {@link ZebraJS#position .position()} method which retrieves the current position relative to the offset parent.
              *
              *  > This method cannot get the position of hidden elements or accounting for borders, margins, or padding set on the
              *  body element.
@@ -1668,8 +1709,12 @@
              *  var offset = element.offset()
              *
              *  @return {object}    Returns an object with the `left` and `top` properties.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      offset
+             *  @instance
              */
-            this.offset = function() {
+            elements.offset = function() {
 
                 // get the bounding box of the first element in the set of matched elements
                 var box = elements[0].getBoundingClientRect();
@@ -1730,9 +1775,13 @@
              *
              *  @param  {function}  callback    A function to execute when the event is triggered.
              *
-             *  @return {$}         Returns the set of matched elements.
+             *  @return {ZebraJS}   Returns the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      on
+             *  @instance
              */
-            this.on = function(event_type, selector, callback) {
+            elements.on = function(event_type, selector, callback) {
 
                 var event_types = event_type.split(' '), namespace, actual_callback;
 
@@ -1784,7 +1833,7 @@
                 });
 
                 // return the set of matched elements, for chaining
-                return $this;
+                return elements;
 
             }
 
@@ -1794,7 +1843,7 @@
              *
              *  > For hidden elements the returned value is `0`!
              *
-             *  See {@link $.$#height .height()} for getting the **inner** height without `padding`, `border` and `margin`.
+             *  See {@link ZebraJS#height .height()} for getting the **inner** height without `padding`, `border` and `margin`.
              *
              *  @example
              *
@@ -1809,8 +1858,12 @@
              *                                          margins.
              *
              *  @return {float}
+             *
+             *  @memberof   ZebraJS
+             *  @alias      outerHeight
+             *  @instance
              */
-            this.outerHeight = function(include_margins) {
+            elements.outerHeight = function(include_margins) {
 
                 // get the values of all the CSS properties of the element
                 // after applying the active stylesheets and resolving any
@@ -1837,7 +1890,7 @@
              *
              *  > For hidden elements the returned value is `0`!
              *
-             *  See {@link $.$#width .width()} for getting the **inner** width without `padding`, `border` and `margin`.
+             *  See {@link ZebraJS#width .width()} for getting the **inner** width without `padding`, `border` and `margin`.
              *
              *  @example
              *
@@ -1852,8 +1905,12 @@
              *                                          margins.
              *
              *  @return {float}
+             *
+             *  @memberof   ZebraJS
+             *  @alias      outerWidth
+             *  @instance
              */
-            this.outerWidth = function(include_margins) {
+            elements.outerWidth = function(include_margins) {
 
                 // get the values of all the CSS properties of the element
                 // after applying the active stylesheets and resolving any
@@ -1877,7 +1934,8 @@
             /**
              *  Gets the immediate parent of each element in the current set of matched elements, optionally filtered by a selector.
              *
-             *  This method is similar to {@link $.$#parents .parents()}, except .parent() only travels a single level up the DOM tree.
+             *  This method is similar to {@link ZebraJS#parents .parents()}, except .parent() only travels a single level up the
+             *  DOM tree.
              *
              *  @example
              *
@@ -1897,10 +1955,14 @@
              *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
              *                                  match it.
              *
-             *  @return {$}         Returns the immediate parent of each element in the current set of matched elements, optionally
+             *  @return {ZebraJS}   Returns the immediate parent of each element in the current set of matched elements, optionally
              *                      filtered by a selector, as a ZebraJS object.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      parent
+             *  @instance
              */
-            this.parent = function(selector) {
+            elements.parent = function(selector) {
 
                 var result = [];
 
@@ -1920,13 +1982,13 @@
             /**
              *  Gets the ancestors of each element in the current set of matched elements, optionally filtered by a selector.
              *
-             *  Given a ZebraJS object that represents a set of DOM elements, this method allows us to search through the ancestors
-             *  of these elements in the DOM tree and construct a new ZebraJS object from the matching elements ordered from immediate
-             *  parent on up; the elements are returned in order from the closest parent to the outer ones. When multiple DOM elements
-             *  are in the original set, the resulting set will have duplicates removed.
+             *  Given a {@link ZebraJS} object that represents a set of DOM elements, this method allows us to search through the
+             *  ancestors of these elements in the DOM tree and construct a new {@link ZebraJS} object from the matching elements
+             *  ordered from immediate parent on up; the elements are returned in order from the closest parent to the outer ones.
+             *  When multiple DOM elements are in the original set, the resulting set will have duplicates removed.
              *
-             *  This method is similar to {@link $.$#parent .parent()}, except .parent() only travels a single level up the DOM tree,
-             *  while this method travels all the way up to the DOM root.
+             *  This method is similar to {@link ZebraJS#parent .parent()}, except .parent() only travels a single level up the DOM
+             *  tree, while this method travels all the way up to the DOM root.
              *
              *  @example
              *
@@ -1946,10 +2008,14 @@
              *  @param  {string}    selector    If the selector is supplied, the parents will be filtered by testing whether they
              *                                  match it.
              *
-             *  @return {$}         Returns an array of parents of each element in the current set of matched elements, optionally
+             *  @return {ZebraJS}   Returns an array of parents of each element in the current set of matched elements, optionally
              *                      filtered by a selector, as a ZebraJS object.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      parents
+             *  @instance
              */
-            this.parents = function(selector) {
+            elements.parents = function(selector) {
 
                 var result = [];
 
@@ -1978,7 +2044,7 @@
              *  Gets the current coordinates of the first element in the set of matched elements, relative to the offset parent.
              *
              *  This method retrieves the current position of an element relative to the offset parent, in contrast with the
-             *  {@link $.$#offset .offset()} method which retrieves the current position relative to the document.
+             *  {@link ZebraJS#offset .offset()} method which retrieves the current position relative to the document.
              *
              *  > This method cannot get the position of hidden elements or accounting for borders, margins, or padding set on the
              *  body element.
@@ -1993,8 +2059,12 @@
              *  var position = element.position()
              *
              *  @return {object}    Returns an object with the `left` and `top` properties.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      position
+             *  @instance
              */
-            this.position = function() {
+            elements.position = function() {
 
                 // return the position of the first element in the set of matched elements
                 return {
@@ -2007,8 +2077,8 @@
             /**
              *  Inserts content, specified by the argument, to the beginning of each element in the set of matched elements.
              *
-             *  Both this and the {@link $.$#prependTo .prependTo()} method perform the same task, the main difference being in the
-             *  placement of the content and the target. With `.prepend()`, the selector expression preceding the method is the
+             *  Both this and the {@link ZebraJS#prependTo .prependTo()} method perform the same task, the main difference being in
+             *  the placement of the content and the target. With `.prepend()`, the selector expression preceding the method is the
              *  container into which the content is to be inserted. On the other hand, with `.prependTo()`, the content precedes the
              *  method, and it is inserted into the target container.
              *
@@ -2043,22 +2113,26 @@
              *  // chaining
              *  parent.prepend($('div')).addClass('foo');
              *
-             *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the beginning
-             *                                  of each element in the set of matched elements.
+             *  @param  {mixed}     content     DOM element, text node, HTML string, or {@link ZebraJS} object to insert at the
+             *                                  beginning of each element in the set of matched elements.
              *
-             *  @return {$}         Returns the set of matched elements (the parents, not the prepended elements).
+             *  @return {ZebraJS}   Returns the set of matched elements (the parents, not the prepended elements).
+             *
+             *  @memberof   ZebraJS
+             *  @alias      prepend
+             *  @instance
              */
-            this.prepend = function(content) {
+            elements.prepend = function(content) {
 
                 // call the "_dom_insert" private method with these arguments
-                return this._dom_insert(content, 'prepend');
+                return elements._dom_insert(content, 'prepend');
 
             }
 
             /**
              *  Inserts every element in the set of matched elements to the beginning of the parent element(s), specified by the argument.
              *
-             *  Both this and the {@link $.$#prepend .prepend()} method perform the same task, the main difference being in the
+             *  Both this and the {@link ZebraJS#prepend .prepend()} method perform the same task, the main difference being in the
              *  placement of the content and the target. With `.prepend()`, the selector expression preceding the method is the
              *  container into which the content is to be inserted. On the other hand, with `.prependTo()`, the content precedes the
              *  method, and it is inserted into the target container.
@@ -2087,14 +2161,18 @@
              *  // each target except for the last one; for the last target, the original list will be moved
              *  $('ul').appendTo(parent);
              *
-             *  @param  {$}     parent      A ZebraJS object at beginning of which to insert each element in the set of matched elements.
+             *  @param  {ZebraJS}   parent      A ZebraJS object at beginning of which to insert each element in the set of matched elements.
              *
-             *  @return {$}     Returns the ZebraJS object you are appending to.
+             *  @return {ZebraJS}   Returns the ZebraJS object you are appending to.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      prependTo
+             *  @instance
              */
-            this.prependTo = function(parent) {
+            elements.prependTo = function(parent) {
 
                 // call the "_dom_insert" private method with these arguments
-                return $(parent)._dom_insert(this, 'prepend');
+                return $(parent)._dom_insert(elements, 'prepend');
 
             }
 
@@ -2120,14 +2198,18 @@
              *  @param  {string}    selector    If the selector is provided, the method will retrieve the previous sibling only if
              *                                  it matches the selector
              *
-             *  @return {$}         Returns the immediately preceding sibling of each element in the set of matched elements,
+             *  @return {ZebraJS}   Returns the immediately preceding sibling of each element in the set of matched elements,
              *                      optionally filtered by a selector, as a ZebraJS object.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      prev
+             *  @instance
              */
-            this.prev = function(selector) {
+            elements.prev = function(selector) {
 
                 // get the immediately preceding sibling of each element in the set of matched elements,
                 // optionally filtered by a selector
-                return this._dom_search('previous', selector);
+                return elements._dom_search('previous', selector);
 
             }
 
@@ -2142,9 +2224,13 @@
              *
              *  @param  {function}  callback    A function to execute when the DOM is ready and safe to manipulate.
              *
-             *  @return {$}         Returns the set of matched elements.
+             *  @return {ZebraJS}   Returns the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      ready
+             *  @instance
              */
-            this.ready = function(callback) {
+            elements.ready = function(callback) {
 
                 // if DOM is already ready, fire the callback now
                 if (document.readyState === 'complete' || document.readyState !== 'loading') callback();
@@ -2153,7 +2239,7 @@
                 else document.addEventListener('DOMContentLoaded', callback);
 
                 // return the set of matched elements
-                return $this;
+                return elements;
 
             }
 
@@ -2163,7 +2249,7 @@
              *  Use this method when you want to remove the element itself, as well as everything inside it. In addition to the elements
              *  themselves, all attached event handlers and data attributes associated with the elements are also removed.
              *
-             *  To remove the elements without removing data and event handlers, use {@link $.$#detach() .detach()} instead.
+             *  To remove the elements without removing data and event handlers, use {@link ZebraJS#detach() .detach()} instead.
              *
              *  @example
              *
@@ -2175,9 +2261,13 @@
              *  // handlers and data attributes associated with the elements
              *  element.remove();
              *
-             *  @return {$}         Returns the set of matched elements.
-             */
-            this.remove = function() {
+             *  @return {ZebraJS}   Returns the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      remove
+             *  @instance
+            */
+            elements.remove = function() {
 
                 // iterate over the set of matched elements
                 elements.forEach(function(element) {
@@ -2216,7 +2306,7 @@
                 });
 
                 // return the set of matched elements
-                return $this;
+                return elements;
 
             }
 
@@ -2241,12 +2331,16 @@
              *  @param  {string}    class_name  One or more space-separated class names to be removed from each element in
              *                                  the set of matched elements.
              *
-             *  @return {$}         Returns the set of matched elements.
+             *  @return {ZebraJS}   Returns the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      removeClass
+             *  @instance
              */
-            this.removeClass = function(class_name) {
+            elements.removeClass = function(class_name) {
 
                 // remove class(es) and return the set of matched elements
-                return this._class('remove', class_name);
+                return elements._class('remove', class_name);
 
             }
 
@@ -2255,8 +2349,8 @@
              *  that was removed.
              *
              *  > Note that if the method's argument is a selector, then clones of the element described by the selector will be
-             *  created and used for replacing each element in the set of matched elements, except for the last one. The original item
-             *  will be moved (not cloned) and used to replace the last target.
+             *  created and used for replacing each element in the set of matched elements, except for the last one. The original
+             *  item will be moved (not cloned) and used to replace the last target.
              *
              *  @example
              *
@@ -2273,15 +2367,19 @@
              *  // using an existing element as the wrapper
              *  element.replaceWith($('#element-from-the-page'));
              *
-             *  @param  {mixed} element     A string, a ZebraJS object or a DOM element to use as replacement for each element in the
-             *                              set of matched elements.
+             *  @param  {mixed} element     A string, a {@link ZebraJS} object or a DOM element to use as replacement for each
+             *                              element in the set of matched elements.
              *
-             *  @return {$}     Returns the set of matched elements.
+             *  @return {ZebraJS}   Returns the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      replaceWith
+             *  @instance
              */
-            this.replaceWith = function(element) {
+            elements.replaceWith = function(element) {
 
                 // call the "_dom_insert" private method with these arguments
-                return this._dom_insert(element, 'replace');
+                return elements._dom_insert(element, 'replace');
 
             }
 
@@ -2309,11 +2407,15 @@
              *
              *  @param  {integer}   [value]     Sets the horizontal position of the scrollbar for every matched element.
              *
-             *  @return {$|integer}             When `setting` the horizontal position, this method returns the set of matched elements.
+             *  @return {ZebraJS|integer}       When `setting` the horizontal position, this method returns the set of matched elements.
              *                                  When `reading` the horizontal position, this method returns the horizontal position of
              *                                  the scrollbar for the first element in the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      scrollLeft
+             *  @instance
              */
-            this.scrollLeft = function(value) {
+            elements.scrollLeft = function(value) {
 
                 // if value is not specified, return the scrollLeft value of the first element in the set of matched elements
                 if (undefined === value) return elements[0].scrollLeft;
@@ -2353,11 +2455,15 @@
              *
              *  @param  {integer}   [value]     Sets the vertical position of the scrollbar for every matched element.
              *
-             *  @return {$|integer}             When `setting` the vertical position, this method returns the set of matched elements.
+             *  @return {ZebraJS|integer}       When `setting` the vertical position, this method returns the set of matched elements.
              *                                  When `reading` the vertical position, this method returns the vertical position of
              *                                  the scrollbar for the first element in the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      scrollTop
+             *  @instance
              */
-            this.scrollTop = function(value) {
+            elements.scrollTop = function(value) {
 
                 // if value is not specified, return the scrollTop value of the first element in the set of matched elements
                 if (undefined === value) return elements[0].scrollTop;
@@ -2394,8 +2500,12 @@
              *  var serialized = form.serialize();
              *
              *  @return {string}    Returns the serialized form as a query string that could be sent to a server in an Ajax request.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      serialize
+             *  @instance
              */
-            this.serialize = function() {
+            elements.serialize = function() {
 
                 var form = elements[0], result = [];
 
@@ -2453,12 +2563,16 @@
              *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
              *                                  match it.
              *
-             *  @return {$}         Returns the siblings of each element in the set of matched elements, as a ZebraJS object
+             *  @return {ZebraJS}   Returns the siblings of each element in the set of matched elements, as a ZebraJS object
+             *
+             *  @memberof   ZebraJS
+             *  @alias      siblings
+             *  @instance
              */
-            this.siblings = function(selector) {
+            elements.siblings = function(selector) {
 
                 // get the siblings of each element in the set of matched elements, optionally filtered by a selector.
-                return this._dom_search('siblings', selector);
+                return elements._dom_search('siblings', selector);
 
             }
 
@@ -2486,11 +2600,15 @@
              *                                  content that was previously in that element is completely replaced by the new
              *                                  content.
              *
-             *  @return {$|string}              When the `content` argument is provided, this method returns the set of matched
+             *  @return {ZebraJS|string}        When the `content` argument is provided, this method returns the set of matched
              *                                  elements. Otherwise it returns the text content of the first element in the set of
              *                                  matched elements (combined with the text content of all its descendants)
+             *
+             *  @memberof   ZebraJS
+             *  @alias      text
+             *  @instance
              */
-            this.text = function(content) {
+            elements.text = function(content) {
 
                 // if content is provided
                 if (content)
@@ -2509,7 +2627,7 @@
                 else return elements[0].textContent;
 
                 // return the set of matched elements
-                return $this;
+                return elements;
 
             }
 
@@ -2536,12 +2654,16 @@
              *  @param  {string}    class_name  One or more space-separated class names to be toggled for each element in the set of
              *                                  matched elements.
              *
-             *  @return {$}         Returns the set of matched elements.
+             *  @return {ZebraJS}   Returns the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      toggleClass
+             *  @instance
              */
-            this.toggleClass = function(class_name) {
+            elements.toggleClass = function(class_name) {
 
                 // toggle class(es) and return the set of matched elements
-                return this._class('toggle', class_name);
+                return elements._class('toggle', class_name);
 
             }
 
@@ -2577,9 +2699,13 @@
              *
              *  @param  {object}    data        Additional parameters to pass along to the event handler.
              *
-             *  @return {$}         Returns the set of matched elements.
+             *  @return {ZebraJS}   Returns the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      trigger
+             *  @instance
              */
-            this.trigger = function(event_type, data) {
+            elements.trigger = function(event_type, data) {
 
                 // iterate through the set of matched elements
                 elements.forEach(function(element) {
@@ -2608,14 +2734,14 @@
                 });
 
                 // return the set of matched elements, for chaining
-                return $this;
+                return elements;
 
             }
 
             /**
              *  Removes the parents of the set of matched elements from the DOM, leaving the matched elements in their place.
              *
-             *  This method is effectively the inverse of the {@link $.$#wrap .wrap()} method. The matched elements (and their
+             *  This method is effectively the inverse of the {@link ZebraJS#wrap .wrap()} method. The matched elements (and their
              *  siblings, if any) replace their parents within the DOM structure.
              *
              *  @example
@@ -2633,9 +2759,13 @@
              *  @param  {string}    selector    If the selector is supplied, the parent elements will be filtered and the unwrapping
              *                                  will occur only they match it.
              *
-             *  @return {$}         Returns the set of matched elements.
+             *  @return {ZebraJS}   Returns the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      unwrap
+             *  @instance
              */
-            this.unwrap = function(selector) {
+            elements.unwrap = function(selector) {
 
                 // iterate through the set of matched elements
                 elements.forEach(function(element) {
@@ -2647,7 +2777,7 @@
                 });
 
                 // return the set of matched elements
-                return $this;
+                return elements;
 
             }
 
@@ -2674,10 +2804,15 @@
              *  @param  {mixed}     [value]     A string, a number, or an array of strings corresponding to the value of each matched
              *                                  element to set as selected/checked.
              *
-             *  @return {$|mixed}   If setting a value, this method returns the set of matched elements. If called without the argument,
-             *                      the method return the current value of the first element in the set of matched elements.
+             *  @return {ZebraJS|mixed}         If setting a value, this method returns the set of matched elements. If called without
+             *                                  the argument, the method return the current value of the first element in the set of
+             *                                  matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      val
+             *  @instance
              */
-            this.val = function(value) {
+            elements.val = function(value) {
 
                 var result = [];
 
@@ -2702,9 +2837,11 @@
                     // for other elements, return the first element's value
                     return elements[0].value;
 
+                }
+
                 // if "value" argument is specified
                 // iterate through the set of matched elements
-                } elements.forEach(function(element) {
+                elements.forEach(function(element) {
 
                     // if value is not an array
                     if (!Array.isArray(value))
@@ -2731,7 +2868,7 @@
                 });
 
                 // return the set of matched elements
-                return $this;
+                return elements;
 
             }
 
@@ -2739,7 +2876,7 @@
              *  Returns the current computed **inner** width (without `padding`, `border` and `margin`) of the first element
              *  in the set of matched elements as `float`, or sets the `width` CSS property of every element in the set.
              *
-             *  See {@link $.$#outerWidth .outerWidth()} for getting the width including `padding`, `border` and, optionally,
+             *  See {@link ZebraJS#outerWidth .outerWidth()} for getting the width including `padding`, `border` and, optionally,
              *  `margin`.
              *
              *  @example
@@ -2772,21 +2909,25 @@
              *
              *  > For hidden elements the returned value is `0`!
              *
-             *  @return {$|float}   When **setting** the `width`, this method returns the set of matched elements. Otherwise, it
-             *                      returns the current computed **inner** width (without `padding`, `border` and `margin`) of the
-             *                      first element in the set of matched elements, as `float`.
+             *  @return {ZebraJS|float}     When **setting** the `width`, this method returns the set of matched elements. Otherwise,
+             *                              it returns the current computed **inner** width (without `padding`, `border` and `margin`)
+             *                              of the first element in the set of matched elements, as `float`.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      width
+             *  @instance
              */
-            this.width = function(width) {
+            elements.width = function(width) {
 
                 // if "width" is given, set the width of every matched element, making sure to suffix the value with "px"
                 // if not otherwise specified
-                if (width) return this.css('width', width + (parseFloat(width) === width ? 'px' : ''));
+                if (width) return elements.css('width', width + (parseFloat(width) === width ? 'px' : ''));
 
                 // for the "window"
-                if (this.get()[0] === window) return window.innerWith;
+                if (elements[0] === window) return window.innerWith;
 
                 // for the "document"
-                if (this.get()[0] === document)
+                if (elements[0] === document)
 
                     // return width
                     return Math.max(
@@ -2832,21 +2973,49 @@
              *  // using an existing element as the wrapper
              *  element.wrap($('#element-from-the-page'));
              *
-             *  @param  {mixed} element     A string, a ZebraJS object or a DOM element in which to wrap around each element in the
-             *                              set of matched elements.
+             *  @param  {mixed} element     A string, a {@link ZebraJS} object or a DOM element in which to wrap around each element
+             *                              in the set of matched elements.
              *
-             *  @return {$}     Returns the set of matched elements.
+             *  @return {ZebraJS}   Returns the set of matched elements.
+             *
+             *  @memberof   ZebraJS
+             *  @alias      wrap
+             *  @instance
              */
-            this.wrap = function(element) {
+            elements.wrap = function(element) {
 
                 // call the "_dom_insert" private method with these arguments
-                return this._dom_insert(element, 'wrap');
+                return elements._dom_insert(element, 'wrap');
 
             }
 
 
+            return elements;
+
         }
 
-    }
+    // for browsers that do not support Element.matches() or Element.matchesSelector(), but carry support for
+    // document.querySelectorAll(), a polyfill exists:
+    if (!Element.prototype.matches)
+
+        Element.prototype.matches =
+
+            Element.prototype.matchesSelector ||
+            Element.prototype.mozMatchesSelector ||
+            Element.prototype.msMatchesSelector ||
+            Element.prototype.oMatchesSelector ||
+            Element.prototype.webkitMatchesSelector ||
+
+            function(s) {
+                var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+                    i = matches.length;
+
+                while (--i >= 0 && matches.item(i) !== this) {}
+
+                return i > -1;
+
+            };
+
+    window.$ = $;
 
 })();

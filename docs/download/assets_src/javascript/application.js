@@ -38,7 +38,7 @@ $(document).ready(function() {
             'wrap':         ['_dom_insert']
         },
 
-        reversed_dependencies = {}, methods = {}, private_methods = {},
+        reversed_dependencies = {}, methods = {}, private_methods = {}, script_header, script_footer,
 
         // extract all the available methods
         extract_methods = function() {
@@ -54,7 +54,7 @@ $(document).ready(function() {
                 tmp += source[i];
 
                 // if we're not looking for a matching closing bracket and we found a method
-                if (matching_brackets === false && (matches = tmp.match(/this\.([^\(]+?)=function\([^\)]*?\)\{/))) {
+                if (matching_brackets === false && (matches = tmp.match(/g\.([^\=]+?)=function\([^\)]*?\)\{/))) {
 
                     // we start looking for the matching closing bracket
                     tmp = '';
@@ -69,20 +69,20 @@ $(document).ready(function() {
                 // if we found a method
                 if (matching_brackets === 0 && tmp !== '') {
 
+                    // the start of the script (everything until the first method)
+                    if (!method_name) script_header = source.substr(0, source.indexOf(matches[0]) - 1);
+
                     // this is the method's name
-                    method_name = matches[0].match(/^this\.(.*?)\=/)[1];
+                    method_name = matches[0].match(/^g\.(.*?)\=/)[1];
 
                     // is this a private method? (starting with an underscore)
                     is_private_method = method_name.indexOf('_') === 0;
 
-                    // add the global function this way
-                    if (method_name === 'get') methods[method_name] = (source.substr(0, i) + '}}};').trim();
-
                     // store private methods
-                    else if (is_private_method) private_methods[method_name] = matches[0] + tmp + ';';
+                    if (is_private_method) private_methods[method_name] = matches[0] + tmp;
 
                     // store public methods
-                    else methods[method_name] = matches[0] + tmp + ';';
+                    else methods[method_name] = matches[0] + tmp;
 
                     // start looking for other methods
                     tmp = '';
@@ -91,6 +91,9 @@ $(document).ready(function() {
                 }
 
             }
+
+            // the end of the main script - everything after the last method
+            script_footer = tmp;
 
             // return the array of methods
             return methods;
@@ -162,7 +165,7 @@ $(document).ready(function() {
 
         manage_modules = function(e) {
 
-            var code = '', global_object_name = global_object.val().trim();
+            var code = script_header, global_object_name = global_object.val().trim();
 
             // if this method is called when selecting/deselecting a module, compute the module's dependencies
             if (undefined !== e) manage_dependencies(e.target.getAttribute('id').replace(/^method\_/, ''), e.target.checked);
@@ -177,24 +180,27 @@ $(document).ready(function() {
                 var id = this.getAttribute('id').replace(/method\_/, '');
 
                 // if checkbox is checked
-                if (this.checked) {
+                if (id !== '$' && this.checked) {
 
                     // highlight the checkbox's container
                     wells[index].classList.add('selected');
 
                     // add module's source to the existing source code
-                    code += id.indexOf('_') === 0 ? private_methods[id] : (methods[id === '$' ? 'get' : id]);
+                    code += ',' + (id.indexOf('_') === 0 ? private_methods[id] : methods[id]);
 
                 // if not checked, remove highlight from checkbox's container
                 } else wells[index].classList.remove('selected');
 
             });
 
+            // add the script's footer
+            code += script_footer;
+
             // if we have a global object name
             if (global_object_name !== '')
 
                 // replace instances of "$" in the source code (with those of the given name)
-                downloadable_content.val(code.replace(/\B\$=/g, global_object_name + '=').replace(/\B\$\(/g, global_object_name + '(').replace(/instanceof \$/g, 'instance of ' + global_object_name));
+                downloadable_content.val(code.replace(/window\.\$/, 'window.' + global_object_name));
 
             // otherwise simply set the downloadable content
             else downloadable_content.val(code);
@@ -207,47 +213,39 @@ $(document).ready(function() {
     // get an object with the existing methods
     extract_methods();
 
+    // add the requuired $ method
+    block = $('.well', $(parse_template({
+        method: '$',
+        size: script_header.length + script_footer.length
+
+    // ...and add it to the section of required modules
+    }))).appendTo($('.required-modules'));
+
+    // additionally, disable the checkbox
+    $('input', block).attr({
+        checked: 'checked',
+        readonly: 'readonly',
+        disabled: 'disabled'
+    });
+
     // iterate over the available public methods
     for (i in methods)
 
-        // if this is not the global object
-        if (i !== 'get')
+        // generate the HTML for the module, based on the template
+        block = $(parse_template({
+            method: methods[i].match(/^g\.(.*?)\=/)[1],
+            size: methods[i].length + 1 // the ',' prefix
 
-            // generate the HTML for the module, based on the template
-            block = $(parse_template({
-                method: methods[i].match(/^this\.(.*?)\=/)[1],
-                size: methods[i].length
-
-            // ...and add it to the section of optional modules
-            })).appendTo(modules_container);
-
-        // if this is the global object
-        else {
-
-            // generate the HTML, based on the template
-            block = $('.well', $(parse_template({
-                method: '$',
-                size: methods[i].length + 3
-
-            // ...and add it to the section of required modules
-            }))).appendTo($('.required-modules'));
-
-            // additionally, disable the checkbox
-            $('input', block).attr({
-                checked: 'checked',
-                readonly: 'readonly',
-                disabled: 'disabled'
-            });
-
-        }
+        // ...and add it to the section of optional modules
+        })).appendTo(modules_container);
 
     // iterate over the available private methods
     for (i in private_methods)
 
         // generate the HTML for the module, based on the template
         block = $(parse_template({
-            method: private_methods[i].match(/^this\.(.*?)\=/)[1],
-            size: private_methods[i].length
+            method: private_methods[i].match(/^g\.(.*?)\=/)[1],
+            size: private_methods[i].length + 1 // the ',' prefix
 
         // ...and add it to the section of optional modules
         })).appendTo(helper_modules_container);
