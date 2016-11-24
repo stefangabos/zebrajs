@@ -1367,7 +1367,7 @@
 
                 // if "height" is given, set the height of every matched element, making sure to suffix the value with "px"
                 // if not otherwise specified
-                if (height) return this.css('height', height + (parseFloat(height) === height ? 'px' : ''));
+                if (height) return elements.css('height', height + (parseFloat(height) === height ? 'px' : ''));
 
                 // for the "window"
                 if (elements[0] === window) return window.innerHeight;
@@ -1457,7 +1457,7 @@
             /**
              *  @todo   Needs to be written!
              */
-            this.inArray = function() {
+            elements.inArray = function() {
 
             }
 
