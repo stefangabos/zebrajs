@@ -8,7 +8,8 @@ $(document).ready(function() {
         // cache some selectors
         global_object = $('#object'),
         modules_container = $('#packager .optional-methods'),
-        helper_modules_container = $('#packager .private-methods'),
+        helper_modules_container = $('#packager .helper-methods'),
+        private_modules_container = $('#packager .private-methods'),
         total_download_size_container = $('.result strong span'),
         checkboxes,
         downloadable_content = $('textarea'),
@@ -38,14 +39,14 @@ $(document).ready(function() {
             'wrap':         ['_dom_insert']
         },
 
-        reversed_dependencies = {}, methods = {}, private_methods = {}, script_header, script_footer,
+        reversed_dependencies = {}, methods = {}, private_methods = {}, helper_methods = {}, script_header, script_footer,
 
         // extract all the available methods
         extract_methods = function() {
 
             var source = '@import "../../../../dist/zebra.min.js"',
                 source_length = source.length,
-                i, tmp = '', is_private_method, matches, matching_brackets = false, method_name;
+                i, tmp = '', is_private_method, is_helper_method, matches, matching_brackets = false, method_name;
 
             // go over the source code, character by character
             for (i = 0; i < source_length; i++) {
@@ -54,7 +55,7 @@ $(document).ready(function() {
                 tmp += source[i];
 
                 // if we're not looking for a matching closing bracket and we found a method
-                if (matching_brackets === false && (matches = tmp.match(/g\.([^\=]+?)=function\([^\)]*?\)\{/))) {
+                if (matching_brackets === false && (matches = tmp.match(/[cg]\.([^\=]+?)=function\([^\)]*?\)\{/))) {
 
                     // we start looking for the matching closing bracket
                     tmp = '';
@@ -72,14 +73,19 @@ $(document).ready(function() {
                     // the start of the script (everything until the first method)
                     if (!method_name) script_header = source.substr(0, source.indexOf(matches[0]) - 1);
 
+                    is_helper_method = matches[0].indexOf('c') === 0;
+
                     // this is the method's name
-                    method_name = matches[0].match(/^g\.(.*?)\=/)[1];
+                    method_name = matches[0].match(/^[cg]\.(.*?)\=/)[1];
 
                     // is this a private method? (starting with an underscore)
                     is_private_method = method_name.indexOf('_') === 0;
 
                     // store private methods
                     if (is_private_method) private_methods[method_name] = matches[0] + tmp;
+
+                    // store helper methods
+                    else if (is_helper_method) helper_methods[method_name] = matches[0] + tmp;
 
                     // store public methods
                     else methods[method_name] = matches[0] + tmp;
@@ -94,9 +100,6 @@ $(document).ready(function() {
 
             // the end of the main script - everything after the last method
             script_footer = tmp;
-
-            // return the array of methods
-            return methods;
 
         },
 
@@ -165,7 +168,7 @@ $(document).ready(function() {
 
         manage_modules = function(e) {
 
-            var code = script_header, global_object_name = global_object.val().trim();
+            var code = script_header, global_object_name = global_object.val().trim(), helper_methods_code = '';
 
             // if this method is called when selecting/deselecting a module, compute the module's dependencies
             if (undefined !== e) manage_dependencies(e.target.getAttribute('id').replace(/^method\_/, ''), e.target.checked);
@@ -180,21 +183,27 @@ $(document).ready(function() {
                 var id = this.getAttribute('id').replace(/method\_/, '');
 
                 // if checkbox is checked
-                if (id !== '$' && this.checked) {
+                if (this.checked) {
 
                     // highlight the checkbox's container
                     wells[index].classList.add('selected');
 
-                    // add module's source to the existing source code
-                    code += ',' + (id.indexOf('_') === 0 ? private_methods[id] : methods[id]);
+                    // if this is not the "$" module (which we're adding via script_header and script_footer)
+                    if (id !== '$')
+
+                        // helper methods go to the end, so add them to a different place
+                        if (helper_methods[id]) helper_methods_code += (helper_methods_code !== '' ? ';' : '') + helper_methods[id];
+
+                        // add module's source to the existing source code
+                        else code += ',' + (id.indexOf('_') === 0 ? private_methods[id] : methods[id]);
 
                 // if not checked, remove highlight from checkbox's container
                 } else wells[index].classList.remove('selected');
 
             });
 
-            // add the script's footer
-            code += script_footer;
+            // add helper methods, if any, and the script's footer
+            code += ';' + helper_methods_code + (helper_methods_code === '' ? script_footer.substr(1) : script_footer);
 
             // if we have a global object name
             if (global_object_name !== '')
@@ -213,7 +222,7 @@ $(document).ready(function() {
     // get an object with the existing methods
     extract_methods();
 
-    // add the requuired $ method
+    // add the required $ method
     block = $('.well', $(parse_template({
         method: '$',
         size: script_header.length + script_footer.length
@@ -229,7 +238,7 @@ $(document).ready(function() {
     });
 
     // iterate over the available public methods
-    for (i in methods)
+    Object.keys(methods).sort().forEach(function(i) {
 
         // generate the HTML for the module, based on the template
         block = $(parse_template({
@@ -239,8 +248,23 @@ $(document).ready(function() {
         // ...and add it to the section of optional modules
         })).appendTo(modules_container);
 
+    });
+
+    // iterate over the available helper methods
+    Object.keys(helper_methods).sort().forEach(function(i) {
+
+        // generate the HTML for the module, based on the template
+        block = $(parse_template({
+            method: helper_methods[i].match(/^c\.(.*?)\=/)[1],
+            size: helper_methods[i].length + 1 // the ',' prefix
+
+        // ...and add it to the section of optional modules
+        })).appendTo(helper_modules_container);
+
+    });
+
     // iterate over the available private methods
-    for (i in private_methods)
+    Object.keys(private_methods).sort().forEach(function(i) {
 
         // generate the HTML for the module, based on the template
         block = $(parse_template({
@@ -248,7 +272,9 @@ $(document).ready(function() {
             size: private_methods[i].length + 1 // the ',' prefix
 
         // ...and add it to the section of optional modules
-        })).appendTo(helper_modules_container);
+        })).appendTo(private_modules_container);
+
+    });
 
     // the wells containing the checkboxes
     wells = $('.well');
