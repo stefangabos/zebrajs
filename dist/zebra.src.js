@@ -14,23 +14,53 @@
     var
 
         // we'll use this to keep track of registered event listeners
+        // eslint-disable-next-line no-unused-vars
         event_listeners = {},
 
         // we'll use this when generating random IDs
+        // eslint-disable-next-line no-unused-vars
         internal_counter = 0,
 
         // this is the function used internally create ZebraJS objects using the given arguments
         // at the end of this file we give it a simpler name, like "$", but internally we'll use it like it is
 
         /**
-        *   Creates a "$" object which provides methods meant for simplifying the interaction with the set of elements matched
-        *   by the `selector` argument. This is refered to as `wrapping` those elements.
+        *   Creates a ZebraJS object which provides methods meant for simplifying the interaction with the set of
+        *   elements matched by the `selector` argument. This is refered to as `wrapping` those elements.
         *
-        *   @param  {string|object|node}    selector
+        *   @example
+        *
+        *   // select an element by ID
+        *   var element = $('#foo');
+        *
+        *   // select element by class name
+        *   var elements = $('.foo');
+        *
+        *   // select elements by using JavaScript
+        *   var elements = $(document.querySelectorAll('.foo'));
+        *
+        *   // use CSS selectors
+        *   var elements = $(input[type=text]);
+        *
+        *   @param  {mixed}     selector        A selector to filter DOM elements from the current document. It can be a
+        *                                       query selector, a {@link ZebraJS} object, a DOM element, a
+        *                                       {@link https://developer.mozilla.org/en-US/docs/Web/API/NodeList NodeList},
+        *                                       and array of DOM elements
+        *
+        *   @param  {mixed}     [parent]        A selector to filter DOM elements from the current document, but only
+        *                                       those which have as parent the element(s) indicated by this argument. It
+        *                                       can be a query selector, a {@link ZebraJS} object, a DOM element, a
+        *                                       {@link https://developer.mozilla.org/en-US/docs/Web/API/NodeList NodeList},
+        *                                       and array of DOM elements
+        *
+        *   @param  {boolean}   [first_only]    Setting this argument will instruct the method to return only the first
+        *                                       element from the set of matched elements.
+        *
+        *   @return {array}     Returns a special array holding the matching elements and having all the methods to help
+        *                       you work with those elements.
         *
         *   @alias ZebraJS
         *   @class
-        *   @static
         */
         $ = function(selector, parent, first_only) {
 
@@ -77,6 +107,7 @@
                             elements.push(parent.querySelector(selector));
 
                         // if something went wrong (not a valid CSS selector)
+                        // eslint-disable-next-line no-empty
                         } catch (e) {}
 
                     // if the "first" argument is not set
@@ -89,6 +120,7 @@
                             elements = elements.concat(Array.prototype.slice.call(parent.querySelectorAll(selector)));
 
                         // if something went wrong (not a valid CSS selector)
+                        // eslint-disable-next-line no-empty
                         } catch (e) {}
 
                 }
@@ -3010,12 +3042,14 @@
                 var matches = (this.document || this.ownerDocument).querySelectorAll(s),
                     i = matches.length;
 
+                // eslint-disable-next-line no-empty
                 while (--i >= 0 && matches.item(i) !== this) {}
 
                 return i > -1;
 
             };
 
+    // this is where we make the $ object available globally
     window.$ = $;
 
 })();
