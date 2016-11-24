@@ -21,10 +21,15 @@
  *  @param  {mixed}     [value]     A string, a number, or an array of strings corresponding to the value of each matched
  *                                  element to set as selected/checked.
  *
- *  @return {$|mixed}   If setting a value, this method returns the set of matched elements. If called without the argument,
- *                      the method return the current value of the first element in the set of matched elements.
+ *  @return {ZebraJS|mixed}         If setting a value, this method returns the set of matched elements. If called without
+ *                                  the argument, the method return the current value of the first element in the set of
+ *                                  matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      val
+ *  @instance
  */
-this.val = function(value) {
+elements.val = function(value) {
 
     var result = [];
 
@@ -49,9 +54,11 @@ this.val = function(value) {
         // for other elements, return the first element's value
         return elements[0].value;
 
+    }
+
     // if "value" argument is specified
     // iterate through the set of matched elements
-    } elements.forEach(function(element) {
+    elements.forEach(function(element) {
 
         // if value is not an array
         if (!Array.isArray(value))
@@ -78,6 +85,6 @@ this.val = function(value) {
     });
 
     // return the set of matched elements
-    return $this;
+    return elements;
 
 }

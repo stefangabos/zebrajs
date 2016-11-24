@@ -19,8 +19,12 @@
  *  var serialized = form.serialize();
  *
  *  @return {string}    Returns the serialized form as a query string that could be sent to a server in an Ajax request.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      serialize
+ *  @instance
  */
-this.serialize = function() {
+elements.serialize = function() {
 
     var form = elements[0], result = [];
 

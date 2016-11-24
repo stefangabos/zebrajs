@@ -20,14 +20,18 @@
  *  // using an existing element as the wrapper
  *  element.wrap($('#element-from-the-page'));
  *
- *  @param  {mixed} element     A string, a ZebraJS object or a DOM element in which to wrap around each element in the
- *                              set of matched elements.
+ *  @param  {mixed} element     A string, a {@link ZebraJS} object or a DOM element in which to wrap around each element
+ *                              in the set of matched elements.
  *
- *  @return {$}     Returns the set of matched elements.
+ *  @return {ZebraJS}   Returns the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      wrap
+ *  @instance
  */
-this.wrap = function(element) {
+elements.wrap = function(element) {
 
     // call the "_dom_insert" private method with these arguments
-    return this._dom_insert(element, 'wrap');
+    return elements._dom_insert(element, 'wrap');
 
 }

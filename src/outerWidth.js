@@ -4,7 +4,7 @@
  *
  *  > For hidden elements the returned value is `0`!
  *
- *  See {@link $.$#width .width()} for getting the **inner** width without `padding`, `border` and `margin`.
+ *  See {@link ZebraJS#width .width()} for getting the **inner** width without `padding`, `border` and `margin`.
  *
  *  @example
  *
@@ -19,8 +19,12 @@
  *                                          margins.
  *
  *  @return {float}
+ *
+ *  @memberof   ZebraJS
+ *  @alias      outerWidth
+ *  @instance
  */
-this.outerWidth = function(include_margins) {
+elements.outerWidth = function(include_margins) {
 
     // get the values of all the CSS properties of the element
     // after applying the active stylesheets and resolving any

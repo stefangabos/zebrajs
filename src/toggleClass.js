@@ -21,11 +21,15 @@
  *  @param  {string}    class_name  One or more space-separated class names to be toggled for each element in the set of
  *                                  matched elements.
  *
- *  @return {$}         Returns the set of matched elements.
+ *  @return {ZebraJS}   Returns the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      toggleClass
+ *  @instance
  */
-this.toggleClass = function(class_name) {
+elements.toggleClass = function(class_name) {
 
     // toggle class(es) and return the set of matched elements
-    return this._class('toggle', class_name);
+    return elements._class('toggle', class_name);
 
 }

@@ -17,8 +17,12 @@
  *                                  of matched elements.
  *
  *  @return {boolean}   Returns TRUE if the sought class exists in *any* of the elements in the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      hasClass
+ *  @instance
  */
-this.hasClass = function(class_name) {
+elements.hasClass = function(class_name) {
 
     // iterate through the set of matched elements
     for (var i = 0; i < elements.length; i++)

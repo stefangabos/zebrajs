@@ -19,11 +19,15 @@
  *  @param  {string}    class_name  One or more space-separated class names to be removed from each element in
  *                                  the set of matched elements.
  *
- *  @return {$}         Returns the set of matched elements.
+ *  @return {ZebraJS}   Returns the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      removeClass
+ *  @instance
  */
-this.removeClass = function(class_name) {
+elements.removeClass = function(class_name) {
 
     // remove class(es) and return the set of matched elements
-    return this._class('remove', class_name);
+    return elements._class('remove', class_name);
 
 }

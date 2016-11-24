@@ -1,7 +1,8 @@
 /**
  *  Gets the immediate parent of each element in the current set of matched elements, optionally filtered by a selector.
  *
- *  This method is similar to {@link $.$#parents .parents()}, except .parent() only travels a single level up the DOM tree.
+ *  This method is similar to {@link ZebraJS#parents .parents()}, except .parent() only travels a single level up the
+ *  DOM tree.
  *
  *  @example
  *
@@ -21,10 +22,14 @@
  *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
  *                                  match it.
  *
- *  @return {$}         Returns the immediate parent of each element in the current set of matched elements, optionally
+ *  @return {ZebraJS}   Returns the immediate parent of each element in the current set of matched elements, optionally
  *                      filtered by a selector, as a ZebraJS object.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      parent
+ *  @instance
  */
-this.parent = function(selector) {
+elements.parent = function(selector) {
 
     var result = [];
 

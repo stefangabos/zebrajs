@@ -1,10 +1,10 @@
 /**
  *  Inserts content, specified by the argument, before each element in the set of matched elements.
  *
- *  Both this and the {@link $.$#insertBefore .insertBefore()} method perform the same task, the main difference being
- *  in the placement of the content and the target. With `.before()`, the selector expression preceding the method is
- *  the target before which the content is to be inserted. On the other hand, with `.insertBefore()`, the content precedes
- *  the method, and it is the one inserted before the target element.
+ *  Both this and the {@link ZebraJS#insertBefore .insertBefore()} method perform the same task, the main difference
+ *  being in the placement of the content and the target. With `.before()`, the selector expression preceding the method
+ *  is the target before which the content is to be inserted. On the other hand, with `.insertBefore()`, the content
+ *  precedes the method, and it is the one inserted before the target element.
  *
  *  > If there is more than one target element, clones of the inserted element will be created before each target except
  *  for the last one. The original item will be inserted before the last target.
@@ -37,14 +37,18 @@
  *  // chaining
  *  target.append($('div')).addClass('foo');
  *
- *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to be inserted before each
- *                                  element in the set of matched elements.
+ *  @param  {mixed}     content     DOM element, text node, HTML string, or {@link ZebraJS} object to be inserted before
+ *                                  each element in the set of matched elements.
  *
- *  @return {$}         Returns the set of matched elements (the parents, not the inserted elements).
+ *  @return {ZebraJS}   Returns the set of matched elements (the parents, not the inserted elements).
+ *
+ *  @memberof   ZebraJS
+ *  @alias      before
+ *  @instance
  */
-this.before = function(content) {
+elements.before = function(content) {
 
     // call the "_dom_insert" private method with these arguments
-    return this._dom_insert(content, 'before');
+    return elements._dom_insert(content, 'before');
 
 }

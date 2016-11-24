@@ -2,8 +2,8 @@
  *  For each element in the set, get the first element that matches the selector by traversing up through its ancestors
  *  in the DOM tree.
  *
- *  Given a ZebraJS object that represents a set of DOM elements, this method searches through the ancestors of these
- *  elements in the DOM tree and constructs a new ZebraJS object from the matching elements.
+ *  Given a {@link ZebraJS} object that represents a set of DOM elements, this method searches through the ancestors of
+ *  these elements in the DOM tree and constructs a new {@link ZebraJS} object from the matching elements.
  *
  *  @example
  *
@@ -20,9 +20,13 @@
  *  @param  {string}    selector    If the selector is supplied, the parents will be filtered by testing whether they
  *                                  match it.
  *
- *  @return {$}         Returns zero or one element for each element in the original set, as a ZebraJS object
+ *  @return {ZebraJS}   Returns zero or one element for each element in the original set, as a {@link ZebraJS} object
+ *
+ *  @memberof   ZebraJS
+ *  @alias      closest
+ *  @instance
  */
-this.closest = function(selector) {
+elements.closest = function(selector) {
 
     var result = [];
 

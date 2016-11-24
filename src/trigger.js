@@ -30,9 +30,13 @@
  *
  *  @param  {object}    data        Additional parameters to pass along to the event handler.
  *
- *  @return {$}         Returns the set of matched elements.
+ *  @return {ZebraJS}   Returns the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      trigger
+ *  @instance
  */
-this.trigger = function(event_type, data) {
+elements.trigger = function(event_type, data) {
 
     // iterate through the set of matched elements
     elements.forEach(function(element) {
@@ -61,6 +65,6 @@ this.trigger = function(event_type, data) {
     });
 
     // return the set of matched elements, for chaining
-    return $this;
+    return elements;
 
 }

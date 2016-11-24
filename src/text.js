@@ -22,11 +22,15 @@
  *                                  content that was previously in that element is completely replaced by the new
  *                                  content.
  *
- *  @return {$|string}              When the `content` argument is provided, this method returns the set of matched
+ *  @return {ZebraJS|string}        When the `content` argument is provided, this method returns the set of matched
  *                                  elements. Otherwise it returns the text content of the first element in the set of
  *                                  matched elements (combined with the text content of all its descendants)
+ *
+ *  @memberof   ZebraJS
+ *  @alias      text
+ *  @instance
  */
-this.text = function(content) {
+elements.text = function(content) {
 
     // if content is provided
     if (content)
@@ -45,6 +49,6 @@ this.text = function(content) {
     else return elements[0].textContent;
 
     // return the set of matched elements
-    return $this;
+    return elements;
 
 }

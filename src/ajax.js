@@ -1,6 +1,10 @@
 /**
  *  @todo   Needs to be written!
+ *
+ *  @memberof   ZebraJS
+ *  @alias      ajax
+ *  @instance
  */
-this.ajax = function() {
+elements.ajax = function() {
 
 }

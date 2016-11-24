@@ -22,11 +22,15 @@
  *
  *  @param  {integer}   [value]     Sets the horizontal position of the scrollbar for every matched element.
  *
- *  @return {$|integer}             When `setting` the horizontal position, this method returns the set of matched elements.
+ *  @return {ZebraJS|integer}       When `setting` the horizontal position, this method returns the set of matched elements.
  *                                  When `reading` the horizontal position, this method returns the horizontal position of
  *                                  the scrollbar for the first element in the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      scrollLeft
+ *  @instance
  */
-this.scrollLeft = function(value) {
+elements.scrollLeft = function(value) {
 
     // if value is not specified, return the scrollLeft value of the first element in the set of matched elements
     if (undefined === value) return elements[0].scrollLeft;

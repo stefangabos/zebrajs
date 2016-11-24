@@ -1,7 +1,7 @@
 /**
  *  Removes the parents of the set of matched elements from the DOM, leaving the matched elements in their place.
  *
- *  This method is effectively the inverse of the {@link $.$#wrap .wrap()} method. The matched elements (and their
+ *  This method is effectively the inverse of the {@link ZebraJS#wrap .wrap()} method. The matched elements (and their
  *  siblings, if any) replace their parents within the DOM structure.
  *
  *  @example
@@ -19,9 +19,13 @@
  *  @param  {string}    selector    If the selector is supplied, the parent elements will be filtered and the unwrapping
  *                                  will occur only they match it.
  *
- *  @return {$}         Returns the set of matched elements.
+ *  @return {ZebraJS}   Returns the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      unwrap
+ *  @instance
  */
-this.unwrap = function(selector) {
+elements.unwrap = function(selector) {
 
     // iterate through the set of matched elements
     elements.forEach(function(element) {
@@ -33,6 +37,6 @@ this.unwrap = function(selector) {
     });
 
     // return the set of matched elements
-    return $this;
+    return elements;
 
 }

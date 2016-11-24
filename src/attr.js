@@ -44,12 +44,14 @@
  *                                      Setting it to `false` or `null` will instead **remove** the attribute from the
  *                                      set of matched elements.
  *
- *  @return {$|mixed}   When `setting` attributes, this method returns the set of matched elements.
- *                      When `reading` attributes, this method returns the value of the required attribute.
+ *  @return {ZebraJS|mixed}             When `setting` attributes, this method returns the set of matched elements.
+ *                                      When `reading` attributes, this method returns the value of the required attribute.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      attr
+ *  @instance
  */
-this.attr = function(attribute, value) {
-
-    var i;
+elements.attr = function(attribute, value) {
 
     // if attribute argument is an object
     if (typeof attribute === 'object')
@@ -58,7 +60,7 @@ this.attr = function(attribute, value) {
         elements.forEach(function(element) {
 
             // iterate over the attributes
-            for (i in attribute)
+            for (var i in attribute)
 
                 // set each attribute
                 element.setAttribute(i, attribute[i]);
@@ -93,6 +95,6 @@ this.attr = function(attribute, value) {
             return elements[0].getAttribute(attribute);
 
     // if we get this far, return the set of matched elements
-    return $this;
+    return elements;
 
 }

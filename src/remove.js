@@ -4,7 +4,7 @@
  *  Use this method when you want to remove the element itself, as well as everything inside it. In addition to the elements
  *  themselves, all attached event handlers and data attributes associated with the elements are also removed.
  *
- *  To remove the elements without removing data and event handlers, use {@link $.$#detach() .detach()} instead.
+ *  To remove the elements without removing data and event handlers, use {@link ZebraJS#detach() .detach()} instead.
  *
  *  @example
  *
@@ -16,9 +16,13 @@
  *  // handlers and data attributes associated with the elements
  *  element.remove();
  *
- *  @return {$}         Returns the set of matched elements.
- */
-this.remove = function() {
+ *  @return {ZebraJS}   Returns the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      remove
+ *  @instance
+*/
+elements.remove = function() {
 
     // iterate over the set of matched elements
     elements.forEach(function(element) {
@@ -57,6 +61,6 @@ this.remove = function() {
     });
 
     // return the set of matched elements
-    return $this;
+    return elements;
 
 }

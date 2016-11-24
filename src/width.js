@@ -2,7 +2,7 @@
  *  Returns the current computed **inner** width (without `padding`, `border` and `margin`) of the first element
  *  in the set of matched elements as `float`, or sets the `width` CSS property of every element in the set.
  *
- *  See {@link $.$#outerWidth .outerWidth()} for getting the width including `padding`, `border` and, optionally,
+ *  See {@link ZebraJS#outerWidth .outerWidth()} for getting the width including `padding`, `border` and, optionally,
  *  `margin`.
  *
  *  @example
@@ -35,21 +35,25 @@
  *
  *  > For hidden elements the returned value is `0`!
  *
- *  @return {$|float}   When **setting** the `width`, this method returns the set of matched elements. Otherwise, it
- *                      returns the current computed **inner** width (without `padding`, `border` and `margin`) of the
- *                      first element in the set of matched elements, as `float`.
+ *  @return {ZebraJS|float}     When **setting** the `width`, this method returns the set of matched elements. Otherwise,
+ *                              it returns the current computed **inner** width (without `padding`, `border` and `margin`)
+ *                              of the first element in the set of matched elements, as `float`.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      width
+ *  @instance
  */
-this.width = function(width) {
+elements.width = function(width) {
 
     // if "width" is given, set the width of every matched element, making sure to suffix the value with "px"
     // if not otherwise specified
-    if (width) return this.css('width', width + (parseFloat(width) === width ? 'px' : ''));
+    if (width) return elements.css('width', width + (parseFloat(width) === width ? 'px' : ''));
 
     // for the "window"
-    if (this.get()[0] === window) return window.innerWith;
+    if (elements[0] === window) return window.innerWith;
 
     // for the "document"
-    if (this.get()[0] === document)
+    if (elements[0] === document)
 
         // return width
         return Math.max(

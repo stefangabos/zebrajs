@@ -45,10 +45,14 @@
  *                                      Setting it to `false` or `null` will instead **remove** the CSS property from the
  *                                      set of matched elements.
  *
- *  @return {$|mixed}   When `setting` CSS properties, this method returns the set of matched elements.
- *                      When `reading` CSS properties, this method returns the value(s) of the required computed style(s).
+ *  @return {ZebraJS|mixed}             When `setting` CSS properties, this method returns the set of matched elements.
+ *                                      When `reading` CSS properties, this method returns the value(s) of the required computed style(s).
+ *
+ *  @memberof   ZebraJS
+ *  @alias      css
+ *  @instance
  */
-this.css = function(property, value) {
+elements.css = function(property, value) {
 
     var i, computedStyle;
 
@@ -96,6 +100,6 @@ this.css = function(property, value) {
     }
 
     // if we get this far, return the matched elements
-    return $this;
+    return elements;
 
 }

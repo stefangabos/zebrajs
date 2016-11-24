@@ -22,11 +22,15 @@
  *
  *  @param  {integer}   [value]     Sets the vertical position of the scrollbar for every matched element.
  *
- *  @return {$|integer}             When `setting` the vertical position, this method returns the set of matched elements.
+ *  @return {ZebraJS|integer}       When `setting` the vertical position, this method returns the set of matched elements.
  *                                  When `reading` the vertical position, this method returns the vertical position of
  *                                  the scrollbar for the first element in the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      scrollTop
+ *  @instance
  */
-this.scrollTop = function(value) {
+elements.scrollTop = function(value) {
 
     // if value is not specified, return the scrollTop value of the first element in the set of matched elements
     if (undefined === value) return elements[0].scrollTop;

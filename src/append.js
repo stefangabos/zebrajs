@@ -1,7 +1,7 @@
 /**
  *  Inserts content, specified by the argument, to the end of each element in the set of matched elements.
  *
- *  Both this and the {@link $.$#appendTo .appendTo()} method perform the same task, the main difference being in the
+ *  Both this and the {@link ZebraJS#appendTo .appendTo()} method perform the same task, the main difference being in the
  *  placement of the content and the target. With `.append()`, the selector expression preceding the method is the
  *  container into which the content is to be inserted. On the other hand, with `.appendTo()`, the content precedes the
  *  method, and it is inserted into the target container.
@@ -40,11 +40,15 @@
  *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the end of each
  *                                  element in the set of matched elements.
  *
- *  @return {$}         Returns the set of matched elements (the parents, not the appended elements).
+ *  @return {ZebraJS}   Returns the set of matched elements (the parents, not the appended elements).
+ *
+ *  @memberof   ZebraJS
+ *  @alias      append
+ *  @instance
  */
-this.append = function(content) {
+elements.append = function(content) {
 
     // call the "_dom_insert" private method with these arguments
-    return this._dom_insert(content, 'append');
+    return elements._dom_insert(content, 'append');
 
 }

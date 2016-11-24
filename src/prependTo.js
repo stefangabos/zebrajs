@@ -1,7 +1,7 @@
 /**
  *  Inserts every element in the set of matched elements to the beginning of the parent element(s), specified by the argument.
  *
- *  Both this and the {@link $.$#prepend .prepend()} method perform the same task, the main difference being in the
+ *  Both this and the {@link ZebraJS#prepend .prepend()} method perform the same task, the main difference being in the
  *  placement of the content and the target. With `.prepend()`, the selector expression preceding the method is the
  *  container into which the content is to be inserted. On the other hand, with `.prependTo()`, the content precedes the
  *  method, and it is inserted into the target container.
@@ -30,13 +30,17 @@
  *  // each target except for the last one; for the last target, the original list will be moved
  *  $('ul').appendTo(parent);
  *
- *  @param  {$}     parent      A ZebraJS object at beginning of which to insert each element in the set of matched elements.
+ *  @param  {ZebraJS}   parent      A ZebraJS object at beginning of which to insert each element in the set of matched elements.
  *
- *  @return {$}     Returns the ZebraJS object you are appending to.
+ *  @return {ZebraJS}   Returns the ZebraJS object you are appending to.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      prependTo
+ *  @instance
  */
-this.prependTo = function(parent) {
+elements.prependTo = function(parent) {
 
     // call the "_dom_insert" private method with these arguments
-    return $(parent)._dom_insert(this, 'prepend');
+    return $(parent)._dom_insert(elements, 'prepend');
 
 }

@@ -1,6 +1,6 @@
 /**
- *  Gets the descendants of each element in the current set of matched elements, filtered by a selector, ZebraJS object,
- *  or an element you'd get by using document.getElementById.
+ *  Gets the descendants of each element in the current set of matched elements, filtered by a selector, {@link ZebraJS}
+ *  object, or a DOM element.
  *
  *  @example
  *
@@ -17,14 +17,17 @@
  *  // chaining
  *  element.find('div').addClass('foo');
  *
- *  @param  {string}    selector    A selector to filter descendant elements by. It can be a query selector, a ZebraJS
- *                                  object, or an element you'd get by using document.getElementById.
+ *  @param  {string}    selector    A selector to filter descendant elements by. It can be a query selector, a
+ *                                  {@link ZebraJS} object, or a DOM element.
  *
- *  @return {$}         Returns the descendants of each element in the current set of matched elements, filtered by a
- *                      selector, ZebraJS object, or an element you'd get by using document.getElementById, as a ZebraJS
- *                      object.
+ *  @return {ZebraJS}   Returns the descendants of each element in the current set of matched elements, filtered by a
+ *                      selector, {@link ZebraJS} object, or DOM element, as a {@link ZebraJS} object.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      find
+ *  @instance
  */
-this.find = function(selector) {
+elements.find = function(selector) {
 
     var result = [];
 
@@ -32,10 +35,10 @@ this.find = function(selector) {
     elements.forEach(function(element) {
 
         // if selector is a ZebraJS object
-        if (typeof selector === 'object' && selector instanceof $)
+        if (typeof selector === 'object' && selector.version)
 
             // iterate through the elements in the object
-            selector.get().forEach(function(wrapped) {
+            selector.forEach(function(wrapped) {
 
                 // if the elements are the same, add it to the results array
                 if (wrapped.isSameNode(element)) result.push(element);

@@ -29,9 +29,13 @@
  *
  *  @param  {function}  callback    A function to execute when the event is triggered.
  *
- *  @return {$}         Returns the set of matched elements.
+ *  @return {ZebraJS}   Returns the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      off
+ *  @instance
  */
-this.off = function(event_type, callback) {
+elements.off = function(event_type, callback) {
 
     var event_types = event_type ? event_type.split(' ') : Object.keys(event_listeners), namespace, remove_all_event_handlers = !event_type;
 
@@ -88,6 +92,6 @@ this.off = function(event_type, callback) {
     });
 
     // return the set of matched elements, for chaining
-    return $this;
+    return elements;
 
 }

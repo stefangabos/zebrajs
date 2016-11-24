@@ -19,11 +19,15 @@
  *  @param  {string}    selector    If the selector is supplied, the elements will be filtered by testing whether they
  *                                  match it.
  *
- *  @return {$}         Returns the siblings of each element in the set of matched elements, as a ZebraJS object
+ *  @return {ZebraJS}   Returns the siblings of each element in the set of matched elements, as a ZebraJS object
+ *
+ *  @memberof   ZebraJS
+ *  @alias      siblings
+ *  @instance
  */
-this.siblings = function(selector) {
+elements.siblings = function(selector) {
 
     // get the siblings of each element in the set of matched elements, optionally filtered by a selector.
-    return this._dom_search('siblings', selector);
+    return elements._dom_search('siblings', selector);
 
 }

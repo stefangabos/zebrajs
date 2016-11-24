@@ -19,11 +19,15 @@
  *  @param  {string}    class_name  One or more space-separated class names to be added to each element in the
  *                                  set of matched elements.
  *
- *  @return {$}         Returns the set of matched elements.
+ *  @return {ZebraJS}   Returns the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      addClass
+ *  @instance
  */
-this.addClass = function(class_name) {
+elements.addClass = function(class_name) {
 
     // add class(es) and return the set of matched elements
-    return this._class('add', class_name);
+    return elements._class('add', class_name);
 
 }

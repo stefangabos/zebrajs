@@ -20,13 +20,17 @@
  *  @param  {string}    selector    If the selector is provided, the method will retrieve the previous sibling only if
  *                                  it matches the selector
  *
- *  @return {$}         Returns the immediately preceding sibling of each element in the set of matched elements,
+ *  @return {ZebraJS}   Returns the immediately preceding sibling of each element in the set of matched elements,
  *                      optionally filtered by a selector, as a ZebraJS object.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      prev
+ *  @instance
  */
-this.prev = function(selector) {
+elements.prev = function(selector) {
 
     // get the immediately preceding sibling of each element in the set of matched elements,
     // optionally filtered by a selector
-    return this._dom_search('previous', selector);
+    return elements._dom_search('previous', selector);
 
 }

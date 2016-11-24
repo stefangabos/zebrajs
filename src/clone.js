@@ -31,9 +31,13 @@
  *  @param  {boolean}   deep_with_data_and_events   Setting this argument to `true` will instruct the method to also copy
  *                                                  event handlers and data for all children of the cloned element.
  *
- *  @return {$}         Returns the cloned elements, as a ZebraJS object.
+ *  @return {ZebraJS}   Returns the cloned elements, as a {@link ZebraJS} object.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      clone
+ *  @instance
  */
-this.clone = function(with_data_and_events, deep_with_data_and_events) {
+elements.clone = function(with_data_and_events, deep_with_data_and_events) {
 
     var result = [];
 
@@ -72,7 +76,7 @@ this.clone = function(with_data_and_events, deep_with_data_and_events) {
             });
 
         // if event handlers and data for all children of the cloned element should be also copied
-        if (deep_with_data_and_events) $this._clone_data_and_events(element, clone);
+        if (deep_with_data_and_events) elements._clone_data_and_events(element, clone);
 
     });
 

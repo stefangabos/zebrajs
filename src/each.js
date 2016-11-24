@@ -22,8 +22,12 @@
  *  });
  *
  *  @return {undefined}
+ *
+ *  @memberof   ZebraJS
+ *  @alias      each
+ *  @instance
  */
-this.each = function(callback) {
+elements.each = function(callback) {
 
     // iterate through the set of matched elements
     for (var i = 0; i < elements.length; i++)

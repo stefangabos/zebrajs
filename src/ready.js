@@ -9,9 +9,13 @@
  *
  *  @param  {function}  callback    A function to execute when the DOM is ready and safe to manipulate.
  *
- *  @return {$}         Returns the set of matched elements.
+ *  @return {ZebraJS}   Returns the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      ready
+ *  @instance
  */
-this.ready = function(callback) {
+elements.ready = function(callback) {
 
     // if DOM is already ready, fire the callback now
     if (document.readyState === 'complete' || document.readyState !== 'loading') callback();
@@ -20,6 +24,6 @@ this.ready = function(callback) {
     else document.addEventListener('DOMContentLoaded', callback);
 
     // return the set of matched elements
-    return $this;
+    return elements;
 
 }

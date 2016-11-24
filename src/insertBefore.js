@@ -1,7 +1,7 @@
 /**
  *  Inserts every element in the set of matched elements before the parent element(s), specified by the argument.
  *
- *  Both this and the {@link $.$#before .before()} method perform the same task, the main difference being in the
+ *  Both this and the {@link ZebraJS#before .before()} method perform the same task, the main difference being in the
  *  placement of the content and the target. With `.before()`, the selector expression preceding the method is the target
  *  before which the content is to be inserted. On the other hand, with `.insertBefore()`, the content precedes the method,
  *  and it is the one inserted before the target element(s).
@@ -30,13 +30,17 @@
  *  // each target, except for the last one; the original list will be moved before the last target
  *  $('ul').insertBefore(target);
  *
- *  @param  {$}     target  A ZebraJS object before which to insert each element in the set of matched elements.
+ *  @param  {ZebraJS}   target  A ZebraJS object before which to insert each element in the set of matched elements.
  *
- *  @return {$}     Returns the ZebraJS object before which the content is inserted.
+ *  @return {ZebraJS}   Returns the ZebraJS object before which the content is inserted.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      insertBefore
+ *  @instance
  */
-this.insertBefore = function(target) {
+elements.insertBefore = function(target) {
 
     // call the "_dom_insert" private method with these arguments
-    return $(target)._dom_insert(this, 'before');
+    return $(target)._dom_insert(elements, 'before');
 
 }

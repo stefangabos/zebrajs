@@ -21,11 +21,15 @@
  *
  *  @param  {mixed}     value       The value to associate with the data set.
  *
- *  @return {$|mixed}   When `setting` data attributes, this method returns the set of matched elements.
- *                      When `reading` data attributes, this method returns the stored values, or `undefined` if not data
- *                      found for the requested key.
+ *  @return {ZebraJS|mixed}         When `setting` data attributes, this method returns the set of matched elements.
+ *                                  When `reading` data attributes, this method returns the stored values, or `undefined`
+ *                                  if not data found for the requested key.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      data
+ *  @instance
  */
-this.data = function(name, value) {
+elements.data = function(name, value) {
 
     // make sure the name follows the Dataset API specs
     // http://www.w3.org/TR/html5/dom.html#dom-dataset
@@ -95,7 +99,7 @@ this.data = function(name, value) {
         });
 
         // return the set of matched elements
-        return $this;
+        return elements;
 
     }
 

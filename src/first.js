@@ -1,5 +1,5 @@
 /**
- *  Constructs a new ZebraJS object from the first element in the set of matched elements.
+ *  Constructs a new {@link ZebraJS} object from the first element in the set of matched elements.
  *
  *  @example
  *
@@ -10,9 +10,13 @@
  *  // returns the first element from the list of matched elements, as a ZebraJS object
  *  var first = elements.first();
  *
- *  @return {$}         Returns the first element from the list of matched elements, as a ZebraJS object
+ *  @return {ZebraJS}   Returns the first element from the list of matched elements, as a ZebraJS object
+ *
+ *  @memberof   ZebraJS
+ *  @alias      first
+ *  @instance
  */
-this.first = function() {
+elements.first = function() {
 
     // returns the first element from the list of matched elements, as a ZebraJS object
     return $(elements[0]);

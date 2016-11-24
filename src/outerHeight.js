@@ -4,7 +4,7 @@
  *
  *  > For hidden elements the returned value is `0`!
  *
- *  See {@link $.$#height .height()} for getting the **inner** height without `padding`, `border` and `margin`.
+ *  See {@link ZebraJS#height .height()} for getting the **inner** height without `padding`, `border` and `margin`.
  *
  *  @example
  *
@@ -19,8 +19,12 @@
  *                                          margins.
  *
  *  @return {float}
+ *
+ *  @memberof   ZebraJS
+ *  @alias      outerHeight
+ *  @instance
  */
-this.outerHeight = function(include_margins) {
+elements.outerHeight = function(include_margins) {
 
     // get the values of all the CSS properties of the element
     // after applying the active stylesheets and resolving any

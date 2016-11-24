@@ -1,8 +1,8 @@
 /**
  *  Inserts content specified by the argument after each element in the set of matched elements.
  *
- *  Both this and the {@link $.$#insertAfter .insertAfter()} method perform the same task, the main difference being in
- *  the placement of the content and the target. With `.after()`, the selector expression preceding the method is the
+ *  Both this and the {@link ZebraJS#insertAfter .insertAfter()} method perform the same task, the main difference being
+ *  in the placement of the content and the target. With `.after()`, the selector expression preceding the method is the
  *  target after which the content is to be inserted. On the other hand, with `.insertAfter()`, the content precedes the
  *  method and it is the one inserted after the target element.
  *
@@ -37,11 +37,15 @@
  *  @param  {mixed}     content     DOM element, text node, HTML string or ZebraJS object to be inserted after each
  *                                  element in the set of matched elements.
  *
- *  @return {$}         Returns the set of matched elements.
+ *  @return {ZebraJS}   Returns the set of matched elements.
+ *
+ *  @memberof   ZebraJS
+ *  @alias      after
+ *  @instance
  */
-this.after = function(content) {
+elements.after = function(content) {
 
     // call the "_dom_insert" private method with these arguments
-    return this._dom_insert(content, 'after');
+    return elements._dom_insert(content, 'after');
 
 }
