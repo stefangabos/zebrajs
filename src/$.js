@@ -1,12 +1,3 @@
-/**
- *
- *  @fileOverview
- *  @author     Stefan Gabos <contact@stefangabos.ro>
- *  @version    1.0.0
- *  @copyright  (c) 2016 Stefan Gabos
- *  @license    LGPL-3.0
- *
- */
 (function() {
 
     'use strict';
@@ -59,6 +50,10 @@
         *   @return {array}     Returns a special array holding the matching elements and having all the methods to help
         *                       you work with those elements.
         *
+        *   @author     Stefan Gabos <contact@stefangabos.ro>
+        *   @version    1.0.0
+        *   @copyright  (c) 2016 Stefan Gabos
+        *   @license    LGPL-3.0
         *   @alias ZebraJS
         *   @class
         */
