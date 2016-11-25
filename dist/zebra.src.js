@@ -504,7 +504,32 @@
              *  @alias      ajax
              *  @instance
              */
-            elements.ajax = function() {
+            $.ajax = function(url, options) {
+
+                var defaults = {
+                        async: true,
+                        cache: true,
+                        data: null,
+                        method: 'get'
+                    }, callback = function(httpRequest) {
+                        console.log(httpRequest.readyState, httpRequest.status, httpRequest.responseText);
+                    }, httpRequest;
+
+                options = $.extend(defaults, options);
+
+                console.log(options);
+
+            //     if (window.XMLHttpRequest) {
+            //
+            //         httpRequest = new XMLHttpRequest();
+            //
+            //         httpRequest.onreadystatechange = callback;
+            //
+            //         httpRequest.open(options.method.toUpperCase(), url, options.async);
+            //
+            //         httpRequest.send(options.data);
+            //
+            //     }
 
             }
 
@@ -3015,6 +3040,42 @@
         }
 
     /**
+     *  @todo   Needs to be written!
+     *
+     *  @memberof   ZebraJS
+     *  @alias      ajax
+     *  @instance
+     */
+    $.ajax = function(url, options) {
+
+        var defaults = {
+                async: true,
+                cache: true,
+                data: null,
+                method: 'get'
+            }, callback = function(httpRequest) {
+                console.log(httpRequest.readyState, httpRequest.status, httpRequest.responseText);
+            }, httpRequest;
+
+        options = $.extend(defaults, options);
+
+        console.log(options);
+
+    //     if (window.XMLHttpRequest) {
+    //
+    //         httpRequest = new XMLHttpRequest();
+    //
+    //         httpRequest.onreadystatechange = callback;
+    //
+    //         httpRequest.open(options.method.toUpperCase(), url, options.async);
+    //
+    //         httpRequest.send(options.data);
+    //
+    //     }
+
+    }
+
+    /**
      *  Search for a given value within an array and returns the first index where the value is found, or `-1` if the value
      *  is not found.
      *
@@ -3076,7 +3137,7 @@
         var i, property, result;
 
         // if the "assign" method is available, use it
-        if (Object.assign) return Object.assign.apply(Object, Array.prototype.slice.call(arguments, 1));
+        if (Object.assign) return Object.assign.apply(null, [target].concat(Array.prototype.slice.call(arguments, 1)));
 
         // if the "assign" method is not available
 
@@ -3087,7 +3148,7 @@
         for (i = 1; i < arguments.length; i++)
 
             // if argument is an object
-            if (typeof arguments[i] === 'object') {
+            if (typeof arguments[i] === 'object')
 
                 // iterate over the object's properties
                 for (property in arguments[i])
@@ -3097,8 +3158,6 @@
 
                         // add property to the result
                         result[property] = arguments[i][property];
-
-            }
 
         // return the new object
         return result;
