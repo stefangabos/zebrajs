@@ -24,7 +24,7 @@ $.extend = function(target) {
     var i, property, result;
 
     // if the "assign" method is available, use it
-    if (Object.assign) return Object.assign.apply(Object, Array.prototype.slice.call(arguments, 1));
+    if (Object.assign) return Object.assign.apply(null, [target].concat(Array.prototype.slice.call(arguments, 1)));
 
     // if the "assign" method is not available
 
