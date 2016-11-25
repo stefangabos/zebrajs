@@ -18,6 +18,7 @@ $(document).ready(function() {
         dependencies = {
             'addClass':     ['_class'],
             'after':        ['_dom_insert'],
+            'ajax':         ['extend'],
             'append':       ['_dom_insert'],
             'appendTo':     ['_dom_insert'],
             'before':       ['_dom_insert'],
