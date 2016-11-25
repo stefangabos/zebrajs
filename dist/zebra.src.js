@@ -529,6 +529,7 @@
 
                                 // if we have a callback function ready to handle this event, call it now
                                 if (typeof options.beforeSend === 'function') options.beforeSend.call(null, httpRequest, options);
+
                                 break;
 
                             // if the request completed
@@ -544,7 +545,7 @@
                                 if (httpRequest.status !== 200 && typeof options.error === 'function')
 
                                     // call that function now
-                                    options.success.call(null, httpRequest.status, httpRequest.responseText);
+                                    options.error.call(null, httpRequest.status, httpRequest.responseText);
 
                                 // if we have a callback function ready to handle the fact that the request completed (regardless if
                                 // it was successful or not)
@@ -590,11 +591,11 @@
                     // this will be called as the call progresses
                     httpRequest.onreadystatechange = callback;
 
-                    // set the request header
-                    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-
                     // this makes the call...
                     httpRequest.open(options.method, url + (options.method === 'GET' && options.data ? '?' + options.data : ''), options.async);
+
+                    // set the request header
+                    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 
                     // with any additional parameters, if provided
                     httpRequest.send(options.data);
@@ -3141,6 +3142,7 @@
 
                         // if we have a callback function ready to handle this event, call it now
                         if (typeof options.beforeSend === 'function') options.beforeSend.call(null, httpRequest, options);
+
                         break;
 
                     // if the request completed
@@ -3156,7 +3158,7 @@
                         if (httpRequest.status !== 200 && typeof options.error === 'function')
 
                             // call that function now
-                            options.success.call(null, httpRequest.status, httpRequest.responseText);
+                            options.error.call(null, httpRequest.status, httpRequest.responseText);
 
                         // if we have a callback function ready to handle the fact that the request completed (regardless if
                         // it was successful or not)
@@ -3202,11 +3204,11 @@
             // this will be called as the call progresses
             httpRequest.onreadystatechange = callback;
 
-            // set the request header
-            httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-
             // this makes the call...
             httpRequest.open(options.method, url + (options.method === 'GET' && options.data ? '?' + options.data : ''), options.async);
+
+            // set the request header
+            httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 
             // with any additional parameters, if provided
             httpRequest.send(options.data);
