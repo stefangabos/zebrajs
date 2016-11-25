@@ -155,13 +155,24 @@ module.exports = function(grunt) {
         },
 
         /***************************************************************************************************************
+         *  COPY
+         *  https://github.com/gruntjs/grunt-contrib-copy
+         **************************************************************************************************************/
+        'copy': {
+            main: {
+                src: 'dist/zebra.min.js',
+                dest: 'docs/download/public/javascript/zebra.min.js'
+            }
+        },
+
+        /***************************************************************************************************************
          *  WATCH
          *  https://npmjs.org/package/grunt-contrib-watch
          **************************************************************************************************************/
         'watch': {
             library: {
                 files: ['src/**/*.js'],
-                tasks: ['includes:library', 'newer:eslint:library', 'newer:jshint:library', 'jsdoc', 'newer:uglify:library', 'uglify:site', 'includes:site', 'notify:done'],
+                tasks: ['includes:library', 'newer:eslint:library', 'newer:jshint:library', 'jsdoc', 'newer:uglify:library', 'copy', 'uglify:site', 'includes:site', 'notify:done'],
                 options: {
                     livereload: true
                 }
@@ -189,6 +200,7 @@ module.exports = function(grunt) {
     });
 
     // register plugins
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-notify');
     grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-includes');

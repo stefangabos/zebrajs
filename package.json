@@ -24,16 +24,17 @@
     "docdash": "https://github.com/stefangabos/docdash.git",
     "grunt": "*",
     "grunt-cli": "*",
-    "grunt-newer": "*",
-    "time-grunt": "*",
-    "grunt-notify": "*",
-    "grunt-contrib-watch": "*",
-    "grunt-sass": "*",
-    "grunt-eslint": "*",
+    "grunt-contrib-copy": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-eslint": "*",
     "grunt-includes": "*",
     "grunt-jsdoc": "*",
-    "jsdoc": "*"
+    "grunt-newer": "*",
+    "grunt-notify": "*",
+    "grunt-sass": "*",
+    "jsdoc": "*",
+    "time-grunt": "*"
   }
 }
