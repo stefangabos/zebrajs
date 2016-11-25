@@ -35,7 +35,7 @@ $.extend = function(target) {
     for (i = 1; i < arguments.length; i++)
 
         // if argument is an object
-        if (typeof arguments[i] === 'object') {
+        if (typeof arguments[i] === 'object')
 
             // iterate over the object's properties
             for (property in arguments[i])
@@ -45,8 +45,6 @@ $.extend = function(target) {
 
                     // add property to the result
                     result[property] = arguments[i][property];
-
-        }
 
     // return the new object
     return result;
