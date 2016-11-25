@@ -193,6 +193,7 @@
         }
 
     // import "inArray.js"
+    // import "extend.js"
 
     // for browsers that do not support Element.matches() or Element.matchesSelector(), but carry support for
     // document.querySelectorAll(), a polyfill exists:
