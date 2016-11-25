@@ -29,6 +29,11 @@ a, a:hover {
     }
 }
 
+.actions {
+    margin-top: -.7em;
+    margin-bottom: .7em;
+}
+
 .well {
     box-shadow: none;
     background: #FAFAFA;
@@ -38,7 +43,9 @@ a, a:hover {
     }
 }
 
-.optional-methods + .col-lg-12 > label {
+.optional-methods + .col-lg-12 > label,
+.helper-methods + .col-lg-12 > label,
+.private-methods + .col-lg-12 > label {
     margin-bottom: 0;
     & + span {
         margin: 0 0 1em;
