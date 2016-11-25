@@ -211,6 +211,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['includes:library', 'sass', 'eslint', 'jshint', 'jsdoc', 'uglify', 'includes:site', 'watch']);
+    grunt.registerTask('default', ['includes:library', 'sass', 'eslint', 'jshint', 'jsdoc', 'uglify', 'copy', 'includes:site', 'watch']);
 
 };
