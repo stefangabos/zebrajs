@@ -192,7 +192,7 @@ $(document).ready(function() {
                     if (id !== '$')
 
                         // helper methods go to the end, so add them to a different place
-                        if (helper_methods[id]) helper_methods_code += (helper_methods_code !== '' ? ';' : '') + helper_methods[id];
+                        if (helper_methods[id]) helper_methods_code += (helper_methods_code !== '' ? ',' : '') + helper_methods[id];
 
                         // add module's source to the existing source code
                         else code += ',' + (id.indexOf('_') === 0 ? private_methods[id] : methods[id]);
@@ -203,7 +203,7 @@ $(document).ready(function() {
             });
 
             // add helper methods, if any, and the script's footer
-            code += ';' + helper_methods_code + (helper_methods_code === '' ? script_footer.substr(1) : script_footer);
+            code += ', g};' + helper_methods_code + (helper_methods_code === '' ? script_footer.substr(1) : script_footer);
 
             // if we have a global object name
             if (global_object_name !== '')
