@@ -1,5 +1,36 @@
 /**
- *  @todo   Needs to be written!
+ *  Performs an asynchronous HTTP (Ajax) request.
+ *
+ *  @example
+ *
+ *  $.ajax({
+ *      url: 'http://mydomain.com/index.html',
+ *      method: 'GET',
+ *      data: {
+ *          foo:  'baz',
+ *          bar: 'bax'
+ *      },
+ *      error: function() {
+ *          alert('error!');
+ *      },
+ *      success: function() {
+ *          alert('success!');
+ *      }
+ *  });
+ *
+ *  @param  {object}    options     A set of key/value pairs that configure the Ajax request.
+ *
+ *  |  Property         |   Type                |   Descritption
+ *  |-------------------|-----------------------|----------------------------------------------
+ *  |   **async**       |   *boolean*           |   By default, all requests are sent *asynchronously*. If you need synchronous requests, set this option to `false`. Note that synchronous requests may temporarily lock the browser, disabling any actions while the request is active.<br>Default is `true`
+ *  |   **beforeSend**  |   *function*          |   A pre-request callback function that can be used to modify the XMLHTTPRequest object before it is sent. Use this to set custom headers, etc. The XMLHTTPRequest object and settings objects are passed as arguments. Returning false from this function will cancel the request.
+ *  |   **cache**       |   *boolean*           |   If set to `false`, will force requested pages not to be cached by the browser. Note: Setting cache to `false` will only work correctly with `HEAD` and `GET` requests. It works by appending "_={timestamp}" to the GET parameters. The parameter is not needed for other types of requests.<br>Default is `true`
+ *  |   **complete**    |   *function*          |   A function to be called when the request finishes (after `success` and `error` callbacks are executed). The function gets passed two arguments: The XMLHTTPRequest object and a string with the status of the request.
+ *  |   **data**        |   *string* / *object* |   Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET requests. Object must be `key/value` pairs, where `value` can also be an array.
+ *  |   **error**       |   *function*          |   A function to be called if the request fails. The function receives two arguments: The XMLHttpRequest object and a string describing the type of error that occurred.
+ *  |   **method**      |   *string*            |   The HTTP method to use for the request (e.g. `POST`, `GET`, `PUT`).
+ *  |   **success**     |   *function*          |   A function to be called if the request succeeds. The function gets passed two arguments: the data returned from the server and a string describing the status.
+ *
  *
  *  @memberof   ZebraJS
  *  @alias      ajax
@@ -14,6 +45,7 @@ $.ajax = function(url, options) {
             cache: true,
             complete: null,
             data: null,
+            error: null,
             method: 'get',
             success: null
 
