@@ -681,7 +681,7 @@
 
     
 
-    <h4 class="name" id="ajax"><span class="type-signature"></span>ajax<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ajax"><span class="type-signature"></span>ajax<span class="signature">(options)</span><span class="type-signature"></span></h4>
 
     
 
@@ -693,7 +693,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3018">line 3018</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3049">line 3049</a>
     </li></ul></dd>
     
 
@@ -726,19 +726,15 @@
     
 
     
-    <dt class="tag-todo">To Do:</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>Needs to be written!</li>
-        </ul>
-    </dd>
-    
 </dl>
 
 
 
 
 
+<div class="description">
+    <p>Performs an asynchronous HTTP (Ajax) request.</p>
+</div>
 
 
 
@@ -747,6 +743,127 @@
 
 
 
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>$.ajax({
+     url: 'http://mydomain.com/index.html',
+     method: 'GET',
+     data: {
+         foo:  'baz',
+         bar: 'bax'
+     },
+     error: function() {
+         alert('error!');
+     },
+     success: function() {
+         alert('success!');
+     }
+ });
+
+ </code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A set of key/value pairs that configure the Ajax request.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Descritption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>async</strong></td>
+<td><em>boolean</em></td>
+<td>By default, all requests are sent <em>asynchronously</em>. If you need synchronous requests, set this option to <code>false</code>. Note that synchronous requests may temporarily lock the browser, disabling any actions while the request is active.<br>Default is <code>true</code></td>
+</tr>
+<tr>
+<td><strong>beforeSend</strong></td>
+<td><em>function</em></td>
+<td>A pre-request callback function that can be used to modify the XMLHTTPRequest object before it is sent. Use this to set custom headers, etc. The XMLHTTPRequest object and settings objects are passed as arguments. Returning false from this function will cancel the request.</td>
+</tr>
+<tr>
+<td><strong>cache</strong></td>
+<td><em>boolean</em></td>
+<td>If set to <code>false</code>, will force requested pages not to be cached by the browser. Note: Setting cache to <code>false</code> will only work correctly with <code>HEAD</code> and <code>GET</code> requests. It works by appending &quot;_={timestamp}&quot; to the GET parameters. The parameter is not needed for other types of requests.<br>Default is <code>true</code></td>
+</tr>
+<tr>
+<td><strong>complete</strong></td>
+<td><em>function</em></td>
+<td>A function to be called when the request finishes (after <code>success</code> and <code>error</code> callbacks are executed). The function gets passed two arguments: The XMLHTTPRequest object and a string with the status of the request.</td>
+</tr>
+<tr>
+<td><strong>data</strong></td>
+<td><em>string</em> / <em>object</em></td>
+<td>Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET requests. Object must be <code>key/value</code> pairs, where <code>value</code> can also be an array.</td>
+</tr>
+<tr>
+<td><strong>error</strong></td>
+<td><em>function</em></td>
+<td>A function to be called if the request fails. The function receives two arguments: The XMLHttpRequest object and a string describing the type of error that occurred.</td>
+</tr>
+<tr>
+<td><strong>method</strong></td>
+<td><em>string</em></td>
+<td>The HTTP method to use for the request (e.g. <code>POST</code>, <code>GET</code>, <code>PUT</code>).</td>
+</tr>
+<tr>
+<td><strong>success</strong></td>
+<td><em>function</em></td>
+<td>A function to be called if the request succeeds. The function gets passed two arguments: the data returned from the server and a string describing the status.</td>
+</tr>
+</tbody>
+</table></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -2675,7 +2792,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3175">line 3175</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3207">line 3207</a>
     </li></ul></dd>
     
 
@@ -3787,7 +3904,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3147">line 3147</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3179">line 3179</a>
     </li></ul></dd>
     
 
@@ -9100,7 +9217,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Mon Nov 28 2016 15:17:02 GMT+0200 (GTB Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Mon Nov 28 2016 18:17:16 GMT+0200 (GTB Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
