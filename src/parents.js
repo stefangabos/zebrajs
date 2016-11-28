@@ -34,12 +34,12 @@
  *  @alias      parents
  *  @instance
  */
-elements.parents = function(selector) {
+$.fn.parents = function(selector) {
 
     var result = [];
 
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // unless we got to the root of the DOM, get the element's parent
         while (!((element = element.parentNode) instanceof Document)) {

@@ -30,13 +30,13 @@
  *  @alias      text
  *  @instance
  */
-elements.text = function(content) {
+$.fn.text = function(content) {
 
     // if content is provided
     if (content)
 
         // iterate through the set of matched elements
-        elements.forEach(function(element) {
+        this.forEach(function(element) {
 
             // set the text content of each element
             element.textContent = content;
@@ -46,9 +46,9 @@ elements.text = function(content) {
     // if content is not provided
     // return the text content of the first element in the set of matched elements
     // (combined with the text content of all its descendants)
-    else return elements[0].textContent;
+    else return this[0].textContent;
 
     // return the set of matched elements
-    return elements;
+    return this;
 
 }

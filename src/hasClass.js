@@ -22,13 +22,13 @@
  *  @alias      hasClass
  *  @instance
  */
-elements.hasClass = function(class_name) {
+$.fn.hasClass = function(class_name) {
 
     // iterate through the set of matched elements
-    for (var i = 0; i < elements.length; i++)
+    for (var i = 0; i < this.length; i++)
 
         // if sought class exists, return TRUE
-        if (elements[i].classList.contains(class_name)) return true;
+        if (this[i].classList.contains(class_name)) return true;
 
     // return FALSE if we get this far
     return false;

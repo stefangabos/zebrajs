@@ -16,9 +16,9 @@
  *  @alias      first
  *  @instance
  */
-elements.first = function() {
+$.fn.first = function() {
 
     // returns the first element from the list of matched elements, as a ZebraJS object
-    return $(elements[0]);
+    return $(this[0]);
 
 }

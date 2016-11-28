@@ -29,7 +29,7 @@
  *  @alias      val
  *  @instance
  */
-elements.val = function(value) {
+$.fn.val = function(value) {
 
     var result = [];
 
@@ -37,10 +37,10 @@ elements.val = function(value) {
     if (undefined === value) {
 
         // if first element in the list of matched elements is a select box with the "multiple" attribute set
-        if (elements[0].tagName.toLowerCase() === 'select' && elements[0].multiple) {
+        if (this[0].tagName.toLowerCase() === 'select' && this[0].multiple) {
 
             // add each selected option to the results array
-            Array.prototype.slice.call(elements[0].options).map(function(elem) {
+            Array.prototype.slice.call(this[0].options).map(function(elem) {
 
                 if (elem.selected) result.push(elem.value)
 
@@ -52,13 +52,13 @@ elements.val = function(value) {
         }
 
         // for other elements, return the first element's value
-        return elements[0].value;
+        return this[0].value;
 
     }
 
     // if "value" argument is specified
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // if value is not an array
         if (!Array.isArray(value))
@@ -85,6 +85,6 @@ elements.val = function(value) {
     });
 
     // return the set of matched elements
-    return elements;
+    return this;
 
 }

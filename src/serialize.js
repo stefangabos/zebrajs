@@ -24,9 +24,9 @@
  *  @alias      serialize
  *  @instance
  */
-elements.serialize = function() {
+$.fn.serialize = function() {
 
-    var form = elements[0], result = [];
+    var form = this[0], result = [];
 
     // if element is a form
     if (typeof form === 'object' && form.nodeName === 'FORM')
@@ -48,7 +48,7 @@ elements.serialize = function() {
 
                     });
 
-                // if not a radio or a checbox, or a checked radio/checkbox
+                // if not a radio or a checkbox, or a checked radio/checkbox
                 else if (['checkbox', 'radio'].indexOf(control.type) === -1 || control.checked)
 
                     // add to result

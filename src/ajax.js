@@ -36,13 +36,13 @@ $.ajax = function(url, options) {
                 // if the request completed
                 case 4:
 
-                    // if the request was successfull and we have a callback function ready to handle this situation
+                    // if the request was successful and we have a callback function ready to handle this situation
                     if (httpRequest.status === 200 && typeof options.success === 'function')
 
                         // call that function now
                         options.success.call(null, httpRequest.responseText, httpRequest.status);
 
-                    // if the request was unsuccessfull and we have a callback function ready to handle this situation
+                    // if the request was unsuccessful and we have a callback function ready to handle this situation
                     if (httpRequest.status !== 200 && typeof options.error === 'function')
 
                         // call that function now

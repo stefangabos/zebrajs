@@ -22,10 +22,10 @@
  *  @alias      remove
  *  @instance
 */
-elements.remove = function() {
+$.fn.remove = function() {
 
     // iterate over the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         var
 
@@ -61,6 +61,6 @@ elements.remove = function() {
     });
 
     // return the set of matched elements
-    return elements;
+    return this;
 
 }

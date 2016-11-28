@@ -52,7 +52,7 @@
  *  @alias      css
  *  @instance
  */
-elements.css = function(property, value) {
+$.fn.css = function(property, value) {
 
     var i, computedStyle;
 
@@ -60,7 +60,7 @@ elements.css = function(property, value) {
     if (typeof property === 'object')
 
         // iterate through the set of matched elements
-        elements.forEach(function(element) {
+        this.forEach(function(element) {
 
             // iterate through the "properties" object
             for (i in property)
@@ -74,7 +74,7 @@ elements.css = function(property, value) {
     else if (undefined !== value)
 
         // iterate through the set of matched elements
-        elements.forEach(function(element) {
+        this.forEach(function(element) {
 
             // if value argument's value is FALSE or NULL
             if (value === false || value === null)
@@ -92,7 +92,7 @@ elements.css = function(property, value) {
     else {
 
         // get the first element's computed styles
-        computedStyle = window.getComputedStyle(elements[0]);
+        computedStyle = window.getComputedStyle(this[0]);
 
         // return the sought property's value
         return computedStyle[property];
@@ -100,6 +100,6 @@ elements.css = function(property, value) {
     }
 
     // if we get this far, return the matched elements
-    return elements;
+    return this;
 
 }

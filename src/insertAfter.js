@@ -38,9 +38,9 @@
  *  @alias      insertAfter
  *  @instance
  */
-elements.insertAfter = function(target) {
+$.fn.insertAfter = function(target) {
 
     // call the "_dom_insert" private method with these arguments
-    return $(target)._dom_insert(elements, 'after');
+    return $(target)._dom_insert(this, 'after');
 
 }

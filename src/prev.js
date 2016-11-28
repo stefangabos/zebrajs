@@ -8,7 +8,7 @@
  *  // to avoid DOM scanning over and over again
  *  var element = $('#selector');
  *
- *  // get the previous sibgling
+ *  // get the previous sibling
  *  var prev = element.prev();
  *
  *  // get the previous sibling only if it matches the selector
@@ -27,10 +27,10 @@
  *  @alias      prev
  *  @instance
  */
-elements.prev = function(selector) {
+$.fn.prev = function(selector) {
 
     // get the immediately preceding sibling of each element in the set of matched elements,
     // optionally filtered by a selector
-    return elements._dom_search('previous', selector);
+    return this._dom_search('previous', selector);
 
 }

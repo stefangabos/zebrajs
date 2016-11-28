@@ -33,13 +33,13 @@
  *  @alias      html
  *  @instance
  */
-elements.html = function(content) {
+$.fn.html = function(content) {
 
     // if content is provided
     if (content)
 
         // iterate through the set of matched elements
-        elements.forEach(function(element) {
+        this.forEach(function(element) {
 
             // set the HTML content of each element
             element.innerHTML = content;
@@ -48,9 +48,9 @@ elements.html = function(content) {
 
     // if content is not provided
     // return the content of the first element in the set of matched elements
-    else return elements[0].innerHTML;
+    else return this[0].innerHTML;
 
     // return the set of matched elements
-    return elements;
+    return this;
 
 }

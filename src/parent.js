@@ -29,12 +29,12 @@
  *  @alias      parent
  *  @instance
  */
-elements.parent = function(selector) {
+$.fn.parent = function(selector) {
 
     var result = [];
 
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // if no selector is provided or it is and the parent matches it, add element to the array
         if (!selector || element.parentNode.matches(selector)) result.push(element.parentNode);

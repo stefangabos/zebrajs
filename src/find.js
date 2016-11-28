@@ -27,18 +27,18 @@
  *  @alias      find
  *  @instance
  */
-elements.find = function(selector) {
+$.fn.find = function(selector) {
 
     var result = [];
 
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // if selector is a ZebraJS object
         if (typeof selector === 'object' && selector.version)
 
             // iterate through the elements in the object
-            selector.forEach(function(wrapped) {
+            selector.each(function(index, wrapped) {
 
                 // if the elements are the same, add it to the results array
                 if (wrapped.isSameNode(element)) result.push(element);

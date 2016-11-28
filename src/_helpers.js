@@ -13,13 +13,13 @@
  *
  *  @access private
  */
-elements._class = function(action, class_names) {
+$.fn._class = function(action, class_names) {
 
     // split by space and create an array
     class_names = class_names.split(' ');
 
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // iterate through the class names to add
         class_names.forEach(function(class_name) {
@@ -32,13 +32,13 @@ elements._class = function(action, class_names) {
     });
 
     // return the set of matched elements, for chaining
-    return elements;
+    return this;
 
 }
 
 /**
  *  Private helper method used by {@link ZebraJS#clone .clone()} method when called with the `deep_with_data_and_events`
- *  argument set to TRUE. It recursivelly attached events and data from an original element's children to it's clone
+ *  argument set to TRUE. It recursively attached events and data from an original element's children to it's clone
  *  children.
  *
  *  @param  {DOM_element}   element     Element that was cloned
@@ -49,7 +49,7 @@ elements._class = function(action, class_names) {
  *
  *  @access private
  */
-elements._clone_data_and_events = function(element, clone) {
+$.fn._clone_data_and_events = function(element, clone) {
 
     // get the original element's and the clone's children
     var elements = Array.prototype.slice.call(element.children),
@@ -83,7 +83,7 @@ elements._clone_data_and_events = function(element, clone) {
 
             });
 
-            // recursivelly attach events to children's children
+            // recursively attach events to children's children
             elements._clone_data_and_events(element, clones[index]);
 
         });
@@ -107,13 +107,15 @@ elements._clone_data_and_events = function(element, clone) {
  *
  *  @access private
  */
-elements._dom_insert = function(content, where) {
+$.fn._dom_insert = function(content, where) {
+
+    var $this = this;
 
     // make a ZebraJS object out of whatever given as content
     content = $(content);
 
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // since content is an array of DOM elements or text nodes
         // iterate over the array
@@ -125,16 +127,16 @@ elements._dom_insert = function(content, where) {
                 // insert a clone after each target except for the last one after which we insert the original content
                 case 'after':
                 case 'replace':
-                case 'wrap': element.parentNode.insertBefore(index < elements.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
+                case 'wrap': element.parentNode.insertBefore(index < $this.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
 
                 // add a clone to each parent except for the last one where we add the original content
-                case 'append': element.appendChild(index < elements.length - 1 ? item.cloneNode(true) : item); break;
+                case 'append': element.appendChild(index < $this.length - 1 ? item.cloneNode(true) : item); break;
 
                 // insert a clone before each target except for the last one before which we insert the original content
-                case 'before': element.parentNode.insertBefore(index < elements.length - 1 ? item.cloneNode(true) : item, element); break;
+                case 'before': element.parentNode.insertBefore(index < $this.length - 1 ? item.cloneNode(true) : item, element); break;
 
                 // prepend a clone to each parent except for the last one where we add the original content
-                case 'prepend': element.insertBefore(index < elements.length - 1 ? item.cloneNode(true) : item, element.firstChild); break;
+                case 'prepend': element.insertBefore(index < $this.length - 1 ? item.cloneNode(true) : item, element.firstChild); break;
 
             }
 
@@ -154,13 +156,13 @@ elements._dom_insert = function(content, where) {
     });
 
     // return the set of matched elements, for chaining
-    return elements;
+    return this;
 
 }
 
 /**
  *  Private helper method used by {@link ZebraJS#children .children()}, {@link ZebraJS#siblings .siblings()},
- *  {@link ZebraJS#nexr .next()} and {@link ZebraJS#prev .prev()} methods.
+ *  {@link ZebraJS#next .next()} and {@link ZebraJS#prev .prev()} methods.
  *
  *  @param  {string}    action      Specified what type of elements to look for
  *                                  <br><br>
@@ -173,12 +175,12 @@ elements._dom_insert = function(content, where) {
  *
  *  @access private
  */
-elements._dom_search = function(action, selector) {
+$.fn._dom_search = function(action, selector) {
 
-    var result = [], remove_id, root, tmp;
+    var result = [], remove_id, root, tmp, $this = this;
 
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         remove_id = false;
 
@@ -193,7 +195,7 @@ elements._dom_search = function(action, selector) {
 
             // if the root element doesn't have an ID,
             // generate and set a random ID for the element's parent node
-            if (null === root.getAttribute('id')) root.setAttribute('id', elements._random('id'));
+            if (null === root.getAttribute('id')) root.setAttribute('id', $this._random('id'));
 
             // set this flag so that we know to remove the randomly generated ID when we're done
             remove_id = true;
@@ -262,7 +264,7 @@ elements._dom_search = function(action, selector) {
  *
  *  @access private
  */
-elements._random = function(prefix) {
+$.fn._random = function(prefix) {
 
     // if the internal counter is too large, reset it
     if (internal_counter > Number.MAX_VALUE) internal_counter = 0;

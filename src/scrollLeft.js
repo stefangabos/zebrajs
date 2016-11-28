@@ -30,13 +30,13 @@
  *  @alias      scrollLeft
  *  @instance
  */
-elements.scrollLeft = function(value) {
+$.fn.scrollLeft = function(value) {
 
     // if value is not specified, return the scrollLeft value of the first element in the set of matched elements
-    if (undefined === value) return elements[0].scrollLeft;
+    if (undefined === value) return this[0].scrollLeft;
 
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // set the scrollLeft value for each element
         // apply "parseFloat" in case is provided as string or suffixed with "px"

@@ -38,9 +38,9 @@
  *  @alias      insertBefore
  *  @instance
  */
-elements.insertBefore = function(target) {
+$.fn.insertBefore = function(target) {
 
     // call the "_dom_insert" private method with these arguments
-    return $(target)._dom_insert(elements, 'before');
+    return $(target)._dom_insert(this, 'before');
 
 }

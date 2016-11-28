@@ -5,8 +5,8 @@
  *  @alias      get
  *  @instance
  */
-elements.get = function(index) {
+$.fn.get = function(index) {
 
-    return elements[index];
+    return this[index];
 
 }

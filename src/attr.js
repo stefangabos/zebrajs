@@ -51,13 +51,13 @@
  *  @alias      attr
  *  @instance
  */
-elements.attr = function(attribute, value) {
+$.fn.attr = function(attribute, value) {
 
     // if attribute argument is an object
     if (typeof attribute === 'object')
 
         // iterate over the set of matched elements
-        elements.forEach(function(element) {
+        this.forEach(function(element) {
 
             // iterate over the attributes
             for (var i in attribute)
@@ -74,7 +74,7 @@ elements.attr = function(attribute, value) {
         if (undefined !== value)
 
             // iterate over the set of matched elements
-            elements.forEach(function(element) {
+            this.forEach(function(element) {
 
                 // if value argument's value is FALSE or NULL
                 if (value === false || value === null)
@@ -92,9 +92,9 @@ elements.attr = function(attribute, value) {
 
             // return the value of the requested attribute
             // of the first element in the set of matched elements
-            return elements[0].getAttribute(attribute);
+            return this[0].getAttribute(attribute);
 
     // if we get this far, return the set of matched elements
-    return elements;
+    return this;
 
 }

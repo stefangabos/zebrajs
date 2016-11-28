@@ -54,12 +54,12 @@
         *   @version    1.0.0
         *   @copyright  (c) 2016 Stefan Gabos
         *   @license    LGPL-3.0
-        *   @alias ZebraJS
+        *   @alias      ZebraJS
         *   @class
         */
         $ = function(selector, parent, first_only) {
 
-            var elements = [];
+            var elements = [], property;
 
             // if selector is given as the string 'body', refer to document.body node
             if (selector === 'body') selector = document.body;
@@ -68,7 +68,7 @@
             if (typeof selector === 'string')
 
                 // if it seems that we want to *create* an HTML node
-                if (selector.indexOf('<') === 0) {
+                if (selector.indexOf('<') === 0 && selector.indexOf('>') > 1 && selector.length > 2) {
 
                     // create a dummy container
                     parent = document.createElement('div');
@@ -86,7 +86,7 @@
                     if (!parent) parent = document;
 
                     // if parent is set and is a ZebraJS object, refer to the first DOM element from the set instead
-                    else if (parent.version) parent = parent[0];
+                    else if (typeof parent === 'object' && parent.version) parent = parent[0];
 
                     // if the selector is an ID
                     // select the matching element and add it to the elements array
@@ -112,7 +112,7 @@
                         try {
 
                             // select the matching elements and create and add the to the elements array
-                            elements = elements.concat(Array.prototype.slice.call(parent.querySelectorAll(selector)));
+                            elements = Array.prototype.slice.call(parent.querySelectorAll(selector));
 
                         // if something went wrong (not a valid CSS selector)
                         // eslint-disable-next-line no-empty
@@ -127,70 +127,77 @@
                 elements.push(selector);
 
             // if selector is a NodeList (returned by document.querySelectorAll), add items to the elements array
-            else if (selector instanceof NodeList) elements = elements.concat(Array.prototype.slice.call(selector));
+            else if (selector instanceof NodeList) elements = Array.prototype.slice.call(selector);
 
             // if selector is an array of DOM elements, add them to the elements array
             else if (Array.isArray(selector)) elements = elements.concat(selector);
 
             // if the selector is a ZebraJS object, simply return it
-            else if (selector.version) return selector;
+            else if (typeof selector === 'object' && selector.version) return selector;
 
-            // we'll use this property to determine if an array is a ZebraJS "object"
-            elements.version = '1.0.0';
+            // attach all the ZebraJS methods to the elements array (including plugins, if any)
+            for (property in $.fn) elements[property] = $.fn[property];
 
-            // import "_helpers.js"
-            // import "addClass.js"
-            // import "after.js"
-            // import "append.js"
-            // import "appendTo.js"
-            // import "attr.js"
-            // import "before.js"
-            // import "children.js"
-            // import "clone.js"
-            // import "closest.js"
-            // import "css.js"
-            // import "get.js"
-            // import "data.js"
-            // import "each.js"
-            // import "find.js"
-            // import "first.js"
-            // import "hasClass.js"
-            // import "height.js"
-            // import "html.js"
-            // import "insertAfter.js"
-            // import "insertBefore.js"
-            // import "next.js"
-            // import "off.js"
-            // import "offset.js"
-            // import "on.js"
-            // import "outerHeight.js"
-            // import "outerWidth.js"
-            // import "parent.js"
-            // import "parents.js"
-            // import "position.js"
-            // import "prepend.js"
-            // import "prependTo.js"
-            // import "prev.js"
-            // import "ready.js"
-            // import "remove.js"
-            // import "removeClass.js"
-            // import "replaceWith.js"
-            // import "scrollLeft.js"
-            // import "scrollTop.js"
-            // import "serialize.js"
-            // import "siblings.js"
-            // import "text.js"
-            // import "toggleClass.js"
-            // import "trigger.js"
-            // import "unwrap.js"
-            // import "val.js"
-            // import "width.js"
-            // import "wrap.js"
-
+            // return the elements "array-on-steroids"
             return elements;
 
         }
 
+    $.fn = {
+
+        // zebrajs version
+        version: '1.0.0'
+
+    };
+
+    // import "_helpers.js"
+    // import "addClass.js"
+    // import "after.js"
+    // import "append.js"
+    // import "appendTo.js"
+    // import "attr.js"
+    // import "before.js"
+    // import "children.js"
+    // import "clone.js"
+    // import "closest.js"
+    // import "css.js"
+    // import "data.js"
+    // import "each.js"
+    // import "find.js"
+    // import "first.js"
+    // import "get.js"
+    // import "hasClass.js"
+    // import "height.js"
+    // import "html.js"
+    // import "insertAfter.js"
+    // import "insertBefore.js"
+    // import "next.js"
+    // import "off.js"
+    // import "offset.js"
+    // import "on.js"
+    // import "outerHeight.js"
+    // import "outerWidth.js"
+    // import "parent.js"
+    // import "parents.js"
+    // import "position.js"
+    // import "prepend.js"
+    // import "prependTo.js"
+    // import "prev.js"
+    // import "ready.js"
+    // import "remove.js"
+    // import "removeClass.js"
+    // import "replaceWith.js"
+    // import "scrollLeft.js"
+    // import "scrollTop.js"
+    // import "serialize.js"
+    // import "siblings.js"
+    // import "text.js"
+    // import "toggleClass.js"
+    // import "trigger.js"
+    // import "unwrap.js"
+    // import "val.js"
+    // import "width.js"
+    // import "wrap.js"
     // import "ajax.js"
     // import "inArray.js"
     // import "extend.js"

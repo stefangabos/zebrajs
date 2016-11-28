@@ -29,9 +29,9 @@
  *  @alias      wrap
  *  @instance
  */
-elements.wrap = function(element) {
+$.fn.wrap = function(element) {
 
     // call the "_dom_insert" private method with these arguments
-    return elements._dom_insert(element, 'wrap');
+    return this._dom_insert(element, 'wrap');
 
 }

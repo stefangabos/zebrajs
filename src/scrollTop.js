@@ -30,13 +30,13 @@
  *  @alias      scrollTop
  *  @instance
  */
-elements.scrollTop = function(value) {
+$.fn.scrollTop = function(value) {
 
     // if value is not specified, return the scrollTop value of the first element in the set of matched elements
-    if (undefined === value) return elements[0].scrollTop;
+    if (undefined === value) return this[0].scrollTop;
 
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // set the scrollTop value for each element
         // apply "parseFloat" in case is provided as string or suffixed with "px"

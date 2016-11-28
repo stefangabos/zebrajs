@@ -43,17 +43,17 @@
  *  @alias      height
  *  @instance
  */
-elements.height = function(height) {
+$.fn.height = function(height) {
 
     // if "height" is given, set the height of every matched element, making sure to suffix the value with "px"
     // if not otherwise specified
-    if (height) return elements.css('height', height + (parseFloat(height) === height ? 'px' : ''));
+    if (height) return this.css('height', height + (parseFloat(height) === height ? 'px' : ''));
 
     // for the "window"
-    if (elements[0] === window) return window.innerHeight;
+    if (this[0] === window) return window.innerHeight;
 
     // for the "document"
-    if (elements[0] === document)
+    if (this[0] === document)
 
         // return height
         return Math.max(
@@ -65,8 +65,8 @@ elements.height = function(height) {
         );
 
     // get the first element's height, top/bottom padding and borders
-    var styles = window.getComputedStyle(elements[0]),
-        offset_height = elements[0].offsetHeight,
+    var styles = window.getComputedStyle(this[0]),
+        offset_height = this[0].offsetHeight,
         border_top_width = parseFloat(styles.borderTopWidth),
         border_bottom_width = parseFloat(styles.borderBottomWidth),
         padding_top = parseFloat(styles.paddingTop),

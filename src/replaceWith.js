@@ -30,9 +30,9 @@
  *  @alias      replaceWith
  *  @instance
  */
-elements.replaceWith = function(element) {
+$.fn.replaceWith = function(element) {
 
     // call the "_dom_insert" private method with these arguments
-    return elements._dom_insert(element, 'replace');
+    return this._dom_insert(element, 'replace');
 
 }

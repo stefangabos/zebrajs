@@ -24,12 +24,12 @@
  *  @alias      outerWidth
  *  @instance
  */
-elements.outerWidth = function(include_margins) {
+$.fn.outerWidth = function(include_margins) {
 
     // get the values of all the CSS properties of the element
     // after applying the active stylesheets and resolving any
     // basic computation those values may contain
-    var computed_styles = window.getComputedStyle(elements[0]);
+    var computed_styles = window.getComputedStyle(this[0]);
 
     // return the result of inner width together with
     return (parseFloat(computed_styles.width) +

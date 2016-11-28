@@ -25,9 +25,9 @@
  *  @alias      children
  *  @instance
  */
-elements.children = function(selector) {
+$.fn.children = function(selector) {
 
     // get the children of each element in the set of matched elements, optionally filtered by a selector
-    return elements._dom_search('children', selector);
+    return this._dom_search('children', selector);
 
 }

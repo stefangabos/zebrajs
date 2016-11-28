@@ -22,12 +22,12 @@
  *  @alias      position
  *  @instance
  */
-elements.position = function() {
+$.fn.position = function() {
 
     // return the position of the first element in the set of matched elements
     return {
-        left: parseFloat(elements[0].offsetLeft),
-        top: parseFloat(elements[0].offsetTop)
+        left: parseFloat(this[0].offsetLeft),
+        top: parseFloat(this[0].offsetTop)
     }
 
 }

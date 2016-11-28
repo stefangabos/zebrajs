@@ -46,9 +46,9 @@
  *  @alias      prepend
  *  @instance
  */
-elements.prepend = function(content) {
+$.fn.prepend = function(content) {
 
     // call the "_dom_insert" private method with these arguments
-    return elements._dom_insert(content, 'prepend');
+    return this._dom_insert(content, 'prepend');
 
 }

@@ -27,9 +27,9 @@
  *  @alias      toggleClass
  *  @instance
  */
-elements.toggleClass = function(class_name) {
+$.fn.toggleClass = function(class_name) {
 
     // toggle class(es) and return the set of matched elements
-    return elements._class('toggle', class_name);
+    return this._class('toggle', class_name);
 
 }

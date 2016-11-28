@@ -35,15 +35,15 @@
  *  @alias      off
  *  @instance
  */
-elements.off = function(event_type, callback) {
+$.fn.off = function(event_type, callback) {
 
     var event_types = event_type ? event_type.split(' ') : Object.keys(event_listeners), namespace, remove_all_event_handlers = !event_type;
 
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // iterate through the event types we have to remove the handler from
-        event_types.forEach(function(event_type) {
+        event_types.each(function(index, event_type) {
 
             // handle namespacing
             namespace = event_type.split('.')
@@ -92,6 +92,6 @@ elements.off = function(event_type, callback) {
     });
 
     // return the set of matched elements, for chaining
-    return elements;
+    return this;
 
 }

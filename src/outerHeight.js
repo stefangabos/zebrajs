@@ -24,12 +24,12 @@
  *  @alias      outerHeight
  *  @instance
  */
-elements.outerHeight = function(include_margins) {
+$.fn.outerHeight = function(include_margins) {
 
     // get the values of all the CSS properties of the element
     // after applying the active stylesheets and resolving any
     // basic computation those values may contain
-    var computed_style = window.getComputedStyle(elements[0]);
+    var computed_style = window.getComputedStyle(this[0]);
 
     // return the result of inner height together with
     return (parseFloat(computed_style.height) +

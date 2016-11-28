@@ -52,7 +52,7 @@
  *  @alias      on
  *  @instance
  */
-elements.on = function(event_type, selector, callback) {
+$.fn.on = function(event_type, selector, callback) {
 
     var event_types = event_type.split(' '), namespace, actual_callback;
 
@@ -61,7 +61,7 @@ elements.on = function(event_type, selector, callback) {
     if (undefined === callback) callback = selector;
 
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // iterate through the event types we have to attach the handler to
         event_types.forEach(function(event_type) {
@@ -96,7 +96,7 @@ elements.on = function(event_type, selector, callback) {
             // set the event listener
             } else element.addEventListener(event_type, callback);
 
-            // add element/cllback combination to the array of events of this type
+            // add element/callback combination to the array of events of this type
             event_listeners[event_type].push([element, callback, namespace, actual_callback]);
 
         });
@@ -104,6 +104,6 @@ elements.on = function(event_type, selector, callback) {
     });
 
     // return the set of matched elements, for chaining
-    return elements;
+    return this;
 
 }

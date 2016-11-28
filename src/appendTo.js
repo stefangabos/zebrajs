@@ -38,9 +38,9 @@
  *  @alias      appendTo
  *  @instance
  */
-elements.appendTo = function(parent) {
+$.fn.appendTo = function(parent) {
 
     // call the "_dom_insert" private method with these arguments
-    return $(parent)._dom_insert(elements, 'append');
+    return $(parent)._dom_insert(this, 'append');
 
 }

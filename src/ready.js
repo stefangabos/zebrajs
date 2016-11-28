@@ -15,7 +15,7 @@
  *  @alias      ready
  *  @instance
  */
-elements.ready = function(callback) {
+$.fn.ready = function(callback) {
 
     // if DOM is already ready, fire the callback now
     if (document.readyState === 'complete' || document.readyState !== 'loading') callback();
@@ -24,6 +24,6 @@ elements.ready = function(callback) {
     else document.addEventListener('DOMContentLoaded', callback);
 
     // return the set of matched elements
-    return elements;
+    return this;
 
 }

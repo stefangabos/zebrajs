@@ -43,17 +43,17 @@
  *  @alias      width
  *  @instance
  */
-elements.width = function(width) {
+$.fn.width = function(width) {
 
     // if "width" is given, set the width of every matched element, making sure to suffix the value with "px"
     // if not otherwise specified
-    if (width) return elements.css('width', width + (parseFloat(width) === width ? 'px' : ''));
+    if (width) return this.css('width', width + (parseFloat(width) === width ? 'px' : ''));
 
     // for the "window"
-    if (elements[0] === window) return window.innerWith;
+    if (this[0] === window) return window.innerWith;
 
     // for the "document"
-    if (elements[0] === document)
+    if (this[0] === document)
 
         // return width
         return Math.max(
@@ -65,8 +65,8 @@ elements.width = function(width) {
         );
 
     // get the first element's width, left/right padding and borders
-    var styles = window.getComputedStyle(elements[0]),
-        offset_width = elements[0].offsetWidth,
+    var styles = window.getComputedStyle(this[0]),
+        offset_width = this[0].offsetWidth,
         border_left_width = parseFloat(styles.borderLeftWidth),
         border_right_width = parseFloat(styles.borderRightWidth),
         padding_left = parseFloat(styles.paddingLeft),

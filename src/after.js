@@ -43,9 +43,9 @@
  *  @alias      after
  *  @instance
  */
-elements.after = function(content) {
+$.fn.after = function(content) {
 
     // call the "_dom_insert" private method with these arguments
-    return elements._dom_insert(content, 'after');
+    return this._dom_insert(content, 'after');
 
 }

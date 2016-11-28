@@ -37,12 +37,12 @@
  *  @alias      clone
  *  @instance
  */
-elements.clone = function(with_data_and_events, deep_with_data_and_events) {
+$.fn.clone = function(with_data_and_events, deep_with_data_and_events) {
 
-    var result = [];
+    var result = [], $this = this;
 
     // iterate over the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // clone the element (together with its children)
         var clone = element.cloneNode(true);
@@ -76,7 +76,7 @@ elements.clone = function(with_data_and_events, deep_with_data_and_events) {
             });
 
         // if event handlers and data for all children of the cloned element should be also copied
-        if (deep_with_data_and_events) elements._clone_data_and_events(element, clone);
+        if (deep_with_data_and_events) $this._clone_data_and_events(element, clone);
 
     });
 

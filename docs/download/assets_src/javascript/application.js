@@ -56,7 +56,7 @@ $(document).ready(function() {
                 tmp += source[i];
 
                 // if we're not looking for a matching closing bracket and we found a method
-                if (matching_brackets === false && (matches = tmp.match(/[cg]\.([^\=]+?)=function\([^\)]*?\)\{/))) {
+                if (matching_brackets === false && (matches = tmp.match(/c(\.fn)?\.([^\=]+?)=function\([^\)]*?\)\{/))) {
 
                     // we start looking for the matching closing bracket
                     tmp = '';
@@ -74,12 +74,12 @@ $(document).ready(function() {
                     // the start of the script (everything until the first method)
                     if (!method_name) script_header = source.substr(0, source.indexOf(matches[0]) - 1);
 
-                    is_helper_method = matches[0].indexOf('c') === 0;
+                    is_helper_method = matches[0].indexOf('.fn') === -1;
 
                     // this is the method's name
-                    method_name = matches[0].match(/^[cg]\.(.*?)\=/)[1];
+                    method_name = matches[0].match(/^c\.(fn\.)?(.*?)\=/)[2];
 
-                    // is this a private method? (starting with an underscore)
+                    // is this amethod_name method? (starting with an underscore)
                     is_private_method = method_name.indexOf('_') === 0;
 
                     // store private methods
@@ -204,7 +204,7 @@ $(document).ready(function() {
             });
 
             // add helper methods, if any, and the script's footer
-            code += ', g};' + helper_methods_code + (helper_methods_code === '' ? script_footer.substr(1) : script_footer);
+            code += ',' + helper_methods_code + (helper_methods_code === '' ? script_footer.substr(1) : script_footer);
 
             // if we have a global object name
             if (global_object_name !== '')
@@ -243,7 +243,7 @@ $(document).ready(function() {
 
         // generate the HTML for the module, based on the template
         block = $(parse_template({
-            method: methods[i].match(/^g\.(.*?)\=/)[1],
+            method: methods[i].match(/^c\.fn\.(.*?)\=/)[1],
             size: methods[i].length + 1 // the ',' prefix
 
         // ...and add it to the section of optional modules
@@ -269,7 +269,7 @@ $(document).ready(function() {
 
         // generate the HTML for the module, based on the template
         block = $(parse_template({
-            method: private_methods[i].match(/^g\.(.*?)\=/)[1],
+            method: private_methods[i].match(/^c\.fn\.(.*?)\=/)[1],
             size: private_methods[i].length + 1 // the ',' prefix
 
         // ...and add it to the section of optional modules

@@ -36,10 +36,10 @@
  *  @alias      trigger
  *  @instance
  */
-elements.trigger = function(event_type, data) {
+$.fn.trigger = function(event_type, data) {
 
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // create the event
         var event = document.createEvent('HTMLEvents');
@@ -65,6 +65,6 @@ elements.trigger = function(event_type, data) {
     });
 
     // return the set of matched elements, for chaining
-    return elements;
+    return this;
 
 }

@@ -46,9 +46,9 @@
  *  @alias      before
  *  @instance
  */
-elements.before = function(content) {
+$.fn.before = function(content) {
 
     // call the "_dom_insert" private method with these arguments
-    return elements._dom_insert(content, 'before');
+    return this._dom_insert(content, 'before');
 
 }

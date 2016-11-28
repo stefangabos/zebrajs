@@ -38,9 +38,9 @@
  *  @alias      prependTo
  *  @instance
  */
-elements.prependTo = function(parent) {
+$.fn.prependTo = function(parent) {
 
     // call the "_dom_insert" private method with these arguments
-    return $(parent)._dom_insert(elements, 'prepend');
+    return $(parent)._dom_insert(this, 'prepend');
 
 }

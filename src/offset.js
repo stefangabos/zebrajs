@@ -22,10 +22,10 @@
  *  @alias      offset
  *  @instance
  */
-elements.offset = function() {
+$.fn.offset = function() {
 
     // get the bounding box of the first element in the set of matched elements
-    var box = elements[0].getBoundingClientRect();
+    var box = this[0].getBoundingClientRect();
 
     // return the object with the offset
     return {

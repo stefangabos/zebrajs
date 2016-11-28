@@ -29,7 +29,7 @@
  *  @alias      data
  *  @instance
  */
-elements.data = function(name, value) {
+$.fn.data = function(name, value) {
 
     // make sure the name follows the Dataset API specs
     // http://www.w3.org/TR/html5/dom.html#dom-dataset
@@ -45,7 +45,7 @@ elements.data = function(name, value) {
     if (undefined !== value) {
 
         // iterate through the set of matched elements
-        elements.forEach(function(element) {
+        this.forEach(function(element) {
 
             // initialize the "zjs" "private" property, if not already initialized
             if (!element.zjs) element.zjs = {};
@@ -99,11 +99,11 @@ elements.data = function(name, value) {
         });
 
         // return the set of matched elements
-        return elements;
+        return this;
 
     }
 
     // if "value" argument is not provided, return the existing value, or "undefined" if no value exists
-    return elements[0].zjs.data[name] || undefined;
+    return this[0].zjs.data[name] || undefined;
 
 }

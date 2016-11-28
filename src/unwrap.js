@@ -25,10 +25,10 @@
  *  @alias      unwrap
  *  @instance
  */
-elements.unwrap = function(selector) {
+$.fn.unwrap = function(selector) {
 
     // iterate through the set of matched elements
-    elements.forEach(function(element) {
+    this.forEach(function(element) {
 
         // get the element's parent, optionally filtered by a selector,
         // and replace it with the element
@@ -37,6 +37,6 @@ elements.unwrap = function(selector) {
     });
 
     // return the set of matched elements
-    return elements;
+    return this;
 
 }

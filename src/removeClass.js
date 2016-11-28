@@ -25,9 +25,9 @@
  *  @alias      removeClass
  *  @instance
  */
-elements.removeClass = function(class_name) {
+$.fn.removeClass = function(class_name) {
 
     // remove class(es) and return the set of matched elements
-    return elements._class('remove', class_name);
+    return this._class('remove', class_name);
 
 }

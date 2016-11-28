@@ -27,10 +27,10 @@
  *  @alias      next
  *  @instance
  */
-elements.next = function(selector) {
+$.fn.next = function(selector) {
 
     // get the immediately preceding sibling of each element in the set of matched elements,
     // optionally filtered by a selector
-    return elements._dom_search('next', selector);
+    return this._dom_search('next', selector);
 
 }
