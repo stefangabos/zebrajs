@@ -1,5 +1,4 @@
-<img src="https://scontent-frt3-1.xx.fbcdn.net/v/t1.0-9/68664_301079533346588_1041396683_n.png?oh=ae6d2a36dc1202df1f0ec9bc87ff00c3&oe=58B92C47" alt="zebrajs">
-
+<img src="https://github.com/stefangabos/zebrajs/blob/master/docs/images/logo.png" alt="zebrajs">
 
 # ZebraJS
 
