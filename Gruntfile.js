@@ -130,7 +130,7 @@ module.exports = function(grunt) {
                 destination: 'docs',
                 template : "node_modules/docdash",
                 configure : "jsdoc.json",
-                readme: "Readme.md",
+                readme: "docs/Readme.md",
                 private: false
             }
         },
@@ -192,7 +192,7 @@ module.exports = function(grunt) {
                 }
             },
             readme: {
-                files: ['Readme.md'],
+                files: ['Readme.md', 'docs/Readme.md'],
                 tasks: ['jsdoc']
             }
         }
