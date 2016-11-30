@@ -50,6 +50,6 @@ Make sure you have installed [Node.js, npm](https://docs.npmjs.com/getting-start
 
 From this point on, when you edit the project's files in the `/src` folder, Grunt will automatically run tasks that will check whether you follow the project's coding standards via [ESLint](http://eslint.org/docs/about/), will do static code analysis via [JSHint](http://jshint.com/about/), will use [Uglify](https://github.com/mishoo/UglifyJS) on the code and will generate the documentation with [JSDoc](https://github.com/jsdoc3/jsdoc) (documentation follows JavaDoc standards)
 
-You can help by writing actual code for the methods listed in the `/src` folder and which don't have yet been written. The methods are included in the main `_$.js` file via comments looking like `// import "_methodName.js"`.
+You can help by writing actual code for the methods listed in the `/src` folder and which don't have yet been written. The methods are included in the main `$.js` file via comments looking like `// import "methodName.js"`.
 
 Alternatively, you can help improving the library's website in the `/docs/download` folder. This implies altering JavaScript and CSS files in the `/docs/download/assets_src` folder and the actual `index.html` in `/docs/download`.
