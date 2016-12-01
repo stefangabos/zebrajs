@@ -43,7 +43,7 @@ $.fn.off = function(event_type, callback) {
     this.forEach(function(element) {
 
         // iterate through the event types we have to remove the handler from
-        event_types.forEach(function(index, event_type) {
+        event_types.forEach(function(event_type) {
 
             // handle namespacing
             namespace = event_type.split('.')
