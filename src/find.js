@@ -38,7 +38,7 @@ $.fn.find = function(selector) {
         if (typeof selector === 'object' && selector.version)
 
             // iterate through the elements in the object
-            selector.each(function(index, wrapped) {
+            selector.forEach(function(index, wrapped) {
 
                 // if the elements are the same, add it to the results array
                 if (wrapped.isSameNode(element)) result.push(element);
