@@ -20,7 +20,7 @@
  *      console.log('clicked!');
  *  });
  *
- *  // namespacing, so that you can only remove certain events
+ *  // namespacing, so that you can remove only certain events
  *  element.on('click.namespace', function(e) {
  *      console.log('clicked!');
  *  });
@@ -52,7 +52,7 @@
  *  @alias      on
  *  @instance
  */
-$.fn.on = function(event_type, selector, callback) {
+$.fn.on = function(event_type, selector, callback, once) {
 
     var event_types = event_type.split(' '), namespace, actual_callback;
 
@@ -64,12 +64,12 @@ $.fn.on = function(event_type, selector, callback) {
     this.forEach(function(element) {
 
         // iterate through the event types we have to attach the handler to
-        event_types.forEach(function(event_type) {
+        event_types.forEach(function(original_event) {
 
             actual_callback = false;
 
             // handle namespacing
-            namespace = event_type.split('.')
+            namespace = original_event.split('.')
             event_type = namespace[0];
             namespace = namespace[1] || '';
 
@@ -85,7 +85,10 @@ $.fn.on = function(event_type, selector, callback) {
                 // this will be the actual callback function
                 actual_callback = function(e) {
 
-                    // trigger the callback function only if the clicked element matches the selector
+                    // if the callback needs to be executed only once, remove it now
+                    if (once) $(this).off(original_event, callback);
+
+                    // trigger the callback function only if the target element matches the selector
                     if (this !== e.target && e.target.matches(selector)) callback.apply(e.target);
 
                 };
@@ -93,7 +96,24 @@ $.fn.on = function(event_type, selector, callback) {
                 // attach event listener
                 element.addEventListener(event_type, actual_callback);
 
-            // set the event listener
+            // if the callback needs to be executed only once
+            } else if (once) {
+
+                // the actual callback function
+                actual_callback = function(e) {
+
+                    // remove the event handler
+                    $(this).off(original_event, callback);
+
+                    // execute the callback function
+                    callback();
+
+                }
+
+                // set the event listener
+                element.addEventListener(event_type, actual_callback);
+
+            // registering of default event listeners
             } else element.addEventListener(event_type, callback);
 
             // add element/callback combination to the array of events of this type
