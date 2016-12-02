@@ -74,9 +74,14 @@ $.fn._clone_data_and_events = function(element, clone) {
                         // also add the event to the clone element
                         $(clones[index]).on(event_type + (properties[2] ? '.' + properties[2] : ''), properties[1]);
 
-                        // clone data
-                        clones[index].zjs = {};
-                        clones[index].zjs.data = element.zjs.data;
+                        // if original element has some data attached to it
+                        if (element.zjs && element.zjs.data) {
+
+                            // clone it
+                            clones[index].zjs = {};
+                            clones[index].zjs.data = element.zjs.data;
+
+                        }
 
                     }
 
