@@ -53,7 +53,8 @@ $.fn._clone_data_and_events = function(element, clone) {
 
     // get the original element's and the clone's children
     var elements = Array.prototype.slice.call(element.children),
-        clones = Array.prototype.slice.call(clone.children);
+        clones = Array.prototype.slice.call(clone.children),
+        $this = this;
 
     // if the original element's has any children
     if (elements && elements.length)
@@ -84,7 +85,7 @@ $.fn._clone_data_and_events = function(element, clone) {
             });
 
             // recursively attach events to children's children
-            elements._clone_data_and_events(element, clones[index]);
+            $this._clone_data_and_events(element, clones[index]);
 
         });
 
