@@ -205,7 +205,8 @@
 
         // get the original element's and the clone's children
         var elements = Array.prototype.slice.call(element.children),
-            clones = Array.prototype.slice.call(clone.children);
+            clones = Array.prototype.slice.call(clone.children),
+            $this = this;
 
         // if the original element's has any children
         if (elements && elements.length)
@@ -225,9 +226,14 @@
                             // also add the event to the clone element
                             $(clones[index]).on(event_type + (properties[2] ? '.' + properties[2] : ''), properties[1]);
 
-                            // clone data
-                            clones[index].zjs = {};
-                            clones[index].zjs.data = element.zjs.data;
+                            // if original element has some data attached to it
+                            if (element.zjs && element.zjs.data) {
+
+                                // clone it
+                                clones[index].zjs = {};
+                                clones[index].zjs.data = element.zjs.data;
+
+                            }
 
                         }
 
@@ -236,7 +242,7 @@
                 });
 
                 // recursively attach events to children's children
-                elements._clone_data_and_events(element, clones[index]);
+                $this._clone_data_and_events(element, clones[index]);
 
             });
 
@@ -870,9 +876,14 @@
                             // also add the event to the clone element
                             $(clone).on(event_type + (properties[2] ? '.' + properties[2] : ''), properties[1]);
 
-                            // clone data
-                            clone.zjs = {};
-                            clone.zjs.data = element.zjs.data;
+                            // if original element has some data attached to it
+                            if (element.zjs && clone.zjs.data) {
+
+                                // clone it
+                                clone.zjs = {};
+                                clone.zjs.data = element.zjs.data;
+
+                            }
 
                         }
 
@@ -1159,6 +1170,55 @@
 
         // if "value" argument is not provided, return the existing value, or "undefined" if no value exists
         return this[0].zjs.data[name] || undefined;
+
+    }
+
+    /**
+     *  Removes the set of matched elements from the DOM.
+     *
+     *  This method is the same as the {@link ZebraJS#remove .remove()} method, except that .detach() keeps all events and
+     *  data associated with the removed elements. This method is useful when removed elements are to be reinserted into the
+     *  DOM at a later time.
+     *
+     *  @example
+     *
+     *  // always cache selectors
+     *  // to avoid DOM scanning over and over again
+     *  var element = $('#selector');
+     *
+     *  // remove elements from the DOM
+     *  var detached = element.detach();
+     *
+     *  // add them back, together with data and events,
+     *  // to the end of the body element
+     *  $('body').insert(detached);
+     *
+     *  @return {ZebraJS}   Returns the removed elements.
+     *
+     *  @memberof   ZebraJS
+     *  @alias      detach
+     *  @instance
+    */
+    $.fn.detach = function() {
+
+        var result = [];
+
+        // iterate over the set of matched elements
+        this.forEach(function(element) {
+
+            // the ZebraJS object
+            var $element = $(element);
+
+            // clone the element (deep with data and events and add it to the results array)
+            result = result.concat($element.clone(true, true));
+
+            // remove the original element from the DOM
+            $element.remove();
+
+        });
+
+        // return the removed elements
+        return $(result);
 
     }
 
