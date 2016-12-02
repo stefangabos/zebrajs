@@ -25,6 +25,7 @@ $(document).ready(function() {
             'children':     ['_dom_search', '_random'],
             'clone':        ['_clone_data_and_events'],
             'detach':       ['_clone_data_and_events', 'clone', 'remove'],
+            'hasClass':     ['_class'],
             'height':       ['css'],
             'insertAfter':  ['_dom_insert'],
             'insertBefore': ['_dom_insert'],
