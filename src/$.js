@@ -33,10 +33,14 @@
         *   // use CSS selectors
         *   var elements = $(input[type=text]);
         *
+        *   // create elements
+        *   var element = $('<div>').addClass('foo').appendTo($('body'));
+        *
         *   @param  {mixed}     selector        A selector to filter DOM elements from the current document. It can be a
         *                                       query selector, a {@link ZebraJS} object, a DOM element, a
         *                                       {@link https://developer.mozilla.org/en-US/docs/Web/API/NodeList NodeList},
-        *                                       and array of DOM elements
+        *                                       and array of DOM elements<br><br>Alternatively, it can be a HTML tag
+        *                                       to create.
         *
         *   @param  {mixed}     [parent]        A selector to filter DOM elements from the current document, but only
         *                                       those which have as parent the element(s) indicated by this argument. It
