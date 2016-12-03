@@ -1910,7 +1910,7 @@
                         if (once) $(this).off(original_event, callback);
 
                         // trigger the callback function only if the target element matches the selector
-                        if (this !== e.target && e.target.matches(selector)) callback.apply(e.target);
+                        if (this !== e.target && e.target.matches(selector)) callback(e);
 
                     };
 
@@ -1927,7 +1927,7 @@
                         $(this).off(original_event, callback);
 
                         // execute the callback function
-                        callback();
+                        callback(e);
 
                     }
 
