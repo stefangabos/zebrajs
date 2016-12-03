@@ -2,7 +2,7 @@
  *  Checks the current matched set of elements against a selector, element, or ZebraJS object and returns `true` if at
  *  least one of these elements matches the given arguments.
  *
- *  > Unlike jQuery, this method matches only valid CSS selectors!
+ *  > Note that, unlike jQuery, when matching selectors, this method matches only valid CSS selectors!
  *
  *  @example
  *
