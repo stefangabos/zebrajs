@@ -171,6 +171,7 @@
     // import "hasClass.js"
     // import "height.js"
     // import "html.js"
+    // import "is.js"
     // import "insertAfter.js"
     // import "insertBefore.js"
     // import "next.js"
