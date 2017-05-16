@@ -104,6 +104,6 @@ $.fn.data = function(name, value) {
     }
 
     // if "value" argument is not provided, return the existing value, or "undefined" if no value exists
-    return this[0].zjs.data[name] || undefined;
+    return this[0].zjs ? this[0].zjs.data[name] : undefined;
 
 }
