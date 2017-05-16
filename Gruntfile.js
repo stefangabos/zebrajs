@@ -140,6 +140,11 @@ module.exports = function(grunt) {
          *  https://npmjs.org/package/grunt-contrib-uglify
          **************************************************************************************************************/
         'uglify': {
+            options: {
+                compress: true,
+                mangle: true,
+                beautify: false
+            },
             library: {
                 files: [{
                     src: 'dist/zebra.src.js',
