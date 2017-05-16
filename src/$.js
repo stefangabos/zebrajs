@@ -55,8 +55,8 @@
         *                       you work with those elements.
         *
         *   @author     Stefan Gabos <contact@stefangabos.ro>
-        *   @version    1.0.0
-        *   @copyright  (c) 2016 Stefan Gabos
+        *   @version    1.0.1
+        *   @copyright  (c) 2016-2017 Stefan Gabos
         *   @license    LGPL-3.0
         *   @alias      ZebraJS
         *   @class
