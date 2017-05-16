@@ -55,8 +55,8 @@
         *                       you work with those elements.
         *
         *   @author     Stefan Gabos <contact@stefangabos.ro>
-        *   @version    1.0.0
-        *   @copyright  (c) 2016 Stefan Gabos
+        *   @version    1.0.1
+        *   @copyright  (c) 2016-2017 Stefan Gabos
         *   @license    LGPL-3.0
         *   @alias      ZebraJS
         *   @class
@@ -1173,7 +1173,7 @@
         }
 
         // if "value" argument is not provided, return the existing value, or "undefined" if no value exists
-        return this[0].zjs.data[name] || undefined;
+        return this[0].zjs ? this[0].zjs.data[name] : undefined;
 
     }
 
@@ -1969,7 +1969,24 @@
      */
     $.fn.on = function(event_type, selector, callback, once) {
 
-        var event_types = event_type.split(' '), namespace, actual_callback;
+        var event_types, namespace, actual_callback, i;
+
+        // if event_type is given as object
+        if (typeof event_type === 'object') {
+
+            // iterate over all the events
+            for (i in event_type)
+
+                // bind them
+                this.on(i, event_type[i]);
+
+            // don't go forward
+            return;
+
+        }
+
+        // if more than a single event was given
+        event_types = event_type.split(' ');
 
         // if method is called with just 2 arguments,
         // the seconds argument is the callback not a selector
