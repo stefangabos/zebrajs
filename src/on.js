@@ -54,7 +54,24 @@
  */
 $.fn.on = function(event_type, selector, callback, once) {
 
-    var event_types = event_type.split(' '), namespace, actual_callback;
+    var event_types, namespace, actual_callback, i;
+
+    // if event_type is given as object
+    if (typeof event_type === 'object') {
+
+        // iterate over all the events
+        for (i in event_type)
+
+            // bind them
+            this.on(i, event_type[i]);
+
+        // don't go forward
+        return;
+
+    }
+
+    // if more than a single event was given
+    event_types = event_type.split(' ');
 
     // if method is called with just 2 arguments,
     // the seconds argument is the callback not a selector
