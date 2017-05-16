@@ -58,7 +58,7 @@ $(document).ready(function() {
                 tmp += source[i];
 
                 // if we're not looking for a matching closing bracket and we found a method
-                if (matching_brackets === false && (matches = tmp.match(/c(\.fn)?\.([^\=]+?)=function\([^\)]*?\)\{/))) {
+                if (matching_brackets === false && (matches = tmp.match(/\b[a-z]{1}(\.fn)?\.([^\=]+?)=function\([^\)]*?\)\{/))) {
 
                     // we start looking for the matching closing bracket
                     tmp = '';
@@ -79,7 +79,7 @@ $(document).ready(function() {
                     is_helper_method = matches[0].indexOf('.fn') === -1;
 
                     // this is the method's name
-                    method_name = matches[0].match(/^c\.(fn\.)?(.*?)\=/)[2];
+                    method_name = matches[0].match(/^[a-z]{1}\.(fn\.)?(.*?)\=/)[2];
 
                     // is this amethod_name method? (starting with an underscore)
                     is_private_method = method_name.indexOf('_') === 0;
@@ -245,7 +245,7 @@ $(document).ready(function() {
 
         // generate the HTML for the module, based on the template
         block = $(parse_template({
-            method: methods[i].match(/^c\.fn\.(.*?)\=/)[1],
+            method: methods[i].match(/^[a-z]{1}\.fn\.(.*?)\=/)[1],
             size: methods[i].length + 1 // the ',' prefix
 
         // ...and add it to the section of optional modules
@@ -258,7 +258,7 @@ $(document).ready(function() {
 
         // generate the HTML for the module, based on the template
         block = $(parse_template({
-            method: helper_methods[i].match(/^c\.(.*?)\=/)[1],
+            method: helper_methods[i].match(/^[a-z]{1}\.(.*?)\=/)[1],
             size: helper_methods[i].length + 1 // the ',' prefix
 
         // ...and add it to the section of optional modules
@@ -271,7 +271,7 @@ $(document).ready(function() {
 
         // generate the HTML for the module, based on the template
         block = $(parse_template({
-            method: private_methods[i].match(/^c\.fn\.(.*?)\=/)[1],
+            method: private_methods[i].match(/^[a-z]{1}\.fn\.(.*?)\=/)[1],
             size: private_methods[i].length + 1 // the ',' prefix
 
         // ...and add it to the section of optional modules
