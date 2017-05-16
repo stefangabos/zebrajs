@@ -37,8 +37,14 @@
  *      console.log('clicked!');
  *  }).addClass('foo');
  *
+ *  // multiple events
+ *  element.on({
+ *      mouseenter: function() { ... },
+ *      mouseleave: function() { ... }
+ *  });
+ *
  *  @param  {string}    event_type  One or more space-separated event types and optional namespaces, such as "click" or
- *                                  "click.namespace".
+ *                                  "click.namespace". Can also be given as an object.
  *
  *  @param  {string}    [selector]  A selector string to filter the descendants of the selected elements that will call
  *                                  the handler. If the selector is null or omitted, the handler is always called when it
