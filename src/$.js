@@ -17,7 +17,7 @@
 
         /**
         *   Creates a ZebraJS object which provides methods meant for simplifying the interaction with the set of
-        *   elements matched by the `selector` argument. This is refered to as `wrapping` those elements.
+        *   elements matched by the `selector` argument. This is referred to as `wrapping` those elements.
         *
         *   @example
         *
@@ -55,7 +55,7 @@
         *                       you work with those elements.
         *
         *   @author     Stefan Gabos <contact@stefangabos.ro>
-        *   @version    1.0.1
+        *   @version    1.0.2 (last revision June 01, 2017)
         *   @copyright  (c) 2016-2017 Stefan Gabos
         *   @license    LGPL-3.0
         *   @alias      ZebraJS
