@@ -7,7 +7,7 @@
  *      url: 'http://mydomain.com/index.html',
  *      method: 'GET',
  *      data: {
- *          foo:  'baz',
+ *          foo: 'baz',
  *          bar: 'bax'
  *      },
  *      error: function() {
@@ -18,10 +18,14 @@
  *      }
  *  });
  *
+ *  @param  {string}    [url]       The URL to which the request is to be sent.<br>
+ *                                  You may skip it and set it in the *options* object
+ *
  *  @param  {object}    options     A set of key/value pairs that configure the Ajax request.
  *
- *  |  Property         |   Type                |   Descritption
+ *  |  Property         |   Type                |   Description
  *  |-------------------|-----------------------|----------------------------------------------
+ *  |   **url**         |   *string*            |   The URL to which the request is to be sent.
  *  |   **async**       |   *boolean*           |   By default, all requests are sent *asynchronously*. If you need synchronous requests, set this option to `false`. Note that synchronous requests may temporarily lock the browser, disabling any actions while the request is active.<br>Default is `true`
  *  |   **beforeSend**  |   *function*          |   A pre-request callback function that can be used to modify the XMLHTTPRequest object before it is sent. Use this to set custom headers, etc. The XMLHTTPRequest object and settings objects are passed as arguments. Returning false from this function will cancel the request.
  *  |   **cache**       |   *boolean*           |   If set to `false`, will force requested pages not to be cached by the browser. Note: Setting cache to `false` will only work correctly with `HEAD` and `GET` requests. It works by appending "_={timestamp}" to the GET parameters. The parameter is not needed for other types of requests.<br>Default is `true`
@@ -91,6 +95,17 @@ $.ajax = function(url, options) {
             }
 
         }, key, params = '';
+
+    // if method is called with a single argument
+    if (!options) {
+
+        // then "options" is actually the first argument
+        options = url;
+
+        // and the "url" is taken from the "options" object
+        url = options.url;
+
+    }
 
     // extend the default options with the ones provided by the user
     options = $.extend(defaults, options);
