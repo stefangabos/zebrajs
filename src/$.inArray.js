@@ -24,7 +24,7 @@
  *                      if the value couldn't be found.
  *
  *  @memberof   ZebraJS
- *  @alias      inArray
+ *  @alias      $&period;inArray
  *  @instance
  */
 $.inArray = function(value, array) {

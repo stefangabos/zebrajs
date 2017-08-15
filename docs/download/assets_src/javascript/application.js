@@ -271,7 +271,7 @@ $(document).ready(function() {
 
         // generate the HTML for the module, based on the template
         block = $(parse_template({
-            method: private_methods[i].match(/^[a-z]{1}\.fn\.(.*?)\=/)[1],
+            method: '$'.private_methods[i].match(/^[a-z]{1}\.fn\.(.*?)\=/)[1],
             size: private_methods[i].length + 1 // the ',' prefix
 
         // ...and add it to the section of optional modules

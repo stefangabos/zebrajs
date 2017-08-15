@@ -155,6 +155,9 @@
     };
 
     // import "_helpers.js"
+    // import "$.ajax.js"
+    // import "$.extend.js"
+    // import "$.inArray.js"
     // import "addClass.js"
     // import "after.js"
     // import "append.js"
@@ -206,9 +209,6 @@
     // import "val.js"
     // import "width.js"
     // import "wrap.js"
-    // import "ajax.js"
-    // import "inArray.js"
-    // import "extend.js"
     // for browsers that do not support Element.matches() or Element.matchesSelector(), but carry support for
     // document.querySelectorAll(), a polyfill exists:
     if (!Element.prototype.matches)

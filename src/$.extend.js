@@ -16,7 +16,7 @@
  *                      properties of additional objects passed as arguments to this method.
  *
  *  @memberof   ZebraJS
- *  @alias      extend
+ *  @alias      $&period;extend
  *  @instance
  */
 $.extend = function(target) {

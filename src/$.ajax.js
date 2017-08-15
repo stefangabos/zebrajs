@@ -37,7 +37,7 @@
  *
  *
  *  @memberof   ZebraJS
- *  @alias      ajax
+ *  @alias      $&period;ajax
  *  @instance
  */
 $.ajax = function(url, options) {
