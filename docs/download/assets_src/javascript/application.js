@@ -228,7 +228,8 @@ $(document).ready(function() {
     // add the required $ method
     block = $('.well', $(parse_template({
         method: '$',
-        size: script_header.length + script_footer.length
+        size: script_header.length + script_footer.length,
+        prefix: ''
 
     // ...and add it to the section of required modules
     }))).appendTo($('.required-modules'));
