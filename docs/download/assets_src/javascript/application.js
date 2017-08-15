@@ -246,7 +246,8 @@ $(document).ready(function() {
         // generate the HTML for the module, based on the template
         block = $(parse_template({
             method: methods[i].match(/^[a-z]{1}\.fn\.(.*?)\=/)[1],
-            size: methods[i].length + 1 // the ',' prefix
+            size: methods[i].length + 1, // the ',' prefix
+            prefix: ''
 
         // ...and add it to the section of optional modules
         })).appendTo(modules_container);
@@ -259,7 +260,8 @@ $(document).ready(function() {
         // generate the HTML for the module, based on the template
         block = $(parse_template({
             method: helper_methods[i].match(/^[a-z]{1}\.(.*?)\=/)[1],
-            size: helper_methods[i].length + 1 // the ',' prefix
+            size: helper_methods[i].length + 1, // the ',' prefix
+            prefix: '$.'
 
         // ...and add it to the section of optional modules
         })).appendTo(helper_modules_container);
@@ -271,8 +273,9 @@ $(document).ready(function() {
 
         // generate the HTML for the module, based on the template
         block = $(parse_template({
-            method: '$'.private_methods[i].match(/^[a-z]{1}\.fn\.(.*?)\=/)[1],
-            size: private_methods[i].length + 1 // the ',' prefix
+            method: private_methods[i].match(/^[a-z]{1}\.fn\.(.*?)\=/)[1],
+            size: private_methods[i].length + 1, // the ',' prefix
+            prefix: ''
 
         // ...and add it to the section of optional modules
         })).appendTo(private_modules_container);
