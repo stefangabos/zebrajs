@@ -233,6 +233,6 @@
             };
 
     // this is where we make the $ object available globally
-    window.$ = $;
+    window.$ = window.jQuery =  $;
 
 })();
