@@ -31,6 +31,9 @@
  */
 $.fn.data = function(name, value) {
 
+    // if no name is given, return "undefined"
+    if (undefined === name) return undefined;
+
     // make sure the name follows the Dataset API specs
     // http://www.w3.org/TR/html5/dom.html#dom-dataset
     name = name
