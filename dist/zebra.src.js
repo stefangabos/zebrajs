@@ -436,6 +436,249 @@
     }
 
     /**
+     *  Performs an asynchronous HTTP (Ajax) request.
+     *
+     *  @example
+     *
+     *  $.ajax({
+     *      url: 'http://mydomain.com/index.html',
+     *      method: 'GET',
+     *      data: {
+     *          foo: 'baz',
+     *          bar: 'bax'
+     *      },
+     *      error: function() {
+     *          alert('error!');
+     *      },
+     *      success: function() {
+     *          alert('success!');
+     *      }
+     *  });
+     *
+     *  @param  {string}    [url]       The URL to which the request is to be sent.<br>
+     *                                  You may skip it and set it in the *options* object
+     *
+     *  @param  {object}    options     A set of key/value pairs that configure the Ajax request.
+     *
+     *  |  Property         |   Type                |   Description
+     *  |-------------------|-----------------------|----------------------------------------------
+     *  |   **url**         |   *string*            |   The URL to which the request is to be sent.
+     *  |   **async**       |   *boolean*           |   By default, all requests are sent *asynchronously*. If you need synchronous requests, set this option to `false`. Note that synchronous requests may temporarily lock the browser, disabling any actions while the request is active.<br>Default is `true`
+     *  |   **beforeSend**  |   *function*          |   A pre-request callback function that can be used to modify the XMLHTTPRequest object before it is sent. Use this to set custom headers, etc. The XMLHTTPRequest object and settings objects are passed as arguments. Returning false from this function will cancel the request.
+     *  |   **cache**       |   *boolean*           |   If set to `false`, will force requested pages not to be cached by the browser. Note: Setting cache to `false` will only work correctly with `HEAD` and `GET` requests. It works by appending "_={timestamp}" to the GET parameters. The parameter is not needed for other types of requests.<br>Default is `true`
+     *  |   **complete**    |   *function*          |   A function to be called when the request finishes (after `success` and `error` callbacks are executed). The function gets passed two arguments: The XMLHTTPRequest object and a string with the status of the request.
+     *  |   **data**        |   *string* / *object* |   Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET requests. Object must be `key/value` pairs, where `value` can also be an array.
+     *  |   **error**       |   *function*          |   A function to be called if the request fails. The function receives two arguments: The XMLHttpRequest object and a string describing the type of error that occurred.
+     *  |   **method**      |   *string*            |   The HTTP method to use for the request (e.g. `POST`, `GET`, `PUT`).
+     *  |   **success**     |   *function*          |   A function to be called if the request succeeds. The function gets passed two arguments: the data returned from the server and a string describing the status.
+     *
+     *
+     *  @memberof   ZebraJS
+     *  @alias      $&period;ajax
+     *  @instance
+     */
+    $.ajax = function(url, options) {
+
+        var defaults = {
+
+                async: true,
+                beforeSend: null,
+                cache: true,
+                complete: null,
+                data: null,
+                error: null,
+                method: 'get',
+                success: null
+
+            }, httpRequest,
+
+            // this callback functions is called as the AJAX call progresses
+            callback = function() {
+
+                // get the request's status
+                switch (httpRequest.readyState) {
+
+                    // if the request is ready to be made
+                    case 1:
+
+                        // if we have a callback function ready to handle this event, call it now
+                        if (typeof options.beforeSend === 'function') options.beforeSend.call(null, httpRequest, options);
+
+                        break;
+
+                    // if the request completed
+                    case 4:
+
+                        // if the request was successful and we have a callback function ready to handle this situation
+                        if (httpRequest.status === 200 && typeof options.success === 'function')
+
+                            // call that function now
+                            options.success.call(null, httpRequest.responseText, httpRequest.status);
+
+                        // if the request was unsuccessful and we have a callback function ready to handle this situation
+                        if (httpRequest.status !== 200 && typeof options.error === 'function')
+
+                            // call that function now
+                            options.error.call(null, httpRequest.status, httpRequest.responseText);
+
+                        // if we have a callback function ready to handle the fact that the request completed (regardless if
+                        // it was successful or not)
+                        if (typeof options.complete === 'function')
+
+                            // call that function now
+                            options.complete.call(null, httpRequest, httpRequest.status);
+
+                        break;
+                }
+
+            }, key, params = '';
+
+        // if method is called with a single argument
+        if (!options) {
+
+            // then "options" is actually the first argument
+            options = url;
+
+            // and the "url" is taken from the "options" object
+            url = options.url;
+
+        }
+
+        // extend the default options with the ones provided by the user
+        options = $.extend(defaults, options);
+
+        // the method of the request needs to be uppercase
+        options.method = options.method.toUpperCase();
+
+        // if data is provided and is an object
+        if (options.data && typeof options.data === 'object') {
+
+            // iterate over the object's properties
+            for (key in options.data)
+
+                // construct the query string
+                params += (params !== '' ? '&' : '') + key + '=' + encodeURIComponent(options.data[key]);
+
+            // change the data options to its string representation
+            options.data = params;
+
+        }
+
+        // if we don't want to cache requests, append a query string to the existing ones
+        if (!options.cache) options.data = options.data + (options.data ? '&' : '') + '_=' + (+new Date());
+
+        // if the XMLHttpRequest object is available
+        if (window.XMLHttpRequest) {
+
+            // instantiate the XMLHttpRequest object
+            httpRequest = new XMLHttpRequest();
+
+            // this will be called as the call progresses
+            httpRequest.onreadystatechange = callback;
+
+            // this makes the call...
+            httpRequest.open(options.method, url + (options.method === 'GET' && options.data ? '?' + options.data : ''), options.async);
+
+            // set the request header
+            httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+            // with any additional parameters, if provided
+            httpRequest.send(options.data);
+
+        }
+
+    }
+
+    /**
+     *  Merges the properties of two or more objects together into the first object.
+     *
+     *  @example
+     *
+     *  // merge the properties of the last 2 objects into the first one
+     *  $.extend({}, {foo:  'baz'}, {bar: 'biz'});
+     *
+     *  // the result
+     *  // {foo: 'baz', bar: 'biz'}
+     *
+     *  @param  {object}    target  An object whose properties will be merged with the properties of the additional objects
+     *                              passed as arguments to this method.
+     *
+     *  @return {object}    Returns an object with the properties of the object given as first argument merged with the
+     *                      properties of additional objects passed as arguments to this method.
+     *
+     *  @memberof   ZebraJS
+     *  @alias      $&period;extend
+     *  @instance
+     */
+    $.extend = function(target) {
+
+        var i, property, result;
+
+        // if the "assign" method is available, use it
+        if (Object.assign) return Object.assign.apply(null, [target].concat(Array.prototype.slice.call(arguments, 1)));
+
+        // if the "assign" method is not available
+
+        // if converting the target argument to an object fails, throw an error
+        try { result = Object(target); } catch (e) { throw new TypeError('Cannot convert undefined or null to object'); }
+
+        // iterate over the method's arguments
+        for (i = 1; i < arguments.length; i++)
+
+            // if argument is an object
+            if (typeof arguments[i] === 'object')
+
+                // iterate over the object's properties
+                for (property in arguments[i])
+
+                    // avoid bugs when hasOwnProperty is shadowed
+                    if (Object.prototype.hasOwnProperty.call(arguments[i], property))
+
+                        // add property to the result
+                        result[property] = arguments[i][property];
+
+        // return the new object
+        return result;
+
+    }
+
+    /**
+     *  Search for a given value within an array and returns the first index where the value is found, or `-1` if the value
+     *  is not found.
+     *
+     *  This method returns `-1` when it doesn't find a match. If the searched value is in the first position in the array
+     *  this method returns `0`, if in second `1`, and so on.
+     *
+     *  > Because in JavaScript `0 == false` (but `0 !== false`), to check for the presence of value within array, you need to
+     *  check if it's not equal to (or greater than) `-1`.
+     *  <br><br>
+     *  > **This method is here only for compatibility purposes and you shouldn't use it - you should use instead JavaScript's
+     *  own {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf indexOf}**
+     *
+     *  @example
+     *
+     *  // returns 4
+     *  $.inArray(5, [1, 2, 3, 4, 5, 6, 7]);
+     *
+     *  @param  {mixed}     value   The value to search for
+     *
+     *  @param  {array}     array   The array to search in
+     *
+     *  @return {integer}   Returns the position of the searched value inside the given array (starting from `0`), or `-1`
+     *                      if the value couldn't be found.
+     *
+     *  @memberof   ZebraJS
+     *  @alias      $&period;inArray
+     *  @instance
+     */
+    $.inArray = function(value, array) {
+
+        // return the index of "value" in the "array"
+        return array.indexOf(value);
+
+    }
+
+    /**
      *  Adds one or more classes to each element in the set of matched elements.
      *
      *  @example
@@ -1099,6 +1342,9 @@
      *  @instance
      */
     $.fn.data = function(name, value) {
+
+        // if no name is given, return "undefined"
+        if (undefined === name) return undefined;
 
         // make sure the name follows the Dataset API specs
         // http://www.w3.org/TR/html5/dom.html#dom-dataset
@@ -3284,249 +3530,6 @@
 
     }
 
-    /**
-     *  Performs an asynchronous HTTP (Ajax) request.
-     *
-     *  @example
-     *
-     *  $.ajax({
-     *      url: 'http://mydomain.com/index.html',
-     *      method: 'GET',
-     *      data: {
-     *          foo: 'baz',
-     *          bar: 'bax'
-     *      },
-     *      error: function() {
-     *          alert('error!');
-     *      },
-     *      success: function() {
-     *          alert('success!');
-     *      }
-     *  });
-     *
-     *  @param  {string}    [url]       The URL to which the request is to be sent.<br>
-     *                                  You may skip it and set it in the *options* object
-     *
-     *  @param  {object}    options     A set of key/value pairs that configure the Ajax request.
-     *
-     *  |  Property         |   Type                |   Description
-     *  |-------------------|-----------------------|----------------------------------------------
-     *  |   **url**         |   *string*            |   The URL to which the request is to be sent.
-     *  |   **async**       |   *boolean*           |   By default, all requests are sent *asynchronously*. If you need synchronous requests, set this option to `false`. Note that synchronous requests may temporarily lock the browser, disabling any actions while the request is active.<br>Default is `true`
-     *  |   **beforeSend**  |   *function*          |   A pre-request callback function that can be used to modify the XMLHTTPRequest object before it is sent. Use this to set custom headers, etc. The XMLHTTPRequest object and settings objects are passed as arguments. Returning false from this function will cancel the request.
-     *  |   **cache**       |   *boolean*           |   If set to `false`, will force requested pages not to be cached by the browser. Note: Setting cache to `false` will only work correctly with `HEAD` and `GET` requests. It works by appending "_={timestamp}" to the GET parameters. The parameter is not needed for other types of requests.<br>Default is `true`
-     *  |   **complete**    |   *function*          |   A function to be called when the request finishes (after `success` and `error` callbacks are executed). The function gets passed two arguments: The XMLHTTPRequest object and a string with the status of the request.
-     *  |   **data**        |   *string* / *object* |   Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET requests. Object must be `key/value` pairs, where `value` can also be an array.
-     *  |   **error**       |   *function*          |   A function to be called if the request fails. The function receives two arguments: The XMLHttpRequest object and a string describing the type of error that occurred.
-     *  |   **method**      |   *string*            |   The HTTP method to use for the request (e.g. `POST`, `GET`, `PUT`).
-     *  |   **success**     |   *function*          |   A function to be called if the request succeeds. The function gets passed two arguments: the data returned from the server and a string describing the status.
-     *
-     *
-     *  @memberof   ZebraJS
-     *  @alias      ajax
-     *  @instance
-     */
-    $.ajax = function(url, options) {
-
-        var defaults = {
-
-                async: true,
-                beforeSend: null,
-                cache: true,
-                complete: null,
-                data: null,
-                error: null,
-                method: 'get',
-                success: null
-
-            }, httpRequest,
-
-            // this callback functions is called as the AJAX call progresses
-            callback = function() {
-
-                // get the request's status
-                switch (httpRequest.readyState) {
-
-                    // if the request is ready to be made
-                    case 1:
-
-                        // if we have a callback function ready to handle this event, call it now
-                        if (typeof options.beforeSend === 'function') options.beforeSend.call(null, httpRequest, options);
-
-                        break;
-
-                    // if the request completed
-                    case 4:
-
-                        // if the request was successful and we have a callback function ready to handle this situation
-                        if (httpRequest.status === 200 && typeof options.success === 'function')
-
-                            // call that function now
-                            options.success.call(null, httpRequest.responseText, httpRequest.status);
-
-                        // if the request was unsuccessful and we have a callback function ready to handle this situation
-                        if (httpRequest.status !== 200 && typeof options.error === 'function')
-
-                            // call that function now
-                            options.error.call(null, httpRequest.status, httpRequest.responseText);
-
-                        // if we have a callback function ready to handle the fact that the request completed (regardless if
-                        // it was successful or not)
-                        if (typeof options.complete === 'function')
-
-                            // call that function now
-                            options.complete.call(null, httpRequest, httpRequest.status);
-
-                        break;
-                }
-
-            }, key, params = '';
-
-        // if method is called with a single argument
-        if (!options) {
-
-            // then "options" is actually the first argument
-            options = url;
-
-            // and the "url" is taken from the "options" object
-            url = options.url;
-
-        }
-
-        // extend the default options with the ones provided by the user
-        options = $.extend(defaults, options);
-
-        // the method of the request needs to be uppercase
-        options.method = options.method.toUpperCase();
-
-        // if data is provided and is an object
-        if (options.data && typeof options.data === 'object') {
-
-            // iterate over the object's properties
-            for (key in options.data)
-
-                // construct the query string
-                params += (params !== '' ? '&' : '') + key + '=' + encodeURIComponent(options.data[key]);
-
-            // change the data options to its string representation
-            options.data = params;
-
-        }
-
-        // if we don't want to cache requests, append a query string to the existing ones
-        if (!options.cache) options.data = options.data + (options.data ? '&' : '') + '_=' + (+new Date());
-
-        // if the XMLHttpRequest object is available
-        if (window.XMLHttpRequest) {
-
-            // instantiate the XMLHttpRequest object
-            httpRequest = new XMLHttpRequest();
-
-            // this will be called as the call progresses
-            httpRequest.onreadystatechange = callback;
-
-            // this makes the call...
-            httpRequest.open(options.method, url + (options.method === 'GET' && options.data ? '?' + options.data : ''), options.async);
-
-            // set the request header
-            httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-
-            // with any additional parameters, if provided
-            httpRequest.send(options.data);
-
-        }
-
-    }
-
-    /**
-     *  Search for a given value within an array and returns the first index where the value is found, or `-1` if the value
-     *  is not found.
-     *
-     *  This method returns `-1` when it doesn't find a match. If the searched value is in the first position in the array
-     *  this method returns `0`, if in second `1`, and so on.
-     *
-     *  > Because in JavaScript `0 == false` (but `0 !== false`), to check for the presence of value within array, you need to
-     *  check if it's not equal to (or greater than) `-1`.
-     *  <br><br>
-     *  > **This method is here only for compatibility purposes and you shouldn't use it - you should use instead JavaScript's
-     *  own {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf indexOf}**
-     *
-     *  @example
-     *
-     *  // returns 4
-     *  $.inArray(5, [1, 2, 3, 4, 5, 6, 7]);
-     *
-     *  @param  {mixed}     value   The value to search for
-     *
-     *  @param  {array}     array   The array to search in
-     *
-     *  @return {integer}   Returns the position of the searched value inside the given array (starting from `0`), or `-1`
-     *                      if the value couldn't be found.
-     *
-     *  @memberof   ZebraJS
-     *  @alias      inArray
-     *  @instance
-     */
-    $.inArray = function(value, array) {
-
-        // return the index of "value" in the "array"
-        return array.indexOf(value);
-
-    }
-
-    /**
-     *  Merges the properties of two or more objects together into the first object.
-     *
-     *  @example
-     *
-     *  // merge the properties of the last 2 objects into the first one
-     *  $.extend({}, {foo:  'baz'}, {bar: 'biz'});
-     *
-     *  // the result
-     *  // {foo: 'baz', bar: 'biz'}
-     *
-     *  @param  {object}    target  An object whose properties will be merged with the properties of the additional objects
-     *                              passed as arguments to this method.
-     *
-     *  @return {object}    Returns an object with the properties of the object given as first argument merged with the
-     *                      properties of additional objects passed as arguments to this method.
-     *
-     *  @memberof   ZebraJS
-     *  @alias      extend
-     *  @instance
-     */
-    $.extend = function(target) {
-
-        var i, property, result;
-
-        // if the "assign" method is available, use it
-        if (Object.assign) return Object.assign.apply(null, [target].concat(Array.prototype.slice.call(arguments, 1)));
-
-        // if the "assign" method is not available
-
-        // if converting the target argument to an object fails, throw an error
-        try { result = Object(target); } catch (e) { throw new TypeError('Cannot convert undefined or null to object'); }
-
-        // iterate over the method's arguments
-        for (i = 1; i < arguments.length; i++)
-
-            // if argument is an object
-            if (typeof arguments[i] === 'object')
-
-                // iterate over the object's properties
-                for (property in arguments[i])
-
-                    // avoid bugs when hasOwnProperty is shadowed
-                    if (Object.prototype.hasOwnProperty.call(arguments[i], property))
-
-                        // add property to the result
-                        result[property] = arguments[i][property];
-
-        // return the new object
-        return result;
-
-    }
-
     // for browsers that do not support Element.matches() or Element.matchesSelector(), but carry support for
     // document.querySelectorAll(), a polyfill exists:
     if (!Element.prototype.matches)
@@ -3551,6 +3554,6 @@
             };
 
     // this is where we make the $ object available globally
-    window.$ = $;
+    window.$ = window.jQuery =  $;
 
 })();
