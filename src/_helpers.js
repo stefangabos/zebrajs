@@ -161,8 +161,8 @@ $.fn._dom_insert = function(content, where) {
 
     });
 
-    // return the set of matched elements, for chaining
-    return this;
+    // return the newly inserted element(s), for chaining
+    return content;
 
 }
 
