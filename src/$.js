@@ -12,7 +12,7 @@
         // eslint-disable-next-line no-unused-vars
         internal_counter = 0,
 
-        // this is the function used internally create ZebraJS objects using the given arguments
+        // this is the function used internally to create ZebraJS objects using the given arguments
         // at the end of this file we give it a simpler name, like "$", but internally we'll use it like it is
 
         /**
@@ -124,8 +124,8 @@
 
                 }
 
-            // if selector is the Document object, a DOM node, the Window object or a text node OR
-            else if (typeof selector === 'object' && (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window))
+            // if selector is the Document object, the Window object, a DOM node or a text node
+            else if (typeof selector === 'object' && (selector instanceof Document || selector instanceof Window || selector instanceof Element || selector instanceof Text))
 
                 // add it to the elements array
                 elements.push(selector);
@@ -222,6 +222,7 @@
             Element.prototype.webkitMatchesSelector ||
 
             function(s) {
+
                 var matches = (this.document || this.ownerDocument).querySelectorAll(s),
                     i = matches.length;
 
@@ -233,6 +234,6 @@
             };
 
     // this is where we make the $ object available globally
-    window.$ = window.jQuery =  $;
+    window.$ = window.jQuery = $;
 
 })();
