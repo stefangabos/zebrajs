@@ -33,7 +33,7 @@
 $.fn.scrollTop = function(value) {
 
     // if value is not specified, return the scrollTop value of the first element in the set of matched elements
-    if (undefined === value) return this[0].scrollTop;
+    if (undefined === value) return this[0] instanceof Window || this[0] instanceof Document ? document.documentElement.scrollTop : this[0].scrollTop;
 
     // iterate through the set of matched elements
     this.forEach(function(element) {

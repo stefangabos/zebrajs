@@ -33,7 +33,7 @@
 $.fn.scrollLeft = function(value) {
 
     // if value is not specified, return the scrollLeft value of the first element in the set of matched elements
-    if (undefined === value) return this[0].scrollLeft;
+    if (undefined === value) return this[0] instanceof Window || this[0] instanceof Document ? document.documentElement.scrollLeft : this[0].scrollLeft;
 
     // iterate through the set of matched elements
     this.forEach(function(element) {
