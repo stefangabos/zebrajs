@@ -12,7 +12,7 @@
         // eslint-disable-next-line no-unused-vars
         internal_counter = 0,
 
-        // this is the function used internally create ZebraJS objects using the given arguments
+        // this is the function used internally to create ZebraJS objects using the given arguments
         // at the end of this file we give it a simpler name, like "$", but internally we'll use it like it is
 
         /**
@@ -124,8 +124,8 @@
 
                 }
 
-            // if selector is the Document object, a DOM node, the Window object or a text node OR
-            else if (typeof selector === 'object' && (selector instanceof Document || selector instanceof Element || selector instanceof Text || selector instanceof Window))
+            // if selector is the Document object, the Window object, a DOM node or a text node
+            else if (typeof selector === 'object' && (selector instanceof Document || selector instanceof Window || selector instanceof Element || selector instanceof Text))
 
                 // add it to the elements array
                 elements.push(selector);
@@ -317,8 +317,8 @@
 
         });
 
-        // return the set of matched elements, for chaining
-        return this;
+        // return the newly inserted element(s), for chaining
+        return content;
 
     }
 
@@ -2959,7 +2959,7 @@
     $.fn.scrollLeft = function(value) {
 
         // if value is not specified, return the scrollLeft value of the first element in the set of matched elements
-        if (undefined === value) return this[0].scrollLeft;
+        if (undefined === value) return this[0] instanceof Window || this[0] instanceof Document ? document.documentElement.scrollLeft : this[0].scrollLeft;
 
         // iterate through the set of matched elements
         this.forEach(function(element) {
@@ -3007,7 +3007,7 @@
     $.fn.scrollTop = function(value) {
 
         // if value is not specified, return the scrollTop value of the first element in the set of matched elements
-        if (undefined === value) return this[0].scrollTop;
+        if (undefined === value) return this[0] instanceof Window || this[0] instanceof Document ? document.documentElement.scrollTop : this[0].scrollTop;
 
         // iterate through the set of matched elements
         this.forEach(function(element) {
@@ -3543,6 +3543,7 @@
             Element.prototype.webkitMatchesSelector ||
 
             function(s) {
+
                 var matches = (this.document || this.ownerDocument).querySelectorAll(s),
                     i = matches.length;
 
@@ -3554,6 +3555,6 @@
             };
 
     // this is where we make the $ object available globally
-    window.$ = window.jQuery =  $;
+    window.$ = window.jQuery = $;
 
 })();
