@@ -384,31 +384,18 @@
                 result = result.concat(Array.prototype.slice.call(selector ? element.parentNode.querySelectorAll('#' + element.id + '>' + selector) : element.children));
 
             // if we're looking next/previous sibling
-            else if (action === 'previous' || action === 'next')
+            else if (action === 'previous' || action === 'next') {
 
-                // if there's no selector specified
-                if (!selector)
+                // get the next/previous sibling
+                tmp = element[(action === 'next' ? 'next' : 'previous') + 'ElementSibling'];
+
+                // if there's no selector specified or there is and it matches
+                if (!selector || $(tmp).is(selector))
 
                     // add it to the results array
-                    result = result.concat([element[(action === 'next' ? 'next' : 'previous') + 'ElementSibling']]);
+                    result = result.concat([tmp]);
 
-                // if selector is specified
-                else {
-
-                    tmp = [];
-
-                    // get the element's sibling nodes which, optionally, match a given selector and add them to the results array
-                    Array.prototype.filter.call(element.parentNode.querySelectorAll('#' + element.parentNode.id + '>' + selector), function(child) {
-
-                        // add all elements that are after (when looking for next sibling) or before (when looking for previous sibling) the current element
-                        return (action === 'next' ? (child === element || tmp.indexOf(element) > -1) && tmp.push(child) : tmp.indexOf(element) === -1 && tmp.push(child));
-
-                    });
-
-                    // add to the results array
-                    result = result.concat(tmp.length >= 2 ? tmp[tmp.length - 2] : []);
-
-                }
+            }
 
             // if present, remove the randomly generated ID
             // we remove the randomly generated ID from the element
