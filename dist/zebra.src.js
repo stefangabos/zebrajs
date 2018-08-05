@@ -1392,11 +1392,11 @@
         // http://www.w3.org/TR/html5/dom.html#dom-dataset
         name = name
 
-                // replace "-" followed by an ascii letter to that letter in uppercase
-                .replace(/\-([a-z])/ig, function() { return arguments[1].toUpperCase(); })
+            // replace "-" followed by an ascii letter to that letter in uppercase
+            .replace(/\-([a-z])/ig, function() { return arguments[1].toUpperCase(); })
 
-                // remove any left "-"
-                .replace(/\-/g, '');
+            // remove any left "-"
+            .replace(/\-/g, '');
 
         // if "value" argument is provided
         if (undefined !== value) {
@@ -1422,14 +1422,14 @@
                             // make sure the name follows the Dataset API specs
                             var name = attribute.name
 
-                                    // remove the "data-" prefix
-                                    .replace(/^data\-/, '')
+                                // remove the "data-" prefix
+                                .replace(/^data\-/, '')
 
-                                    // replace "-" followed by an ascii letter to that letter in uppercase
-                                    .replace(/\-([a-z])/ig, function() { return arguments[1].toUpperCase(); })
+                                // replace "-" followed by an ascii letter to that letter in uppercase
+                                .replace(/\-([a-z])/ig, function() { return arguments[1].toUpperCase(); })
 
-                                    // remove any left "-"
-                                    .replace(/\-/g, '');
+                                // remove any left "-"
+                                .replace(/\-/g, '');
 
                             // store the data attribute
                             element.zjs.data[name] = attribute.value;
