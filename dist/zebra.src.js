@@ -590,7 +590,9 @@
     }
 
     /**
-     *  Iterates over the set of matched elements, executing a callback function for each element in the set.
+     *  Iterates over an array, executing a callback function for each item in the array.
+     *
+     *  For iterating over a set of matched elements, see the {@link ZebraJS#each each()} method.
      *
      *  @param  {function}  callback    The function to execute for each item in the set. The callback function receives two
      *                                  arguments: the element's position in the set, called `index` (0-based), and the DOM
@@ -598,9 +600,12 @@
      *                                  <br><br>
      *                                  *Returning `FALSE` from the callback function breaks the loop!*
      *
+     *  > **This method is here only for compatibility purposes and you shouldn't use it - you should use instead JavaScript's
+     *  native {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach forEach}**
+     *
      *  @example
      *
-     *  $('selector').each(function(index) {
+     *  $.each([1, 2, 3, 4], function(index) {
      *
      *      // show the element's index in the set
      *      console.log(index);
