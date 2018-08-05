@@ -5,6 +5,9 @@ module.exports = function(grunt) {
     // show time spent on each taks
     require('time-grunt')(grunt);
 
+    // required for sass
+    const sass = require('node-sass');
+
     grunt.initConfig({
 
         // load packages.json
@@ -59,6 +62,7 @@ module.exports = function(grunt) {
          **************************************************************************************************************/
         'sass': {
             options: {
+                implementation: sass,
                 sourceMap: false,
                 outputStyle: 'compressed',
                 precision: 4
