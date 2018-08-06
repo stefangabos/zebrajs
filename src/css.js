@@ -54,7 +54,23 @@
  */
 $.fn.css = function(property, value) {
 
-    var i, computedStyle;
+    var i, computedStyle,
+
+        // CSS properties that don't have a unit
+        // *numeric* values for other CSS properties will be suffixed with "px", unless already suffixed with a unit
+        unitless_properties = [
+
+            'animationIterationCount', 'borderImageOutset', 'borderImageSlice', 'borderImageWidth', 'boxFlex',
+            'boxFlexGroup', 'boxOrdinalGroup', 'columnCount', 'columns', 'flex', 'flexGrow', 'flexPositive',
+            'flexShrink', 'flexNegative', 'flexOrder', 'gridRow', 'gridRowEnd', 'gridRowSpan', 'gridRowStart',
+            'gridColumn', 'gridColumnEnd', 'gridColumnSpan', 'gridColumnStart', 'fontWeight', 'lineClamp',
+            'lineHeight', 'opacity', 'order', 'orphans', 'tabSize', 'widows', 'zIndex', 'zoom',
+
+            // svg-related properties
+            'fillOpacity', 'floodOpacity', 'stopOpacity', 'strokeDasharray', 'strokeDashoffset',
+            'strokeMiterlimit', 'strokeOpacity', 'strokeWidth'
+
+        ];
 
     // if "property" is an object and "value" is not set
     if (typeof property === 'object')
@@ -66,7 +82,10 @@ $.fn.css = function(property, value) {
             for (i in property)
 
                 // set each style property
-                element.style[i] = property[i];
+                element.style[i] = property[i] +
+
+                    // if value does not have a unit provided and is not one of the unitless properties, add the "px" suffix
+                    (parseFloat(property[i]) === property[i] && unitless_properties.indexOf(i) === -1 ? 'px' : '');
 
         });
 
