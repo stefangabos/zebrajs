@@ -34,12 +34,6 @@ $.fn.outerHeight = function(include_margins) {
     // return the result of inner height together with
     return (parseFloat(computed_style.height) +
 
-        // top and bottom paddings
-        parseFloat(computed_style.paddingTop) + parseFloat(computed_style.paddingBottom) +
-
-        // top and bottom borders
-        parseFloat(computed_style.borderTopWidth) + parseFloat(computed_style.borderBottomWidth) +
-
         // include margins, if requested
         (include_margins ? parseFloat(computed_style.marginTop) + parseFloat(computed_style.marginBottom) : 0)) || 0;
 

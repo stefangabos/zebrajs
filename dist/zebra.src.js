@@ -1293,6 +1293,7 @@
 
             // CSS properties that don't have a unit
             // *numeric* values for other CSS properties will be suffixed with "px", unless already suffixed with a unit
+            // list taken from https://github.com/facebook/react/blob/4131af3e4bf52f3a003537ec95a1655147c81270/src/renderers/dom/shared/CSSProperty.js#L15-L59
             unitless_properties = [
 
                 'animationIterationCount', 'borderImageOutset', 'borderImageSlice', 'borderImageWidth', 'boxFlex',
@@ -2462,12 +2463,6 @@
         // return the result of inner height together with
         return (parseFloat(computed_style.height) +
 
-            // top and bottom paddings
-            parseFloat(computed_style.paddingTop) + parseFloat(computed_style.paddingBottom) +
-
-            // top and bottom borders
-            parseFloat(computed_style.borderTopWidth) + parseFloat(computed_style.borderBottomWidth) +
-
             // include margins, if requested
             (include_margins ? parseFloat(computed_style.marginTop) + parseFloat(computed_style.marginBottom) : 0)) || 0;
 
@@ -2506,14 +2501,10 @@
         // basic computation those values may contain
         var computed_styles = window.getComputedStyle(this[0]);
 
+        console.log(computed_styles.width);
+
         // return the result of inner width together with
         return (parseFloat(computed_styles.width) +
-
-            // left and right paddings
-            parseFloat(computed_styles.paddingLeft) + parseFloat(computed_styles.paddingRight) +
-
-            // left and right borders
-            parseFloat(computed_styles.borderLeftWidth) + parseFloat(computed_styles.borderRightWidth) +
 
             // include margins, if requested
             (include_margins ? parseFloat(computed_styles.marginLeft) + parseFloat(computed_styles.marginRight) : 0)) || 0;

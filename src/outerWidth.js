@@ -31,14 +31,10 @@ $.fn.outerWidth = function(include_margins) {
     // basic computation those values may contain
     var computed_styles = window.getComputedStyle(this[0]);
 
+    console.log(computed_styles.width);
+
     // return the result of inner width together with
     return (parseFloat(computed_styles.width) +
-
-        // left and right paddings
-        parseFloat(computed_styles.paddingLeft) + parseFloat(computed_styles.paddingRight) +
-
-        // left and right borders
-        parseFloat(computed_styles.borderLeftWidth) + parseFloat(computed_styles.borderRightWidth) +
 
         // include margins, if requested
         (include_margins ? parseFloat(computed_styles.marginLeft) + parseFloat(computed_styles.marginRight) : 0)) || 0;
