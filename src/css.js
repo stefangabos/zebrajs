@@ -58,6 +58,7 @@ $.fn.css = function(property, value) {
 
         // CSS properties that don't have a unit
         // *numeric* values for other CSS properties will be suffixed with "px", unless already suffixed with a unit
+        // list taken from https://github.com/facebook/react/blob/4131af3e4bf52f3a003537ec95a1655147c81270/src/renderers/dom/shared/CSSProperty.js#L15-L59
         unitless_properties = [
 
             'animationIterationCount', 'borderImageOutset', 'borderImageSlice', 'borderImageWidth', 'boxFlex',
