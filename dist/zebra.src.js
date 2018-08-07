@@ -2501,8 +2501,6 @@
         // basic computation those values may contain
         var computed_styles = window.getComputedStyle(this[0]);
 
-        console.log(computed_styles.width);
-
         // return the result of inner width together with
         return (parseFloat(computed_styles.width) +
 
