@@ -81,7 +81,7 @@ $(document).ready(function() {
                     // this is the method's name
                     method_name = matches[0].match(/^[a-z]{1}\.(fn\.)?(.*?)\=/)[2];
 
-                    // is this amethod_name method? (starting with an underscore)
+                    // is this a method_name method? (starting with an underscore)
                     is_private_method = method_name.indexOf('_') === 0;
 
                     // store private methods
