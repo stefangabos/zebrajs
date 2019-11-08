@@ -95,7 +95,7 @@
         *
         *   @author     Stefan Gabos &lt;contact@stefangabos.ro>
         *   @version    1.0.3 (last revision August 15, 2017)
-        *   @copyright  (c) 2016-2017 Stefan Gabos
+        *   @copyright  (c) 2016-2019 Stefan Gabos
         *   @license    LGPL-3.0
         *   @alias      ZebraJS
         *   @class
@@ -133,7 +133,7 @@
 
                     // if the selector is an ID
                     // select the matching element and add it to the elements array
-                    if (selector.match(/^\#[^\s]+$/)) elements.push(parent.getElementById(selector.substr(1)));
+                    if (selector.match(/^\#[^\s]+$/)) elements.push(parent.querySelector(selector));
 
                     // if the "first_only" argument is set
                     else if (first_only)
@@ -1444,67 +1444,67 @@
             // remove any left "-"
             .replace(/\-/g, '');
 
+        // iterate through the set of matched elements
+        this.some(function(element) {
+
+            // initialize the "zjs" "private" property, if not already initialized
+            if (!element.zjs) element.zjs = {};
+
+            // if not already initialized...
+            if (!element.zjs.data) {
+
+                // ...initialize the "data" property,
+                element.zjs.data = {};
+
+                // iterate over the element's existing attributes
+                Array.prototype.slice.call(element.attributes).forEach(function(attribute) {
+
+                    // if we found an attribute starting with "data-"
+                    if (attribute.name.indexOf('data-') === 0) {
+
+                        // make sure the name follows the Dataset API specs
+                        var name = attribute.name
+
+                            // remove the "data-" prefix
+                            .replace(/^data\-/, '')
+
+                            // replace "-" followed by an ascii letter to that letter in uppercase
+                            .replace(/\-([a-z])/ig, function() { return arguments[1].toUpperCase(); })
+
+                            // remove any left "-"
+                            .replace(/\-/g, '');
+
+                        // store the data attribute
+                        element.zjs.data[name] = attribute.value;
+
+                    }
+
+                });
+
+            }
+
+            // if "value" argument is not provided
+            // break out of "some" after the first element
+            if (undefined === value) return true;
+
+            // if value is not already set, or it is set but it is of different type, set it now
+            if (!element.zjs.data[name] || typeof value !== typeof element.zjs.data[name]) element.zjs.data[name] = value;
+
+            // if both the existing value and the new one are objects
+            else if (typeof value === 'object' &amp;&amp; typeof element.zjs.data[name] === 'object')
+
+                // merge the new values with the old ones
+                Object.keys(value).forEach(function(key) {
+
+                    element.zjs.data[name][key] = value[key];
+
+                });
+
+        });
+
         // if "value" argument is provided
-        if (undefined !== value) {
-
-            // iterate through the set of matched elements
-            this.forEach(function(element) {
-
-                // initialize the "zjs" "private" property, if not already initialized
-                if (!element.zjs) element.zjs = {};
-
-                // if not already initialized...
-                if (!element.zjs.data) {
-
-                    // ...initialize the "data" property,
-                    element.zjs.data = {};
-
-                    // iterate over the element's existing attributes
-                    Array.prototype.slice.call(element.attributes).forEach(function(attribute) {
-
-                        // if we found an attribute starting with "data-"
-                        if (attribute.name.indexOf('data-') === 0) {
-
-                            // make sure the name follows the Dataset API specs
-                            var name = attribute.name
-
-                                // remove the "data-" prefix
-                                .replace(/^data\-/, '')
-
-                                // replace "-" followed by an ascii letter to that letter in uppercase
-                                .replace(/\-([a-z])/ig, function() { return arguments[1].toUpperCase(); })
-
-                                // remove any left "-"
-                                .replace(/\-/g, '');
-
-                            // store the data attribute
-                            element.zjs.data[name] = attribute.value;
-
-                        }
-
-                    });
-
-                }
-
-                // if value is not already set, or it is set but it is of different type, set it now
-                if (!element.zjs.data[name] || typeof value !== typeof element.zjs.data[name]) element.zjs.data[name] = value;
-
-                // if both the existing value and the new one are objects
-                else if (typeof value === 'object' &amp;&amp; typeof element.zjs.data[name] === 'object')
-
-                    // merge the new values with the old ones
-                    Object.keys(value).forEach(function(key) {
-
-                        element.zjs.data[name][key] = value[key];
-
-                    });
-
-            });
-
-            // return the set of matched elements
-            return this;
-
-        }
+        // return the set of matched elements
+        if (undefined !== value) return this;
 
         // if "value" argument is not provided, return the existing value, or "undefined" if no value exists
         return this[0].zjs ? this[0].zjs.data[name] : undefined;
@@ -3646,7 +3646,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Aug 07 2018 08:17:48 GMT+0300 (Eastern European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Nov 09 2019 00:01:49 GMT+0200 (Eastern European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

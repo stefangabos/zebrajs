@@ -56,7 +56,7 @@
         *
         *   @author     Stefan Gabos <contact@stefangabos.ro>
         *   @version    1.0.3 (last revision August 15, 2017)
-        *   @copyright  (c) 2016-2017 Stefan Gabos
+        *   @copyright  (c) 2016-2019 Stefan Gabos
         *   @license    LGPL-3.0
         *   @alias      ZebraJS
         *   @class
