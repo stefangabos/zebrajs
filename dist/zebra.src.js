@@ -56,7 +56,7 @@
         *
         *   @author     Stefan Gabos <contact@stefangabos.ro>
         *   @version    1.0.3 (last revision August 15, 2017)
-        *   @copyright  (c) 2016-2017 Stefan Gabos
+        *   @copyright  (c) 2016-2019 Stefan Gabos
         *   @license    LGPL-3.0
         *   @alias      ZebraJS
         *   @class
@@ -94,7 +94,7 @@
 
                     // if the selector is an ID
                     // select the matching element and add it to the elements array
-                    if (selector.match(/^\#[^\s]+$/)) elements.push(parent.getElementById(selector.substr(1)));
+                    if (selector.match(/^\#[^\s]+$/)) elements.push(parent.querySelector(selector));
 
                     // if the "first_only" argument is set
                     else if (first_only)
