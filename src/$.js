@@ -94,7 +94,7 @@
 
                     // if the selector is an ID
                     // select the matching element and add it to the elements array
-                    if (selector.match(/^\#[^\s]+$/)) elements.push(parent.getElementById(selector.substr(1)));
+                    if (selector.match(/^\#[^\s]+$/)) elements.push(parent.querySelector(selector));
 
                     // if the "first_only" argument is set
                     else if (first_only)
