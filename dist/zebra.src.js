@@ -1409,70 +1409,54 @@
             // remove any left "-"
             .replace(/\-/g, '');
 
+        // if "value" argument is provided
+        if (undefined !== value) {
+
+            // iterate through the set of matched elements
+            this.forEach(function(element) {
+
+                // set the data attribute's value
+                // since dataset can not store objects, we use JSON.stringify if value is an object
+                element.dataset[name] = typeof value === 'object' ? JSON.stringify(value) : value;
+
+            });
+
+            // return the set of matched elements, for chaining
+            return this;
+
+        }
+
         // iterate through the set of matched elements
         this.some(function(element) {
 
-            // initialize the "zjs" "private" property, if not already initialized
-            if (!element.zjs) element.zjs = {};
+            // if the data attribute exists
+            if (undefined !== element.dataset[name]) {
 
-            // if not already initialized...
-            if (!element.zjs.data) {
+                // first
+                try {
 
-                // ...initialize the "data" property,
-                element.zjs.data = {};
+                    // check if the stored value is a JSON object
+                    // if it is, convert it back to an object
+                    value = JSON.parse(element.dataset[name]);
 
-                // iterate over the element's existing attributes
-                Array.prototype.slice.call(element.attributes).forEach(function(attribute) {
+                // if the stored value is not a JSON object
+                } catch (err) {
 
-                    // if we found an attribute starting with "data-"
-                    if (attribute.name.indexOf('data-') === 0) {
+                    // get value
+                    value = element.dataset[name];
 
-                        // make sure the name follows the Dataset API specs
-                        var name = attribute.name
+                }
 
-                            // remove the "data-" prefix
-                            .replace(/^data\-/, '')
-
-                            // replace "-" followed by an ascii letter to that letter in uppercase
-                            .replace(/\-([a-z])/ig, function() { return arguments[1].toUpperCase(); })
-
-                            // remove any left "-"
-                            .replace(/\-/g, '');
-
-                        // store the data attribute
-                        element.zjs.data[name] = attribute.value;
-
-                    }
-
-                });
+                // break out of the loop
+                return true;
 
             }
 
-            // if "value" argument is not provided
-            // break out of "some" after the first element
-            if (undefined === value) return true;
-
-            // if value is not already set, or it is set but it is of different type, set it now
-            if (!element.zjs.data[name] || typeof value !== typeof element.zjs.data[name]) element.zjs.data[name] = value;
-
-            // if both the existing value and the new one are objects
-            else if (typeof value === 'object' && typeof element.zjs.data[name] === 'object')
-
-                // merge the new values with the old ones
-                Object.keys(value).forEach(function(key) {
-
-                    element.zjs.data[name][key] = value[key];
-
-                });
-
         });
 
-        // if "value" argument is provided
-        // return the set of matched elements
-        if (undefined !== value) return this;
-
-        // if "value" argument is not provided, return the existing value, or "undefined" if no value exists
-        return this[0].zjs ? this[0].zjs.data[name] : undefined;
+        // return the found value
+        // (or "undefined" if not found)
+        return value;
 
     }
 
