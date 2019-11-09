@@ -1,0 +1,9 @@
+node_modules/*
+src/*
+.gitattributes
+.gitignore
+.npmignore
+eslint.json
+Gruntfile.js
+package.json
+package-lock.json
