@@ -28,6 +28,9 @@
  */
 $.fn.closest = function(selector) {
 
+	if(this[0].matches(selector))
+			return this;
+
     var result = [];
 
     // iterate through the set of matched elements
