@@ -55,7 +55,7 @@
         *                       you work with those elements.
         *
         *   @author     Stefan Gabos <contact@stefangabos.ro>
-        *   @version    1.0.3 (last revision August 15, 2017)
+        *   @version    0.9.0 (last revision November 09, 2019)
         *   @copyright  (c) 2016-2019 Stefan Gabos
         *   @license    LGPL-3.0
         *   @alias      ZebraJS
