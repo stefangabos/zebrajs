@@ -1,9 +1,10 @@
 /**
  *  For each element in the set, get the first element that matches the selector by traversing up through its ancestors
- *  in the DOM tree.
+ *  in the DOM tree, beginning with the current element.
  *
  *  Given a {@link ZebraJS} object that represents a set of DOM elements, this method searches through the ancestors of
- *  these elements in the DOM tree and constructs a new {@link ZebraJS} object from the matching elements.
+ *  these elements in the DOM tree, beginning with the current element, and constructs a new {@link ZebraJS} object from
+ *  the matching elements.
  *
  *  @example
  *
@@ -29,6 +30,9 @@
 $.fn.closest = function(selector) {
 
     var result = [];
+
+    // since the checking starts with the element itself, if the element itself matches the selector return now
+    if (this[0].matches(selector)) return this;
 
     // iterate through the set of matched elements
     this.forEach(function(element) {
