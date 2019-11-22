@@ -577,13 +577,13 @@
     }
 
     /**
-     *  Iterates over an array, executing a callback function for each item in the array.
+     *  Iterates over an array or an object, executing a callback function for each item.
      *
      *  For iterating over a set of matched elements, see the {@link ZebraJS#each each()} method.
      *
      *  @param  {function}  callback    The function to execute for each item in the set. The callback function receives two
-     *                                  arguments: the element's position in the set, called `index` (0-based), and the DOM
-     *                                  element. The `this` keyword inside the callback function refers to the DOM element.
+     *                                  arguments: the item's position in the set, called `index` (0-based), and the item.
+     *                                     The `this` keyword inside the callback function refers to the item.
      *                                  <br><br>
      *                                  *Returning `FALSE` from the callback function breaks the loop!*
      *
@@ -592,14 +592,16 @@
      *
      *  @example
      *
-     *  $.each([1, 2, 3, 4], function(index) {
+     *  $.each([1, 2, 3, 4], function(index, value) {
+     *      console.log(index + ': ' + value);
+     *  });
      *
-     *      // show the element's index in the set
-     *      console.log(index);
-     *
-     *      // remember, inside the callback, the "this" keyword refers to the DOM element
-     *      $(this).css('display', 'none');
-     *
+     *  var obj = {
+     *      prop1:  'value1',
+     *      prop2:  'value2'
+     *  };
+     *  $.each(obj, function(index, value) {
+     *      console.log(index + ': ' + value);
      *  });
      *
      *  @return {undefined}
@@ -610,13 +612,28 @@
      */
     $.each = function(array, callback) {
 
-        // iterate through the set of matched elements
-        for (var i = 0; i < this.length; i++)
+        var key;
 
-            //  apply the callback function
-            if (callback.call(this[i], i, this[i]) === false) return;
+        // if argument is an array
+        if (array.length) {
 
-    }
+            // iterate through the element in the array
+            for (key = 0; key < array.length; key++)
+
+                //  apply the callback function
+                if (callback.call(array[key], key, array[key]) === false) return;
+
+        // if argument is an object
+        } else
+
+            // iterate over the object's properties
+            for (key in array)
+
+                //  apply the callback function
+                if (callback.call(array[key], key, array[key]) === false) return;
+
+    };
+
 
     /**
      *  Merges the properties of two or more objects together into the first object.
