@@ -33,9 +33,9 @@
 $.each = function(array, callback) {
 
     // iterate through the set of matched elements
-    for (var i = 0; i < this.length; i++)
+    for (var i = 0; i < array.length; i++)
 
         //  apply the callback function
-        if (callback.call(this[i], i, this[i]) === false) return;
+        if (callback.call(array[i], i, array[i]) === false) return;
 
 }
