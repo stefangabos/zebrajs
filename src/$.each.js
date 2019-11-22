@@ -30,12 +30,15 @@
  *  @alias      $&period;each
  *  @instance
  */
-$.each = function(array, callback) {
+$.each = function (array, callback) {
+	if (array.length) {
+		// iterate through the set of matched elements
+		for (var i=0; i < array.length; i++)
+			//  apply the callback function
+			if (callback.call(array[i], i, array[i]) === false) return;
+	} else {
+		for (var key in array)
+			if (callback.call(array[key], key, array[key]) === false) return;
+	}
+};
 
-    // iterate through the set of matched elements
-    for (var i = 0; i < array.length; i++)
-
-        //  apply the callback function
-        if (callback.call(array[i], i, array[i]) === false) return;
-
-}
