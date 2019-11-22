@@ -32,7 +32,7 @@
  */
 $.each = function(array, callback) {
 
-    // iterate through the set of matched elements
+    // iterate through elements in the array
     for (var i = 0; i < array.length; i++)
 
         //  apply the callback function
