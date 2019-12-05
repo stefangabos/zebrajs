@@ -92,6 +92,9 @@
                     // if parent is set and is a ZebraJS object, refer to the first DOM element from the set instead
                     else if (typeof parent === 'object' && parent.version) parent = parent[0];
 
+                    // if parent is set and is a string, refer to the matching DOM element
+                    else if (typeof parent === 'string') parent = document.querySelector(parent);
+
                     // if the selector is an ID
                     // select the matching element and add it to the elements array
                     if (selector.match(/^\#[^\s]+$/)) elements.push(parent.querySelector(selector));
