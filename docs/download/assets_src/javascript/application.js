@@ -195,7 +195,7 @@ $(document).ready(function() {
                     if (id !== '$')
 
                         // helper methods go to the end, so add them to a different place
-                        if (helper_methods[id]) helper_methods_code += (helper_methods_code !== '' ? ',' : '') + helper_methods[id];
+                        if ($(this).next('strong').text().match(/^\$/) && helper_methods[id]) helper_methods_code += (helper_methods_code !== '' ? ',' : '') + helper_methods[id];
 
                         // add module's source to the existing source code
                         else code += ',' + (id.indexOf('_') === 0 ? private_methods[id] : methods[id]);
