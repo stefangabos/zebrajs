@@ -142,6 +142,9 @@
             // if the selector is a ZebraJS object, simply return it
             else if (typeof selector === 'object' && selector.version) return selector;
 
+            // remove undefined values
+            elements = elements.filter(function(value) { return value !== undefined && value !== null; });
+
             // attach all the ZebraJS methods to the elements array (including plugins, if any)
             for (property in $.fn) elements[property] = $.fn[property];
 
@@ -2104,7 +2107,7 @@
     $.fn.not = function(selector) {
 
         // iterate over the set of matched elements
-        return this.filter(function(element, index) {
+        return $(this.filter(function(element, index) {
 
             // if selector is a function, use it to filter results
             if (typeof selector === 'function' && selector.call !== undefined) return selector.call(element, index);
@@ -2120,7 +2123,7 @@
             // otherwise use "is" to  filter results
             return !$(element).is(selector);
 
-        });
+        }));
 
     }
 

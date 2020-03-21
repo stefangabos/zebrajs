@@ -142,6 +142,9 @@
             // if the selector is a ZebraJS object, simply return it
             else if (typeof selector === 'object' && selector.version) return selector;
 
+            // remove undefined values
+            elements = elements.filter(function(value) { return value !== undefined && value !== null; });
+
             // attach all the ZebraJS methods to the elements array (including plugins, if any)
             for (property in $.fn) elements[property] = $.fn[property];
 
