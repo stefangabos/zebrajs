@@ -30,6 +30,7 @@ $(document).ready(function() {
             'insertAfter':  ['_dom_insert'],
             'insertBefore': ['_dom_insert'],
             'next':         ['_dom_search', '_random', 'is'],
+            'not':          ['is'],
             'prepend':      ['_dom_insert'],
             'prependTo':    ['_dom_insert'],
             'prev':         ['_dom_search', '_random', 'is'],
