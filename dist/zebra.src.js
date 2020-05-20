@@ -2343,9 +2343,16 @@
         // if more than a single event was given
         event_types = event_type.split(' ');
 
-        // if method is called with just 2 arguments,
-        // the seconds argument is the callback not a selector
-        if (undefined === callback) callback = selector;
+        // if "selector" argument is missing
+        if ('function' === typeof selector) {
+
+            // if "once" argument is given
+            if (typeof callback  === 'boolean') once = callback;
+
+            // the "callback" argument is now in the place of the "selector" argument
+            callback = selector;
+
+        }
 
         // iterate through the set of matched elements
         this.forEach(function(element) {
