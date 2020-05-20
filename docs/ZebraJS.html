@@ -124,7 +124,7 @@
 
 <div class="description">
     <p>Creates a ZebraJS object which provides methods meant for simplifying the interaction with the set of
-  elements matched by the <code>selector</code> argument. This is referred to as <code>wrapping</code> those elements.</p>
+elements matched by the <code>selector</code> argument. This is referred to as <code>wrapping</code> those elements.</p>
 </div>
 
 
@@ -194,10 +194,10 @@
             
 
             <td class="description last"><p>A selector to filter DOM elements from the current document. It can be a
-                                      query selector, a <a href="ZebraJS.html">ZebraJS</a> object, a DOM element, a
-                                      <a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList">NodeList</a>,
-                                      and array of DOM elements<br><br>Alternatively, it can be a HTML tag
-                                      to create.</p></td>
+query selector, a <a href="ZebraJS.html">ZebraJS</a> object, a DOM element, a
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList">NodeList</a>,
+and array of DOM elements<br><br>Alternatively, it can be a HTML tag
+to create.</p></td>
         </tr>
 
     
@@ -231,10 +231,10 @@
             
 
             <td class="description last"><p>A selector to filter DOM elements from the current document, but only
-                                      those which have as parent the element(s) indicated by this argument. It
-                                      can be a query selector, a <a href="ZebraJS.html">ZebraJS</a> object, a DOM element, a
-                                      <a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList">NodeList</a>,
-                                      and array of DOM elements</p></td>
+those which have as parent the element(s) indicated by this argument. It
+can be a query selector, a <a href="ZebraJS.html">ZebraJS</a> object, a DOM element, a
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList">NodeList</a>,
+and array of DOM elements</p></td>
         </tr>
 
     
@@ -268,7 +268,7 @@
             
 
             <td class="description last"><p>Setting this argument will instruct the method to return only the first
-                                      element from the set of matched elements.</p></td>
+element from the set of matched elements.</p></td>
         </tr>
 
     
@@ -293,7 +293,7 @@
         
 <div class="param-desc">
     <p>Returns a special array holding the matching elements and having all the methods to help
-                      you work with those elements.</p>
+you work with those elements.</p>
 </div>
 
 
@@ -460,7 +460,7 @@
             
 
             <td class="description last"><p>The URL to which the request is to be sent.<br>
-                                 You may skip it and set it in the <em>options</em> object</p></td>
+You may skip it and set it in the <em>options</em> object</p></td>
         </tr>
 
     
@@ -627,7 +627,7 @@
 
 <div class="description">
     <p>Iterates over an array or an object, executing a callback function for each item.</p>
-<p> For iterating over a set of matched elements, see the <a href="ZebraJS.html#each">each()</a> method.</p>
+<p>For iterating over a set of matched elements, see the <a href="ZebraJS.html#each">each()</a> method.</p>
 </div>
 
 
@@ -687,13 +687,13 @@
             
 
             <td class="description last"><p>The function to execute for each item in the set. The callback function receives two
-                                 arguments: the item's position in the set, called <code>index</code> (0-based), and the item.
-                                    The <code>this</code> keyword inside the callback function refers to the item.
-                                 <br><br>
-                                 <em>Returning <code>FALSE</code> from the callback function breaks the loop!</em></p>
+arguments: the item's position in the set, called <code>index</code> (0-based), and the item.
+The <code>this</code> keyword inside the callback function refers to the item.
+<br><br>
+<em>Returning <code>FALSE</code> from the callback function breaks the loop!</em></p>
 <blockquote>
 <p><strong>This method is here only for compatibility purposes and you shouldn't use it - you should use instead JavaScript's
- native <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">forEach</a></strong></p>
+native <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">forEach</a></strong></p>
 </blockquote></td>
         </tr>
 
@@ -851,7 +851,7 @@
             
 
             <td class="description last"><p>An object whose properties will be merged with the properties of the additional objects
-                             passed as arguments to this method.</p></td>
+passed as arguments to this method.</p></td>
         </tr>
 
     
@@ -876,7 +876,7 @@
         
 <div class="param-desc">
     <p>Returns an object with the properties of the object given as first argument merged with the
-                     properties of additional objects passed as arguments to this method.</p>
+properties of additional objects passed as arguments to this method.</p>
 </div>
 
 
@@ -954,15 +954,15 @@
 
 <div class="description">
     <p>Search for a given value within an array and returns the first index where the value is found, or <code>-1</code> if the value
- is not found.</p>
-<p> This method returns <code>-1</code> when it doesn't find a match. If the searched value is in the first position in the array
- this method returns <code>0</code>, if in second <code>1</code>, and so on.</p>
+is not found.</p>
+<p>This method returns <code>-1</code> when it doesn't find a match. If the searched value is in the first position in the array
+this method returns <code>0</code>, if in second <code>1</code>, and so on.</p>
 <blockquote>
 <p>Because in JavaScript <code>0 == false</code> (but <code>0 !== false</code>), to check for the presence of value within array, you need to
- check if it's not equal to (or greater than) <code>-1</code>.
- <br><br>
+check if it's not equal to (or greater than) <code>-1</code>.
+<br><br>
 <strong>This method is here only for compatibility purposes and you shouldn't use it - you should use instead JavaScript's
- own <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf">indexOf</a></strong></p>
+own <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf">indexOf</a></strong></p>
 </blockquote>
 </div>
 
@@ -1070,7 +1070,7 @@
         
 <div class="param-desc">
     <p>Returns the position of the searched value inside the given array (starting from <code>0</code>), or <code>-1</code>
-                     if the value couldn't be found.</p>
+if the value couldn't be found.</p>
 </div>
 
 
@@ -1207,7 +1207,7 @@
             
 
             <td class="description last"><p>One or more space-separated class names to be added to each element in the
-                                 set of matched elements.</p></td>
+set of matched elements.</p></td>
         </tr>
 
     
@@ -1309,18 +1309,18 @@
 
 <div class="description">
     <p>Inserts content specified by the argument after each element in the set of matched elements.</p>
-<p> Both this and the <a href="ZebraJS.html#insertAfter">.insertAfter()</a> method perform the same task, the main difference being
- in the placement of the content and the target. With <code>.after()</code>, the selector expression preceding the method is the
- target after which the content is to be inserted. On the other hand, with <code>.insertAfter()</code>, the content precedes the
- method and it is the one inserted after the target element.</p>
+<p>Both this and the <a href="ZebraJS.html#insertAfter">.insertAfter()</a> method perform the same task, the main difference being
+in the placement of the content and the target. With <code>.after()</code>, the selector expression preceding the method is the
+target after which the content is to be inserted. On the other hand, with <code>.insertAfter()</code>, the content precedes the
+method and it is the one inserted after the target element.</p>
 <blockquote>
 <p>Clones of the inserted element will be created after each element in the set of matched elements, except for the last
- one. The original item will be inserted after the last element.</p>
+one. The original item will be inserted after the last element.</p>
 </blockquote>
 <blockquote>
 <p>If the content to be inserted is an element existing on the page, clones of the element will be created after each
- element in the set of matched elements, except for the last one. The original item will be moved (not cloned) after
- the last element.</p>
+element in the set of matched elements, except for the last one. The original item will be moved (not cloned) after
+the last element.</p>
 </blockquote>
 </div>
 
@@ -1381,7 +1381,7 @@
             
 
             <td class="description last"><p>DOM element, text node, HTML string or ZebraJS object to be inserted after each
-                                 element in the set of matched elements.</p></td>
+element in the set of matched elements.</p></td>
         </tr>
 
     
@@ -1483,17 +1483,17 @@
 
 <div class="description">
     <p>Inserts content, specified by the argument, to the end of each element in the set of matched elements.</p>
-<p> Both this and the <a href="ZebraJS.html#appendTo">.appendTo()</a> method perform the same task, the main difference being in the
- placement of the content and the target. With <code>.append()</code>, the selector expression preceding the method is the
- container into which the content is to be inserted. On the other hand, with <code>.appendTo()</code>, the content precedes the
- method, and it is inserted into the target container.</p>
+<p>Both this and the <a href="ZebraJS.html#appendTo">.appendTo()</a> method perform the same task, the main difference being in the
+placement of the content and the target. With <code>.append()</code>, the selector expression preceding the method is the
+container into which the content is to be inserted. On the other hand, with <code>.appendTo()</code>, the content precedes the
+method, and it is inserted into the target container.</p>
 <blockquote>
 <p>If there is more than one target element, clones of the inserted element will be created for each target except for
- the last one. For the last target, the original item will be inserted.</p>
+the last one. For the last target, the original item will be inserted.</p>
 </blockquote>
 <blockquote>
 <p>If an element selected this way is inserted elsewhere in the DOM, clones of the inserted element will be created for
- each target except for the last one. For the last target, the original item will be moved (not cloned).</p>
+each target except for the last one. For the last target, the original item will be moved (not cloned).</p>
 </blockquote>
 </div>
 
@@ -1554,7 +1554,7 @@
             
 
             <td class="description last"><p>DOM element, text node, HTML string, or ZebraJS object to insert at the end of each
-                                 element in the set of matched elements.</p></td>
+element in the set of matched elements.</p></td>
         </tr>
 
     
@@ -1656,17 +1656,17 @@
 
 <div class="description">
     <p>Inserts every element in the set of matched elements to the end of the parent element(s), specified by the argument.</p>
-<p> Both this and the <a href="ZebraJS.html#append">.append()</a> method perform the same task, the main difference being in the
- placement of the content and the target. With <code>.append()</code>, the selector expression preceding the method is the
- container into which the content is to be inserted. On the other hand, with <code>.appendTo()</code>, the content precedes the
- method, and it is inserted into the target container.</p>
+<p>Both this and the <a href="ZebraJS.html#append">.append()</a> method perform the same task, the main difference being in the
+placement of the content and the target. With <code>.append()</code>, the selector expression preceding the method is the
+container into which the content is to be inserted. On the other hand, with <code>.appendTo()</code>, the content precedes the
+method, and it is inserted into the target container.</p>
 <blockquote>
 <p>If there is more than one target element, clones of the inserted element will be created for each target except for
- the last one. For the last target, the original item will be inserted.</p>
+the last one. For the last target, the original item will be inserted.</p>
 </blockquote>
 <blockquote>
 <p>If an element selected this way is inserted elsewhere in the DOM, clones of the inserted element will be created for
- each target except for the last one. For the last target, the original item will be moved (not cloned).</p>
+each target except for the last one. For the last target, the original item will be moved (not cloned).</p>
 </blockquote>
 </div>
 
@@ -1828,7 +1828,7 @@
 
 <div class="description">
     <p>Gets the value of an attribute for the first element in the set of matched elements, or sets one or more attributes
- for every matched element.</p>
+for every matched element.</p>
 </div>
 
 
@@ -1901,15 +1901,15 @@
             
 
             <td class="description last"><p>If given as a <code>string</code> representing an attribute and <code>value</code> <strong>is not</strong> set, this
-                                     method will return that particular attribute's value for the first element in the
-                                     set of matched elements.
-                                     <br><br>
-                                     If given as a <code>string</code> representing an attribute and <code>value</code> <strong>is</strong> set, this
-                                     method will set that particular attribute's value for all the elements in the
-                                     set of matched elements.
-                                     <br><br>
-                                     If given as an <code>object</code>, this method will set the given attributes to the given
-                                     values for all the elements in the set of matched elements.</p></td>
+method will return that particular attribute's value for the first element in the
+set of matched elements.
+<br><br>
+If given as a <code>string</code> representing an attribute and <code>value</code> <strong>is</strong> set, this
+method will set that particular attribute's value for all the elements in the
+set of matched elements.
+<br><br>
+If given as an <code>object</code>, this method will set the given attributes to the given
+values for all the elements in the set of matched elements.</p></td>
         </tr>
 
     
@@ -1943,10 +1943,10 @@
             
 
             <td class="description last"><p>The value to be set for the attribute given as argument. <em>Only used if <code>attribute</code>
-                                     is not an object!</em>
-                                     <br><br>
-                                     Setting it to <code>false</code> or <code>null</code> will instead <strong>remove</strong> the attribute from the
-                                     set of matched elements.</p></td>
+is not an object!</em>
+<br><br>
+Setting it to <code>false</code> or <code>null</code> will instead <strong>remove</strong> the attribute from the
+set of matched elements.</p></td>
         </tr>
 
     
@@ -1971,7 +1971,7 @@
         
 <div class="param-desc">
     <p>When <code>setting</code> attributes, this method returns the set of matched elements.
-                                     When <code>reading</code> attributes, this method returns the value of the required attribute.</p>
+When <code>reading</code> attributes, this method returns the value of the required attribute.</p>
 </div>
 
 
@@ -2052,17 +2052,17 @@
 
 <div class="description">
     <p>Inserts content, specified by the argument, before each element in the set of matched elements.</p>
-<p> Both this and the <a href="ZebraJS.html#insertBefore">.insertBefore()</a> method perform the same task, the main difference
- being in the placement of the content and the target. With <code>.before()</code>, the selector expression preceding the method
- is the target before which the content is to be inserted. On the other hand, with <code>.insertBefore()</code>, the content
- precedes the method, and it is the one inserted before the target element.</p>
+<p>Both this and the <a href="ZebraJS.html#insertBefore">.insertBefore()</a> method perform the same task, the main difference
+being in the placement of the content and the target. With <code>.before()</code>, the selector expression preceding the method
+is the target before which the content is to be inserted. On the other hand, with <code>.insertBefore()</code>, the content
+precedes the method, and it is the one inserted before the target element.</p>
 <blockquote>
 <p>If there is more than one target element, clones of the inserted element will be created before each target except
- for the last one. The original item will be inserted before the last target.</p>
+for the last one. The original item will be inserted before the last target.</p>
 </blockquote>
 <blockquote>
 <p>If an element selected this way is inserted elsewhere in the DOM, clones of the inserted element will be created
- before each target except for the last one. The original item will be moved (not cloned) before the last target.</p>
+before each target except for the last one. The original item will be moved (not cloned) before the last target.</p>
 </blockquote>
 </div>
 
@@ -2123,7 +2123,7 @@
             
 
             <td class="description last"><p>DOM element, text node, HTML string, or <a href="ZebraJS.html">ZebraJS</a> object to be inserted before
-                                 each element in the set of matched elements.</p></td>
+each element in the set of matched elements.</p></td>
         </tr>
 
     
@@ -2284,7 +2284,7 @@
             
 
             <td class="description last"><p>If the selector is supplied, the elements will be filtered by testing whether they
-                                 match it.</p></td>
+match it.</p></td>
         </tr>
 
     
@@ -2386,16 +2386,16 @@
 
 <div class="description">
     <p>Creates a deep copy of the set of matched elements.</p>
-<p> This method performs a deep copy of the set of matched elements meaning that it copies the matched elements as well
- as all of their descendant elements and text nodes.</p>
-<p> Normally, any event handlers bound to the original element are not copied to the clone. Setting the <code>with_data_and_events</code>
- argument to <code>true</code> will copy the event handlers and element data bound to the original element.</p>
+<p>This method performs a deep copy of the set of matched elements meaning that it copies the matched elements as well
+as all of their descendant elements and text nodes.</p>
+<p>Normally, any event handlers bound to the original element are not copied to the clone. Setting the <code>with_data_and_events</code>
+argument to <code>true</code> will copy the event handlers and element data bound to the original element.</p>
 <blockquote>
 <p>This method may lead to duplicate element IDs in a document. Where possible, it is recommended to avoid cloning
- elements with this attribute or using class attributes as identifiers instead.</p>
+elements with this attribute or using class attributes as identifiers instead.</p>
 </blockquote>
-<p> Element data will continue to be shared between the cloned and the original element. To deep copy all data, copy each
- one manually.</p>
+<p>Element data will continue to be shared between the cloned and the original element. To deep copy all data, copy each
+one manually.</p>
 </div>
 
 
@@ -2455,7 +2455,7 @@
             
 
             <td class="description last"><p>Setting this argument to <code>true</code> will instruct the method to also copy
-                                                 event handlers and element data along with the elements.</p></td>
+event handlers and element data along with the elements.</p></td>
         </tr>
 
     
@@ -2479,7 +2479,7 @@
             
 
             <td class="description last"><p>Setting this argument to <code>true</code> will instruct the method to also copy
-                                                 event handlers and data for all children of the cloned element.</p></td>
+event handlers and data for all children of the cloned element.</p></td>
         </tr>
 
     
@@ -2581,10 +2581,10 @@
 
 <div class="description">
     <p>For each element in the set, get the first element that matches the selector by traversing up through its ancestors
- in the DOM tree, beginning with the current element.</p>
-<p> Given a <a href="ZebraJS.html">ZebraJS</a> object that represents a set of DOM elements, this method searches through the ancestors of
- these elements in the DOM tree, beginning with the current element, and constructs a new <a href="ZebraJS.html">ZebraJS</a> object from
- the matching elements.</p>
+in the DOM tree, beginning with the current element.</p>
+<p>Given a <a href="ZebraJS.html">ZebraJS</a> object that represents a set of DOM elements, this method searches through the ancestors of
+these elements in the DOM tree, beginning with the current element, and constructs a new <a href="ZebraJS.html">ZebraJS</a> object from
+the matching elements.</p>
 </div>
 
 
@@ -2644,7 +2644,7 @@
             
 
             <td class="description last"><p>If the selector is supplied, the parents will be filtered by testing whether they
-                                 match it.</p></td>
+match it.</p></td>
         </tr>
 
     
@@ -2746,7 +2746,7 @@
 
 <div class="description">
     <p>Gets the value of a computed style property for the first element in the set of matched elements, or sets one or more
- CSS properties for every matched element.</p>
+CSS properties for every matched element.</p>
 </div>
 
 
@@ -2819,15 +2819,15 @@
             
 
             <td class="description last"><p>If given as a <code>string</code> representing a CSS property and <code>value</code> <strong>is not</strong> set,
-                                     this method will return the computed style of that particular property for the
-                                     first element in the set of matched elements.
-                                     <br><br>
-                                     If given as a <code>string</code> representing a CSS property and <code>value</code> <strong>is</strong> set, this
-                                     method will set that particular CSS property's value for all the elements in the
-                                     set of matched elements.
-                                     <br><br>
-                                     If given as an <code>object</code>, this method will set the given CSS properties to the
-                                     given values for all the elements in the set of matched elements.</p></td>
+this method will return the computed style of that particular property for the
+first element in the set of matched elements.
+<br><br>
+If given as a <code>string</code> representing a CSS property and <code>value</code> <strong>is</strong> set, this
+method will set that particular CSS property's value for all the elements in the
+set of matched elements.
+<br><br>
+If given as an <code>object</code>, this method will set the given CSS properties to the
+given values for all the elements in the set of matched elements.</p></td>
         </tr>
 
     
@@ -2861,10 +2861,10 @@
             
 
             <td class="description last"><p>The value to be set for the CSS property given as argument. <em>Only used if <code>property</code>
-                                     is not an object!</em>
-                                     <br><br>
-                                     Setting it to <code>false</code> or <code>null</code> will instead <strong>remove</strong> the CSS property from the
-                                     set of matched elements.</p></td>
+is not an object!</em>
+<br><br>
+Setting it to <code>false</code> or <code>null</code> will instead <strong>remove</strong> the CSS property from the
+set of matched elements.</p></td>
         </tr>
 
     
@@ -2889,7 +2889,7 @@
         
 <div class="param-desc">
     <p>When <code>setting</code> CSS properties, this method returns the set of matched elements.
-                                     When <code>reading</code> CSS properties, this method returns the value(s) of the required computed style(s).</p>
+When <code>reading</code> CSS properties, this method returns the value(s) of the required computed style(s).</p>
 </div>
 
 
@@ -2970,7 +2970,7 @@
 
 <div class="description">
     <p>Stores arbitrary data associated with the matched elements, or returns the value at the named data store for the
- first element in the set of matched elements.</p>
+first element in the set of matched elements.</p>
 </div>
 
 
@@ -3077,8 +3077,8 @@
         
 <div class="param-desc">
     <p>When <code>setting</code> data attributes, this method returns the set of matched elements.
-                                 When <code>reading</code> data attributes, this method returns the stored values, or <code>undefined</code>
-                                 if not data found for the requested key.</p>
+When <code>reading</code> data attributes, this method returns the stored values, or <code>undefined</code>
+if not data found for the requested key.</p>
 </div>
 
 
@@ -3159,9 +3159,9 @@
 
 <div class="description">
     <p>Removes the set of matched elements from the DOM.</p>
-<p> This method is the same as the <a href="ZebraJS.html#remove">.remove()</a> method, except that .detach() keeps all events and
- data associated with the removed elements. This method is useful when removed elements are to be reinserted into the
- DOM at a later time.</p>
+<p>This method is the same as the <a href="ZebraJS.html#remove">.remove()</a> method, except that .detach() keeps all events and
+data associated with the removed elements. This method is useful when removed elements are to be reinserted into the
+DOM at a later time.</p>
 </div>
 
 
@@ -3332,10 +3332,10 @@
             
 
             <td class="description last"><p>The function to execute for each item in the set. The callback function receives two
-                                 arguments: the element's position in the set, called <code>index</code> (0-based), and the DOM
-                                 element. The <code>this</code> keyword inside the callback function refers to the DOM element.
-                                 <br><br>
-                                 <em>Returning <code>FALSE</code> from the callback function breaks the loop!</em></p></td>
+arguments: the element's position in the set, called <code>index</code> (0-based), and the DOM
+element. The <code>this</code> keyword inside the callback function refers to the DOM element.
+<br><br>
+<em>Returning <code>FALSE</code> from the callback function breaks the loop!</em></p></td>
         </tr>
 
     
@@ -3492,7 +3492,7 @@
             
 
             <td class="description last"><p>An integer indicating the 0-based position of the element. If a negative integer is
-                             given the counting will go backwards, starting from the last element in the set.</p></td>
+given the counting will go backwards, starting from the last element in the set.</p></td>
         </tr>
 
     
@@ -3594,7 +3594,7 @@
 
 <div class="description">
     <p>Gets the descendants of each element in the current set of matched elements, filtered by a selector, <a href="ZebraJS.html">ZebraJS</a>
- object, or a DOM element.</p>
+object, or a DOM element.</p>
 </div>
 
 
@@ -3654,7 +3654,7 @@
             
 
             <td class="description last"><p>A selector to filter descendant elements by. It can be a query selector, a
-                                 <a href="ZebraJS.html">ZebraJS</a> object, or a DOM element.</p></td>
+<a href="ZebraJS.html">ZebraJS</a> object, or a DOM element.</p></td>
         </tr>
 
     
@@ -3679,7 +3679,7 @@
         
 <div class="param-desc">
     <p>Returns the descendants of each element in the current set of matched elements, filtered by a
-                     selector, <a href="ZebraJS.html">ZebraJS</a> object, or DOM element, as a <a href="ZebraJS.html">ZebraJS</a> object.</p>
+selector, <a href="ZebraJS.html">ZebraJS</a> object, or DOM element, as a <a href="ZebraJS.html">ZebraJS</a> object.</p>
 </div>
 
 
@@ -3927,7 +3927,7 @@
             
 
             <td class="description last"><p>The index (starting from <code>0</code>) of the DOM element to return from the list of matched
-                             elements</p></td>
+elements</p></td>
         </tr>
 
     
@@ -4066,7 +4066,7 @@
             
 
             <td class="description last"><p>The name of a class to be checked if it exists on <em>any</em> of the elements in the set
-                                 of matched elements.</p></td>
+of matched elements.</p></td>
         </tr>
 
     
@@ -4168,9 +4168,9 @@
 
 <div class="description">
     <p>Returns the current computed <strong>inner</strong> height (without <code>padding</code>, <code>border</code> and <code>margin</code>) of the first element
- in the set of matched elements as <code>float</code>, or sets the <code>height</code> CSS property of every element in the set.</p>
-<p> See <a href="ZebraJS.html#outerHeight">.outerHeight()</a> for getting the height including <code>padding</code>, <code>border</code> and, optionally,
- <code>margin</code>.</p>
+in the set of matched elements as <code>float</code>, or sets the <code>height</code> CSS property of every element in the set.</p>
+<p>See <a href="ZebraJS.html#outerHeight">.outerHeight()</a> for getting the height including <code>padding</code>, <code>border</code> and, optionally,
+<code>margin</code>.</p>
 </div>
 
 
@@ -4248,12 +4248,12 @@
             
 
             <td class="description last"><p>If not given, the method will return the computed <strong>inner</strong>
-                                                 height (without <code>padding</code>, <code>border</code> and <code>margin</code>) for the first
-                                                 element in the set of matched elements.
-                                                 <br><br>
-                                                 If given, the method will set the <code>height</code> CSS property of all
-                                                 the elements in the set to that particular value, making sure
-                                                 to apply the &quot;px&quot; suffix if not otherwise specified.</p>
+height (without <code>padding</code>, <code>border</code> and <code>margin</code>) for the first
+element in the set of matched elements.
+<br><br>
+If given, the method will set the <code>height</code> CSS property of all
+the elements in the set to that particular value, making sure
+to apply the &quot;px&quot; suffix if not otherwise specified.</p>
 <blockquote>
 <p>For hidden elements the returned value is <code>0</code>!</p>
 </blockquote></td>
@@ -4281,8 +4281,8 @@
         
 <div class="param-desc">
     <p>When <strong>setting</strong> the <code>height</code>, this method returns the set of matched elements.
-                             Otherwise, it returns the current computed <strong>inner</strong> height (without <code>padding</code>, <code>border</code>
-                             and <code>margin</code>) of the first element in the set of matched elements, as <code>float</code>.</p>
+Otherwise, it returns the current computed <strong>inner</strong> height (without <code>padding</code>, <code>border</code>
+and <code>margin</code>) of the first element in the set of matched elements, as <code>float</code>.</p>
 </div>
 
 
@@ -4363,10 +4363,10 @@
 
 <div class="description">
     <p>Gets the HTML content of the first element in the set of matched elements, or set the HTML content of every matched
- element.</p>
+element.</p>
 <blockquote>
 <p>There are some <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML#Security_considerations">security considerations</a>
- that you should be aware of when using this method.</p>
+that you should be aware of when using this method.</p>
 </blockquote>
 </div>
 
@@ -4439,8 +4439,8 @@
             
 
             <td class="description last"><p>The HTML content to set as the content of all the matched elements. Note that any
-                                 content that was previously in that element is completely replaced by the new
-                                 content.</p></td>
+content that was previously in that element is completely replaced by the new
+content.</p></td>
         </tr>
 
     
@@ -4465,8 +4465,8 @@
         
 <div class="param-desc">
     <p>When the <code>content</code> argument is provided, this method returns the set of matched
-                                 elements. Otherwise it returns the HTML content of the first element in the set of
-                                 matched elements.</p>
+elements. Otherwise it returns the HTML content of the first element in the set of
+matched elements.</p>
 </div>
 
 
@@ -4547,17 +4547,17 @@
 
 <div class="description">
     <p>Inserts every element in the set of matched elements after the parent element(s), specified by the argument.</p>
-<p> Both this and the <a href="ZebraJS.html#after">.after()</a> method perform the same task, the main difference being in the
- placement of the content and the target. With <code>.after()</code>, the selector expression preceding the method is the target
- after which the content is to be inserted. On the other hand, with <code>.insertAfter()</code>, the content precedes the method,
- and it is the one inserted after the target element(s).</p>
+<p>Both this and the <a href="ZebraJS.html#after">.after()</a> method perform the same task, the main difference being in the
+placement of the content and the target. With <code>.after()</code>, the selector expression preceding the method is the target
+after which the content is to be inserted. On the other hand, with <code>.insertAfter()</code>, the content precedes the method,
+and it is the one inserted after the target element(s).</p>
 <blockquote>
 <p>If there is more than one target element, clones of the inserted element will be created after each target except
- for the last one. The original item will be inserted after the last target.</p>
+for the last one. The original item will be inserted after the last target.</p>
 </blockquote>
 <blockquote>
 <p>If an element selected this way is inserted elsewhere in the DOM, clones of the inserted element will be created
- after each target except for the last one. The original item will be moved (not cloned) after the last target.</p>
+after each target except for the last one. The original item will be moved (not cloned) after the last target.</p>
 </blockquote>
 </div>
 
@@ -4719,17 +4719,17 @@
 
 <div class="description">
     <p>Inserts every element in the set of matched elements before the parent element(s), specified by the argument.</p>
-<p> Both this and the <a href="ZebraJS.html#before">.before()</a> method perform the same task, the main difference being in the
- placement of the content and the target. With <code>.before()</code>, the selector expression preceding the method is the target
- before which the content is to be inserted. On the other hand, with <code>.insertBefore()</code>, the content precedes the method,
- and it is the one inserted before the target element(s).</p>
+<p>Both this and the <a href="ZebraJS.html#before">.before()</a> method perform the same task, the main difference being in the
+placement of the content and the target. With <code>.before()</code>, the selector expression preceding the method is the target
+before which the content is to be inserted. On the other hand, with <code>.insertBefore()</code>, the content precedes the method,
+and it is the one inserted before the target element(s).</p>
 <blockquote>
 <p>If there is more than one target element, clones of the inserted element will be created before each target except
- for the last one. The original item will be inserted before the last target.</p>
+for the last one. The original item will be inserted before the last target.</p>
 </blockquote>
 <blockquote>
 <p>If an element selected this way is inserted elsewhere in the DOM, clones of the inserted element will be created
- before each target except for the last one. The original item will be moved (not cloned) before the last target.</p>
+before each target except for the last one. The original item will be moved (not cloned) before the last target.</p>
 </blockquote>
 </div>
 
@@ -4891,7 +4891,7 @@
 
 <div class="description">
     <p>Checks the current matched set of elements against a selector, element, or ZebraJS object and returns <code>true</code> if at
- least one of these elements matches the given arguments.</p>
+least one of these elements matches the given arguments.</p>
 <blockquote>
 <p>Note that, unlike jQuery, when matching selectors, this method matches only valid CSS selectors!</p>
 </blockquote>
@@ -4954,7 +4954,7 @@
             
 
             <td class="description last"><p>A string containing a selector expression to match elements against, a DOM element
-                                 or a ZebraJS object.</p></td>
+or a ZebraJS object.</p></td>
         </tr>
 
     
@@ -4979,7 +4979,7 @@
         
 <div class="param-desc">
     <p>Returns <code>true</code> if at least one of the elements from the currently matched set matches the given
-                     argument.</p>
+argument.</p>
 </div>
 
 
@@ -5057,7 +5057,7 @@
 
 <div class="description">
     <p>Gets the immediately following sibling of each element in the set of matched elements. If a selector is provided,
- it retrieves the following sibling only if it matches that selector.</p>
+it retrieves the following sibling only if it matches that selector.</p>
 </div>
 
 
@@ -5117,7 +5117,7 @@
             
 
             <td class="description last"><p>If the selector is provided, the method will retrieve the following sibling only if
-                                 it matches the selector</p></td>
+it matches the selector</p></td>
         </tr>
 
     
@@ -5142,7 +5142,7 @@
         
 <div class="param-desc">
     <p>Returns the immediately following sibling of each element in the set of matched elements,
-                     optionally filtered by a selector, as a ZebraJS object.</p>
+optionally filtered by a selector, as a ZebraJS object.</p>
 </div>
 
 
@@ -5279,12 +5279,12 @@
             
 
             <td class="description last"><p>Can be a <strong>string</strong> containing a selector expression, a <strong>DOM</strong> element, an <strong>array
-                                 of elements</strong> to match against the set, or a <strong>function</strong> used as a test for each
-                                 element in the set.
-                                 <br><br>
-                                 If argument is a function, it accepts two arguments: &quot;index&quot;, which is the element's
-                                 index in the set of matched elements, and &quot;element&quot;, which is the DOM element.<br>
-                                 Within the function, <code>this</code> refers to the current DOM element.</p></td>
+of elements</strong> to match against the set, or a <strong>function</strong> used as a test for each
+element in the set.
+<br><br>
+If argument is a function, it accepts two arguments: &quot;index&quot;, which is the element's
+index in the set of matched elements, and &quot;element&quot;, which is the DOM element.<br>
+Within the function, <code>this</code> refers to the current DOM element.</p></td>
         </tr>
 
     
@@ -5423,7 +5423,7 @@
             
 
             <td class="description last"><p>One or more space-separated event types and optional namespaces, such as &quot;click&quot; or
-                                 &quot;click.namespace&quot;.</p></td>
+&quot;click.namespace&quot;.</p></td>
         </tr>
 
     
@@ -5548,11 +5548,11 @@
 
 <div class="description">
     <p>Gets the current coordinates of the first element in the set of matched elements, relative to the document.</p>
-<p> This method retrieves the current position of an element relative to the document, in contrast with the
- <a href="ZebraJS.html#position">.position()</a> method which retrieves the current position relative to the offset parent.</p>
+<p>This method retrieves the current position of an element relative to the document, in contrast with the
+<a href="ZebraJS.html#position">.position()</a> method which retrieves the current position relative to the offset parent.</p>
 <blockquote>
 <p>This method cannot get the position of hidden elements or accounting for borders, margins, or padding set on the
- body element.</p>
+body element.</p>
 </blockquote>
 </div>
 
@@ -5734,7 +5734,7 @@
             
 
             <td class="description last"><p>One or more space-separated event types and optional namespaces, such as &quot;click&quot; or
-                                 &quot;click.namespace&quot;. Can also be given as an object.</p></td>
+&quot;click.namespace&quot;. Can also be given as an object.</p></td>
         </tr>
 
     
@@ -5768,8 +5768,8 @@
             
 
             <td class="description last"><p>A selector string to filter the descendants of the selected elements that will call
-                                 the handler. If the selector is null or omitted, the handler is always called when it
-                                 reaches the selected element.</p></td>
+the handler. If the selector is null or omitted, the handler is always called when it
+reaches the selected element.</p></td>
         </tr>
 
     
@@ -5861,7 +5861,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2477">line 2477</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2484">line 2484</a>
     </li></ul></dd>
     
 
@@ -5902,7 +5902,7 @@
 
 <div class="description">
     <p>Attaches an event handler function for one or more events to the selected elements. The event handler is executed at
- most once per element per event type.</p>
+most once per element per event type.</p>
 </div>
 
 
@@ -5972,7 +5972,7 @@
             
 
             <td class="description last"><p>One or more space-separated event types and optional namespaces, such as &quot;click&quot; or
-                                 &quot;click.namespace&quot;.</p></td>
+&quot;click.namespace&quot;.</p></td>
         </tr>
 
     
@@ -6006,8 +6006,8 @@
             
 
             <td class="description last"><p>A selector string to filter the descendants of the selected elements that will call
-                                 the handler. If the selector is null or omitted, the handler is always called when it
-                                 reaches the selected element.</p></td>
+the handler. If the selector is null or omitted, the handler is always called when it
+reaches the selected element.</p></td>
         </tr>
 
     
@@ -6099,7 +6099,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2510">line 2510</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2517">line 2517</a>
     </li></ul></dd>
     
 
@@ -6140,11 +6140,11 @@
 
 <div class="description">
     <p>Returns the current computed height for the first element in the set of matched elements, including <code>padding</code>,
- <code>border</code> and, optionally, <code>margin</code>.</p>
+<code>border</code> and, optionally, <code>margin</code>.</p>
 <blockquote>
 <p>For hidden elements the returned value is <code>0</code>!</p>
 </blockquote>
-<p> See <a href="ZebraJS.html#height">.height()</a> for getting the <strong>inner</strong> height without <code>padding</code>, <code>border</code> and <code>margin</code>.</p>
+<p>See <a href="ZebraJS.html#height">.height()</a> for getting the <strong>inner</strong> height without <code>padding</code>, <code>border</code> and <code>margin</code>.</p>
 </div>
 
 
@@ -6216,7 +6216,7 @@
             
 
             <td class="description last"><p>If set to <code>TRUE</code>, the result will also include <strong>top</strong> and <strong>bottom</strong>
-                                         margins.</p></td>
+margins.</p></td>
         </tr>
 
     
@@ -6273,7 +6273,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2551">line 2551</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2558">line 2558</a>
     </li></ul></dd>
     
 
@@ -6314,11 +6314,11 @@
 
 <div class="description">
     <p>Returns the current computed width for the first element in the set of matched elements, including <code>padding</code>,
- <code>border</code> and, optionally, <code>margin</code>.</p>
+<code>border</code> and, optionally, <code>margin</code>.</p>
 <blockquote>
 <p>For hidden elements the returned value is <code>0</code>!</p>
 </blockquote>
-<p> See <a href="ZebraJS.html#width">.width()</a> for getting the <strong>inner</strong> width without <code>padding</code>, <code>border</code> and <code>margin</code>.</p>
+<p>See <a href="ZebraJS.html#width">.width()</a> for getting the <strong>inner</strong> width without <code>padding</code>, <code>border</code> and <code>margin</code>.</p>
 </div>
 
 
@@ -6390,7 +6390,7 @@
             
 
             <td class="description last"><p>If set to <code>TRUE</code>, the result will also include <strong>left</strong> and <strong>right</strong>
-                                         margins.</p></td>
+margins.</p></td>
         </tr>
 
     
@@ -6447,7 +6447,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2597">line 2597</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2604">line 2604</a>
     </li></ul></dd>
     
 
@@ -6488,8 +6488,8 @@
 
 <div class="description">
     <p>Gets the immediate parent of each element in the current set of matched elements, optionally filtered by a selector.</p>
-<p> This method is similar to <a href="ZebraJS.html#parents">.parents()</a>, except .parent() only travels a single level up the
- DOM tree.</p>
+<p>This method is similar to <a href="ZebraJS.html#parents">.parents()</a>, except .parent() only travels a single level up the
+DOM tree.</p>
 </div>
 
 
@@ -6549,7 +6549,7 @@
             
 
             <td class="description last"><p>If the selector is supplied, the elements will be filtered by testing whether they
-                                 match it.</p></td>
+match it.</p></td>
         </tr>
 
     
@@ -6574,7 +6574,7 @@
         
 <div class="param-desc">
     <p>Returns the immediate parent of each element in the current set of matched elements, optionally
-                     filtered by a selector, as a ZebraJS object.</p>
+filtered by a selector, as a ZebraJS object.</p>
 </div>
 
 
@@ -6611,7 +6611,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2650">line 2650</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2657">line 2657</a>
     </li></ul></dd>
     
 
@@ -6652,12 +6652,12 @@
 
 <div class="description">
     <p>Gets the ancestors of each element in the current set of matched elements, optionally filtered by a selector.</p>
-<p> Given a <a href="ZebraJS.html">ZebraJS</a> object that represents a set of DOM elements, this method allows us to search through the
- ancestors of these elements in the DOM tree and construct a new <a href="ZebraJS.html">ZebraJS</a> object from the matching elements
- ordered from immediate parent on up; the elements are returned in order from the closest parent to the outer ones.
- When multiple DOM elements are in the original set, the resulting set will have duplicates removed.</p>
-<p> This method is similar to <a href="ZebraJS.html#parent">.parent()</a>, except .parent() only travels a single level up the DOM
- tree, while this method travels all the way up to the DOM root.</p>
+<p>Given a <a href="ZebraJS.html">ZebraJS</a> object that represents a set of DOM elements, this method allows us to search through the
+ancestors of these elements in the DOM tree and construct a new <a href="ZebraJS.html">ZebraJS</a> object from the matching elements
+ordered from immediate parent on up; the elements are returned in order from the closest parent to the outer ones.
+When multiple DOM elements are in the original set, the resulting set will have duplicates removed.</p>
+<p>This method is similar to <a href="ZebraJS.html#parent">.parent()</a>, except .parent() only travels a single level up the DOM
+tree, while this method travels all the way up to the DOM root.</p>
 </div>
 
 
@@ -6717,7 +6717,7 @@
             
 
             <td class="description last"><p>If the selector is supplied, the parents will be filtered by testing whether they
-                                 match it.</p></td>
+match it.</p></td>
         </tr>
 
     
@@ -6742,7 +6742,7 @@
         
 <div class="param-desc">
     <p>Returns an array of parents of each element in the current set of matched elements, optionally
-                     filtered by a selector, as a ZebraJS object.</p>
+filtered by a selector, as a ZebraJS object.</p>
 </div>
 
 
@@ -6779,7 +6779,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2699">line 2699</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2706">line 2706</a>
     </li></ul></dd>
     
 
@@ -6820,11 +6820,11 @@
 
 <div class="description">
     <p>Gets the current coordinates of the first element in the set of matched elements, relative to the offset parent.</p>
-<p> This method retrieves the current position of an element relative to the offset parent, in contrast with the
- <a href="ZebraJS.html#offset">.offset()</a> method which retrieves the current position relative to the document.</p>
+<p>This method retrieves the current position of an element relative to the offset parent, in contrast with the
+<a href="ZebraJS.html#offset">.offset()</a> method which retrieves the current position relative to the document.</p>
 <blockquote>
 <p>This method cannot get the position of hidden elements or accounting for borders, margins, or padding set on the
- body element.</p>
+body element.</p>
 </blockquote>
 </div>
 
@@ -6896,7 +6896,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2757">line 2757</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2764">line 2764</a>
     </li></ul></dd>
     
 
@@ -6937,17 +6937,17 @@
 
 <div class="description">
     <p>Inserts content, specified by the argument, to the beginning of each element in the set of matched elements.</p>
-<p> Both this and the <a href="ZebraJS.html#prependTo">.prependTo()</a> method perform the same task, the main difference being in
- the placement of the content and the target. With <code>.prepend()</code>, the selector expression preceding the method is the
- container into which the content is to be inserted. On the other hand, with <code>.prependTo()</code>, the content precedes the
- method, and it is inserted into the target container.</p>
+<p>Both this and the <a href="ZebraJS.html#prependTo">.prependTo()</a> method perform the same task, the main difference being in
+the placement of the content and the target. With <code>.prepend()</code>, the selector expression preceding the method is the
+container into which the content is to be inserted. On the other hand, with <code>.prependTo()</code>, the content precedes the
+method, and it is inserted into the target container.</p>
 <blockquote>
 <p>If there is more than one target element, clones of the inserted element will be created for each target except for
- the last one. For the last target, the original item will be inserted.</p>
+the last one. For the last target, the original item will be inserted.</p>
 </blockquote>
 <blockquote>
 <p>If an element selected this way is inserted elsewhere in the DOM, clones of the inserted element will be created for
- each target except for the last one. For the last target, the original item will be moved (not cloned).</p>
+each target except for the last one. For the last target, the original item will be moved (not cloned).</p>
 </blockquote>
 </div>
 
@@ -7008,7 +7008,7 @@
             
 
             <td class="description last"><p>DOM element, text node, HTML string, or <a href="ZebraJS.html">ZebraJS</a> object to insert at the
-                                 beginning of each element in the set of matched elements.</p></td>
+beginning of each element in the set of matched elements.</p></td>
         </tr>
 
     
@@ -7069,7 +7069,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2804">line 2804</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2811">line 2811</a>
     </li></ul></dd>
     
 
@@ -7110,17 +7110,17 @@
 
 <div class="description">
     <p>Inserts every element in the set of matched elements to the beginning of the parent element(s), specified by the argument.</p>
-<p> Both this and the <a href="ZebraJS.html#prepend">.prepend()</a> method perform the same task, the main difference being in the
- placement of the content and the target. With <code>.prepend()</code>, the selector expression preceding the method is the
- container into which the content is to be inserted. On the other hand, with <code>.prependTo()</code>, the content precedes the
- method, and it is inserted into the target container.</p>
+<p>Both this and the <a href="ZebraJS.html#prepend">.prepend()</a> method perform the same task, the main difference being in the
+placement of the content and the target. With <code>.prepend()</code>, the selector expression preceding the method is the
+container into which the content is to be inserted. On the other hand, with <code>.prependTo()</code>, the content precedes the
+method, and it is inserted into the target container.</p>
 <blockquote>
 <p>If there is more than one target element, clones of the inserted element will be created for each target except for
- the last one. For the last target, the original item will be inserted.</p>
+the last one. For the last target, the original item will be inserted.</p>
 </blockquote>
 <blockquote>
 <p>If an element selected this way is inserted elsewhere in the DOM, clones of the inserted element will be created for
- each target except for the last one. For the last target, the original item will be moved (not cloned).</p>
+each target except for the last one. For the last target, the original item will be moved (not cloned).</p>
 </blockquote>
 </div>
 
@@ -7241,7 +7241,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2840">line 2840</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2847">line 2847</a>
     </li></ul></dd>
     
 
@@ -7282,7 +7282,7 @@
 
 <div class="description">
     <p>Gets the immediately preceding sibling of each element in the set of matched elements. If a selector is provided,
- it retrieves the previous sibling only if it matches that selector.</p>
+it retrieves the previous sibling only if it matches that selector.</p>
 </div>
 
 
@@ -7342,7 +7342,7 @@
             
 
             <td class="description last"><p>If the selector is provided, the method will retrieve the previous sibling only if
-                                 it matches the selector</p></td>
+it matches the selector</p></td>
         </tr>
 
     
@@ -7367,7 +7367,7 @@
         
 <div class="param-desc">
     <p>Returns the immediately preceding sibling of each element in the set of matched elements,
-                     optionally filtered by a selector, as a ZebraJS object.</p>
+optionally filtered by a selector, as a ZebraJS object.</p>
 </div>
 
 
@@ -7404,7 +7404,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2865">line 2865</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2872">line 2872</a>
     </li></ul></dd>
     
 
@@ -7564,7 +7564,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2902">line 2902</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2909">line 2909</a>
     </li></ul></dd>
     
 
@@ -7605,9 +7605,9 @@
 
 <div class="description">
     <p>Removes the set of matched elements from the DOM.</p>
-<p> Use this method when you want to remove the element itself, as well as everything inside it. In addition to the elements
- themselves, all attached event handlers and data attributes associated with the elements are also removed.</p>
-<p> To remove the elements without removing data and event handlers, use .detach() instead.</p>
+<p>Use this method when you want to remove the element itself, as well as everything inside it. In addition to the elements
+themselves, all attached event handlers and data attributes associated with the elements are also removed.</p>
+<p>To remove the elements without removing data and event handlers, use .detach() instead.</p>
 </div>
 
 
@@ -7678,7 +7678,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2972">line 2972</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line2979">line 2979</a>
     </li></ul></dd>
     
 
@@ -7778,7 +7778,7 @@
             
 
             <td class="description last"><p>One or more space-separated class names to be removed from each element in
-                                 the set of matched elements.</p></td>
+the set of matched elements.</p></td>
         </tr>
 
     
@@ -7839,7 +7839,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3011">line 3011</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3018">line 3018</a>
     </li></ul></dd>
     
 
@@ -7880,11 +7880,11 @@
 
 <div class="description">
     <p>Replaces each element in the set of matched elements with the provided new content and returns the set of elements
- that was removed.</p>
+that was removed.</p>
 <blockquote>
 <p>Note that if the method's argument is a selector, then clones of the element described by the selector will be
- created and used for replacing each element in the set of matched elements, except for the last one. The original
- item will be moved (not cloned) and used to replace the last target.</p>
+created and used for replacing each element in the set of matched elements, except for the last one. The original
+item will be moved (not cloned) and used to replace the last target.</p>
 </blockquote>
 </div>
 
@@ -7945,7 +7945,7 @@
             
 
             <td class="description last"><p>A string, a <a href="ZebraJS.html">ZebraJS</a> object or a DOM element to use as replacement for each
-                             element in the set of matched elements.</p></td>
+element in the set of matched elements.</p></td>
         </tr>
 
     
@@ -8006,7 +8006,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3050">line 3050</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3057">line 3057</a>
     </li></ul></dd>
     
 
@@ -8047,9 +8047,9 @@
 
 <div class="description">
     <p>Gets the horizontal position of the scrollbar for the first element in the set of matched elements, or sets the
- horizontal position of the scrollbar for every matched element.</p>
-<p> The horizontal scroll position is the same as the number of pixels that are hidden from view above the scrollable area.
- If the scroll bar is at the very left, or if the element is not scrollable, this number will be <code>0</code>.</p>
+horizontal position of the scrollbar for every matched element.</p>
+<p>The horizontal scroll position is the same as the number of pixels that are hidden from view above the scrollable area.
+If the scroll bar is at the very left, or if the element is not scrollable, this number will be <code>0</code>.</p>
 </div>
 
 
@@ -8145,8 +8145,8 @@
         
 <div class="param-desc">
     <p>When <code>setting</code> the horizontal position, this method returns the set of matched elements.
-                                 When <code>reading</code> the horizontal position, this method returns the horizontal position of
-                                 the scrollbar for the first element in the set of matched elements.</p>
+When <code>reading</code> the horizontal position, this method returns the horizontal position of
+the scrollbar for the first element in the set of matched elements.</p>
 </div>
 
 
@@ -8186,7 +8186,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3098">line 3098</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3105">line 3105</a>
     </li></ul></dd>
     
 
@@ -8227,9 +8227,9 @@
 
 <div class="description">
     <p>Gets the vertical position of the scrollbar for the first element in the set of matched elements, or sets the
- vertical position of the scrollbar for every matched element.</p>
-<p> The vertical scroll position is the same as the number of pixels that are hidden from view above the scrollable area.
- If the scroll bar is at the very top, or if the element is not scrollable, this number will be <code>0</code>.</p>
+vertical position of the scrollbar for every matched element.</p>
+<p>The vertical scroll position is the same as the number of pixels that are hidden from view above the scrollable area.
+If the scroll bar is at the very top, or if the element is not scrollable, this number will be <code>0</code>.</p>
 </div>
 
 
@@ -8325,8 +8325,8 @@
         
 <div class="param-desc">
     <p>When <code>setting</code> the vertical position, this method returns the set of matched elements.
-                                 When <code>reading</code> the vertical position, this method returns the vertical position of
-                                 the scrollbar for the first element in the set of matched elements.</p>
+When <code>reading</code> the vertical position, this method returns the vertical position of
+the scrollbar for the first element in the set of matched elements.</p>
 </div>
 
 
@@ -8366,7 +8366,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3140">line 3140</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3147">line 3147</a>
     </li></ul></dd>
     
 
@@ -8407,14 +8407,14 @@
 
 <div class="description">
     <p>If the first element in the set of matched elements is a <code>form</code> element, this method returns the encodes string of
- the form's elements and their respective values.</p>
+the form's elements and their respective values.</p>
 <blockquote>
 <p>Only &quot;successful controls&quot; are serialized to the string. No submit button value is serialized since the form was
- not submitted using a button. For a form element's value to be included in the serialized string, the element must
- have a name attribute. Values from checkboxes and radio buttons (inputs of type &quot;radio&quot; or &quot;checkbox&quot;) are included
- only if they are checked. Data from file select elements is not serialized.</p>
+not submitted using a button. For a form element's value to be included in the serialized string, the element must
+have a name attribute. Values from checkboxes and radio buttons (inputs of type &quot;radio&quot; or &quot;checkbox&quot;) are included
+only if they are checked. Data from file select elements is not serialized.</p>
 </blockquote>
-<p> This method creates a text string in standard URL-encoded notation.</p>
+<p>This method creates a text string in standard URL-encoded notation.</p>
 </div>
 
 
@@ -8485,7 +8485,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3204">line 3204</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3211">line 3211</a>
     </li></ul></dd>
     
 
@@ -8585,7 +8585,7 @@
             
 
             <td class="description last"><p>If the selector is supplied, the elements will be filtered by testing whether they
-                                 match it.</p></td>
+match it.</p></td>
         </tr>
 
     
@@ -8646,7 +8646,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3243">line 3243</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3250">line 3250</a>
     </li></ul></dd>
     
 
@@ -8687,7 +8687,7 @@
 
 <div class="description">
     <p>Gets the text content of the first element in the set of matched elements (combined with the text content of all its
- descendants), or sets the text contents of the matched elements.</p>
+descendants), or sets the text contents of the matched elements.</p>
 </div>
 
 
@@ -8759,8 +8759,8 @@
             
 
             <td class="description last"><p>The text to set as the content of all the matched elements. Note that any text
-                                 content that was previously in that element is completely replaced by the new
-                                 content.</p></td>
+content that was previously in that element is completely replaced by the new
+content.</p></td>
         </tr>
 
     
@@ -8785,8 +8785,8 @@
         
 <div class="param-desc">
     <p>When the <code>content</code> argument is provided, this method returns the set of matched
-                                 elements. Otherwise it returns the text content of the first element in the set of
-                                 matched elements (combined with the text content of all its descendants)</p>
+elements. Otherwise it returns the text content of the first element in the set of
+matched elements (combined with the text content of all its descendants)</p>
 </div>
 
 
@@ -8826,7 +8826,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3295">line 3295</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3302">line 3302</a>
     </li></ul></dd>
     
 
@@ -8867,7 +8867,7 @@
 
 <div class="description">
     <p>Adds or removes one or more classes from each element in the set of matched elements, depending on the presence of
- each class name given as argument.</p>
+each class name given as argument.</p>
 </div>
 
 
@@ -8927,7 +8927,7 @@
             
 
             <td class="description last"><p>One or more space-separated class names to be toggled for each element in the set of
-                                 matched elements.</p></td>
+matched elements.</p></td>
         </tr>
 
     
@@ -8988,7 +8988,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3340">line 3340</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3347">line 3347</a>
     </li></ul></dd>
     
 
@@ -9029,9 +9029,9 @@
 
 <div class="description">
     <p>Execute all handlers attached to the matched elements for the given event type, in the same order they would be if
- the event were triggered naturally by the user.</p>
-<p> <code>.trigger()</code>ed events bubble up the DOM tree; an event handler can stop the bubbling by returning <code>false</code> from the
- handler or calling the <code>.stopPropagation()</code> method on the event object passed into the event.</p>
+the event were triggered naturally by the user.</p>
+<p><code>.trigger()</code>ed events bubble up the DOM tree; an event handler can stop the bubbling by returning <code>false</code> from the
+handler or calling the <code>.stopPropagation()</code> method on the event object passed into the event.</p>
 </div>
 
 
@@ -9174,7 +9174,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3400">line 3400</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3407">line 3407</a>
     </li></ul></dd>
     
 
@@ -9215,8 +9215,8 @@
 
 <div class="description">
     <p>Removes the parents of the set of matched elements from the DOM, leaving the matched elements in their place.</p>
-<p> This method is effectively the inverse of the <a href="ZebraJS.html#wrap">.wrap()</a> method. The matched elements (and their
- siblings, if any) replace their parents within the DOM structure.</p>
+<p>This method is effectively the inverse of the <a href="ZebraJS.html#wrap">.wrap()</a> method. The matched elements (and their
+siblings, if any) replace their parents within the DOM structure.</p>
 </div>
 
 
@@ -9276,7 +9276,7 @@
             
 
             <td class="description last"><p>If the selector is supplied, the parent elements will be filtered and the unwrapping
-                                 will occur only they match it.</p></td>
+will occur only they match it.</p></td>
         </tr>
 
     
@@ -9337,7 +9337,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3447">line 3447</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3454">line 3454</a>
     </li></ul></dd>
     
 
@@ -9449,7 +9449,7 @@
             
 
             <td class="description last"><p>A string, a number, or an array of strings corresponding to the value of each matched
-                                 element to set as selected/checked.</p></td>
+element to set as selected/checked.</p></td>
         </tr>
 
     
@@ -9474,8 +9474,8 @@
         
 <div class="param-desc">
     <p>If setting a value, this method returns the set of matched elements. If called without
-                                 the argument, the method return the current value of the first element in the set of
-                                 matched elements.</p>
+the argument, the method return the current value of the first element in the set of
+matched elements.</p>
 </div>
 
 
@@ -9515,7 +9515,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3552">line 3552</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3559">line 3559</a>
     </li></ul></dd>
     
 
@@ -9556,9 +9556,9 @@
 
 <div class="description">
     <p>Returns the current computed <strong>inner</strong> width (without <code>padding</code>, <code>border</code> and <code>margin</code>) of the first element
- in the set of matched elements as <code>float</code>, or sets the <code>width</code> CSS property of every element in the set.</p>
-<p> See <a href="ZebraJS.html#outerWidth">.outerWidth()</a> for getting the width including <code>padding</code>, <code>border</code> and, optionally,
- <code>margin</code>.</p>
+in the set of matched elements as <code>float</code>, or sets the <code>width</code> CSS property of every element in the set.</p>
+<p>See <a href="ZebraJS.html#outerWidth">.outerWidth()</a> for getting the width including <code>padding</code>, <code>border</code> and, optionally,
+<code>margin</code>.</p>
 </div>
 
 
@@ -9636,12 +9636,12 @@
             
 
             <td class="description last"><p>If not given, this method will return the computed <strong>inner</strong>
-                                                 width (without <code>padding</code>, <code>border</code> and <code>margin</code>) of the first
-                                                 element in the set of matched elements.
-                                                 <br><br>
-                                                 If given, this method will set the <code>width</code> CSS property of all
-                                                 the elements in the set to that particular value, making sure
-                                                 to apply the &quot;px&quot; suffix if not otherwise specified.</p>
+width (without <code>padding</code>, <code>border</code> and <code>margin</code>) of the first
+element in the set of matched elements.
+<br><br>
+If given, this method will set the <code>width</code> CSS property of all
+the elements in the set to that particular value, making sure
+to apply the &quot;px&quot; suffix if not otherwise specified.</p>
 <blockquote>
 <p>For hidden elements the returned value is <code>0</code>!</p>
 </blockquote></td>
@@ -9669,8 +9669,8 @@
         
 <div class="param-desc">
     <p>When <strong>setting</strong> the <code>width</code>, this method returns the set of matched elements. Otherwise,
-                             it returns the current computed <strong>inner</strong> width (without <code>padding</code>, <code>border</code> and <code>margin</code>)
-                             of the first element in the set of matched elements, as <code>float</code>.</p>
+it returns the current computed <strong>inner</strong> width (without <code>padding</code>, <code>border</code> and <code>margin</code>)
+of the first element in the set of matched elements, as <code>float</code>.</p>
 </div>
 
 
@@ -9710,7 +9710,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3617">line 3617</a>
+        <a href="zebra.src.js.html">zebra.src.js</a>, <a href="zebra.src.js.html#line3624">line 3624</a>
     </li></ul></dd>
     
 
@@ -9753,8 +9753,8 @@
     <p>Wraps an HTML structure around each element in the set of matched elements.</p>
 <blockquote>
 <p>Note that if the method's argument is a selector then clones of the element described by the selector will be
- created and wrapped around each element in the set of matched elements except for the last one. The original item will
- be moved (not cloned) and wrapped around the last target.</p>
+created and wrapped around each element in the set of matched elements except for the last one. The original item will
+be moved (not cloned) and wrapped around the last target.</p>
 </blockquote>
 </div>
 
@@ -9815,7 +9815,7 @@
             
 
             <td class="description last"><p>A string, a <a href="ZebraJS.html">ZebraJS</a> object or a DOM element in which to wrap around each element
-                             in the set of matched elements.</p></td>
+in the set of matched elements.</p></td>
         </tr>
 
     
@@ -9877,7 +9877,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Mar 21 2020 20:11:31 GMT+0200 (Eastern European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed May 20 2020 10:29:21 GMT+0300 (Eastern European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
