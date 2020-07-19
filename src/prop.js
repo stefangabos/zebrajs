@@ -44,7 +44,8 @@ $.fn.prop = function(prop, value) {
         else {
 
             if (prop in this[0]) return this[0][prop];
-            else return undefined;
+
+            return undefined;
 
         }
 
