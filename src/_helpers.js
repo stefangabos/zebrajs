@@ -201,11 +201,12 @@ $.fn._dom_search = function(action, selector) {
 
             // if the root element doesn't have an ID,
             // generate and set a random ID for the element's parent node
-            if (null === root.getAttribute('id')) root.setAttribute('id', $this._random('id'));
+            if (null === root.getAttribute('id')) {
+                root.setAttribute('id', $this._random('id'));
 
-            // set this flag so that we know to remove the randomly generated ID when we're done
-            remove_id = true;
-
+                // set this flag so that we know to remove the randomly generated ID when we're done
+                remove_id = true;
+            }
         }
 
         // if we're looking for siblings
