@@ -2351,7 +2351,7 @@
         if ('function' === typeof selector) {
 
             // if "once" argument is given
-            if (typeof callback  === 'boolean') once = callback;
+            if (typeof callback === 'boolean') once = callback;
 
             // the "callback" argument is now in the place of the "selector" argument
             callback = selector;
