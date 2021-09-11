@@ -1877,7 +1877,7 @@
     $.fn.html = function(content) {
 
         // if content is provided
-        if (content)
+        if (undefined !== content)
 
             // iterate through the set of matched elements
             this.forEach(function(element) {
@@ -3254,7 +3254,7 @@
     $.fn.text = function(content) {
 
         // if content is provided
-        if (content)
+        if (undefined !== content)
 
             // iterate through the set of matched elements
             this.forEach(function(element) {
