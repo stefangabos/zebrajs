@@ -167,6 +167,7 @@
     // import "$.inArray.js"
     // import "addClass.js"
     // import "after.js"
+    // import "animate.js"
     // import "append.js"
     // import "appendTo.js"
     // import "attr.js"
