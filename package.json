@@ -7,7 +7,7 @@
     "name": "Stefan Gabos",
     "email": "contact@stefangabos.ro"
   },
-  "description": "A JavaScript library for modern browsers",
+  "description": "A modular, jQuery compatible, ultra light-weight JavaScript micro-library for modern browsers",
   "repository": {
     "type": "git",
     "url": "https://github.com/stefangabos/zebrajs.git"
