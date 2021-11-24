@@ -14,7 +14,7 @@ Check out the [awesome documentation](https://stefangabos.github.io/Zebra_cURL/Z
 
 ## :floppy_disk: Custom build
 
-[Download custom build](https://stefangabos.github.io/zebrajs/download/)
+Build a [customized version](https://stefangabos.github.io/zebrajs/download/) of the library and include just the bits you need
 
 ## 🎂 Support the development of this project
 
