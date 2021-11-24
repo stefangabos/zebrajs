@@ -8,11 +8,40 @@ Nevertheless, the need for a library to handle common tasks needed when interact
 
 **ZebraJS** retains [jQuery](http://jquery.com/)'s intuitive and simple syntax but the code behind is largely inspired from the excellent [You Don't Need jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery) GitHub repository as well as the documentation on [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web), and makes use of the modern browsers' improved support for manipulating DOM elements. Also, in line with the modern age's pursuit for byte saving, ZebraJS allows you to build [customized versions](https://stefangabos.github.io/zebrajs/download/) of the library and include just the bits you need.
 
-## Quick links
+## :notebook_with_decorative_cover: Documentation
 
-:floppy_disk: [Download custom build](https://stefangabos.github.io/zebrajs/download/)
+Check out the [awesome documentation](https://stefangabos.github.io/Zebra_cURL/Zebra_cURL/Zebra_cURL.html)!
 
-:books: [Read the awesome documentation](https://stefangabos.github.io/zebrajs/index.html)
+## :floppy_disk: Custom build
+
+[Download custom build](https://stefangabos.github.io/zebrajs/download/)
+
+## 🎂 Support the development of this project
+
+Your support means a lot and it keeps me motivated to keep working on open source projects.<br>
+If you like this project please ⭐ it by clicking on the star button at the top of the page.<br>
+If you are feeling generous, you can buy me a coffee by donating through PayPal, or you can become a sponsor.<br>
+Either way - **Thank you!** 🎉
+
+[<img src="https://img.shields.io/github/stars/stefangabos/zebrajs?color=green&label=star%20it%20on%20GitHub" width="132" height="20" alt="Star it on GitHub">](https://github.com/stefangabos/zebrajs) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9563UHJR67EVE) [<img src="https://img.shields.io/badge/-Sponsor-fafbfc?logo=GitHub%20Sponsors">](https://github.com/sponsors/stefangabos)
+
+## Installation
+
+Download the [full library](https://github.com/stefangabos/zebrajs/archive/master.zip) from GitHub (and use either `dist/zebra.min.js` or `/dist/zebra.src.js`), or go on and [get your customized version](https://stefangabos.github.io/zebrajs/download/).
+
+zebrajs is also available as a [npm package](https://www.npmjs.com/package/zebrajs). To install it use:
+
+```bash
+# the "--save" argument adds the plugin as a dependency in packages.json
+npm install zebrajs --save
+```
+
+zebrajs is also available as a [Bower package](http://bower.io/). To install it use:
+
+```bash
+# the "--save" argument adds the plugin as a dependency in bower.json
+bower install zebrajs --save
+```
 
 ## Examples
 
@@ -39,10 +68,6 @@ Once you grab hold of one or more elements (we call this *wrapping elements* bec
 I use this to fuel my (small) pet projects where jQuery is overkill and plain JavaScript is too verbose. Also, more often than not, I just need very little from jQuery, and hence the modular approach.
 
 Keep in mind that this library is currently in its infancy so adjust your expectations accordingly.
-
-## Installing
-
-Download the [full library](https://github.com/stefangabos/zebrajs/archive/master.zip) from GitHub (and use either `dist/zebra.min.js` or `/dist/zebra.src.js`), or go on and [get your customized version](https://stefangabos.github.io/zebrajs/download/).
 
 ## Contributing
 
