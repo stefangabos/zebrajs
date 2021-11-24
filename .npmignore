@@ -1,9 +1,11 @@
 node_modules/*
 src/*
+docs/*
 .gitattributes
 .gitignore
 .npmignore
 eslint.json
+jsdoc.json
 Gruntfile.js
 package.json
 package-lock.json
