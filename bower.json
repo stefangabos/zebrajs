@@ -1,0 +1,25 @@
+{
+  "name": "zebrajs",
+  "main": "dist/zebra.min.js",
+  "homepage": "https://github.com/stefangabos/zebrajs",
+  "authors": [
+    "Stefan Gabos <contact@stefangabos.ro>"
+  ],
+  "description": "A modular, jQuery compatible, ultra light-weight JavaScript micro-library for modern browsers",
+  "keywords": [
+    "javascript"
+  ],
+  "license": "LGPL",
+  "ignore": [
+    "src/*",
+    ".gitattributes",
+    ".gitignore",
+    ".npmignore",
+    "bower.json",
+    "eslint.json",
+    "jsdoc.json",
+    "Gruntfile.js",
+    "package.json",
+    "package-lock.json"
+  ]
+}
