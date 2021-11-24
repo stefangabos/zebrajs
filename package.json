@@ -1,25 +1,25 @@
 {
-  "name": "zebrajs",
-  "version": "1.0.0",
-  "main": "dist/zebra.min.js",
-  "homepage": "https://github.com/stefangabos/zebrajs",
+  "name": "zebraJS",
+  "description": "A modular, jQuery compatible, ultra light-weight JavaScript micro-library for modern browsers",
   "author": {
     "name": "Stefan Gabos",
     "email": "contact@stefangabos.ro"
   },
-  "description": "A modular, jQuery compatible, ultra light-weight JavaScript micro-library for modern browsers",
+  "homepage": "https://github.com/stefangabos/zebrajs",
+  "main": "dist/zebra.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/stefangabos/zebrajs.git"
   },
+  "license": "LGPL-3.0",
+  "version": "1.0.0",
+  "keywords": [
+    "javascript"
+  ],
   "bugs": {
     "url": "https://github.com/stefangabos/zebrajs",
     "email": "contact@stefangabos.ro"
   },
-  "keywords": [
-    "javascript"
-  ],
-  "license": "LGPL-3.0",
   "devDependencies": {
     "docdash": "git+https://github.com/stefangabos/docdash.git",
     "grunt": "^1.4.1",
