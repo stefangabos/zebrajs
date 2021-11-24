@@ -29,18 +29,11 @@ Either way - **Thank you!** 🎉
 
 Download the [full library](https://github.com/stefangabos/zebrajs/archive/master.zip) from GitHub (and use either `dist/zebra.min.js` or `/dist/zebra.src.js`), or go on and [get your customized version](https://stefangabos.github.io/zebrajs/download/).
 
-zebrajs is also available as a [npm package](https://www.npmjs.com/package/zebra_js). To install it use:
+zebrajs is also available as a [npm package](https://www.npmjs.com/package/@stefangabos/zebra_js). To install it use:
 
 ```bash
 # the "--save" argument adds the plugin as a dependency in packages.json
-npm install zebra_js --save
-```
-
-zebrajs is also available as a [Bower package](http://bower.io/). To install it use:
-
-```bash
-# the "--save" argument adds the plugin as a dependency in bower.json
-bower install zebra_js --save
+npm install @stefangabos/zebra_js --save
 ```
 
 ## Examples
