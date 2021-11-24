@@ -1,6 +1,10 @@
-<img src="https://github.com/stefangabos/zebrajs/blob/master/docs/images/logo.png" alt="zebrajs">
+<img src="https://raw.githubusercontent.com/stefangabos/zebrajs/master/docs/images/logo.png" alt="zebrajs" align="right">
 
-# ZebraJS
+# ZebraJS &nbsp;[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=A+modular,+jQuery+compatible,+ultra+light-weight+JavaScript+micro-library+for+modern+browsers&url=https://github.com/stefangabos/zebrajs&via=stefangabos&hashtags=jquery,javascript)
+
+*A modular, jQuery compatible, ultra light-weight JavaScript micro-library for modern browsers*
+
+[![npm](https://img.shields.io/npm/v/@stefangabos/zebra_js)](https://www.npmjs.com/package/@stefangabos/zebra_js) [![Total](https://img.shields.io/npm/dt/@stefangabos/zebra_js)](https://www.npmjs.com/package/@stefangabos/zebra_js) [![Monthly](https://img.shields.io/npm/dm/@stefangabos/zebra_js)](https://www.npmjs.com/package/@stefangabos/zebra_js) [![](https://data.jsdelivr.com/v1/package/npm/@stefangabos/zebra_js/badge)](https://www.jsdelivr.com/package/npm/@stefangabos/zebra_js) [![License](https://img.shields.io/npm/l/@stefangabos/zebra_js)](https://github.com/stefangabos/@stefangabos/zebra_js/blob/master/LICENSE.md)
 
 A truly modular, jQuery compatible, ultra-lightweight (**13Kb minified, 4Kb gzipped**), JavaScript micro-library for modern browsers (IE 10+) meant to simplify the interaction with the DOM in the *post-jQuery* world, now that there are there are less and less differences between how browsers handle various JavaScript-related aspects and offer native support for most of the things that [jQuery](http://jquery.com/) had to tackle and take care for us, behind the scenes, since its first release [back in 2006](https://en.wikipedia.org/wiki/JQuery).
 
@@ -29,11 +33,22 @@ Either way - **Thank you!** 🎉
 
 Download the [full library](https://github.com/stefangabos/zebrajs/archive/master.zip) from GitHub (and use either `dist/zebra.min.js` or `/dist/zebra.src.js`), or go on and [get your customized version](https://stefangabos.github.io/zebrajs/download/).
 
-zebrajs is also available as a [npm package](https://www.npmjs.com/package/@stefangabos/zebra_js). To install it use:
+zebraJS is also available as a [npm package](https://www.npmjs.com/package/@stefangabos/zebra_js). To install it use:
 
 ```bash
 # the "--save" argument adds the plugin as a dependency in packages.json
 npm install @stefangabos/zebra_js --save
+```
+
+Alternatively, you can load zebraJS from [JSDelivr CDN](https://www.jsdelivr.com/package/npm/zebra_transform) like this:
+```html
+<!-- for the most recent version, not recommended in production -->
+<script src="https://cdn.jsdelivr.net/npm/@stefangabos/zebra_js@latest/dist/zebra.min.js"></script>
+
+<!-- for a specific version -->
+<script src="https://cdn.jsdelivr.net/npm/@stefangabos/zebra_js@1.0.2/dist/zebra.min.js"></script>
+
+<!-- replacing "min" with "src" will serve you the non-compressed version -->
 ```
 
 ## Examples
