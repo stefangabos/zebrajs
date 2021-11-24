@@ -96,7 +96,7 @@ module.exports = function(grunt) {
          **************************************************************************************************************/
         'jshint': {
             options: {
-                strict:     false,       //  requires all functions to run in ECMAScript 5's strict mode
+                strict:     false,      //  requires all functions to run in ECMAScript 5's strict mode
                 asi:        true,       //  suppresses warnings about missing semicolons
                 globals: {              //  white list of global variables that are not formally defined in the source code
                     '$':                true,
