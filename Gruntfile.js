@@ -80,7 +80,7 @@ module.exports = function(grunt) {
          **************************************************************************************************************/
         'eslint' : {
             options: {
-                configFile: 'eslint.json'
+                overrideConfigFile: 'eslint.json'
             },
             library: {
                 src: ['src/**/*.js']
