@@ -6,10 +6,10 @@ Nevertheless, the need for a library to handle common tasks needed when interact
 
 **ZebraJS** retains [jQuery](http://jquery.com/)'s intuitive and simple syntax but the code behind is largely inspired from the excellent [You Don't Need jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery) GitHub repository as well as the documentation on [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web), and makes use of the modern browsers' improved support for manipulating DOM elements. Also, in line with the modern age's pursuit for byte saving, ZebraJS allows you to build [customized versions](https://stefangabos.github.io/zebrajs/download/) of the library and include just the bits you need.
 
-## :notebook_with_decorative_cover: Documentation
+## 📔 Documentation
 
 Check out the [awesome documentation](https://stefangabos.github.io/Zebra_cURL/Zebra_cURL/Zebra_cURL.html)!
 
-## :floppy_disk: Custom build
+## 💾 Custom build
 
 [Download custom build](https://stefangabos.github.io/zebrajs/download/)
