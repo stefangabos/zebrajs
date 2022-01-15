@@ -14,7 +14,7 @@ Nevertheless, the need for a library to handle common tasks needed when interact
 
 ## :notebook_with_decorative_cover: Documentation
 
-Check out the [awesome documentation](https://stefangabos.github.io/Zebra_cURL/Zebra_cURL/Zebra_cURL.html)!
+Check out the [awesome documentation](https://stefangabos.github.io/zebrajs/index.html)!
 
 ## :floppy_disk: Custom build
 
