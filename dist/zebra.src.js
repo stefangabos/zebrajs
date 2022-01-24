@@ -925,8 +925,6 @@
             // default animation speed is 400
             element.style.transition = 'all ' + animation_duration + 's ' + animation_easing;
 
-            // console.log('all ' + animation_duration + 's' + animation_easing);
-
             // set the final values of the
             // properties we are about to animate
             for (property in properties)
