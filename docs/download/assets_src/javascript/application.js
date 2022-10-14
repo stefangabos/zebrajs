@@ -48,7 +48,7 @@ $(document).ready(function() {
         // extract all the available methods
         extract_methods = function() {
 
-            var source = '@import "../../../../dist/zebra.min.js"',
+            var source = '@import "zebra.min.js"'.replace(/\(([a-z]{1})\.fn=\{version\:\"(.*?)\"\}\)/, '$1.fn={version:"$2"};$1.fn'),
                 source_length = source.length,
                 i, tmp = '', is_private_method, is_helper_method, matches, matching_brackets = false, method_name;
 
