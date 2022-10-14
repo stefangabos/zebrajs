@@ -55,8 +55,8 @@
         *                       you work with those elements.
         *
         *   @author     Stefan Gabos <contact@stefangabos.ro>
-        *   @version    1.0.2 (last revision November 24, 2021)
-        *   @copyright  (c) 2016-2021 Stefan Gabos
+        *   @version    1.0.3 (last revision October 14, 2022)
+        *   @copyright  (c) 2016-2022 Stefan Gabos
         *   @license    LGPL-3.0
         *   @alias      ZebraJS
         *   @class
@@ -156,7 +156,7 @@
     $.fn = {
 
         // zebrajs version
-        version: '1.0.2'
+        version: '1.0.3'
 
     };
 
