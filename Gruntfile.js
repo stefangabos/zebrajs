@@ -164,30 +164,6 @@ module.exports = function(grunt) {
         },
 
         /***************************************************************************************************************
-         *  STRING REPLACE
-         *  https://www.npmjs.com/package/grunt-string-replace
-         **************************************************************************************************************/
-        'string-replace': {
-            inline: {
-                files: {
-                    'docs/download/public/javascript/application.min.js': 'docs/download/public/javascript/application.min.js',
-                },
-                options: {
-                    replacements: [
-                        {
-                            pattern: '\=\'\!function\(\)\{\"use',
-                            replacement: '=String.raw`!function(){"use'
-                        },
-                        {
-                            pattern: '\,window\.\$\=window\.jQuery\=f\}\(\);\'',
-                            replacement: ',window.$=window.jQuery=f}();`'
-                        }
-                    ]
-                }
-            }
-        },
-
-        /***************************************************************************************************************
          *  COPY
          *  https://github.com/gruntjs/grunt-contrib-copy
          **************************************************************************************************************/
@@ -212,7 +188,7 @@ module.exports = function(grunt) {
             },
             site_js: {
                 files: ['docs/download/assets_src/javascript/**/*.js'],
-                tasks: ['newer:eslint:site', 'newer:jshint:site', 'newer:uglify:site', 'includes:site', 'string-replace', 'notify:done'],
+                tasks: ['newer:eslint:site', 'newer:jshint:site', 'newer:uglify:site', 'includes:site', 'notify:done'],
                 options: {
                     livereload: true
                 }
@@ -243,8 +219,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-string-replace');
 
-    grunt.registerTask('default', ['includes:library', 'sass', 'eslint', 'jshint', 'jsdoc', 'uglify', 'copy', 'includes:site', 'string-replace', 'watch']);
+    grunt.registerTask('default', ['includes:library', 'sass', 'eslint', 'jshint', 'jsdoc', 'uglify', 'copy', 'includes:site', 'watch']);
 
 };
