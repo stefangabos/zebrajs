@@ -165,6 +165,7 @@
     // import "$.each.js"
     // import "$.extend.js"
     // import "$.inArray.js"
+    // import "$.isArray.js"
     // import "addClass.js"
     // import "after.js"
     // import "animate.js"
