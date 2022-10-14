@@ -75,7 +75,7 @@ $(document).ready(function() {
                 if (matching_brackets === 0 && tmp !== '') {
 
                     // the start of the script (everything until the first method)
-                    if (!method_name) script_header = source.substr(0, source.indexOf(matches[0]) - 1);
+                    if (!method_name) script_header = source.substring(0, source.indexOf(matches[0]) - 1);
 
                     is_helper_method = matches[0].indexOf('.fn') === -1;
 
@@ -207,7 +207,7 @@ $(document).ready(function() {
             });
 
             // add helper methods, if any, and the script's footer
-            code += ',' + helper_methods_code + (helper_methods_code === '' ? script_footer.substr(1) : script_footer);
+            code += ',' + helper_methods_code + (helper_methods_code === '' ? script_footer.substring(1) : script_footer);
 
             // if we have a global object name
             if (global_object_name !== '')
