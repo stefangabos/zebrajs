@@ -72,7 +72,7 @@ $.fn.on = function(event_type, selector, callback, once) {
             this.on(i, event_type[i]);
 
         // don't go forward
-        return;
+        return this;
 
     }
 
