@@ -137,7 +137,22 @@ elements matched by the <code>selector</code> argument. This is referred to as <
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// select an element by ID  var element = $('#foo');  // select element by class name  var elements = $('.foo');  // select elements by using JavaScript  var elements = $(document.querySelectorAll('.foo'));  // use CSS selectors  var elements = $(input[type=text]);  // create elements  var element = $('&lt;div>').addClass('foo').appendTo($('body'));  </code></pre>
+    <pre class="prettyprint"><code>// select an element by ID
+  var element = $('#foo');
+
+  // select element by class name
+  var elements = $('.foo');
+
+  // select elements by using JavaScript
+  var elements = $(document.querySelectorAll('.foo'));
+
+  // use CSS selectors
+  var elements = $(input[type=text]);
+
+  // create elements
+  var element = $('&lt;div>').addClass('foo').appendTo($('body'));
+
+  </code></pre>
 
 
 
@@ -401,7 +416,22 @@ you work with those elements.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>$.ajax({     url: 'http://mydomain.com/index.html',     method: 'GET',     data: {         foo: 'baz',         bar: 'bax'     },     error: function() {         alert('error!');     },     success: function() {         alert('success!');     } }); </code></pre>
+    <pre class="prettyprint"><code>$.ajax({
+     url: 'http://mydomain.com/index.html',
+     method: 'GET',
+     data: {
+         foo: 'baz',
+         bar: 'bax'
+     },
+     error: function() {
+         alert('error!');
+     },
+     success: function() {
+         alert('success!');
+     }
+ });
+
+ </code></pre>
 
 
 
@@ -640,7 +670,19 @@ You may skip it and set it in the <em>options</em> object</p></td>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>$.each([1, 2, 3, 4], function(index, value) {     console.log(index + ': ' + value); }); var obj = {     prop1:  'value1',     prop2:  'value2' }; $.each(obj, function(index, value) {     console.log(index + ': ' + value); }); </code></pre>
+    <pre class="prettyprint"><code>$.each([1, 2, 3, 4], function(index, value) {
+     console.log(index + ': ' + value);
+ });
+
+ var obj = {
+     prop1:  'value1',
+     prop2:  'value2'
+ };
+ $.each(obj, function(index, value) {
+     console.log(index + ': ' + value);
+ });
+
+ </code></pre>
 
 
 
@@ -804,7 +846,13 @@ native <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Referenc
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// merge the properties of the last 2 objects into the first one $.extend({}, {foo:  'baz'}, {bar: 'biz'}); // the result // {foo: 'baz', bar: 'biz'} </code></pre>
+    <pre class="prettyprint"><code>// merge the properties of the last 2 objects into the first one
+ $.extend({}, {foo:  'baz'}, {bar: 'biz'});
+
+ // the result
+ // {foo: 'baz', bar: 'biz'}
+
+ </code></pre>
 
 
 
@@ -976,7 +1024,10 @@ own <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/G
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// returns 4 $.inArray(5, [1, 2, 3, 4, 5, 6, 7]); </code></pre>
+    <pre class="prettyprint"><code>// returns 4
+ $.inArray(5, [1, 2, 3, 4, 5, 6, 7]);
+
+ </code></pre>
 
 
 
@@ -1164,7 +1215,10 @@ own <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/G
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// returns TRUE $.isArray([1, 2, 3, 4, 5, 6, 7]); </code></pre>
+    <pre class="prettyprint"><code>// returns TRUE
+ $.isArray([1, 2, 3, 4, 5, 6, 7]);
+
+ </code></pre>
 
 
 
@@ -1325,7 +1379,20 @@ such as a ZebraJS object).</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // add a single class elements.addClass('foo'); // add multiple classes elements.addClass('foo baz'); // chaining elements.addClass('foo baz').css('display', 'none'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // add a single class
+ elements.addClass('foo');
+
+ // add multiple classes
+ elements.addClass('foo baz');
+
+ // chaining
+ elements.addClass('foo baz').css('display', 'none');
+
+ </code></pre>
 
 
 
@@ -1499,7 +1566,26 @@ the last element.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var target = $('#selector'); // insert a div that we create on the fly target.after($('&lt;div>').text('hello')); // same thing as above target.after($('&lt;div>hello&lt;/div>')); // inserting elements already existing on the page target.after($('ul')); // insert a string (which will be transformed in HTML) target.after('&lt;div>hello&lt;/div>'); // chaining target.append($('div')).addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var target = $('#selector');
+
+ // insert a div that we create on the fly
+ target.after($('&lt;div>').text('hello'));
+
+ // same thing as above
+ target.after($('&lt;div>hello&lt;/div>'));
+
+ // inserting elements already existing on the page
+ target.after($('ul'));
+
+ // insert a string (which will be transformed in HTML)
+ target.after('&lt;div>hello&lt;/div>');
+
+ // chaining
+ target.append($('div')).addClass('foo');
+
+ </code></pre>
 
 
 
@@ -1660,7 +1746,18 @@ element in the set of matched elements.</p></td>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // fade out elements.animate({     opacity: 0 }, 250, function() {     console.log('Animation is complete!'); }); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // fade out
+ elements.animate({
+     opacity: 0
+ }, 250, function() {
+     console.log('Animation is complete!');
+ });
+
+ </code></pre>
 
 
 
@@ -1967,7 +2064,30 @@ each target except for the last one. For the last target, the original item will
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var parent = $('#selector'); // append a div that we create on the fly parent.append($('&lt;div>').text('hello')); // same thing as above parent.append($('&lt;div>hello&lt;/div>')); // append one or more elements that already exist on the page // if "parent" is a single element than the list will be moved inside the parent element // if "parent" is a collection of elements, clones of the list element will be created for // each target except for the last one; for the last target, the original list will be moved parent.append($('ul')); // append a string (which will be transformed in HTML) // this is more efficient memory wise parent.append('&lt;div>hello&lt;/div>'); // chaining parent.append($('div')).addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var parent = $('#selector');
+
+ // append a div that we create on the fly
+ parent.append($('&lt;div>').text('hello'));
+
+ // same thing as above
+ parent.append($('&lt;div>hello&lt;/div>'));
+
+ // append one or more elements that already exist on the page
+ // if "parent" is a single element than the list will be moved inside the parent element
+ // if "parent" is a collection of elements, clones of the list element will be created for
+ // each target except for the last one; for the last target, the original list will be moved
+ parent.append($('ul'));
+
+ // append a string (which will be transformed in HTML)
+ // this is more efficient memory wise
+ parent.append('&lt;div>hello&lt;/div>');
+
+ // chaining
+ parent.append($('div')).addClass('foo');
+
+ </code></pre>
 
 
 
@@ -2140,7 +2260,23 @@ each target except for the last one. For the last target, the original item will
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var parent = $('#selector'); // append a div that we create on the fly $('&lt;div>').text('hello').appendTo(parent); // same thing as above $('&lt;div>hello&lt;/div>').appendTo(parent); // append one or more elements that already exist on the page // if "parent" is a single element than the list will be moved inside the parent element // if "parent" is a collection of elements, clones of the list element will be created for // each target except for the last one; for the last target, the original list will be moved $('ul').appendTo(parent); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var parent = $('#selector');
+
+ // append a div that we create on the fly
+ $('&lt;div>').text('hello').appendTo(parent);
+
+ // same thing as above
+ $('&lt;div>hello&lt;/div>').appendTo(parent);
+
+ // append one or more elements that already exist on the page
+ // if "parent" is a single element than the list will be moved inside the parent element
+ // if "parent" is a collection of elements, clones of the list element will be created for
+ // each target except for the last one; for the last target, the original list will be moved
+ $('ul').appendTo(parent);
+
+ </code></pre>
 
 
 
@@ -2301,7 +2437,30 @@ for every matched element.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // get the value of an attribute for the first // element in the set of matched elements elements.attr('id'); // set a single attribute elements.attr('title', 'title'); // set multiple attributes elements.attr({     title: 'title',     href: 'href' }); // remove an attribute elements.attr('title', false); // chaining elements.attr('title', 'title').removeClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // get the value of an attribute for the first
+ // element in the set of matched elements
+ elements.attr('id');
+
+ // set a single attribute
+ elements.attr('title', 'title');
+
+ // set multiple attributes
+ elements.attr({
+     title: 'title',
+     href: 'href'
+ });
+
+ // remove an attribute
+ elements.attr('title', false);
+
+ // chaining
+ elements.attr('title', 'title').removeClass('foo');
+
+ </code></pre>
 
 
 
@@ -2536,7 +2695,30 @@ before each target except for the last one. The original item will be moved (not
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var target = $('#selector'); // insert a div that we create on the fly target.before($('&lt;div>').text('hello')); // same thing as above target.before($('&lt;div>hello&lt;/div>')); // use one or more elements that already exist on the page // if "target" is a single element than the list will be moved before the target element // if "parent" is a collection of elements, clones of the list element will be created before // each target, except for the last one; the original list will be moved before the last target target.before($('ul')); // insert a string (which will be transformed in HTML) // this is more efficient memory wise target.append('&lt;div>hello&lt;/div>'); // chaining target.append($('div')).addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var target = $('#selector');
+
+ // insert a div that we create on the fly
+ target.before($('&lt;div>').text('hello'));
+
+ // same thing as above
+ target.before($('&lt;div>hello&lt;/div>'));
+
+ // use one or more elements that already exist on the page
+ // if "target" is a single element than the list will be moved before the target element
+ // if "parent" is a collection of elements, clones of the list element will be created before
+ // each target, except for the last one; the original list will be moved before the last target
+ target.before($('ul'));
+
+ // insert a string (which will be transformed in HTML)
+ // this is more efficient memory wise
+ target.append('&lt;div>hello&lt;/div>');
+
+ // chaining
+ target.append($('div')).addClass('foo');
+
+ </code></pre>
 
 
 
@@ -2697,7 +2879,20 @@ each element in the set of matched elements.</p></td>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get all the element's children var children_all = element.children(); // get all the "div" children of the element var children_filtered = element.children('div'); // chaining element.children('div').addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // get all the element's children
+ var children_all = element.children();
+
+ // get all the "div" children of the element
+ var children_filtered = element.children('div');
+
+ // chaining
+ element.children('div').addClass('foo');
+
+ </code></pre>
 
 
 
@@ -2868,7 +3063,17 @@ one manually.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // clone element with data and events, including data and events of children var clones = element.clone(true, true) // chaining - clone and insert into the body element element.clone(true, true).appendTo($('body')); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // clone element with data and events, including data and events of children
+ var clones = element.clone(true, true)
+
+ // chaining - clone and insert into the body element
+ element.clone(true, true).appendTo($('body'));
+
+ </code></pre>
 
 
 
@@ -3057,7 +3262,17 @@ the matching elements.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get the first parent that is a div var closest = element.closest('div'); // chaining element.closest('div').addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // get the first parent that is a div
+ var closest = element.closest('div');
+
+ // chaining
+ element.closest('div').addClass('foo');
+
+ </code></pre>
 
 
 
@@ -3219,7 +3434,31 @@ CSS properties for every matched element.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // get the value of a computed style property // for the first element in the set of matched elements elements.css('width'); // set a single CSS property elements.css('position', 'absolute'); // set multiple CSS properties elements.css({     position: 'absolute',     left: 0,     top: 0 }); // remove a property elements.attr('position', false); // chaining elements.css('position', 'absolute').removeClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // get the value of a computed style property
+ // for the first element in the set of matched elements
+ elements.css('width');
+
+ // set a single CSS property
+ elements.css('position', 'absolute');
+
+ // set multiple CSS properties
+ elements.css({
+     position: 'absolute',
+     left: 0,
+     top: 0
+ });
+
+ // remove a property
+ elements.attr('position', false);
+
+ // chaining
+ elements.css('position', 'absolute').removeClass('foo');
+
+ </code></pre>
 
 
 
@@ -3443,7 +3682,20 @@ first element in the set of matched elements.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // set some data elements.data('foo', 'baz'); // retrieve previously set data elements.data('foo'); // set an object as data elements.data('foo', {bar: 'baz', qux: 2}); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // set some data
+ elements.data('foo', 'baz');
+
+ // retrieve previously set data
+ elements.data('foo');
+
+ // set an object as data
+ elements.data('foo', {bar: 'baz', qux: 2});
+
+ </code></pre>
 
 
 
@@ -3634,7 +3886,18 @@ DOM at a later time.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // remove elements from the DOM var detached = element.detach(); // add them back, together with data and events, // to the end of the body element $('body').insert(detached); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // remove elements from the DOM
+ var detached = element.detach();
+
+ // add them back, together with data and events,
+ // to the end of the body element
+ $('body').insert(detached);
+
+ </code></pre>
 
 
 
@@ -3745,7 +4008,17 @@ DOM at a later time.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>$('selector').each(function(index) {     // show the element's index in the set     console.log(index);     // remember, inside the callback, the "this" keyword refers to the DOM element     $(this).css('display', 'none'); }); </code></pre>
+    <pre class="prettyprint"><code>$('selector').each(function(index) {
+
+     // show the element's index in the set
+     console.log(index);
+
+     // remember, inside the callback, the "this" keyword refers to the DOM element
+     $(this).css('display', 'none');
+
+ });
+
+ </code></pre>
 
 
 
@@ -3905,7 +4178,15 @@ element. The <code>this</code> keyword inside the callback function refers to th
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('.selector'); // assuming there are 6 elements in the set of matched elements // add the "foo" class to the 5th element elements.eq(4).addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('.selector');
+
+ // assuming there are 6 elements in the set of matched elements
+ // add the "foo" class to the 5th element
+ elements.eq(4).addClass('foo');
+
+ </code></pre>
 
 
 
@@ -4067,7 +4348,20 @@ object, or a DOM element.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // find the element's div descendants var target = element.find('div'); // this is equivalent with the above var target = $('div', element); // chaining element.find('div').addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // find the element's div descendants
+ var target = element.find('div');
+
+ // this is equivalent with the above
+ var target = $('div', element);
+
+ // chaining
+ element.find('div').addClass('foo');
+
+ </code></pre>
 
 
 
@@ -4229,7 +4523,14 @@ selector, <a href="ZebraJS.html">ZebraJS</a> object, or DOM element, as a <a hre
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // returns the first element from the list of matched elements, as a ZebraJS object var first = elements.first(); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // returns the first element from the list of matched elements, as a ZebraJS object
+ var first = elements.first();
+
+ </code></pre>
 
 
 
@@ -4340,7 +4641,14 @@ selector, <a href="ZebraJS.html">ZebraJS</a> object, or DOM element, as a <a hre
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // this gets the second DOM element from the list of matched elements elements.get(1); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // this gets the second DOM element from the list of matched elements
+ elements.get(1);
+
+ </code></pre>
 
 
 
@@ -4479,7 +4787,17 @@ elements</p></td>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // check if matched elements have a certain class var class_exists = elements.hasClass('foo'); // chaining elements.toggleClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // check if matched elements have a certain class
+ var class_exists = elements.hasClass('foo');
+
+ // chaining
+ elements.toggleClass('foo');
+
+ </code></pre>
 
 
 
@@ -4643,7 +4961,25 @@ in the set of matched elements as <code>float</code>, or sets the <code>height</
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // returns the current computed inner height of the first element in the set of matched elements elements.height(); // sets the "height" CSS property of all elements in the set to 200px elements.height(200); elements.height('200'); elements.height('200px'); // sets the "height" CSS property of all elements in the set to 5em elements.height('5em'); // chaining elements.height(200).addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // returns the current computed inner height of the first element in the set of matched elements
+ elements.height();
+
+ // sets the "height" CSS property of all elements in the set to 200px
+ elements.height(200);
+ elements.height('200');
+ elements.height('200px');
+
+ // sets the "height" CSS property of all elements in the set to 5em
+ elements.height('5em');
+
+ // chaining
+ elements.height(200).addClass('foo');
+
+ </code></pre>
 
 
 
@@ -4840,7 +5176,20 @@ that you should be aware of when using this method.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // set the HTML content for all the matched elements elements.html('&lt;p>Hello&lt;/p>'); // get the HTML content of the first // element in the set of matched elements var content = elements.html(); // chaining elements.html('&lt;p>Hello&lt;/p>').addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // set the HTML content for all the matched elements
+ elements.html('&lt;p>Hello&lt;/p>');
+
+ // get the HTML content of the first
+ // element in the set of matched elements
+ var content = elements.html();
+
+ // chaining
+ elements.html('&lt;p>Hello&lt;/p>').addClass('foo');
+ </code></pre>
 
 
 
@@ -5031,7 +5380,23 @@ after each target except for the last one. The original item will be moved (not 
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var target = $('#selector'); // insert a div that we create on the fly $('&lt;div>').text('hello').insertAfter(target); // same thing as above $('&lt;div>hello&lt;/div>').insertAfter(target); // use one or more elements that already exist on the page // if "target" is a single element than the list will be moved after the target element // if "parent" is a collection of elements, clones of the list element will be created after // each target, except for the last one; the original list will be moved after the last target $('ul').insertAfter(target); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var target = $('#selector');
+
+ // insert a div that we create on the fly
+ $('&lt;div>').text('hello').insertAfter(target);
+
+ // same thing as above
+ $('&lt;div>hello&lt;/div>').insertAfter(target);
+
+ // use one or more elements that already exist on the page
+ // if "target" is a single element than the list will be moved after the target element
+ // if "parent" is a collection of elements, clones of the list element will be created after
+ // each target, except for the last one; the original list will be moved after the last target
+ $('ul').insertAfter(target);
+
+ </code></pre>
 
 
 
@@ -5203,7 +5568,23 @@ before each target except for the last one. The original item will be moved (not
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var target = $('#selector'); // insert a div that we create on the fly $('&lt;div>').text('hello').insertBefore(target); // same thing as above $('&lt;div>hello&lt;/div>').insertBefore(target); // use one or more elements that already exist on the page // if "target" is a single element than the list will be moved before the target element // if "parent" is a collection of elements, clones of the list element will be created before // each target, except for the last one; the original list will be moved before the last target $('ul').insertBefore(target); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var target = $('#selector');
+
+ // insert a div that we create on the fly
+ $('&lt;div>').text('hello').insertBefore(target);
+
+ // same thing as above
+ $('&lt;div>hello&lt;/div>').insertBefore(target);
+
+ // use one or more elements that already exist on the page
+ // if "target" is a single element than the list will be moved before the target element
+ // if "parent" is a collection of elements, clones of the list element will be created before
+ // each target, except for the last one; the original list will be moved before the last target
+ $('ul').insertBefore(target);
+
+ </code></pre>
 
 
 
@@ -5367,7 +5748,14 @@ least one of these elements matches the given arguments.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // returns true if the element is a "select" element console.log(element.is('select')) </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // returns true if the element is a "select" element
+ console.log(element.is('select'))
+
+ </code></pre>
 
 
 
@@ -5530,7 +5918,20 @@ it retrieves the following sibling only if it matches that selector.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get the next sibling var next = element.next(); // get the following sibling only if it matches the selector var next = element.next('div'); // chaining element.next().addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // get the next sibling
+ var next = element.next();
+
+ // get the following sibling only if it matches the selector
+ var next = element.next('div');
+
+ // chaining
+ element.next().addClass('foo');
+
+ </code></pre>
 
 
 
@@ -5692,7 +6093,10 @@ optionally filtered by a selector, as a ZebraJS object.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// find all elements having class ".foo" but not ".bar" $('.foo').not('.bar'); </code></pre>
+    <pre class="prettyprint"><code>// find all elements having class ".foo" but not ".bar"
+ $('.foo').not('.bar');
+
+ </code></pre>
 
 
 
@@ -5836,7 +6240,28 @@ Within the function, <code>this</code> refers to the current DOM element.</p></t
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // create a function var callback = function(e) {     console.log('clicked!'); } // handle clicks on element using the function created above element.on('click', callback); // remove that particular click event element.off('click', callback); // remove *all* the click events element.off('click'); // remove *only* the click events that were namespaced element.off('click.namespace'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // create a function
+ var callback = function(e) {
+     console.log('clicked!');
+ }
+
+ // handle clicks on element using the function created above
+ element.on('click', callback);
+
+ // remove that particular click event
+ element.off('click', callback);
+
+ // remove *all* the click events
+ element.off('click');
+
+ // remove *only* the click events that were namespaced
+ element.off('click.namespace');
+
+ </code></pre>
 
 
 
@@ -6026,7 +6451,14 @@ body element.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get the element's position, relative to the offset parent var offset = element.offset() </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // get the element's position, relative to the offset parent
+ var offset = element.offset()
+
+ </code></pre>
 
 
 
@@ -6137,7 +6569,47 @@ body element.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // create a function var callback = function(e) {     console.log('clicked!'); } // handle clicks on element using the function created above element.on('click', callback); // handle clicks on element using an anonymous function element.on('click', function(e) {     console.log('clicked!'); }); // namespacing, so that you can remove only certain events element.on('click.namespace', function(e) {     console.log('clicked!'); }); // using delegation // handle clicks on all the "div" elements // that are children of the element element.on('click', 'div', function(e) {     console.log('clicked!'); }); // chaining element.on('click', function() {     console.log('clicked!'); }).addClass('foo'); // multiple events element.on({     mouseenter: function() { ... },     mouseleave: function() { ... } }); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // create a function
+ var callback = function(e) {
+     console.log('clicked!');
+ }
+
+ // handle clicks on element using the function created above
+ element.on('click', callback);
+
+ // handle clicks on element using an anonymous function
+ element.on('click', function(e) {
+     console.log('clicked!');
+ });
+
+ // namespacing, so that you can remove only certain events
+ element.on('click.namespace', function(e) {
+     console.log('clicked!');
+ });
+
+ // using delegation
+ // handle clicks on all the "div" elements
+ // that are children of the element
+ element.on('click', 'div', function(e) {
+     console.log('clicked!');
+ });
+
+ // chaining
+ element.on('click', function() {
+     console.log('clicked!');
+ }).addClass('foo');
+
+ // multiple events
+ element.on({
+     mouseenter: function() { ... },
+     mouseleave: function() { ... }
+ });
+
+ </code></pre>
 
 
 
@@ -6375,7 +6847,45 @@ most once per element per event type.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // create a function var callback = function(e) {     console.log('clicked!'); } // handle clicks on element using the function created above // (the callback will be executed only once) element.one('click', callback); // handle clicks on element using an anonymous function // (the callback will be executed only once) element.one('click', function(e) {     console.log('clicked!'); }); // namespacing, so that you can remove only certain events // (the callback will be executed only once) element.one('click.namespace', function(e) {     console.log('clicked!'); }); // using delegation // handle clicks on all the "div" elements // that are children of the element // (the callback will be executed only once for each matched element) element.one('click', 'div', function(e) {     console.log('clicked!'); }); // chaining element.one('click', function() {     console.log('clicked!'); }).addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // create a function
+ var callback = function(e) {
+     console.log('clicked!');
+ }
+
+ // handle clicks on element using the function created above
+ // (the callback will be executed only once)
+ element.one('click', callback);
+
+ // handle clicks on element using an anonymous function
+ // (the callback will be executed only once)
+ element.one('click', function(e) {
+     console.log('clicked!');
+ });
+
+ // namespacing, so that you can remove only certain events
+ // (the callback will be executed only once)
+ element.one('click.namespace', function(e) {
+     console.log('clicked!');
+ });
+
+ // using delegation
+ // handle clicks on all the "div" elements
+ // that are children of the element
+ // (the callback will be executed only once for each matched element)
+ element.one('click', 'div', function(e) {
+     console.log('clicked!');
+ });
+
+ // chaining
+ element.one('click', function() {
+     console.log('clicked!');
+ }).addClass('foo');
+
+ </code></pre>
 
 
 
@@ -6617,7 +7127,14 @@ reaches the selected element.</p></td>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('selector'); // get the element's outer height var height = element.outerHeight(); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('selector');
+
+ // get the element's outer height
+ var height = element.outerHeight();
+
+ </code></pre>
 
 
 
@@ -6791,7 +7308,14 @@ margins.</p></td>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('selector'); // get the element's outer width var height = element.outerWidth(); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('selector');
+
+ // get the element's outer width
+ var height = element.outerWidth();
+
+ </code></pre>
 
 
 
@@ -6962,7 +7486,20 @@ DOM tree.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get the element's parent var parent = element.parent(); // get the element's parent *only* if it is a div var parent = element.parent('div'); // chaining element.parent().addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // get the element's parent
+ var parent = element.parent();
+
+ // get the element's parent *only* if it is a div
+ var parent = element.parent('div');
+
+ // chaining
+ element.parent().addClass('foo');
+
+ </code></pre>
 
 
 
@@ -7130,7 +7667,20 @@ tree, while this method travels all the way up to the DOM root.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get *all* the element's parent var parents = element.parents(); // get all the element's parent until the first div (including also that first div) var parents = element.parents('div'); // chaining element.parents('div').addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // get *all* the element's parent
+ var parents = element.parents();
+
+ // get all the element's parent until the first div (including also that first div)
+ var parents = element.parents('div');
+
+ // chaining
+ element.parents('div').addClass('foo');
+
+ </code></pre>
 
 
 
@@ -7298,7 +7848,14 @@ body element.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get the element's position, relative to the offset parent var position = element.position() </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // get the element's position, relative to the offset parent
+ var position = element.position()
+
+ </code></pre>
 
 
 
@@ -7421,7 +7978,30 @@ each target except for the last one. For the last target, the original item will
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var parent = $('#selector'); // append a div that we create on the fly parent.prepend($('&lt;div>').text('hello')); // same thing as above parent.prepend($('&lt;div>hello&lt;/div>')); // prepend one or more elements that already exist on the page // if "parent" is a single element than the list will be moved inside the parent element // if "parent" is a collection of elements, clones of the list element will be created for // each target except for the last one; for the last target, the original list will be moved parent.prepend($('ul')); // prepend a string (which will be transformed in HTML) // this is more efficient memory wise parent.prepend('&lt;div>hello&lt;/div>'); // chaining parent.prepend($('div')).addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var parent = $('#selector');
+
+ // append a div that we create on the fly
+ parent.prepend($('&lt;div>').text('hello'));
+
+ // same thing as above
+ parent.prepend($('&lt;div>hello&lt;/div>'));
+
+ // prepend one or more elements that already exist on the page
+ // if "parent" is a single element than the list will be moved inside the parent element
+ // if "parent" is a collection of elements, clones of the list element will be created for
+ // each target except for the last one; for the last target, the original list will be moved
+ parent.prepend($('ul'));
+
+ // prepend a string (which will be transformed in HTML)
+ // this is more efficient memory wise
+ parent.prepend('&lt;div>hello&lt;/div>');
+
+ // chaining
+ parent.prepend($('div')).addClass('foo');
+
+ </code></pre>
 
 
 
@@ -7594,7 +8174,23 @@ each target except for the last one. For the last target, the original item will
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var parent = $('#selector'); // prepend a div that we create on the fly $('&lt;div>').text('hello').prependTo(parent); // same thing as above $('&lt;div>hello&lt;/div>').prependTo(parent); // prepend one or more elements that already exist on the page // if "parent" is a single element than the list will be moved inside the parent element // if "parent" is a collection of elements, clones of the list element will be created for // each target except for the last one; for the last target, the original list will be moved $('ul').appendTo(parent); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var parent = $('#selector');
+
+ // prepend a div that we create on the fly
+ $('&lt;div>').text('hello').prependTo(parent);
+
+ // same thing as above
+ $('&lt;div>hello&lt;/div>').prependTo(parent);
+
+ // prepend one or more elements that already exist on the page
+ // if "parent" is a single element than the list will be moved inside the parent element
+ // if "parent" is a collection of elements, clones of the list element will be created for
+ // each target except for the last one; for the last target, the original list will be moved
+ $('ul').appendTo(parent);
+
+ </code></pre>
 
 
 
@@ -7755,7 +8351,20 @@ it retrieves the previous sibling only if it matches that selector.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get the previous sibling var prev = element.prev(); // get the previous sibling only if it matches the selector var prev = element.prev('div'); // since this method returns a ZebraJS object element.prev().addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // get the previous sibling
+ var prev = element.prev();
+
+ // get the previous sibling only if it matches the selector
+ var prev = element.prev('div');
+
+ // since this method returns a ZebraJS object
+ element.prev().addClass('foo');
+
+ </code></pre>
 
 
 
@@ -7917,7 +8526,11 @@ optionally filtered by a selector, as a ZebraJS object.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>$(document).ready(function() {     // code to be executed when the DOM is ready }); </code></pre>
+    <pre class="prettyprint"><code>$(document).ready(function() {
+     // code to be executed when the DOM is ready
+ });
+
+ </code></pre>
 
 
 
@@ -8080,7 +8693,15 @@ themselves, all attached event handlers and data attributes associated with the 
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // remove the element, its children, and all attached event // handlers and data attributes associated with the elements element.remove(); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // remove the element, its children, and all attached event
+ // handlers and data attributes associated with the elements
+ element.remove();
+
+ </code></pre>
 
 
 
@@ -8191,7 +8812,20 @@ themselves, all attached event handlers and data attributes associated with the 
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // remove a single class elements.removeClass('foo'); // remove multiple classes elements.removeClass('foo baz'); // since this method returns the set of matched elements elements.removeClass('foo baz').css('display', 'none'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // remove a single class
+ elements.removeClass('foo');
+
+ // remove multiple classes
+ elements.removeClass('foo baz');
+
+ // since this method returns the set of matched elements
+ elements.removeClass('foo baz').css('display', 'none');
+
+ </code></pre>
 
 
 
@@ -8358,7 +8992,20 @@ item will be moved (not cloned) and used to replace the last target.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // wrap element in a div element.replaceWith('&lt;div id="replacement">&lt;/div>'); // *exactly* the same thing as above element.replaceWith($('&lt;div id="replacement">&lt;/div>')); // using an existing element as the wrapper element.replaceWith($('#element-from-the-page')); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // wrap element in a div
+ element.replaceWith('&lt;div id="replacement">&lt;/div>');
+
+ // *exactly* the same thing as above
+ element.replaceWith($('&lt;div id="replacement">&lt;/div>'));
+
+ // using an existing element as the wrapper
+ element.replaceWith($('#element-from-the-page'));
+
+ </code></pre>
 
 
 
@@ -8522,7 +9169,20 @@ If the scroll bar is at the very left, or if the element is not scrollable, this
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var body = $('body'); // get the horizontal scroll of the body body.scrollLeft(); // set the horizontal scroll of the body body.scrollLeft(250); // chaining elements.scrollLeft(250).addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var body = $('body');
+
+ // get the horizontal scroll of the body
+ body.scrollLeft();
+
+ // set the horizontal scroll of the body
+ body.scrollLeft(250);
+
+ // chaining
+ elements.scrollLeft(250).addClass('foo');
+
+ </code></pre>
 
 
 
@@ -8702,7 +9362,20 @@ If the scroll bar is at the very top, or if the element is not scrollable, this 
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var body = $('body'); // get the vertical scroll of the body body.scrollTop(); // set the vertical scroll of the body body.scrollTop(250); // chaining elements.scrollTop(250).addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var body = $('body');
+
+ // get the vertical scroll of the body
+ body.scrollTop();
+
+ // set the vertical scroll of the body
+ body.scrollTop(250);
+
+ // chaining
+ elements.scrollTop(250).addClass('foo');
+
+ </code></pre>
 
 
 
@@ -8887,7 +9560,14 @@ only if they are checked. Data from file select elements is not serialized.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var form = $('#form'); // serialize form's elements and their values var serialized = form.serialize(); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var form = $('#form');
+
+ // serialize form's elements and their values
+ var serialized = form.serialize();
+
+ </code></pre>
 
 
 
@@ -8998,7 +9678,20 @@ only if they are checked. Data from file select elements is not serialized.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // get all the siblings of the element var siblings_all = element.siblings(); // get all the "div" siblings of the element var siblings_filtered = element.siblings('div'); // since this method returns a ZebraJS object element.siblings('div').addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // get all the siblings of the element
+ var siblings_all = element.siblings();
+
+ // get all the "div" siblings of the element
+ var siblings_filtered = element.siblings('div');
+
+ // since this method returns a ZebraJS object
+ element.siblings('div').addClass('foo');
+
+ </code></pre>
 
 
 
@@ -9160,7 +9853,20 @@ descendants), or sets the text contents of the matched elements.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // set the text content for all the matched elements elements.text('Hello'); // get the text content of the first element in the // set of matched elements (including its descendants) var content = elements.text(); // chaining elements.text('Hello').addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // set the text content for all the matched elements
+ elements.text('Hello');
+
+ // get the text content of the first element in the
+ // set of matched elements (including its descendants)
+ var content = elements.text();
+
+ // chaining
+ elements.text('Hello').addClass('foo');
+ </code></pre>
 
 
 
@@ -9340,7 +10046,21 @@ each class name given as argument.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // set a random class elements.addClass('foo'); // toggle classes // the result will be that "foo" will be removed from the matched elements while the "baz" will be added elements.toggleClass('foo baz'); // chaining elements.toggleClass('foo').css('display', 'none'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // set a random class
+ elements.addClass('foo');
+
+ // toggle classes
+ // the result will be that "foo" will be removed from the matched elements while the "baz" will be added
+ elements.toggleClass('foo baz');
+
+ // chaining
+ elements.toggleClass('foo').css('display', 'none');
+
+ </code></pre>
 
 
 
@@ -9504,7 +10224,26 @@ handler or calling the <code>.stopPropagation()</code> method on the event objec
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // handle clicks on element element.on('click', function(e) {     // will return "undefined" when element is clicked     // but will return "baz" when triggered manually     console.log(e.foo) }); // manually trigger the click event element.trigger('click', {foo: 'baz'}); // chaining element.trigger('click', {foo: 'baz'}).addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // handle clicks on element
+ element.on('click', function(e) {
+
+     // will return "undefined" when element is clicked
+     // but will return "baz" when triggered manually
+     console.log(e.foo)
+
+ });
+
+ // manually trigger the click event
+ element.trigger('click', {foo: 'baz'});
+
+ // chaining
+ element.trigger('click', {foo: 'baz'}).addClass('foo');
+
+ </code></pre>
 
 
 
@@ -9689,7 +10428,17 @@ siblings, if any) replace their parents within the DOM structure.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // unwrap the element, whatever its parent may be element.unwrap(); // unwrap only if the element's parent is a div element.unwrap('div'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // unwrap the element, whatever its parent may be
+ element.unwrap();
+
+ // unwrap only if the element's parent is a div
+ element.unwrap('div');
+
+ </code></pre>
 
 
 
@@ -9850,7 +10599,22 @@ will occur only they match it.</p></td>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('selector'); // get the value of the first element in the list of matched elements // (if "element" was a select box with multiple selections allowed, // the returned value would be an array) var value = element.val(); // set the element's value element.val('foo'); // setting multiple values for multi-selects and checkboxes element.val(['option1', 'option2']); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('selector');
+
+ // get the value of the first element in the list of matched elements
+ // (if "element" was a select box with multiple selections allowed,
+ // the returned value would be an array)
+ var value = element.val();
+
+ // set the element's value
+ element.val('foo');
+
+ // setting multiple values for multi-selects and checkboxes
+ element.val(['option1', 'option2']);
+
+ </code></pre>
 
 
 
@@ -10031,7 +10795,25 @@ in the set of matched elements as <code>float</code>, or sets the <code>width</c
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var elements = $('selector'); // returns the current computed inner width of the first element in the set of matched elements elements.width(); // sets the "width" CSS property of all elements in the set to 200px elements.width(200); elements.width('200'); elements.width('200px'); // sets the "width" CSS property of all elements in the set to 5em elements.width('5em'); // chaining elements.width(200).addClass('foo'); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var elements = $('selector');
+
+ // returns the current computed inner width of the first element in the set of matched elements
+ elements.width();
+
+ // sets the "width" CSS property of all elements in the set to 200px
+ elements.width(200);
+ elements.width('200');
+ elements.width('200px');
+
+ // sets the "width" CSS property of all elements in the set to 5em
+ elements.width('5em');
+
+ // chaining
+ elements.width(200).addClass('foo');
+
+ </code></pre>
 
 
 
@@ -10228,7 +11010,20 @@ be moved (not cloned) and wrapped around the last target.</p>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// always cache selectors // to avoid DOM scanning over and over again var element = $('#selector'); // wrap element in a div element.wrap('&lt;div id="container">&lt;/div>'); // *exactly* the same thing as above element.wrap($('&lt;div id="container">&lt;/div>')); // using an existing element as the wrapper element.wrap($('#element-from-the-page')); </code></pre>
+    <pre class="prettyprint"><code>// always cache selectors
+ // to avoid DOM scanning over and over again
+ var element = $('#selector');
+
+ // wrap element in a div
+ element.wrap('&lt;div id="container">&lt;/div>');
+
+ // *exactly* the same thing as above
+ element.wrap($('&lt;div id="container">&lt;/div>'));
+
+ // using an existing element as the wrapper
+ element.wrap($('#element-from-the-page'));
+
+ </code></pre>
 
 
 
@@ -10337,7 +11132,7 @@ in the set of matched elements.</p></td>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.11</a> on Fri Oct 14 2022 18:48:11 GMT+0300 (Eastern European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.11</a> on Fri May 10 2024 12:43:49 GMT+0300 (Eastern European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
