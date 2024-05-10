@@ -5,7 +5,7 @@ docs/*
 .gitattributes
 .gitignore
 .npmignore
-eslint.json
+eslint.config.js
 jsdoc.json
 Gruntfile.js
 package.json
