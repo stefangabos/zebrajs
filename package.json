@@ -9,7 +9,7 @@
   "main": "dist/zebra.min.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stefangabos/zebrajs.git"
+    "url": "git+https://github.com/stefangabos/zebrajs.git"
   },
   "license": "LGPL-3.0",
   "version": "1.0.3",
