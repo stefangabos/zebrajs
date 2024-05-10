@@ -268,4 +268,5 @@ $.fn._random = function(prefix) {
 
     // return a pseudo-random string by incrementing the internal counter
     return prefix + '_' + internal_counter++;
+
 }
