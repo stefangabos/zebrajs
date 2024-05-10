@@ -2483,7 +2483,7 @@
                 this.on(i, event_type[i]);
 
             // don't go forward
-            return;
+            return this;
 
         }
 
@@ -2631,7 +2631,7 @@
     $.fn.one = function(event_type, selector, callback) {
 
         // call the "on" method with last argument set to TRUE
-        this.on(event_type, selector, callback, true);
+        return this.on(event_type, selector, callback, true);
 
     }
 
