@@ -38,7 +38,7 @@ $.fn._class = function(action, class_names) {
 
 /**
  *  Private helper method used by {@link ZebraJS#clone .clone()} method when called with the `deep_with_data_and_events`
- *  argument set to TRUE. It recursively attaches events and data from an original element's children to it's clone
+ *  argument set to TRUE. It recursively attaches events and data from an original element's children to its clone
  *  children.
  *
  *  @param  {DOM_element}   element     Element that was cloned
