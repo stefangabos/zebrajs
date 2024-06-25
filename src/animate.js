@@ -40,7 +40,7 @@
  *                                      </ul>
  *                                      Default is `swing`
  *
- *  >   This argument my be skipped!
+ *  >   This argument may be skipped!
  *
  *  @param  {function}      [callback]  A function to call once the animation is complete, called once per matched element.
  *
