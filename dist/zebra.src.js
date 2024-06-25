@@ -3829,7 +3829,7 @@
      *  @param  {mixed} element     A string, a {@link ZebraJS} object or a DOM element in which to wrap around each element
      *                              in the set of matched elements.
      *
-     *  @return {ZebraJS}   Returns the set of matched elements.
+     *  @return {ZebraJS}   Returns the original set of matched elements.
      *
      *  @memberof   ZebraJS
      *  @alias      wrap
@@ -3838,7 +3838,10 @@
     $.fn.wrap = function(element) {
 
         // call the "_dom_insert" private method with these arguments
-        return this._dom_insert(element, 'wrap');
+        this._dom_insert(element, 'wrap')
+
+        // return the original element(s)
+        return this;
 
     }
 
