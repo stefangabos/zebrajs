@@ -1003,7 +1003,7 @@
      *  // chaining
      *  parent.append($('div')).addClass('foo');
      *
-     *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the end of each
+     *  @param  {mixed}     content     DOM element, text node, HTML string or ZebraJS object to insert at the end of each
      *                                  element in the set of matched elements.
      *
      *  @return {ZebraJS}   Returns the set of matched elements (the parents, not the appended elements).
@@ -2074,7 +2074,7 @@
     }
 
     /**
-     *  Checks the current matched set of elements against a selector, element, or ZebraJS object and returns `true` if at
+     *  Checks the current matched set of elements against a selector, element or ZebraJS object and returns `true` if at
      *  least one of these elements matches the given arguments.
      *
      *  > Note that, unlike jQuery, when matching selectors, this method matches only valid CSS selectors!
