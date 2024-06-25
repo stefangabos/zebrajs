@@ -1,5 +1,5 @@
 /**
- *  Checks the current matched set of elements against a selector, element, or ZebraJS object and returns `true` if at
+ *  Checks the current matched set of elements against a selector, element or ZebraJS object and returns `true` if at
  *  least one of these elements matches the given arguments.
  *
  *  > Note that, unlike jQuery, when matching selectors, this method matches only valid CSS selectors!

@@ -37,7 +37,7 @@
  *  // chaining
  *  parent.append($('div')).addClass('foo');
  *
- *  @param  {mixed}     content     DOM element, text node, HTML string, or ZebraJS object to insert at the end of each
+ *  @param  {mixed}     content     DOM element, text node, HTML string or ZebraJS object to insert at the end of each
  *                                  element in the set of matched elements.
  *
  *  @return {ZebraJS}   Returns the set of matched elements (the parents, not the appended elements).
