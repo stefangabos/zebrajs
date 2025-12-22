@@ -32,7 +32,7 @@ $.fn.closest = function(selector) {
     var result = [];
 
     // since the checking starts with the element itself, if the element itself matches the selector return now
-    if (this[0].matches(selector)) return this;
+    if (this[0] && this[0].matches(selector)) return this;
 
     // iterate through the set of matched elements
     this.forEach(function(element) {
