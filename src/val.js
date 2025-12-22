@@ -37,7 +37,7 @@ $.fn.val = function(value) {
     if (undefined === value) {
 
         // if first element in the list of matched elements is a select box with the "multiple" attribute set
-        if (this[0].tagName.toLowerCase() === 'select' && this[0].multiple) {
+        if (this[0] && this[0].tagName.toLowerCase() === 'select' && this[0].multiple) {
 
             // add each selected option to the results array
             Array.prototype.slice.call(this[0].options).map(function(elem) {
@@ -52,7 +52,7 @@ $.fn.val = function(value) {
         }
 
         // for other elements, return the first element's value
-        return this[0].value;
+        return this[0] ? this[0].value : '';
 
     }
 
