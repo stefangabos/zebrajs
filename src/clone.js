@@ -66,7 +66,7 @@ $.fn.clone = function(with_data_and_events, deep_with_data_and_events) {
                         $(clone).on(event_type + (properties[2] ? '.' + properties[2] : ''), properties[1]);
 
                         // if original element has some data attached to it
-                        if (element.zjs && clone.zjs.data) {
+                        if (element.zjs && element.zjs.data) {
 
                             // clone it
                             clone.zjs = {};
