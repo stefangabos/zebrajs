@@ -31,6 +31,10 @@
  */
 $.fn.data = function(name, value) {
 
+    // WeakMap for storing complex objects (DOM elements, array-like object with DOM elements, functions , etc.)
+    // use a shared WeakMap attached to the $ object to persist across calls
+    if (!$._data_storage) $._data_storage = new WeakMap();
+
     // if no name is given, return "undefined"
     if (undefined === name) return undefined;
 
@@ -50,9 +54,42 @@ $.fn.data = function(name, value) {
         // iterate through the set of matched elements
         this.forEach(function(element) {
 
-            // set the data attribute's value
-            // since dataset can not store objects, we use JSON.stringify if value is an object
-            element.dataset[name] = typeof value === 'object' ? JSON.stringify(value) : value;
+            // check if value is a complex object that can't be JSON stringified properly
+            // (functions, DOM elements, objects with methods)
+            if (typeof value === 'function' || (typeof value === 'object' && (
+
+                    // DOM element
+                    value.nodeType ||
+
+                    // array-like object with at least one DOM element
+                    (value.length !== undefined && Array.prototype.some.call(value, function(item) {
+                        return item && item.nodeType;
+                    }))
+
+            ))) {
+
+                // try to get the existing WeakMap data for the element
+                var element_data = $._data_storage.get(element);
+
+                // if WeakMap data is not yet initialized
+                if (!element_data) {
+
+                    // initialize it now and set it
+                    element_data = {};
+                    $._data_storage.set(element, element_data);
+
+                }
+
+                // add/update entry with the requested value
+                element_data[name] = value;
+
+            // for non-complex objects
+            } else {
+
+                // use dataset for simple values
+                element.dataset[name] = typeof value === 'object' ? JSON.stringify(value) : value;
+
+            }
 
         });
 
@@ -61,11 +98,26 @@ $.fn.data = function(name, value) {
 
     }
 
+    // if we are retrieving a data value
     // iterate through the set of matched elements
     this.some(function(element) {
 
-        // if the data attribute exists
-        if (undefined !== element.dataset[name]) {
+        // first check if we have any data in the WeakMap associated with the element
+        var element_data = $._data_storage.get(element);
+
+        // if we do
+        if (element_data && undefined !== element_data[name]) {
+
+            // extract it
+            value = element_data[name];
+
+            // don't look further
+            return true;
+
+        }
+
+        // then check dataset for simple values
+        if (element.dataset && undefined !== element.dataset[name]) {
 
             // first
             try {
