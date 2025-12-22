@@ -26,15 +26,13 @@
  */
 $.fn.outerWidth = function(include_margins) {
 
-    // get the values of all the CSS properties of the element
-    // after applying the active stylesheets and resolving any
-    // basic computation those values may contain
-    var computed_styles = window.getComputedStyle(this[0]);
+    // get computed styles only if we need to include margins
+    var computed_styles = include_margins ? window.getComputedStyle(this[0]) : null;
 
-    // return the result of inner width together with
-    return (parseFloat(computed_styles.width) +
+    // return outer width (content + padding + border)
+    return this[0].offsetWidth +
 
         // include margins, if requested
-        (include_margins ? parseFloat(computed_styles.marginLeft) + parseFloat(computed_styles.marginRight) : 0)) || 0;
+        (include_margins ? parseFloat(computed_styles.marginLeft) + parseFloat(computed_styles.marginRight) : 0);
 
 }

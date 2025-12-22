@@ -26,15 +26,13 @@
  */
 $.fn.outerHeight = function(include_margins) {
 
-    // get the values of all the CSS properties of the element
-    // after applying the active stylesheets and resolving any
-    // basic computation those values may contain
-    var computed_style = window.getComputedStyle(this[0]);
+    // get computed styles only if we need margins
+    var computed_styles = include_margins ? window.getComputedStyle(this[0]) : null;
 
-    // return the result of inner height together with
-    return (parseFloat(computed_style.height) +
+    // return outer height (content + padding + border)
+    return this[0].offsetHeight +
 
         // include margins, if requested
-        (include_margins ? parseFloat(computed_style.marginTop) + parseFloat(computed_style.marginBottom) : 0)) || 0;
+        (include_margins ? parseFloat(computed_styles.marginTop) + parseFloat(computed_styles.marginBottom) : 0);
 
 }
