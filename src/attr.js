@@ -92,7 +92,7 @@ $.fn.attr = function(attribute, value) {
 
             // return the value of the requested attribute
             // of the first element in the set of matched elements
-            return this[0].getAttribute(attribute);
+            return this[0] ? this[0].getAttribute(attribute) : undefined;
 
     // if we get this far, return the set of matched elements
     return this;
