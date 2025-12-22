@@ -44,4 +44,7 @@ $.fn.scrollTop = function(value) {
 
     });
 
+    // return the matched elements
+    return this;
+
 }

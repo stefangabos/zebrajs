@@ -44,4 +44,7 @@ $.fn.scrollLeft = function(value) {
 
     });
 
+    // return the matched elements
+    return this;
+
 }
