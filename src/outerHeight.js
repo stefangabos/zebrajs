@@ -1,6 +1,6 @@
 /**
- *  Returns the current computed height for the first element in the set of matched elements, including `padding`,
- *  `border` and, optionally, `margin`.
+ *  Returns the height (including `padding`, `border` and, optionally, `margin`) for the first element in the set of
+ *  matched elements.
  *
  *  > For hidden elements the returned value is `0`!
  *
