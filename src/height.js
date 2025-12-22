@@ -1,6 +1,6 @@
 /**
- *  Returns the current computed **inner** height (without `padding`, `border` and `margin`) of the first element
- *  in the set of matched elements as `float`, or sets the `height` CSS property of every element in the set.
+ *  Returns the content height (without `padding`, `border` and `margin`) of the first element in the set of matched
+ *  elements as `float`, or sets the `height` CSS property of every element in the set.
  *
  *  See {@link ZebraJS#outerHeight .outerHeight()} for getting the height including `padding`, `border` and, optionally,
  *  `margin`.
@@ -11,7 +11,7 @@
  *  // to avoid DOM scanning over and over again
  *  var elements = $('selector');
  *
- *  // returns the current computed inner height of the first element in the set of matched elements
+ *  // returns the content height of the first element in the set of matched elements
  *  elements.height();
  *
  *  // sets the "height" CSS property of all elements in the set to 200px
@@ -25,19 +25,19 @@
  *  // chaining
  *  elements.height(200).addClass('foo');
  *
- *  @param  {undefined|number|string}   [height]    If not given, the method will return the computed **inner**
- *                                                  height (without `padding`, `border` and `margin`) for the first
- *                                                  element in the set of matched elements.
+ *  @param  {undefined|number|string}   [height]    If not given, this method will return content height (without `padding`,
+ *                                                  `border` and `margin`) of the first element in the set of matched
+ *                                                  elements.
  *                                                  <br><br>
- *                                                  If given, the method will set the `height` CSS property of all
+ *                                                  If given, this method will set the `height` CSS property of all
  *                                                  the elements in the set to that particular value, making sure
  *                                                  to apply the "px" suffix if not otherwise specified.
  *
  *  > For hidden elements the returned value is `0`!
  *
- *  @return {ZebraJS|float}     When **setting** the `height`, this method returns the set of matched elements.
- *                              Otherwise, it returns the current computed **inner** height (without `padding`, `border`
- *                              and `margin`) of the first element in the set of matched elements, as `float`.
+ *  @return {ZebraJS|float}     When **setting** the `height`, this method returns the set of matched elements. Otherwise,
+ *                              it returns the content height (without `padding`, `border` and `margin`) of the first
+ *                              element in the set of matched elements, as `float`.
  *
  *  @memberof   ZebraJS
  *  @alias      height
