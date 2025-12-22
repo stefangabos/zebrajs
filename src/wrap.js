@@ -32,7 +32,7 @@
 $.fn.wrap = function(element) {
 
     // call the "_dom_insert" private method with these arguments
-    this._dom_insert(element, 'wrap')
+    this._dom_insert(element, 'wrap');
 
     // return the original element(s)
     return this;
