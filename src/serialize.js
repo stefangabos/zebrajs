@@ -26,6 +26,9 @@
  */
 $.fn.serialize = function() {
 
+    // return quickly if an empty selection
+    if (!this[0]) return '';
+
     var form = this[0], result = [];
 
     // if element is a form
