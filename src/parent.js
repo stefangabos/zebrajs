@@ -36,7 +36,7 @@ $.fn.parent = function(selector) {
     // iterate through the set of matched elements
     this.forEach(function(element) {
 
-        // if no selector is provided or it is and the parent matches it, add element to the array
+        // if not a detached element, no selector is provided or it is and the parent matches it, add element to the array
         if (element.parentNode && (!selector || element.parentNode.matches(selector))) result.push(element.parentNode);
 
     });

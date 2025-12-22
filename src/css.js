@@ -111,6 +111,9 @@ $.fn.css = function(property, value) {
     // return the value of the given CSS property, or "undefined" if property is not available
     else {
 
+        // return "undefined" in case of an empty selection
+        if (!this[0]) return undefined;
+
         // get the first element's computed styles
         computedStyle = window.getComputedStyle(this[0]);
 
