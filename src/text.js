@@ -46,7 +46,7 @@ $.fn.text = function(content) {
     // if content is not provided
     // return the text content of the first element in the set of matched elements
     // (combined with the text content of all its descendants)
-    else return this[0].textContent;
+    else return this[0] ? this[0].textContent : undefined;
 
     // return the set of matched elements
     return this;

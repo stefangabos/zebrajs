@@ -48,7 +48,7 @@ $.fn.html = function(content) {
 
     // if content is not provided
     // return the content of the first element in the set of matched elements
-    else return this[0].innerHTML;
+    else return this[0] ? this[0].innerHTML : undefined;
 
     // return the set of matched elements
     return this;
