@@ -16,13 +16,13 @@
  *  @alias      show
  *  @instance
  */
-$.fn.hide = function() {
+$.fn.show = function() {
 
     // iterate through the set of matched elements
     this.forEach(function(element) {
 
-        // set the display to "none"
-        element.display = '';
+        // unsset the "display" property
+        element.style.display = '';
 
     });
 
