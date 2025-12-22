@@ -19,7 +19,10 @@
  */
 $.fn.get = function(index) {
 
+    // handle negative indexes
+    if (index < 0) index = this.length + index;
+
     // return the matching DOM element
-    return this[index];
+    return undefined !== this[index] ? this[index] : undefined;
 
 }
