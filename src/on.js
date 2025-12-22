@@ -118,8 +118,28 @@ $.fn.on = function(event_type, selector, callback, once) {
                     // if the callback needs to be executed only once, remove it now
                     if (once) $(this).off(original_event, callback);
 
-                    // trigger the callback function only if the target element matches the selector
-                    if (this !== e.target && e.target.matches(selector)) callback(e);
+                    // walk up the DOM tree from e.target to "this" (the element the listener is attached to)
+                    // to find an element that matches the selector
+                    var target = e.target;
+
+                    // as long as we didn't yet find the element the listener is attached to
+                    while (target && target !== this) {
+
+                        // if the element matches the selector
+                        if (target.matches(selector)) {
+
+                            // call the callback with the matched element as 'this'
+                            callback.call(target, e);
+
+                            // stop after first match (don't continue bubbling up)
+                            return;
+
+                        }
+
+                        // continue walking up the DOM tree
+                        target = target.parentNode;
+
+                    }
 
                 };
 
