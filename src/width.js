@@ -50,7 +50,7 @@ $.fn.width = function(width) {
     if (width) return this.css('width', width + (parseFloat(width) === width ? 'px' : ''));
 
     // for the "window"
-    if (this[0] === window) return window.innerWith;
+    if (this[0] === window) return window.innerWidth;
 
     // for the "document"
     if (this[0] === document)
