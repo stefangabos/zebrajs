@@ -21,8 +21,8 @@ $.fn.hide = function() {
     // iterate through the set of matched elements
     this.forEach(function(element) {
 
-        // set the display to "none"
-        element.display = 'none';
+        // set the "display" property
+        element.style.display = 'none';
 
     });
 
