@@ -47,7 +47,7 @@ $.fn.width = function(width) {
 
     // if "width" is given, set the width of every matched element, making sure to suffix the value with "px"
     // if not otherwise specified
-    if (width) return this.css('width', width + (parseFloat(width) === width ? 'px' : ''));
+    if (width !== undefined) return this.css('width', width + (parseFloat(width) === width ? 'px' : ''));
 
     // for the "window"
     if (this[0] === window) return window.innerWidth;
