@@ -11,7 +11,7 @@
  *  // to avoid DOM scanning over and over again
  *  var elements = $('selector');
  *
- *  // returns the current computed inner width of the first element in the set of matched elements
+ *  // returns the content width of the first element in the set of matched elements
  *  elements.width();
  *
  *  // sets the "width" CSS property of all elements in the set to 200px
@@ -25,9 +25,9 @@
  *  // chaining
  *  elements.width(200).addClass('foo');
  *
- *  @param  {undefined|number|string}   [width]     If not given, this method will return the computed **inner**
- *                                                  width (without `padding`, `border` and `margin`) of the first
- *                                                  element in the set of matched elements.
+ *  @param  {undefined|number|string}   [width]     If not given, this method will return content width (without `padding`,
+ *                                                  `border` and `margin`) of the first element in the set of matched
+ *                                                  elements.
  *                                                  <br><br>
  *                                                  If given, this method will set the `width` CSS property of all
  *                                                  the elements in the set to that particular value, making sure
@@ -36,8 +36,8 @@
  *  > For hidden elements the returned value is `0`!
  *
  *  @return {ZebraJS|float}     When **setting** the `width`, this method returns the set of matched elements. Otherwise,
- *                              it returns the current computed **inner** width (without `padding`, `border` and `margin`)
- *                              of the first element in the set of matched elements, as `float`.
+ *                              it returns the content width (without `padding`, `border` and `margin`) of the first
+ *                              element in the set of matched elements, as `float`.
  *
  *  @memberof   ZebraJS
  *  @alias      width
