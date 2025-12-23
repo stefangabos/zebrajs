@@ -102,22 +102,36 @@ $.fn.animate = function(properties, duration, easing, callback) {
     // batch all style writes
     elements_data.forEach(function(data) {
 
-        var property;
+        var property, cleanup_done = false, timeout,
+
+            // cleanup function that handles both transitionend and timeout scenarios
+            cleanup = function(e) {
+
+                // prevent double execution
+                if (cleanup_done) return;
+                cleanup_done = true;
+
+                // clear the timeout if it exists
+                if (timeout) clearTimeout(timeout);
+
+                // cleanup - remove transition property so future CSS changes don't animate unexpectedly
+                data.element.style.transition = '';
+
+                // call user callback if provided
+                if (callback) callback.call(data.element, e);
+
+            };
 
         // explicitly set the current values of the properties we are about to animate
         for (property in properties)
             data.element.style[property] = data.styles[property];
 
         // listen for transition end to clean up and call callback
-        $(data.element).one('transitionend', function(e) {
+        $(data.element).one('transitionend', cleanup);
 
-            // cleanup - remove transition property so future CSS changes don't animate unexpectedly
-            data.element.style.transition = '';
-
-            // call user callback if provided
-            if (callback) callback.call(this, e);
-
-        });
+        // set a timeout fallback in case transitionend never fires
+        // (element removed from DOM, display:none, no actual transition, etc.)
+        timeout = setTimeout(cleanup, (animation_duration * 1000) + 50);
 
         // set the transition property
         data.element.style.transition = 'all ' + animation_duration + 's ' + animation_easing;
