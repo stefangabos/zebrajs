@@ -37,7 +37,9 @@
  */
 $.fn.off = function(event_type, callback) {
 
-    var event_types = event_type ? event_type.split(' ') : Object.keys(event_listeners), namespace, remove_all_event_handlers = !event_type;
+    var event_types = event_type ? event_type.split(' ') : Object.keys(event_listeners),
+        namespace, index, entry,
+        remove_all_event_handlers = !event_type;
 
     // iterate through the set of matched elements
     this.forEach(function(element) {
@@ -54,7 +56,11 @@ $.fn.off = function(event_type, callback) {
             if (undefined !== event_listeners[event_type])
 
                 // iterate through the registered events of this type
-                event_listeners[event_type].forEach(function(entry, index) {
+                // we're going backwards to avoid memory leaks while iterating through an array while
+                // simultaneously splicing from it
+                for (index = event_listeners[event_type].length - 1; index >= 0; index--) {
+
+                    entry = event_listeners[event_type][index];
 
                     // if
                     if (
@@ -85,7 +91,7 @@ $.fn.off = function(event_type, callback) {
 
                     }
 
-                });
+                }
 
         });
 
