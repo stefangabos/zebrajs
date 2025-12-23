@@ -66,7 +66,7 @@
             var elements = [], property;
 
             // refer to document.body node if it is the case
-            if (typeof selector === 'string' && selector.toLocaleLowerCase() === 'body') selector = document.body;
+            if (typeof selector === 'string' && selector.toLowerCase() === 'body') selector = document.body;
 
             // if selector is given as a string
             if (typeof selector === 'string')
