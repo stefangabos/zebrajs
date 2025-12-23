@@ -36,11 +36,28 @@
         *   // create elements
         *   var element = $('<div>').addClass('foo').appendTo($('body'));
         *
+        *   // SECURITY WARNING: When creating HTML elements from strings, NEVER use untrusted user input directly.
+        *   // This could lead to Cross-Site Scripting (XSS) attacks.
+        *
+        *   // UNSAFE - user input could contain malicious code:
+        *   // var userInput = '<img src=x onerror=alert(1)>';
+        *   // $(userInput);  // XSS vulnerability!
+        *
+        *   // SAFE - create elements programmatically and set user data via methods:
+        *   // $('<div>').text(userInput);  // User input is safely escaped
+        *   // $('<img>').attr('src', userInput);  // Safely set attributes
+        *
+        *   // SAFE - sanitize user input with a library like DOMPurify before creating HTML:
+        *   // var sanitized = DOMPurify.sanitize(userInput);
+        *   // $(sanitized);
+        *
         *   @param  {mixed}     selector        A selector to filter DOM elements from the current document. It can be a
         *                                       query selector, a {@link ZebraJS} object, a DOM element, a
         *                                       {@link https://developer.mozilla.org/en-US/docs/Web/API/NodeList NodeList},
         *                                       and array of DOM elements<br><br>Alternatively, it can be a HTML tag
-        *                                       to create.
+        *                                       to create.<br>
+        *                                       <blockquote>**Never pass unsanitized user input when creating HTML elements,
+        *                                       as this can lead to XSS vulnerabilities!**</blockquote>
         *
         *   @param  {mixed}     [parent]        A selector to filter DOM elements from the current document, but only
         *                                       those which have as parent the element(s) indicated by this argument. It
@@ -55,8 +72,8 @@
         *                       you work with those elements.
         *
         *   @author     Stefan Gabos <contact@stefangabos.ro>
-        *   @version    1.0.3 (last revision May 10, 2024)
-        *   @copyright  (c) 2016-2024 Stefan Gabos
+        *   @version    2.0.0 (last revision December 23, 2025)
+        *   @copyright  (c) 2016-2025 Stefan Gabos
         *   @license    LGPL-3.0
         *   @alias      ZebraJS
         *   @class
