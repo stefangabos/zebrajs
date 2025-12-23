@@ -213,23 +213,28 @@ $.fn._dom_search = function(action, selector) {
         }
 
         // if we're looking for siblings
-        if (action === 'siblings')
+        if (action === 'siblings') {
+
+            // cache parent node to avoid multiple property accesses
+            var parent = element.parentNode;
 
             // get the element's parent's children nodes which, optionally, match a given selector
             // and add them to the results array
-            result = result.concat(Array.prototype.filter.call(selector ? element.parentNode.querySelectorAll('#' + element.parentNode.id + '>' + selector) : element.parentNode.children, function(child) {
+            result = result.concat(Array.prototype.filter.call(selector ? parent.querySelectorAll('#' + parent.id + '>' + selector) : parent.children, function(child) {
 
                 // skip the current element
                 return child !== element;
 
             }));
 
+        }
+
         // if we're looking for children
         else if (action === 'children')
 
             // get the element's children nodes which, optionally, match a given selector
             // and add them to the results array
-            result = result.concat(Array.prototype.slice.call(selector ? element.parentNode.querySelectorAll('#' + element.id + '>' + selector) : element.children));
+            result = result.concat(Array.prototype.slice.call(selector ? root.querySelectorAll('#' + root.id + '>' + selector) : element.children));
 
         // if we're looking next/previous sibling
         else if (action === 'previous' || action === 'next') {
