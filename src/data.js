@@ -98,6 +98,9 @@ $.fn.data = function(name, value) {
 
     }
 
+    // make sure we return "undefined" if the next code block doesn't yield a result
+    value = undefined;
+
     // if we are retrieving a data value
     // iterate through the set of matched elements
     this.some(function(element) {
