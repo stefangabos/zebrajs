@@ -553,7 +553,31 @@
                         break;
                 }
 
-            }, key, params = '';
+            },
+
+            // helper function to recursively serialize objects and arrays
+            serialize = function(obj, prefix) {
+                var str = [], k, v, key_name;
+
+                for (k in obj)
+
+                    if (obj.hasOwnProperty(k)) {
+
+                        v = obj[k];
+
+                        // build the key - use prefix if available (for nested objects/arrays)
+                        key_name = prefix ? prefix + '[' + k + ']' : k;
+
+                        // if value is an object or array, serialize it recursively
+                        if (v !== null && typeof v === 'object' && !v.nodeType) str.push(serialize(v, key_name));
+
+                        // otherwise, encode the key-value pair
+                        else str.push(encodeURIComponent(key_name) + '=' + encodeURIComponent(v));
+
+                    }
+
+                return str.join('&');
+            };
 
         // if method is called with a single argument
         if (!options) {
@@ -573,18 +597,10 @@
         options.method = options.method.toUpperCase();
 
         // if data is provided and is an object
-        if (options.data && typeof options.data === 'object') {
+        if (options.data && typeof options.data === 'object')
 
-            // iterate over the object's properties
-            for (key in options.data)
-
-                // construct the query string
-                params += (params !== '' ? '&' : '') + key + '=' + encodeURIComponent(options.data[key]);
-
-            // change the data options to its string representation
-            options.data = params;
-
-        }
+            // serialize the data object (handles nested objects and arrays)
+            options.data = serialize(options.data);
 
         // if we don't want to cache requests, append a query string to the existing ones
         if (!options.cache) options.data = options.data + (options.data ? '&' : '') + '_=' + (+new Date());
@@ -927,53 +943,66 @@
     $.fn.animate = function(properties, duration, easing, callback) {
 
         var unitless_properties = [
-            'animationIterationCount',
-            'columnCount',
-            'fillOpacity',
-            'flexGrow',
-            'flexShrink',
-            'fontWeight',
-            'gridArea',
-            'gridColumn',
-            'gridColumnEnd',
-            'gridColumnStart',
-            'gridRow',
-            'gridRowEnd',
-            'gridRowStart',
-            'lineHeight',
-            'opacity',
-            'order',
-            'orphans',
-            'widows',
-            'zIndex',
-            'zoom'
-        ];
+                'animationIterationCount',
+                'columnCount',
+                'fillOpacity',
+                'flex',
+                'flexGrow',
+                'flexShrink',
+                'floodOpacity',
+                'fontWeight',
+                'gridArea',
+                'gridColumn',
+                'gridColumnEnd',
+                'gridColumnStart',
+                'gridRow',
+                'gridRowEnd',
+                'gridRowStart',
+                'lineHeight',
+                'opacity',
+                'order',
+                'orphans',
+                'stopOpacity',
+                'strokeMiterlimit',
+                'strokeOpacity',
+                'widows',
+                'zIndex',
+                'zoom'
+            ],
 
-        // iterate over the set of matched elements
+            animation_duration = (duration === 'fast' ? 200 : (duration === 'slow' ? 600 : (duration || 400))) / 1000,
+            animation_easing = typeof easing === 'string' ? (['ease', 'ease-in', 'ease-in-out', 'ease-out', 'linear', 'swing'].indexOf(easing) > -1 || easing.match(/cubic\-bezier\(.*?\)/g) ? easing : 'swing') : 'swing',
+            elements_data = [];
+
+        // apply formulas for these easing
+        if (animation_easing === 'linear') animation_easing = 'cubic-bezier(0.0, 0.0, 1.0, 1.0)';
+        else if (animation_easing === 'swing') animation_easing = 'cubic-bezier(.02, .01, .47, 1)';
+
+        // if the "easing" argument is skipped
+        if (typeof easing === 'function') callback = easing;
+
+        // batch all style reads to minimize reflows
         this.forEach(function(element) {
+            elements_data.push({
+                element: element,
+                styles: window.getComputedStyle(element)
+            });
+        });
 
-            var property,
-                styles = window.getComputedStyle(element),
-                animation_duration = (duration === 'fast' ? 200 : (duration === 'slow' ? 600 : (duration || 400))) / 1000,
-                animation_easing = typeof easing === 'string' ? (['ease', 'ease-in', 'ease-in-out', 'ease-out', 'linear', 'swing'].indexOf(easing) > -1 || easing.match(/cubic\-bezier\(.*?\)/g) ? easing : 'swing') : 'swing';
+        // batch all style writes
+        elements_data.forEach(function(data) {
 
-            // apply formulas for these easing
-            if (animation_easing === 'linear') animation_easing = 'cubic-bezier(0.0, 0.0, 1.0, 1.0)';
-            else if (animation_easing === 'swing') animation_easing = 'cubic-bezier(.02, .01, .47, 1)';
+            var property;
 
-            // explicitly set the current values of the
-            // properties we are about to animate
+            // explicitly set the current values of the properties we are about to animate
             for (property in properties)
-                element.style[property] = styles[property];
-
-            // if the "easing" argument is skipped
-            if (typeof easing === 'function') callback = easing;
+                data.element.style[property] = data.styles[property];
 
             // listen for transition end to clean up and call callback
-            $(element).one('transitionend', function(e) {
+            $(data.element).one('transitionend', function(e) {
 
                 // cleanup - remove transition property so future CSS changes don't animate unexpectedly
-                element.style.transition = '';
+                data.element.style.transition = '';
 
                 // call user callback if provided
                 if (callback) callback.call(this, e);
@@ -981,13 +1010,11 @@
             });
 
             // set the transition property
-            // default animation speed is 400
-            element.style.transition = 'all ' + animation_duration + 's ' + animation_easing;
+            data.element.style.transition = 'all ' + animation_duration + 's ' + animation_easing;
 
-            // set the final values of the
-            // properties we are about to animate
+            // set the final values of the properties we are about to animate
             for (property in properties)
-                element.style[property] = properties[property] + (!isNaN(properties[property]) && unitless_properties.indexOf(property) === -1 ? 'px' : '');
+                data.element.style[property] = properties[property] + (!isNaN(properties[property]) && unitless_properties.indexOf(property) === -1 ? 'px' : '');
 
         });
 
