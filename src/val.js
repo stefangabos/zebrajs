@@ -42,7 +42,7 @@ $.fn.val = function(value) {
             // add each selected option to the results array
             Array.prototype.slice.call(this[0].options).map(function(elem) {
 
-                if (elem.selected) result.push(elem.value)
+                if (elem.selected && !elem.disabled) result.push(elem.value)
 
             });
 
