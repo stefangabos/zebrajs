@@ -101,7 +101,8 @@ module.exports = function(grunt) {
                     'console':          true,
                     'elements':         true,
                     'internal_counter': true,
-                    'event_listeners':  true
+                    'event_listeners':  true,
+                    'WeakMap':          true
                 },
                 browser:    true,       //  defines globals exposed by modern browsers (like `document` and `navigator`)
                 bitwise:    true,       //  prohibits the use of bitwise operators such as ^ (XOR), | (OR) and others
