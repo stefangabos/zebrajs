@@ -25,11 +25,21 @@
  *      console.log('clicked!');
  *  });
  *
+ *  // passing data to the event handler
+ *  element.on('click', { foo: 'bar' }, function(e) {
+ *      console.log(e.data.foo); // 'bar'
+ *  });
+ *
  *  // using delegation
  *  // handle clicks on all the "div" elements
  *  // that are children of the element
  *  element.on('click', 'div', function(e) {
  *      console.log('clicked!');
+ *  });
+ *
+ *  // using delegation with data
+ *  element.on('click', 'div', { userId: 123 }, function(e) {
+ *      console.log(e.data.userId); // 123
  *  });
  *
  *  // chaining
@@ -50,6 +60,8 @@
  *                                  the handler. If the selector is null or omitted, the handler is always called when it
  *                                  reaches the selected element.
  *
+ *  @param  {object}    [data]      Data to be passed to the handler in `event.data` when an event is triggered.
+ *
  *  @param  {function}  callback    A function to execute when the event is triggered.
  *
  *  @return {ZebraJS}   Returns the set of matched elements.
@@ -58,9 +70,9 @@
  *  @alias      on
  *  @instance
  */
-$.fn.on = function(event_type, selector, callback, once) {
+$.fn.on = function(event_type, selector, data, callback, once) {
 
-    var event_types, namespace, actual_callback, i;
+    var event_types, namespace, actual_callback, event_data, i;
 
     // if event_type is given as object
     if (typeof event_type === 'object') {
@@ -79,14 +91,42 @@ $.fn.on = function(event_type, selector, callback, once) {
     // if more than a single event was given
     event_types = event_type.split(' ');
 
-    // if "selector" argument is missing
-    if ('function' === typeof selector) {
+    // handle optional selector and data
+    // case 1: selector is a function - on(event_type, callback)
+    if (typeof selector === 'function') {
 
-        // if "once" argument is given
-        if (typeof callback === 'boolean') once = callback;
-
-        // the "callback" argument is now in the place of the "selector" argument
+        // shift parameters
+        if (typeof data === 'boolean') once = data;
         callback = selector;
+        selector = undefined;
+        data = undefined;
+
+    // case 2: selector is an object - on(event_type, data, callback)
+    } else if (typeof selector === 'object' && selector !== null && !Array.isArray(selector)) {
+
+        // shift parameters
+        event_data = selector;
+        if (typeof callback === 'boolean') once = callback;
+        if (typeof data === 'function') callback = data;
+        selector = undefined;
+        data = undefined;
+
+    // case 3: selector is a string
+    } else if (typeof selector === 'string') {
+
+        // if data is a function - on(event_type, selector, callback)
+        if (typeof data === 'function') {
+
+            if (typeof callback === 'boolean') once = callback;
+            callback = data;
+            data = undefined;
+
+        // if data is an object - on(event_type, selector, data, callback)
+        } else if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+
+            event_data = data;
+
+        }
 
     }
 
@@ -114,6 +154,9 @@ $.fn.on = function(event_type, selector, callback, once) {
 
                 // this will be the actual callback function
                 actual_callback = function(e) {
+
+                    // attach data to event object if provided
+                    if (event_data) e.data = event_data;
 
                     // if the callback needs to be executed only once, remove it now
                     if (once) $(this).off(original_event, callback);
@@ -152,11 +195,14 @@ $.fn.on = function(event_type, selector, callback, once) {
                 // the actual callback function
                 actual_callback = function(e) {
 
+                    // attach data to event object if provided
+                    if (event_data) e.data = event_data;
+
                     // remove the event handler
                     $(this).off(original_event, callback);
 
                     // execute the callback function
-                    callback(e);
+                    callback.call(this, e);
 
                 }
 
@@ -164,7 +210,27 @@ $.fn.on = function(event_type, selector, callback, once) {
                 element.addEventListener(event_type, actual_callback);
 
             // registering of default event listeners
-            } else element.addEventListener(event_type, callback);
+            } else {
+
+                // if we have event data, wrap the callback
+                if (event_data) {
+
+                    actual_callback = function(e) {
+
+                        // attach data to event object
+                        e.data = event_data;
+
+                        // execute the callback function
+                        callback.call(this, e);
+
+                    };
+
+                    element.addEventListener(event_type, actual_callback);
+
+                // no event data, register callback directly
+                } else element.addEventListener(event_type, callback);
+
+            }
 
             // add element/callback combination to the array of events of this type
             event_listeners[event_type].push([element, callback, namespace, actual_callback]);
