@@ -144,7 +144,7 @@ $.ajax = function(url, options) {
         options.data = serialize(options.data);
 
     // if we don't want to cache requests, append a query string to the existing ones
-    if (!options.cache) options.data = options.data + (options.data ? '&' : '') + '_=' + (+new Date());
+    if (!options.cache) options.data = (options.data || '') + (options.data ? '&' : '') + '_=' + (+new Date());
 
     // if the XMLHttpRequest object is available
     if (window.XMLHttpRequest) {
