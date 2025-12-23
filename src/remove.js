@@ -53,7 +53,7 @@ $.fn.remove = function() {
         $element.off();
 
         // remove element from the DOM (including children)
-        element.parentNode.removeChild(element);
+        if (element.parentNode) element.parentNode.removeChild(element);
 
         // nullify the object to free memory
         $element = null;
