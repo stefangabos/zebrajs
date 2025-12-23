@@ -95,9 +95,16 @@ $.fn.animate = function(properties, duration, easing, callback) {
         // if the "easing" argument is skipped
         if (typeof easing === 'function') callback = easing;
 
-        // if a callback is set
-        // run it once transitions end
-        if ('function' === typeof callback) $(element).one('transitionend', callback);
+        // listen for transition end to clean up and call callback
+        $(element).one('transitionend', function(e) {
+
+            // cleanup - remove transition property so future CSS changes don't animate unexpectedly
+            element.style.transition = '';
+
+            // call user callback if provided
+            if (callback) callback.call(this, e);
+
+        });
 
         // set the transition property
         // default animation speed is 400
