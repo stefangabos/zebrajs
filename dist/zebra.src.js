@@ -31,7 +31,7 @@
         *   var elements = $(document.querySelectorAll('.foo'));
         *
         *   // use CSS selectors
-        *   var elements = $(input[type=text]);
+        *   var elements = $('input[type=text]');
         *
         *   // create elements
         *   var element = $('<div>').addClass('foo').appendTo($('body'));
@@ -66,7 +66,7 @@
             var elements = [], property;
 
             // refer to document.body node if it is the case
-            if (typeof selector === 'string' && selector.toLocaleLowerCase() === 'body') selector = document.body;
+            if (typeof selector === 'string' && selector.toLowerCase() === 'body') selector = document.body;
 
             // if selector is given as a string
             if (typeof selector === 'string')
@@ -161,7 +161,7 @@
     };
 
     /**
-     *  Private helper method used by {@link ZebraJS#addClass .addCLass()}, {@link ZebraJS#removeClass .removeClass()} and
+     *  Private helper method used by {@link ZebraJS#addClass .addClass()}, {@link ZebraJS#removeClass .removeClass()} and
      *  {@link ZebraJS#toggleClass .toggleClass()} methods.
      *
      *  @param  {string}    action      What to do with the class(es)
@@ -295,7 +295,7 @@
                     // insert a clone after each target except for the last one after which we insert the original content
                     case 'after':
                     case 'replace':
-                    case 'wrap': element.parentNode.insertBefore(index < $this.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
+                    case 'wrap': element.parentNode.insertBefore(index < content.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
 
                     // add a clone to each parent except for the last one where we add the original content
                     case 'append': element.appendChild(index < $this.length - 1 ? item.cloneNode(true) : item); break;
@@ -603,7 +603,7 @@
             options.data = serialize(options.data);
 
         // if we don't want to cache requests, append a query string to the existing ones
-        if (!options.cache) options.data = options.data + (options.data ? '&' : '') + '_=' + (+new Date());
+        if (!options.cache) options.data = (options.data || '') + (options.data ? '&' : '') + '_=' + (+new Date());
 
         // if the XMLHttpRequest object is available
         if (window.XMLHttpRequest) {
@@ -820,7 +820,7 @@
      *  // chaining
      *  elements.addClass('foo baz').css('display', 'none');
      *
-     *  @param  {string}    class_name  One or more space-separated class names to be added to each element in the
+     *  @param  {string}    class_names One or more space-separated class names to be added to each element in the
      *                                  set of matched elements.
      *
      *  @return {ZebraJS}   Returns the set of matched elements.
@@ -829,10 +829,10 @@
      *  @alias      addClass
      *  @instance
      */
-    $.fn.addClass = function(class_name) {
+    $.fn.addClass = function(class_names) {
 
         // add class(es) and return the set of matched elements
-        return this._class('add', class_name);
+        return this._class('add', class_names);
 
     }
 
@@ -970,7 +970,7 @@
                 'zoom'
             ],
 
-            animation_duration = (duration === 'fast' ? 200 : (duration === 'slow' ? 600 : (duration || 400))) / 1000,
+            animation_duration = (duration === 'fast' ? 200 : (duration === 'slow' ? 600 : (typeof duration === 'number' && duration >= 0 ? duration : 400))) / 1000,
             animation_easing = typeof easing === 'string' ? (['ease', 'ease-in', 'ease-in-out', 'ease-out', 'linear', 'swing'].indexOf(easing) > -1 || easing.match(/cubic\-bezier\(.*?\)/g) ? easing : 'swing') : 'swing',
             elements_data = [];
 
@@ -1569,7 +1569,7 @@
                 if (value === false || value === null)
 
                     // remove the CSS property
-                    element.style[property] = null
+                    element.style[property] = null;
 
                 // set the respective style property
                 else element.style[property] = value;
@@ -1695,6 +1695,9 @@
             return this;
 
         }
+
+        // make sure we return "undefined" if the next code block doesn't yield a result
+        value = undefined;
 
         // if we are retrieving a data value
         // iterate through the set of matched elements
@@ -2499,7 +2502,9 @@
      */
     $.fn.off = function(event_type, callback) {
 
-        var event_types = event_type ? event_type.split(' ') : Object.keys(event_listeners), namespace, remove_all_event_handlers = !event_type;
+        var event_types = event_type ? event_type.split(' ') : Object.keys(event_listeners),
+            namespace, index, entry,
+            remove_all_event_handlers = !event_type;
 
         // iterate through the set of matched elements
         this.forEach(function(element) {
@@ -2516,7 +2521,11 @@
                 if (undefined !== event_listeners[event_type])
 
                     // iterate through the registered events of this type
-                    event_listeners[event_type].forEach(function(entry, index) {
+                    // we're going backwards to avoid memory leaks while iterating through an array while
+                    // simultaneously splicing from it
+                    for (index = event_listeners[event_type].length - 1; index >= 0; index--) {
+
+                        entry = event_listeners[event_type][index];
 
                         // if
                         if (
@@ -2547,7 +2556,7 @@
 
                         }
 
-                    });
+                    }
 
             });
 
@@ -3388,7 +3397,7 @@
      *  // since this method returns the set of matched elements
      *  elements.removeClass('foo baz').css('display', 'none');
      *
-     *  @param  {string}    class_name  One or more space-separated class names to be removed from each element in
+     *  @param  {string}    class_names One or more space-separated class names to be removed from each element in
      *                                  the set of matched elements.
      *
      *  @return {ZebraJS}   Returns the set of matched elements.
@@ -3397,10 +3406,10 @@
      *  @alias      removeClass
      *  @instance
      */
-    $.fn.removeClass = function(class_name) {
+    $.fn.removeClass = function(class_names) {
 
         // remove class(es) and return the set of matched elements
-        return this._class('remove', class_name);
+        return this._class('remove', class_names);
 
     }
 
@@ -3579,7 +3588,7 @@
         var form = this[0], result = [];
 
         // if element is a form
-        if (typeof form === 'object' && form.nodeName === 'FORM')
+        if (typeof form === 'object' && form.nodeName.toUpperCase() === 'FORM')
 
             // iterate over the form's elements
             Array.prototype.slice.call(form.elements).forEach(function(control) {
@@ -3634,7 +3643,7 @@
         // iterate through the set of matched elements
         this.forEach(function(element) {
 
-            // unsset the "display" property
+            // unset the "display" property
             element.style.display = '';
 
         });
@@ -3753,7 +3762,7 @@
      *  // chaining
      *  elements.toggleClass('foo').css('display', 'none');
      *
-     *  @param  {string}    class_name  One or more space-separated class names to be toggled for each element in the set of
+     *  @param  {string}    class_names One or more space-separated class names to be toggled for each element in the set of
      *                                  matched elements.
      *
      *  @return {ZebraJS}   Returns the set of matched elements.
@@ -3762,10 +3771,10 @@
      *  @alias      toggleClass
      *  @instance
      */
-    $.fn.toggleClass = function(class_name) {
+    $.fn.toggleClass = function(class_names) {
 
         // toggle class(es) and return the set of matched elements
-        return this._class('toggle', class_name);
+        return this._class('toggle', class_names);
 
     }
 
@@ -3924,7 +3933,7 @@
                 // add each selected option to the results array
                 Array.prototype.slice.call(this[0].options).map(function(elem) {
 
-                    if (elem.selected) result.push(elem.value)
+                    if (elem.selected && !elem.disabled) result.push(elem.value)
 
                 });
 
