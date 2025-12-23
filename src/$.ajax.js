@@ -72,14 +72,18 @@ $.ajax = function(url, options) {
                 // if the request completed
                 case 4:
 
+                    // HTTP success status codes are in the 2xx range (200-299)
+                    // also treat "304 Not Modified" as success (cached content is valid)
+                    var is_success = (httpRequest.status >= 200 && httpRequest.status < 300) || httpRequest.status === 304;
+
                     // if the request was successful and we have a callback function ready to handle this situation
-                    if (httpRequest.status === 200 && typeof options.success === 'function')
+                    if (is_success && typeof options.success === 'function')
 
                         // call that function now
                         options.success.call(null, httpRequest.responseText, httpRequest.status);
 
                     // if the request was unsuccessful and we have a callback function ready to handle this situation
-                    if (httpRequest.status !== 200 && typeof options.error === 'function')
+                    else if (!is_success && typeof options.error === 'function')
 
                         // call that function now
                         options.error.call(null, httpRequest.status, httpRequest.responseText);
@@ -92,6 +96,7 @@ $.ajax = function(url, options) {
                         options.complete.call(null, httpRequest, httpRequest.status);
 
                     break;
+
             }
 
         },
