@@ -32,7 +32,7 @@ $.fn.serialize = function() {
     var form = this[0], result = [];
 
     // if element is a form
-    if (typeof form === 'object' && form.nodeName === 'FORM')
+    if (typeof form === 'object' && form.nodeName.toUpperCase() === 'FORM')
 
         // iterate over the form's elements
         Array.prototype.slice.call(form.elements).forEach(function(control) {
