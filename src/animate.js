@@ -80,7 +80,7 @@ $.fn.animate = function(properties, duration, easing, callback) {
             'zoom'
         ],
 
-        animation_duration = (duration === 'fast' ? 200 : (duration === 'slow' ? 600 : (duration || 400))) / 1000,
+        animation_duration = (duration === 'fast' ? 200 : (duration === 'slow' ? 600 : (typeof duration === 'number' && duration >= 0 ? duration : 400))) / 1000,
         animation_easing = typeof easing === 'string' ? (['ease', 'ease-in', 'ease-in-out', 'ease-out', 'linear', 'swing'].indexOf(easing) > -1 || easing.match(/cubic\-bezier\(.*?\)/g) ? easing : 'swing') : 'swing',
         elements_data = [];
 
