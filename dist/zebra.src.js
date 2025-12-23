@@ -36,11 +36,28 @@
         *   // create elements
         *   var element = $('<div>').addClass('foo').appendTo($('body'));
         *
+        *   // SECURITY WARNING: When creating HTML elements from strings, NEVER use untrusted user input directly.
+        *   // This could lead to Cross-Site Scripting (XSS) attacks.
+        *
+        *   // UNSAFE - user input could contain malicious code:
+        *   // var userInput = '<img src=x onerror=alert(1)>';
+        *   // $(userInput);  // XSS vulnerability!
+        *
+        *   // SAFE - create elements programmatically and set user data via methods:
+        *   // $('<div>').text(userInput);  // User input is safely escaped
+        *   // $('<img>').attr('src', userInput);  // Safely set attributes
+        *
+        *   // SAFE - sanitize user input with a library like DOMPurify before creating HTML:
+        *   // var sanitized = DOMPurify.sanitize(userInput);
+        *   // $(sanitized);
+        *
         *   @param  {mixed}     selector        A selector to filter DOM elements from the current document. It can be a
         *                                       query selector, a {@link ZebraJS} object, a DOM element, a
         *                                       {@link https://developer.mozilla.org/en-US/docs/Web/API/NodeList NodeList},
         *                                       and array of DOM elements<br><br>Alternatively, it can be a HTML tag
-        *                                       to create.
+        *                                       to create.<br>
+        *                                       <blockquote>**Never pass unsanitized user input when creating HTML elements,
+        *                                       as this can lead to XSS vulnerabilities!**</blockquote>
         *
         *   @param  {mixed}     [parent]        A selector to filter DOM elements from the current document, but only
         *                                       those which have as parent the element(s) indicated by this argument. It
@@ -55,8 +72,8 @@
         *                       you work with those elements.
         *
         *   @author     Stefan Gabos <contact@stefangabos.ro>
-        *   @version    1.0.3 (last revision May 10, 2024)
-        *   @copyright  (c) 2016-2024 Stefan Gabos
+        *   @version    2.0.0 (last revision December 23, 2025)
+        *   @copyright  (c) 2016-2025 Stefan Gabos
         *   @license    LGPL-3.0
         *   @alias      ZebraJS
         *   @class
@@ -109,8 +126,15 @@
                             elements.push(parent.querySelector(selector));
 
                         // if something went wrong (not a valid CSS selector)
-                        // eslint-disable-next-line no-empty
-                        } catch (e) {}
+                        } catch (e) {
+
+                            // if "console" is available
+                            if (typeof console !== 'undefined' && console.warn)
+
+                                // show the warning there
+                                console.warn('ZebraJS: Invalid selector "' + selector + '"', e.message);
+
+                        }
 
                     // if the "first" argument is not set
                     else
@@ -122,8 +146,15 @@
                             elements = Array.prototype.slice.call(parent.querySelectorAll(selector));
 
                         // if something went wrong (not a valid CSS selector)
-                        // eslint-disable-next-line no-empty
-                        } catch (e) {}
+                        } catch (e) {
+
+                            // if "console" is available
+                            if (typeof console !== 'undefined' && console.warn)
+
+                                // show the warning there
+                                console.warn('ZebraJS: Invalid selector "' + selector + '"', e.message);
+
+                        }
 
                 }
 
@@ -283,11 +314,11 @@
         content = $(content);
 
         // iterate through the set of matched elements
-        this.forEach(function(element) {
+        this.forEach(function(element, element_index) {
 
             // since content is an array of DOM elements or text nodes
             // iterate over the array
-            content.forEach(function(item, index) {
+            content.forEach(function(item) {
 
                 // where the content needs to be moved in the DOM
                 switch (where) {
@@ -295,16 +326,16 @@
                     // insert a clone after each target except for the last one after which we insert the original content
                     case 'after':
                     case 'replace':
-                    case 'wrap': element.parentNode.insertBefore(index < content.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
+                    case 'wrap': element.parentNode.insertBefore(element_index < $this.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
 
                     // add a clone to each parent except for the last one where we add the original content
-                    case 'append': element.appendChild(index < $this.length - 1 ? item.cloneNode(true) : item); break;
+                    case 'append': element.appendChild(element_index < $this.length - 1 ? item.cloneNode(true) : item); break;
 
                     // insert a clone before each target except for the last one before which we insert the original content
-                    case 'before': element.parentNode.insertBefore(index < $this.length - 1 ? item.cloneNode(true) : item, element); break;
+                    case 'before': element.parentNode.insertBefore(element_index < $this.length - 1 ? item.cloneNode(true) : item, element); break;
 
                     // prepend a clone to each parent except for the last one where we add the original content
-                    case 'prepend': element.insertBefore(index < $this.length - 1 ? item.cloneNode(true) : item, element.firstChild); break;
+                    case 'prepend': element.insertBefore(element_index < $this.length - 1 ? item.cloneNode(true) : item, element.firstChild); break;
 
                 }
 
@@ -531,14 +562,18 @@
                     // if the request completed
                     case 4:
 
+                        // HTTP success status codes are in the 2xx range (200-299)
+                        // also treat "304 Not Modified" as success (cached content is valid)
+                        var is_success = (httpRequest.status >= 200 && httpRequest.status < 300) || httpRequest.status === 304;
+
                         // if the request was successful and we have a callback function ready to handle this situation
-                        if (httpRequest.status === 200 && typeof options.success === 'function')
+                        if (is_success && typeof options.success === 'function')
 
                             // call that function now
                             options.success.call(null, httpRequest.responseText, httpRequest.status);
 
                         // if the request was unsuccessful and we have a callback function ready to handle this situation
-                        if (httpRequest.status !== 200 && typeof options.error === 'function')
+                        else if (!is_success && typeof options.error === 'function')
 
                             // call that function now
                             options.error.call(null, httpRequest.status, httpRequest.responseText);
@@ -551,6 +586,7 @@
                             options.complete.call(null, httpRequest, httpRequest.status);
 
                         break;
+
                 }
 
             },
@@ -992,29 +1028,89 @@
         // batch all style writes
         elements_data.forEach(function(data) {
 
-            var property;
+            var property, cleanup_done = false, timeout, animation_data, final_properties = {},
+
+                // cleanup function that handles both transitionend and timeout scenarios
+                cleanup = function(e) {
+
+                    // prevent double execution
+                    if (cleanup_done) return;
+                    cleanup_done = true;
+
+                    // clear the timeout if it exists
+                    if (timeout) clearTimeout(timeout);
+
+                    // cleanup - remove transition property so future CSS changes don't animate unexpectedly
+                    data.element.style.transition = '';
+
+                    // clean up animation data
+                    // (this is used in case .stop() is called on the element)
+                    if ($._data_storage) {
+
+                        animation_data = $._data_storage.get(data.element);
+
+                        // if we have this data set
+                        if (animation_data) {
+
+                            // unset these values
+                            animation_data.zjs_animating = false;
+                            animation_data.zjs_animation_properties = null;
+                            animation_data.zjs_animation_cleanup = null;
+                            animation_data.zjs_animation_timeout = null;
+
+                        }
+
+                    }
+
+                    // call user callback if provided
+                    if (callback) callback.call(data.element, e);
+
+                };
+
+            // initialize WeakMap storage if needed
+            if (!$._data_storage) $._data_storage = new WeakMap();
+
+            // get data object for this element
+            animation_data = $._data_storage.get(data.element);
+
+            // if no data yet
+            if (!animation_data) {
+
+                // initialize and store now
+                animation_data = {};
+                $._data_storage.set(data.element, animation_data);
+
+            }
+
+            // prepare final properties object with units added
+            for (property in properties)
+                final_properties[property] = properties[property] + (!isNaN(properties[property]) && unitless_properties.indexOf(property) === -1 ? 'px' : '');
+
+            // store animation state for .stop() method
+            animation_data.zjs_animating = true;
+            animation_data.zjs_animation_properties = final_properties;
+            animation_data.zjs_animation_cleanup = cleanup;
 
             // explicitly set the current values of the properties we are about to animate
             for (property in properties)
                 data.element.style[property] = data.styles[property];
 
             // listen for transition end to clean up and call callback
-            $(data.element).one('transitionend', function(e) {
+            $(data.element).one('transitionend', cleanup);
 
-                // cleanup - remove transition property so future CSS changes don't animate unexpectedly
-                data.element.style.transition = '';
+            // set a timeout fallback in case transitionend never fires
+            // (element removed from DOM, display:none, no actual transition, etc.)
+            timeout = setTimeout(cleanup, (animation_duration * 1000) + 50);
 
-                // call user callback if provided
-                if (callback) callback.call(this, e);
-
-            });
+            // store timeout reference for .stop() method
+            animation_data.zjs_animation_timeout = timeout;
 
             // set the transition property
             data.element.style.transition = 'all ' + animation_duration + 's ' + animation_easing;
 
             // set the final values of the properties we are about to animate
-            for (property in properties)
-                data.element.style[property] = properties[property] + (!isNaN(properties[property]) && unitless_properties.indexOf(property) === -1 ? 'px' : '');
+            for (property in final_properties)
+                data.element.style[property] = final_properties[property];
 
         });
 
@@ -1327,8 +1423,8 @@
      *  > This method may lead to duplicate element IDs in a document. Where possible, it is recommended to avoid cloning
      *  elements with this attribute or using class attributes as identifiers instead.
      *
-     *  Element data will continue to be shared between the cloned and the original element. To deep copy all data, copy each
-     *  one manually.
+     *  Element data will be shallow-copied when `with_data_and_events` is `true`. This means objects, arrays, and functions
+     *  will be shared between the original and clone. To deep copy data, copy each property manually.
      *
      *  @example
      *
@@ -1368,7 +1464,7 @@
             result.push(clone);
 
             // if events and data needs to be cloned too
-            if (with_data_and_events)
+            if (with_data_and_events) {
 
                 // iterate over all the existing event listeners
                 Object.keys(event_listeners).forEach(function(event_type) {
@@ -1382,20 +1478,36 @@
                             // also add the event to the clone element
                             $(clone).on(event_type + (properties[2] ? '.' + properties[2] : ''), properties[1]);
 
-                            // if original element has some data attached to it
-                            if (element.zjs && element.zjs.data) {
-
-                                // clone it
-                                clone.zjs = {};
-                                clone.zjs.data = element.zjs.data;
-
-                            }
-
                         }
 
                     });
 
                 });
+
+                // if WeakMap storage has been initialized
+                if ($._data_storage) {
+
+                    // do we have complex objects stored for the element?
+                    var element_data = $._data_storage.get(element);
+
+                    // if we do
+                    if (element_data) {
+
+                        // create a shallow copy of the data object
+                        // objects, arrays, and functions are shared (not deep cloned)
+                        var cloned_data = {}, key;
+
+                        for (key in element_data)
+                            cloned_data[key] = element_data[key];
+
+                        // store the cloned data for the cloned element
+                        $._data_storage.set(clone, cloned_data);
+
+                    }
+
+                }
+
+            }
 
             // if event handlers and data for all children of the cloned element should be also copied
             if (deep_with_data_and_events) $this._clone_data_and_events(element, clone);
@@ -3649,6 +3761,136 @@
         });
 
         // return the set of matched elements
+        return this;
+
+    }
+
+    /**
+     *  Stops the currently-running animation on the matched elements.
+     *
+     *  When `.stop()` is called on an element, the currently-running animation (if any) is immediately stopped. If an
+     *  element is being animated, the animation stops in its current position. If `jump_to_end` is set to `true`, the
+     *  animation will jump to its end position.
+     *
+     *  @example
+     *
+     *  // always cache selectors
+     *  // to avoid DOM scanning over and over again
+     *  var elements = $('#selector');
+     *
+     *  // start an animation
+     *  elements.animate({
+     *      left: '+=100px',
+     *      opacity: 0.5
+     *  }, 1000);
+     *
+     *  // stop the animation at current position
+     *  elements.stop();
+     *
+     *  // stop and jump to end position
+     *  elements.stop(false, true);
+     *
+     *  @param  {boolean}   [clear_queue]   This parameter is included for jQuery compatibility but is currently not used
+     *                                      as ZebraJS does not implement animation queuing. Reserved for future use.
+     *                                      <br><br>
+     *                                      Default is `false`
+     *
+     *  @param  {boolean}   [jump_to_end]   A boolean indicating whether to complete the current animation immediately.
+     *                                      When `true`, the animation will jump to its end state. When `false` or omitted,
+     *                                      the animation stops at its current position.
+     *                                      <br><br>
+     *                                      Default is `false`
+     *
+     *  @return {ZebraJS}   Returns the set of matched elements.
+     *
+     *  @memberof   ZebraJS
+     *  @alias      stop
+     *  @instance
+     */
+    $.fn.stop = function(clear_queue, jump_to_end) {
+
+        // iterate over the set of matched elements
+        this.forEach(function(element) {
+
+            var animation_data, computed_style, property, $element = $(element), transition_property, properties_list;
+
+            // if for whatever reason we don't have this property initialized stop now
+            if (!$._data_storage) return;
+
+            // get animation data stored by animate() method
+            animation_data = $._data_storage.get(element);
+
+            // if no animation data found, nothing to stop
+            if (!animation_data || !animation_data.zjs_animating) return;
+
+            // get current computed styles to freeze or jump
+            computed_style = window.getComputedStyle(element);
+
+            // remove the "transitionend" event listener
+            if (animation_data.zjs_animation_cleanup) $element.off('transitionend', animation_data.zjs_animation_cleanup);
+
+            // clear the timeout fallback
+            if (animation_data.zjs_animation_timeout) clearTimeout(animation_data.zjs_animation_timeout);
+
+            // stop the transition by setting it to 'none'
+            element.style.transition = 'none';
+
+            // if we need to jump_to_end
+            if (jump_to_end && animation_data.zjs_animation_properties)
+
+                // jump to end: apply the target (end) properties
+                for (property in animation_data.zjs_animation_properties)
+                    element.style[property] = animation_data.zjs_animation_properties[property];
+
+            // if we need to "freeze" the animation at current position
+            // (apply computed values as inline styles)
+            else {
+
+                // get the list of properties being transitioned
+                transition_property = computed_style.transitionProperty;
+
+                // if transition property is set
+                if (transition_property && transition_property !== 'none') {
+
+                    // split into individual properties
+                    properties_list = transition_property.split(', ');
+
+                    // apply current computed values
+                    properties_list.forEach(function(prop) {
+
+                        // skip 'all' and 'none' keywords
+                        if (prop !== 'all' && prop !== 'none') {
+
+                            // convert CSS property name (e.g., 'margin-left') to camelCase (e.g., 'marginLeft')
+                            prop = prop.replace(/\-([a-z])/g, function() {
+                                return arguments[1].toUpperCase();
+                            });
+
+                            // apply the current computed value
+                            element.style[prop] = computed_style[prop];
+
+                        }
+
+                    });
+
+                }
+
+            }
+
+            // force a reflow to apply the changes immediately
+            void element.offsetHeight;
+
+            // reset transition property for future animations
+            element.style.transition = '';
+
+            // clean up animation data
+            animation_data.zjs_animating = false;
+            animation_data.zjs_animation_properties = null;
+            animation_data.zjs_animation_cleanup = null;
+            animation_data.zjs_animation_timeout = null;
+
+        });
+
         return this;
 
     }
