@@ -121,11 +121,11 @@ $.fn._dom_insert = function(content, where) {
     content = $(content);
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(function(element, element_index) {
 
         // since content is an array of DOM elements or text nodes
         // iterate over the array
-        content.forEach(function(item, index) {
+        content.forEach(function(item) {
 
             // where the content needs to be moved in the DOM
             switch (where) {
@@ -133,16 +133,16 @@ $.fn._dom_insert = function(content, where) {
                 // insert a clone after each target except for the last one after which we insert the original content
                 case 'after':
                 case 'replace':
-                case 'wrap': element.parentNode.insertBefore(index < content.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
+                case 'wrap': element.parentNode.insertBefore(element_index < $this.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
 
                 // add a clone to each parent except for the last one where we add the original content
-                case 'append': element.appendChild(index < $this.length - 1 ? item.cloneNode(true) : item); break;
+                case 'append': element.appendChild(element_index < $this.length - 1 ? item.cloneNode(true) : item); break;
 
                 // insert a clone before each target except for the last one before which we insert the original content
-                case 'before': element.parentNode.insertBefore(index < $this.length - 1 ? item.cloneNode(true) : item, element); break;
+                case 'before': element.parentNode.insertBefore(element_index < $this.length - 1 ? item.cloneNode(true) : item, element); break;
 
                 // prepend a clone to each parent except for the last one where we add the original content
-                case 'prepend': element.insertBefore(index < $this.length - 1 ? item.cloneNode(true) : item, element.firstChild); break;
+                case 'prepend': element.insertBefore(element_index < $this.length - 1 ? item.cloneNode(true) : item, element.firstChild); break;
 
             }
 
