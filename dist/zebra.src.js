@@ -375,23 +375,28 @@
             }
 
             // if we're looking for siblings
-            if (action === 'siblings')
+            if (action === 'siblings') {
+
+                // cache parent node to avoid multiple property accesses
+                var parent = element.parentNode;
 
                 // get the element's parent's children nodes which, optionally, match a given selector
                 // and add them to the results array
-                result = result.concat(Array.prototype.filter.call(selector ? element.parentNode.querySelectorAll('#' + element.parentNode.id + '>' + selector) : element.parentNode.children, function(child) {
+                result = result.concat(Array.prototype.filter.call(selector ? parent.querySelectorAll('#' + parent.id + '>' + selector) : parent.children, function(child) {
 
                     // skip the current element
                     return child !== element;
 
                 }));
 
+            }
+
             // if we're looking for children
             else if (action === 'children')
 
                 // get the element's children nodes which, optionally, match a given selector
                 // and add them to the results array
-                result = result.concat(Array.prototype.slice.call(selector ? element.parentNode.querySelectorAll('#' + element.id + '>' + selector) : element.children));
+                result = result.concat(Array.prototype.slice.call(selector ? root.querySelectorAll('#' + root.id + '>' + selector) : element.children));
 
             // if we're looking next/previous sibling
             else if (action === 'previous' || action === 'next') {
@@ -430,6 +435,25 @@
 
         // return a pseudo-random string by incrementing the internal counter
         return prefix + '_' + internal_counter++;
+
+    }
+
+    /**
+     *  Private helper method used by traversal/filtering methods to set prevObject for .end() support.
+     *
+     *  @param  {ZebraJS}   result  The ZebraJS object to set prevObject on
+     *
+     *  @return {ZebraJS}   Returns the result with prevObject set to this
+     *
+     *  @access private
+     */
+    $.fn._add_prev_object = function(result) {
+
+        // store reference to the previous object so .end() can restore it
+        result.prevObject = this;
+
+        // return the result
+        return result;
 
     }
 
@@ -626,7 +650,7 @@
         var key;
 
         // if argument is an array
-        if (array.length) {
+        if (Array.isArray(array) || (array.length !== undefined && typeof array !== 'string')) {
 
             // iterate through the element in the array
             for (key = 0; key < array.length; key++)
@@ -945,9 +969,16 @@
             // if the "easing" argument is skipped
             if (typeof easing === 'function') callback = easing;
 
-            // if a callback is set
-            // run it once transitions end
-            if ('function' === typeof callback) $(element).one('transitionend', callback, true);
+            // listen for transition end to clean up and call callback
+            $(element).one('transitionend', function(e) {
+
+                // cleanup - remove transition property so future CSS changes don't animate unexpectedly
+                element.style.transition = '';
+
+                // call user callback if provided
+                if (callback) callback.call(this, e);
+
+            });
 
             // set the transition property
             // default animation speed is 400
@@ -1160,7 +1191,8 @@
 
                 // return the value of the requested attribute
                 // of the first element in the set of matched elements
-                return this[0].getAttribute(attribute);
+                // (return "undefined" in case of an empty selection)
+                return this[0] ? this[0].getAttribute(attribute) : undefined;
 
         // if we get this far, return the set of matched elements
         return this;
@@ -1252,7 +1284,7 @@
     $.fn.children = function(selector) {
 
         // get the children of each element in the set of matched elements, optionally filtered by a selector
-        return this._dom_search('children', selector);
+        return this._add_prev_object(this._dom_search('children', selector));
 
     }
 
@@ -1324,7 +1356,7 @@
                             $(clone).on(event_type + (properties[2] ? '.' + properties[2] : ''), properties[1]);
 
                             // if original element has some data attached to it
-                            if (element.zjs && clone.zjs.data) {
+                            if (element.zjs && element.zjs.data) {
 
                                 // clone it
                                 clone.zjs = {};
@@ -1382,7 +1414,7 @@
         var result = [];
 
         // since the checking starts with the element itself, if the element itself matches the selector return now
-        if (this[0].matches(selector)) return this;
+        if (this[0] && this[0].matches(selector)) return this;
 
         // iterate through the set of matched elements
         this.forEach(function(element) {
@@ -1404,7 +1436,7 @@
         });
 
         // return the matched elements, as a ZebraJS object
-        return $(result);
+        return this._add_prev_object($(result));
 
     }
 
@@ -1521,6 +1553,9 @@
         // return the value of the given CSS property, or "undefined" if property is not available
         else {
 
+            // return "undefined" in case of an empty selection
+            if (!this[0]) return undefined;
+
             // get the first element's computed styles
             computedStyle = window.getComputedStyle(this[0]);
 
@@ -1567,6 +1602,10 @@
      */
     $.fn.data = function(name, value) {
 
+        // WeakMap for storing complex objects (DOM elements, array-like object with DOM elements, functions , etc.)
+        // use a shared WeakMap attached to the $ object to persist across calls
+        if (!$._data_storage) $._data_storage = new WeakMap();
+
         // if no name is given, return "undefined"
         if (undefined === name) return undefined;
 
@@ -1586,9 +1625,42 @@
             // iterate through the set of matched elements
             this.forEach(function(element) {
 
-                // set the data attribute's value
-                // since dataset can not store objects, we use JSON.stringify if value is an object
-                element.dataset[name] = typeof value === 'object' ? JSON.stringify(value) : value;
+                // check if value is a complex object that can't be JSON stringified properly
+                // (functions, DOM elements, objects with methods)
+                if (typeof value === 'function' || (typeof value === 'object' && (
+
+                        // DOM element
+                        value.nodeType ||
+
+                        // array-like object with at least one DOM element
+                        (value.length !== undefined && Array.prototype.some.call(value, function(item) {
+                            return item && item.nodeType;
+                        }))
+
+                ))) {
+
+                    // try to get the existing WeakMap data for the element
+                    var element_data = $._data_storage.get(element);
+
+                    // if WeakMap data is not yet initialized
+                    if (!element_data) {
+
+                        // initialize it now and set it
+                        element_data = {};
+                        $._data_storage.set(element, element_data);
+
+                    }
+
+                    // add/update entry with the requested value
+                    element_data[name] = value;
+
+                // for non-complex objects
+                } else {
+
+                    // use dataset for simple values
+                    element.dataset[name] = typeof value === 'object' ? JSON.stringify(value) : value;
+
+                }
 
             });
 
@@ -1597,11 +1669,26 @@
 
         }
 
+        // if we are retrieving a data value
         // iterate through the set of matched elements
         this.some(function(element) {
 
-            // if the data attribute exists
-            if (undefined !== element.dataset[name]) {
+            // first check if we have any data in the WeakMap associated with the element
+            var element_data = $._data_storage.get(element);
+
+            // if we do
+            if (element_data && undefined !== element_data[name]) {
+
+                // extract it
+                value = element_data[name];
+
+                // don't look further
+                return true;
+
+            }
+
+            // then check dataset for simple values
+            if (element.dataset && undefined !== element.dataset[name]) {
 
                 // first
                 try {
@@ -1718,6 +1805,41 @@
     }
 
     /**
+     *  Ends the most recent filtering operation in the current chain and returns the set of matched elements to its previous state.
+     *
+     *  @example
+     *
+     *  // always cache selectors
+     *  // to avoid DOM scanning over and over again
+     *  var element = $('#selector');
+     *
+     *  // find spans, add a class to them, then go back to the original selection
+     *  element.find('span')
+     *      .addClass('highlight')
+     *      .end()
+     *      .addClass('container');
+     *
+     *  // this is useful for traversing and then returning to the previous set
+     *  $('div')
+     *      .children('.child')
+     *      .addClass('selected')
+     *      .end()
+     *      .addClass('parent');
+     *
+     *  @return {ZebraJS}   Returns the previous set of matched elements, or an empty set if there is no previous set.
+     *
+     *  @memberof   ZebraJS
+     *  @alias      end
+     *  @instance
+     */
+    $.fn.end = function() {
+
+        // return the previous object if it exists, otherwise return an empty ZebraJS object
+        return this.prevObject || $([]);
+
+    }
+
+    /**
      *  Reduces the set of matched elements to the one at the specified index.
      *
      *  @example
@@ -1742,7 +1864,7 @@
     $.fn.eq = function(index) {
 
         // return the element at the specified index
-        return $(this.get(index));
+        return this._add_prev_object($(this.get(index)));
 
     }
 
@@ -1801,7 +1923,7 @@
 
             // selector is a string
             // get the descendants of the element that match the selector, and add them to the results array
-            } else result.push(element.querySelector(selector));
+            } else result = result.concat(Array.prototype.slice.call(element.querySelectorAll(selector)));
 
         });
 
@@ -1812,7 +1934,7 @@
         });
 
         // return the resulting array as a ZebraJS object
-        return $(result);
+        return this._add_prev_object($(result));
 
     }
 
@@ -1837,7 +1959,7 @@
     $.fn.first = function() {
 
         // returns the first element from the list of matched elements, as a ZebraJS object
-        return $(this[0]);
+        return this._add_prev_object(this[0] ? $(this[0]) : $());
 
     }
 
@@ -1862,8 +1984,11 @@
      */
     $.fn.get = function(index) {
 
+        // handle negative indexes
+        if (index < 0) index = this.length + index;
+
         // return the matching DOM element
-        return this[index];
+        return undefined !== this[index] ? this[index] : undefined;
 
     }
 
@@ -1905,8 +2030,8 @@
     }
 
     /**
-     *  Returns the current computed **inner** height (without `padding`, `border` and `margin`) of the first element
-     *  in the set of matched elements as `float`, or sets the `height` CSS property of every element in the set.
+     *  Returns the content height (without `padding`, `border` and `margin`) of the first element in the set of matched
+     *  elements as `float`, or sets the `height` CSS property of every element in the set.
      *
      *  See {@link ZebraJS#outerHeight .outerHeight()} for getting the height including `padding`, `border` and, optionally,
      *  `margin`.
@@ -1917,7 +2042,7 @@
      *  // to avoid DOM scanning over and over again
      *  var elements = $('selector');
      *
-     *  // returns the current computed inner height of the first element in the set of matched elements
+     *  // returns the content height of the first element in the set of matched elements
      *  elements.height();
      *
      *  // sets the "height" CSS property of all elements in the set to 200px
@@ -1931,19 +2056,19 @@
      *  // chaining
      *  elements.height(200).addClass('foo');
      *
-     *  @param  {undefined|number|string}   [height]    If not given, the method will return the computed **inner**
-     *                                                  height (without `padding`, `border` and `margin`) for the first
-     *                                                  element in the set of matched elements.
+     *  @param  {undefined|number|string}   [height]    If not given, this method will return content height (without `padding`,
+     *                                                  `border` and `margin`) of the first element in the set of matched
+     *                                                  elements.
      *                                                  <br><br>
-     *                                                  If given, the method will set the `height` CSS property of all
+     *                                                  If given, this method will set the `height` CSS property of all
      *                                                  the elements in the set to that particular value, making sure
      *                                                  to apply the "px" suffix if not otherwise specified.
      *
      *  > For hidden elements the returned value is `0`!
      *
-     *  @return {ZebraJS|float}     When **setting** the `height`, this method returns the set of matched elements.
-     *                              Otherwise, it returns the current computed **inner** height (without `padding`, `border`
-     *                              and `margin`) of the first element in the set of matched elements, as `float`.
+     *  @return {ZebraJS|float}     When **setting** the `height`, this method returns the set of matched elements. Otherwise,
+     *                              it returns the content height (without `padding`, `border` and `margin`) of the first
+     *                              element in the set of matched elements, as `float`.
      *
      *  @memberof   ZebraJS
      *  @alias      height
@@ -1953,7 +2078,7 @@
 
         // if "height" is given, set the height of every matched element, making sure to suffix the value with "px"
         // if not otherwise specified
-        if (height) return this.css('height', height + (parseFloat(height) === height ? 'px' : ''));
+        if (height !== undefined) return this.css('height', height + (parseFloat(height) === height ? 'px' : ''));
 
         // for the "window"
         if (this[0] === window) return window.innerHeight;
@@ -2006,8 +2131,8 @@
         // iterate through the set of matched elements
         this.forEach(function(element) {
 
-            // set the display to "none"
-            element.display = 'none';
+            // set the "display" property
+            element.style.display = 'none';
 
         });
 
@@ -2066,7 +2191,7 @@
 
         // if content is not provided
         // return the content of the first element in the set of matched elements
-        else return this[0].innerHTML;
+        else return this[0] ? this[0].innerHTML : undefined;
 
         // return the set of matched elements
         return this;
@@ -2261,7 +2386,7 @@
 
         // get the immediately preceding sibling of each element in the set of matched elements,
         // optionally filtered by a selector
-        return this._dom_search('next', selector);
+        return this._add_prev_object(this._dom_search('next', selector));
 
     }
 
@@ -2288,7 +2413,7 @@
     $.fn.not = function(selector) {
 
         // iterate over the set of matched elements
-        return $(this.filter(function(element, index) {
+        return this._add_prev_object($(this.filter(function(element, index) {
 
             // if selector is a function, use it to filter results
             if (typeof selector === 'function' && selector.call !== undefined) return selector.call(element, index);
@@ -2304,7 +2429,7 @@
             // otherwise use "is" to  filter results
             return !$(element).is(selector);
 
-        }));
+        })));
 
     }
 
@@ -2432,6 +2557,9 @@
      */
     $.fn.offset = function() {
 
+        // return now in case of an empty selection
+        if (!this[0]) return { left: 0, top: 0 };
+
         // get the bounding box of the first element in the set of matched elements
         var box = this[0].getBoundingClientRect();
 
@@ -2470,11 +2598,21 @@
      *      console.log('clicked!');
      *  });
      *
+     *  // passing data to the event handler
+     *  element.on('click', { foo: 'bar' }, function(e) {
+     *      console.log(e.data.foo); // 'bar'
+     *  });
+     *
      *  // using delegation
      *  // handle clicks on all the "div" elements
      *  // that are children of the element
      *  element.on('click', 'div', function(e) {
      *      console.log('clicked!');
+     *  });
+     *
+     *  // using delegation with data
+     *  element.on('click', 'div', { userId: 123 }, function(e) {
+     *      console.log(e.data.userId); // 123
      *  });
      *
      *  // chaining
@@ -2495,6 +2633,8 @@
      *                                  the handler. If the selector is null or omitted, the handler is always called when it
      *                                  reaches the selected element.
      *
+     *  @param  {object}    [data]      Data to be passed to the handler in `event.data` when an event is triggered.
+     *
      *  @param  {function}  callback    A function to execute when the event is triggered.
      *
      *  @return {ZebraJS}   Returns the set of matched elements.
@@ -2503,9 +2643,9 @@
      *  @alias      on
      *  @instance
      */
-    $.fn.on = function(event_type, selector, callback, once) {
+    $.fn.on = function(event_type, selector, data, callback, once) {
 
-        var event_types, namespace, actual_callback, i;
+        var event_types, namespace, actual_callback, event_data, i;
 
         // if event_type is given as object
         if (typeof event_type === 'object') {
@@ -2524,14 +2664,42 @@
         // if more than a single event was given
         event_types = event_type.split(' ');
 
-        // if "selector" argument is missing
-        if ('function' === typeof selector) {
+        // handle optional selector and data
+        // case 1: selector is a function - on(event_type, callback)
+        if (typeof selector === 'function') {
 
-            // if "once" argument is given
-            if (typeof callback === 'boolean') once = callback;
-
-            // the "callback" argument is now in the place of the "selector" argument
+            // shift parameters
+            if (typeof data === 'boolean') once = data;
             callback = selector;
+            selector = undefined;
+            data = undefined;
+
+        // case 2: selector is an object - on(event_type, data, callback)
+        } else if (typeof selector === 'object' && selector !== null && !Array.isArray(selector)) {
+
+            // shift parameters
+            event_data = selector;
+            if (typeof callback === 'boolean') once = callback;
+            if (typeof data === 'function') callback = data;
+            selector = undefined;
+            data = undefined;
+
+        // case 3: selector is a string
+        } else if (typeof selector === 'string') {
+
+            // if data is a function - on(event_type, selector, callback)
+            if (typeof data === 'function') {
+
+                if (typeof callback === 'boolean') once = callback;
+                callback = data;
+                data = undefined;
+
+            // if data is an object - on(event_type, selector, data, callback)
+            } else if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+
+                event_data = data;
+
+            }
 
         }
 
@@ -2560,11 +2728,34 @@
                     // this will be the actual callback function
                     actual_callback = function(e) {
 
+                        // attach data to event object if provided
+                        if (event_data) e.data = event_data;
+
                         // if the callback needs to be executed only once, remove it now
                         if (once) $(this).off(original_event, callback);
 
-                        // trigger the callback function only if the target element matches the selector
-                        if (this !== e.target && e.target.matches(selector)) callback(e);
+                        // walk up the DOM tree from e.target to "this" (the element the listener is attached to)
+                        // to find an element that matches the selector
+                        var target = e.target;
+
+                        // as long as we didn't yet find the element the listener is attached to
+                        while (target && target !== this) {
+
+                            // if the element matches the selector
+                            if (target.matches(selector)) {
+
+                                // call the callback with the matched element as 'this'
+                                callback.call(target, e);
+
+                                // stop after first match (don't continue bubbling up)
+                                return;
+
+                            }
+
+                            // continue walking up the DOM tree
+                            target = target.parentNode;
+
+                        }
 
                     };
 
@@ -2577,11 +2768,14 @@
                     // the actual callback function
                     actual_callback = function(e) {
 
+                        // attach data to event object if provided
+                        if (event_data) e.data = event_data;
+
                         // remove the event handler
                         $(this).off(original_event, callback);
 
                         // execute the callback function
-                        callback(e);
+                        callback.call(this, e);
 
                     }
 
@@ -2589,7 +2783,27 @@
                     element.addEventListener(event_type, actual_callback);
 
                 // registering of default event listeners
-                } else element.addEventListener(event_type, callback);
+                } else {
+
+                    // if we have event data, wrap the callback
+                    if (event_data) {
+
+                        actual_callback = function(e) {
+
+                            // attach data to event object
+                            e.data = event_data;
+
+                            // execute the callback function
+                            callback.call(this, e);
+
+                        };
+
+                        element.addEventListener(event_type, actual_callback);
+
+                    // no event data, register callback directly
+                    } else element.addEventListener(event_type, callback);
+
+                }
 
                 // add element/callback combination to the array of events of this type
                 event_listeners[event_type].push([element, callback, namespace, actual_callback]);
@@ -2670,8 +2884,8 @@
     }
 
     /**
-     *  Returns the current computed height for the first element in the set of matched elements, including `padding`,
-     *  `border` and, optionally, `margin`.
+     *  Returns the height (including `padding`, `border` and, optionally, `margin`) for the first element in the set of
+     *  matched elements.
      *
      *  > For hidden elements the returned value is `0`!
      *
@@ -2697,22 +2911,20 @@
      */
     $.fn.outerHeight = function(include_margins) {
 
-        // get the values of all the CSS properties of the element
-        // after applying the active stylesheets and resolving any
-        // basic computation those values may contain
-        var computed_style = window.getComputedStyle(this[0]);
+        // get computed styles only if we need margins
+        var computed_styles = include_margins ? window.getComputedStyle(this[0]) : null;
 
-        // return the result of inner height together with
-        return (parseFloat(computed_style.height) +
+        // return outer height (content + padding + border)
+        return this[0].offsetHeight +
 
             // include margins, if requested
-            (include_margins ? parseFloat(computed_style.marginTop) + parseFloat(computed_style.marginBottom) : 0)) || 0;
+            (include_margins ? parseFloat(computed_styles.marginTop) + parseFloat(computed_styles.marginBottom) : 0);
 
     }
 
     /**
-     *  Returns the current computed width for the first element in the set of matched elements, including `padding`,
-     *  `border` and, optionally, `margin`.
+     *  Returns the width (including `padding`, `border` and, optionally, `margin`) for the first element in the set of
+     *  matched elements.
      *
      *  > For hidden elements the returned value is `0`!
      *
@@ -2738,16 +2950,14 @@
      */
     $.fn.outerWidth = function(include_margins) {
 
-        // get the values of all the CSS properties of the element
-        // after applying the active stylesheets and resolving any
-        // basic computation those values may contain
-        var computed_styles = window.getComputedStyle(this[0]);
+        // get computed styles only if we need to include margins
+        var computed_styles = include_margins ? window.getComputedStyle(this[0]) : null;
 
-        // return the result of inner width together with
-        return (parseFloat(computed_styles.width) +
+        // return outer width (content + padding + border)
+        return this[0].offsetWidth +
 
             // include margins, if requested
-            (include_margins ? parseFloat(computed_styles.marginLeft) + parseFloat(computed_styles.marginRight) : 0)) || 0;
+            (include_margins ? parseFloat(computed_styles.marginLeft) + parseFloat(computed_styles.marginRight) : 0);
 
     }
 
@@ -2789,13 +2999,13 @@
         // iterate through the set of matched elements
         this.forEach(function(element) {
 
-            // if no selector is provided or it is and the parent matches it, add element to the array
-            if (!selector || element.parentNode.matches(selector)) result.push(element.parentNode);
+            // if not a detached element, no selector is provided or it is and the parent matches it, add element to the array
+            if (element.parentNode && (!selector || element.parentNode.matches(selector))) result.push(element.parentNode);
 
         });
 
         // return the resulting array
-        return $(result);
+        return this._add_prev_object($(result));
 
     }
 
@@ -2856,7 +3066,7 @@
         });
 
         // return the matched elements, as a ZebraJS object
-        return $(result);
+        return this._add_prev_object($(result));
 
     }
 
@@ -2885,6 +3095,9 @@
      *  @instance
      */
     $.fn.position = function() {
+
+        // return now in case of an empty selection
+        if (!this[0]) return { left: 0, top: 0 };
 
         // return the position of the first element in the set of matched elements
         return {
@@ -3029,7 +3242,7 @@
 
         // get the immediately preceding sibling of each element in the set of matched elements,
         // optionally filtered by a selector
-        return this._dom_search('previous', selector);
+        return this._add_prev_object(this._dom_search('previous', selector));
 
     }
 
@@ -3118,7 +3331,7 @@
             $element.off();
 
             // remove element from the DOM (including children)
-            element.parentNode.removeChild(element);
+            if (element.parentNode) element.parentNode.removeChild(element);
 
             // nullify the object to free memory
             $element = null;
@@ -3249,6 +3462,9 @@
 
         });
 
+        // return the matched elements
+        return this;
+
     }
 
     /**
@@ -3297,6 +3513,9 @@
 
         });
 
+        // return the matched elements
+        return this;
+
     }
 
     /**
@@ -3326,6 +3545,9 @@
      *  @instance
      */
     $.fn.serialize = function() {
+
+        // return quickly if an empty selection
+        if (!this[0]) return '';
 
         var form = this[0], result = [];
 
@@ -3380,13 +3602,13 @@
      *  @alias      show
      *  @instance
      */
-    $.fn.hide = function() {
+    $.fn.show = function() {
 
         // iterate through the set of matched elements
         this.forEach(function(element) {
 
-            // set the display to "none"
-            element.display = '';
+            // unsset the "display" property
+            element.style.display = '';
 
         });
 
@@ -3425,7 +3647,7 @@
     $.fn.siblings = function(selector) {
 
         // get the siblings of each element in the set of matched elements, optionally filtered by a selector.
-        return this._dom_search('siblings', selector);
+        return this._add_prev_object(this._dom_search('siblings', selector));
 
     }
 
@@ -3477,7 +3699,7 @@
         // if content is not provided
         // return the text content of the first element in the set of matched elements
         // (combined with the text content of all its descendants)
-        else return this[0].textContent;
+        else return this[0] ? this[0].textContent : undefined;
 
         // return the set of matched elements
         return this;
@@ -3564,11 +3786,8 @@
         this.forEach(function(element) {
 
             // create the event
-            var event = document.createEvent('HTMLEvents');
-
-            // define the event's name
             // the event will bubble and it is cancelable
-            event.initEvent(event_type, true, true);
+            var event = new Event(event_type, { bubbles: true, cancelable: true });
 
             // if data is specified and is an object
             if (typeof data === 'object')
@@ -3673,7 +3892,7 @@
         if (undefined === value) {
 
             // if first element in the list of matched elements is a select box with the "multiple" attribute set
-            if (this[0].tagName.toLowerCase() === 'select' && this[0].multiple) {
+            if (this[0] && this[0].tagName.toLowerCase() === 'select' && this[0].multiple) {
 
                 // add each selected option to the results array
                 Array.prototype.slice.call(this[0].options).map(function(elem) {
@@ -3688,7 +3907,7 @@
             }
 
             // for other elements, return the first element's value
-            return this[0].value;
+            return this[0] ? this[0].value : '';
 
         }
 
@@ -3726,8 +3945,8 @@
     }
 
     /**
-     *  Returns the current computed **inner** width (without `padding`, `border` and `margin`) of the first element
-     *  in the set of matched elements as `float`, or sets the `width` CSS property of every element in the set.
+     *  Returns the content width (without `padding`, `border` and `margin`) of the first element in the set of matched
+     *  elements as `float`, or sets the `width` CSS property of every element in the set.
      *
      *  See {@link ZebraJS#outerWidth .outerWidth()} for getting the width including `padding`, `border` and, optionally,
      *  `margin`.
@@ -3738,7 +3957,7 @@
      *  // to avoid DOM scanning over and over again
      *  var elements = $('selector');
      *
-     *  // returns the current computed inner width of the first element in the set of matched elements
+     *  // returns the content width of the first element in the set of matched elements
      *  elements.width();
      *
      *  // sets the "width" CSS property of all elements in the set to 200px
@@ -3752,9 +3971,9 @@
      *  // chaining
      *  elements.width(200).addClass('foo');
      *
-     *  @param  {undefined|number|string}   [width]     If not given, this method will return the computed **inner**
-     *                                                  width (without `padding`, `border` and `margin`) of the first
-     *                                                  element in the set of matched elements.
+     *  @param  {undefined|number|string}   [width]     If not given, this method will return content width (without `padding`,
+     *                                                  `border` and `margin`) of the first element in the set of matched
+     *                                                  elements.
      *                                                  <br><br>
      *                                                  If given, this method will set the `width` CSS property of all
      *                                                  the elements in the set to that particular value, making sure
@@ -3763,8 +3982,8 @@
      *  > For hidden elements the returned value is `0`!
      *
      *  @return {ZebraJS|float}     When **setting** the `width`, this method returns the set of matched elements. Otherwise,
-     *                              it returns the current computed **inner** width (without `padding`, `border` and `margin`)
-     *                              of the first element in the set of matched elements, as `float`.
+     *                              it returns the content width (without `padding`, `border` and `margin`) of the first
+     *                              element in the set of matched elements, as `float`.
      *
      *  @memberof   ZebraJS
      *  @alias      width
@@ -3774,10 +3993,10 @@
 
         // if "width" is given, set the width of every matched element, making sure to suffix the value with "px"
         // if not otherwise specified
-        if (width) return this.css('width', width + (parseFloat(width) === width ? 'px' : ''));
+        if (width !== undefined) return this.css('width', width + (parseFloat(width) === width ? 'px' : ''));
 
         // for the "window"
-        if (this[0] === window) return window.innerWith;
+        if (this[0] === window) return window.innerWidth;
 
         // for the "document"
         if (this[0] === document)
@@ -3838,7 +4057,7 @@
     $.fn.wrap = function(element) {
 
         // call the "_dom_insert" private method with these arguments
-        this._dom_insert(element, 'wrap')
+        this._dom_insert(element, 'wrap');
 
         // return the original element(s)
         return this;
