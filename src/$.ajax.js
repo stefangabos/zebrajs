@@ -94,7 +94,31 @@ $.ajax = function(url, options) {
                     break;
             }
 
-        }, key, params = '';
+        },
+
+        // helper function to recursively serialize objects and arrays
+        serialize = function(obj, prefix) {
+            var str = [], k, v, key_name;
+
+            for (k in obj)
+
+                if (obj.hasOwnProperty(k)) {
+
+                    v = obj[k];
+
+                    // build the key - use prefix if available (for nested objects/arrays)
+                    key_name = prefix ? prefix + '[' + k + ']' : k;
+
+                    // if value is an object or array, serialize it recursively
+                    if (v !== null && typeof v === 'object' && !v.nodeType) str.push(serialize(v, key_name));
+
+                    // otherwise, encode the key-value pair
+                    else str.push(encodeURIComponent(key_name) + '=' + encodeURIComponent(v));
+
+                }
+
+            return str.join('&');
+        };
 
     // if method is called with a single argument
     if (!options) {
@@ -114,18 +138,10 @@ $.ajax = function(url, options) {
     options.method = options.method.toUpperCase();
 
     // if data is provided and is an object
-    if (options.data && typeof options.data === 'object') {
+    if (options.data && typeof options.data === 'object')
 
-        // iterate over the object's properties
-        for (key in options.data)
-
-            // construct the query string
-            params += (params !== '' ? '&' : '') + key + '=' + encodeURIComponent(options.data[key]);
-
-        // change the data options to its string representation
-        options.data = params;
-
-    }
+        // serialize the data object (handles nested objects and arrays)
+        options.data = serialize(options.data);
 
     // if we don't want to cache requests, append a query string to the existing ones
     if (!options.cache) options.data = options.data + (options.data ? '&' : '') + '_=' + (+new Date());
