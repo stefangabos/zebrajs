@@ -109,8 +109,15 @@
                             elements.push(parent.querySelector(selector));
 
                         // if something went wrong (not a valid CSS selector)
-                        // eslint-disable-next-line no-empty
-                        } catch (e) {}
+                        } catch (e) {
+
+                            // if "console" is available
+                            if (typeof console !== 'undefined' && console.warn)
+
+                                // show the warning there
+                                console.warn('ZebraJS: Invalid selector "' + selector + '"', e.message);
+
+                        }
 
                     // if the "first" argument is not set
                     else
@@ -122,8 +129,15 @@
                             elements = Array.prototype.slice.call(parent.querySelectorAll(selector));
 
                         // if something went wrong (not a valid CSS selector)
-                        // eslint-disable-next-line no-empty
-                        } catch (e) {}
+                        } catch (e) {
+
+                            // if "console" is available
+                            if (typeof console !== 'undefined' && console.warn)
+
+                                // show the warning there
+                                console.warn('ZebraJS: Invalid selector "' + selector + '"', e.message);
+
+                        }
 
                 }
 
