@@ -1,5 +1,5 @@
 /**
- *  Private helper method used by {@link ZebraJS#addClass .addCLass()}, {@link ZebraJS#removeClass .removeClass()} and
+ *  Private helper method used by {@link ZebraJS#addClass .addClass()}, {@link ZebraJS#removeClass .removeClass()} and
  *  {@link ZebraJS#toggleClass .toggleClass()} methods.
  *
  *  @param  {string}    action      What to do with the class(es)
