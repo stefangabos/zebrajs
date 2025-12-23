@@ -10,8 +10,8 @@
  *  > This method may lead to duplicate element IDs in a document. Where possible, it is recommended to avoid cloning
  *  elements with this attribute or using class attributes as identifiers instead.
  *
- *  Element data will continue to be shared between the cloned and the original element. To deep copy all data, copy each
- *  one manually.
+ *  Element data will be shallow-copied when `with_data_and_events` is `true`. This means objects, arrays, and functions
+ *  will be shared between the original and clone. To deep copy data, copy each property manually.
  *
  *  @example
  *
@@ -51,7 +51,7 @@ $.fn.clone = function(with_data_and_events, deep_with_data_and_events) {
         result.push(clone);
 
         // if events and data needs to be cloned too
-        if (with_data_and_events)
+        if (with_data_and_events) {
 
             // iterate over all the existing event listeners
             Object.keys(event_listeners).forEach(function(event_type) {
@@ -65,20 +65,36 @@ $.fn.clone = function(with_data_and_events, deep_with_data_and_events) {
                         // also add the event to the clone element
                         $(clone).on(event_type + (properties[2] ? '.' + properties[2] : ''), properties[1]);
 
-                        // if original element has some data attached to it
-                        if (element.zjs && element.zjs.data) {
-
-                            // clone it
-                            clone.zjs = {};
-                            clone.zjs.data = element.zjs.data;
-
-                        }
-
                     }
 
                 });
 
             });
+
+            // if WeakMap storage has been initialized
+            if ($._data_storage) {
+
+                // do we have complex objects stored for the element?
+                var element_data = $._data_storage.get(element);
+
+                // if we do
+                if (element_data) {
+
+                    // create a shallow copy of the data object
+                    // objects, arrays, and functions are shared (not deep cloned)
+                    var cloned_data = {}, key;
+
+                    for (key in element_data)
+                        cloned_data[key] = element_data[key];
+
+                    // store the cloned data for the cloned element
+                    $._data_storage.set(clone, cloned_data);
+
+                }
+
+            }
+
+        }
 
         // if event handlers and data for all children of the cloned element should be also copied
         if (deep_with_data_and_events) $this._clone_data_and_events(element, clone);
