@@ -64,6 +64,6 @@ $.fn.find = function(selector) {
     });
 
     // return the resulting array as a ZebraJS object
-    return $(result);
+    return this._add_prev_object($(result));
 
 }

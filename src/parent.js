@@ -42,6 +42,6 @@ $.fn.parent = function(selector) {
     });
 
     // return the resulting array
-    return $(result);
+    return this._add_prev_object($(result));
 
 }

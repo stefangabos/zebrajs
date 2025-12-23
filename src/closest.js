@@ -54,6 +54,6 @@ $.fn.closest = function(selector) {
     });
 
     // return the matched elements, as a ZebraJS object
-    return $(result);
+    return this._add_prev_object($(result));
 
 }

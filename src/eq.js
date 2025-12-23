@@ -23,6 +23,6 @@
 $.fn.eq = function(index) {
 
     // return the element at the specified index
-    return $(this.get(index));
+    return this._add_prev_object($(this.get(index)));
 
 }

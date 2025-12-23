@@ -275,3 +275,22 @@ $.fn._random = function(prefix) {
     return prefix + '_' + internal_counter++;
 
 }
+
+/**
+ *  Private helper method used by traversal/filtering methods to set prevObject for .end() support.
+ *
+ *  @param  {ZebraJS}   result  The ZebraJS object to set prevObject on
+ *
+ *  @return {ZebraJS}   Returns the result with prevObject set to this
+ *
+ *  @access private
+ */
+$.fn._add_prev_object = function(result) {
+
+    // store reference to the previous object so .end() can restore it
+    result.prevObject = this;
+
+    // return the result
+    return result;
+
+}

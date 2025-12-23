@@ -28,6 +28,6 @@
 $.fn.siblings = function(selector) {
 
     // get the siblings of each element in the set of matched elements, optionally filtered by a selector.
-    return this._dom_search('siblings', selector);
+    return this._add_prev_object(this._dom_search('siblings', selector));
 
 }
