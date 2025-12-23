@@ -19,6 +19,6 @@
 $.fn.first = function() {
 
     // returns the first element from the list of matched elements, as a ZebraJS object
-    return $(this[0]);
+    return this[0] ? $(this[0]) : $();
 
 }
