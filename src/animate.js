@@ -102,7 +102,7 @@ $.fn.animate = function(properties, duration, easing, callback) {
     // batch all style writes
     elements_data.forEach(function(data) {
 
-        var property, cleanup_done = false, timeout,
+        var property, cleanup_done = false, timeout, animation_data, final_properties = {},
 
             // cleanup function that handles both transitionend and timeout scenarios
             cleanup = function(e) {
@@ -117,10 +117,53 @@ $.fn.animate = function(properties, duration, easing, callback) {
                 // cleanup - remove transition property so future CSS changes don't animate unexpectedly
                 data.element.style.transition = '';
 
+                // clean up animation data
+                // (this is used in case .stop() is called on the element)
+                if ($._data_storage) {
+
+                    animation_data = $._data_storage.get(data.element);
+
+                    // if we have this data set
+                    if (animation_data) {
+
+                        // unset these values
+                        animation_data.zjs_animating = false;
+                        animation_data.zjs_animation_properties = null;
+                        animation_data.zjs_animation_cleanup = null;
+                        animation_data.zjs_animation_timeout = null;
+
+                    }
+
+                }
+
                 // call user callback if provided
                 if (callback) callback.call(data.element, e);
 
             };
+
+        // initialize WeakMap storage if needed
+        if (!$._data_storage) $._data_storage = new WeakMap();
+
+        // get data object for this element
+        animation_data = $._data_storage.get(data.element);
+
+        // if no data yet
+        if (!animation_data) {
+
+            // initialize and store now
+            animation_data = {};
+            $._data_storage.set(data.element, animation_data);
+
+        }
+
+        // prepare final properties object with units added
+        for (property in properties)
+            final_properties[property] = properties[property] + (!isNaN(properties[property]) && unitless_properties.indexOf(property) === -1 ? 'px' : '');
+
+        // store animation state for .stop() method
+        animation_data.zjs_animating = true;
+        animation_data.zjs_animation_properties = final_properties;
+        animation_data.zjs_animation_cleanup = cleanup;
 
         // explicitly set the current values of the properties we are about to animate
         for (property in properties)
@@ -133,12 +176,15 @@ $.fn.animate = function(properties, duration, easing, callback) {
         // (element removed from DOM, display:none, no actual transition, etc.)
         timeout = setTimeout(cleanup, (animation_duration * 1000) + 50);
 
+        // store timeout reference for .stop() method
+        animation_data.zjs_animation_timeout = timeout;
+
         // set the transition property
         data.element.style.transition = 'all ' + animation_duration + 's ' + animation_easing;
 
         // set the final values of the properties we are about to animate
-        for (property in properties)
-            data.element.style[property] = properties[property] + (!isNaN(properties[property]) && unitless_properties.indexOf(property) === -1 ? 'px' : '');
+        for (property in final_properties)
+            data.element.style[property] = final_properties[property];
 
     });
 
