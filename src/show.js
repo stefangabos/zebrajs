@@ -21,7 +21,7 @@ $.fn.show = function() {
     // iterate through the set of matched elements
     this.forEach(function(element) {
 
-        // unsset the "display" property
+        // unset the "display" property
         element.style.display = '';
 
     });
