@@ -133,7 +133,7 @@ $.fn._dom_insert = function(content, where) {
                 // insert a clone after each target except for the last one after which we insert the original content
                 case 'after':
                 case 'replace':
-                case 'wrap': element.parentNode.insertBefore(index < $this.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
+                case 'wrap': element.parentNode.insertBefore(index < content.length - 1 ? item.cloneNode(true) : item, element.nextSibling); break;
 
                 // add a clone to each parent except for the last one where we add the original content
                 case 'append': element.appendChild(index < $this.length - 1 ? item.cloneNode(true) : item); break;
