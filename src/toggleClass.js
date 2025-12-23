@@ -18,7 +18,7 @@
  *  // chaining
  *  elements.toggleClass('foo').css('display', 'none');
  *
- *  @param  {string}    class_name  One or more space-separated class names to be toggled for each element in the set of
+ *  @param  {string}    class_names One or more space-separated class names to be toggled for each element in the set of
  *                                  matched elements.
  *
  *  @return {ZebraJS}   Returns the set of matched elements.
@@ -27,9 +27,9 @@
  *  @alias      toggleClass
  *  @instance
  */
-$.fn.toggleClass = function(class_name) {
+$.fn.toggleClass = function(class_names) {
 
     // toggle class(es) and return the set of matched elements
-    return this._class('toggle', class_name);
+    return this._class('toggle', class_names);
 
 }

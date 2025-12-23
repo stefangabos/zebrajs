@@ -16,7 +16,7 @@
  *  // chaining
  *  elements.addClass('foo baz').css('display', 'none');
  *
- *  @param  {string}    class_name  One or more space-separated class names to be added to each element in the
+ *  @param  {string}    class_names One or more space-separated class names to be added to each element in the
  *                                  set of matched elements.
  *
  *  @return {ZebraJS}   Returns the set of matched elements.
@@ -25,9 +25,9 @@
  *  @alias      addClass
  *  @instance
  */
-$.fn.addClass = function(class_name) {
+$.fn.addClass = function(class_names) {
 
     // add class(es) and return the set of matched elements
-    return this._class('add', class_name);
+    return this._class('add', class_names);
 
 }
