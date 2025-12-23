@@ -37,7 +37,7 @@ $.each = function(array, callback) {
     var key;
 
     // if argument is an array
-    if (array.length) {
+    if (Array.isArray(array) || (array.length !== undefined && typeof array !== 'string')) {
 
         // iterate through the element in the array
         for (key = 0; key < array.length; key++)
