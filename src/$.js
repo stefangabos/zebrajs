@@ -31,7 +31,7 @@
         *   var elements = $(document.querySelectorAll('.foo'));
         *
         *   // use CSS selectors
-        *   var elements = $(input[type=text]);
+        *   var elements = $('input[type=text]');
         *
         *   // create elements
         *   var element = $('<div>').addClass('foo').appendTo($('body'));
