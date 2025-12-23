@@ -42,11 +42,8 @@ $.fn.trigger = function(event_type, data) {
     this.forEach(function(element) {
 
         // create the event
-        var event = document.createEvent('HTMLEvents');
-
-        // define the event's name
         // the event will bubble and it is cancelable
-        event.initEvent(event_type, true, true);
+        var event = new Event(event_type, { bubbles: true, cancelable: true });
 
         // if data is specified and is an object
         if (typeof data === 'object')
