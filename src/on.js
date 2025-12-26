@@ -72,13 +72,13 @@
  */
 $.fn.on = function(event_type, selector, data, callback, once) {
 
-    let namespace, actual_callback, event_data, i;
+    let namespace, actual_callback, event_data;
 
     // if event_type is given as object
     if (typeof event_type === 'object') {
 
         // iterate over all the events
-        for (i in event_type)
+        for (const i in event_type)
 
             // bind them
             this.on(i, event_type[i]);

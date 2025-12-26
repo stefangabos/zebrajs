@@ -54,8 +54,6 @@
  */
 $.fn.css = function(property, value) {
 
-    let i, computedStyle;
-
     // CSS properties that don't have a unit
     // *numeric* values for other CSS properties will be suffixed with "px", unless already suffixed with a unit
     // list taken from https://github.com/facebook/react/blob/4131af3e4bf52f3a003537ec95a1655147c81270/src/renderers/dom/shared/CSSProperty.js#L15-L59
@@ -80,7 +78,7 @@ $.fn.css = function(property, value) {
         this.forEach(element => {
 
             // iterate through the "properties" object
-            for (i in property)
+            for (const i in property)
 
                 // set each style property
                 element.style[i] = property[i] +
@@ -115,7 +113,7 @@ $.fn.css = function(property, value) {
         if (!this[0]) return undefined;
 
         // get the first element's computed styles
-        computedStyle = window.getComputedStyle(this[0]);
+        const computedStyle = window.getComputedStyle(this[0]);
 
         // return the sought property's value
         return computedStyle[property];
