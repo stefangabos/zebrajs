@@ -52,34 +52,6 @@
  */
 $.fn.animate = function(properties, duration, easing, callback) {
 
-    const unitless_properties = [
-        'animationIterationCount',
-        'columnCount',
-        'fillOpacity',
-        'flex',
-        'flexGrow',
-        'flexShrink',
-        'floodOpacity',
-        'fontWeight',
-        'gridArea',
-        'gridColumn',
-        'gridColumnEnd',
-        'gridColumnStart',
-        'gridRow',
-        'gridRowEnd',
-        'gridRowStart',
-        'lineHeight',
-        'opacity',
-        'order',
-        'orphans',
-        'stopOpacity',
-        'strokeMiterlimit',
-        'strokeOpacity',
-        'widows',
-        'zIndex',
-        'zoom'
-    ];
-
     const animation_duration = (duration === 'fast' ? 200 : (duration === 'slow' ? 600 : (typeof duration === 'number' && duration >= 0 ? duration : 400))) / 1000;
     let animation_easing = typeof easing === 'string' ? (['ease', 'ease-in', 'ease-in-out', 'ease-out', 'linear', 'swing'].includes(easing) || easing.match(/cubic\-bezier\(.*?\)/g) ? easing : 'swing') : 'swing';
     const elements_data = [];

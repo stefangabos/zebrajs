@@ -54,23 +54,6 @@
  */
 $.fn.css = function(property, value) {
 
-    // CSS properties that don't have a unit
-    // *numeric* values for other CSS properties will be suffixed with "px", unless already suffixed with a unit
-    // list taken from https://github.com/facebook/react/blob/4131af3e4bf52f3a003537ec95a1655147c81270/src/renderers/dom/shared/CSSProperty.js#L15-L59
-    const unitless_properties = [
-
-        'animationIterationCount', 'borderImageOutset', 'borderImageSlice', 'borderImageWidth', 'boxFlex',
-        'boxFlexGroup', 'boxOrdinalGroup', 'columnCount', 'columns', 'flex', 'flexGrow', 'flexPositive',
-        'flexShrink', 'flexNegative', 'flexOrder', 'gridRow', 'gridRowEnd', 'gridRowSpan', 'gridRowStart',
-        'gridColumn', 'gridColumnEnd', 'gridColumnSpan', 'gridColumnStart', 'fontWeight', 'lineClamp',
-        'lineHeight', 'opacity', 'order', 'orphans', 'tabSize', 'widows', 'zIndex', 'zoom',
-
-        // svg-related properties
-        'fillOpacity', 'floodOpacity', 'stopOpacity', 'strokeDasharray', 'strokeDashoffset',
-        'strokeMiterlimit', 'strokeOpacity', 'strokeWidth'
-
-    ];
-
     // if "property" is an object and "value" is not set
     if (typeof property === 'object')
 
