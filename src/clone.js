@@ -61,12 +61,10 @@ $.fn.clone = function(with_data_and_events, deep_with_data_and_events) {
                 event_listeners[event_type].forEach(properties => {
 
                     // if this is an event attached to element we've just cloned
-                    if (with_data_and_events && properties[0] === element) {
+                    if (with_data_and_events && properties[0] === element)
 
                         // also add the event to the clone element
                         $(clone).on(event_type + (properties[2] ? '.' + properties[2] : ''), properties[1]);
-
-                    }
 
                 });
 

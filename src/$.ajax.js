@@ -43,65 +43,63 @@
 $.ajax = function(url, options) {
 
     const defaults = {
-
-            async: true,
-            beforeSend: null,
-            cache: true,
-            complete: null,
-            data: null,
-            error: null,
-            method: 'get',
-            success: null
-
-        };
+        async: true,
+        beforeSend: null,
+        cache: true,
+        complete: null,
+        data: null,
+        error: null,
+        method: 'get',
+        success: null
+    };
 
     let httpRequest;
 
     // this callback functions is called as the AJAX call progresses
     const callback = function() {
 
-            // get the request's status
-            switch (httpRequest.readyState) {
+        // get the request's status
+        switch (httpRequest.readyState) {
 
-                // if the request is ready to be made
-                case 1:
+            // if the request is ready to be made
+            case 1:
 
-                    // if we have a callback function ready to handle this event, call it now
-                    if (typeof options.beforeSend === 'function') options.beforeSend.call(null, httpRequest, options);
+                // if we have a callback function ready to handle this event, call it now
+                if (typeof options.beforeSend === 'function') options.beforeSend.call(null, httpRequest, options);
 
-                    break;
+                break;
 
-                // if the request completed
-                case 4:
+            // if the request completed
+            case 4:
 
-                    // HTTP success status codes are in the 2xx range (200-299)
-                    // also treat "304 Not Modified" as success (cached content is valid)
-                    const is_success = (httpRequest.status >= 200 && httpRequest.status < 300) || httpRequest.status === 304;
+                // HTTP success status codes are in the 2xx range (200-299)
+                // also treat "304 Not Modified" as success (cached content is valid)
+                const is_success = (httpRequest.status >= 200 && httpRequest.status < 300) || httpRequest.status === 304;
 
-                    // if the request was successful and we have a callback function ready to handle this situation
-                    if (is_success && typeof options.success === 'function')
+                // if the request was successful and we have a callback function ready to handle this situation
+                if (is_success && typeof options.success === 'function')
 
-                        // call that function now
-                        options.success.call(null, httpRequest.responseText, httpRequest.status);
+                    // call that function now
+                    options.success.call(null, httpRequest.responseText, httpRequest.status);
 
-                    // if the request was unsuccessful and we have a callback function ready to handle this situation
-                    else if (!is_success && typeof options.error === 'function')
+                // if the request was unsuccessful and we have a callback function ready to handle this situation
+                else if (!is_success && typeof options.error === 'function')
 
-                        // call that function now
-                        options.error.call(null, httpRequest.status, httpRequest.responseText);
+                    // call that function now
+                    options.error.call(null, httpRequest.status, httpRequest.responseText);
 
-                    // if we have a callback function ready to handle the fact that the request completed (regardless if
-                    // it was successful or not)
-                    if (typeof options.complete === 'function')
+                // if we have a callback function ready to handle the fact that the request completed (regardless if
+                // it was successful or not)
+                if (typeof options.complete === 'function')
 
-                        // call that function now
-                        options.complete.call(null, httpRequest, httpRequest.status);
+                    // call that function now
+                    options.complete.call(null, httpRequest, httpRequest.status);
 
-                    break;
+                break;
 
-            }
+        }
 
-        };
+    };
 
     // helper function to recursively serialize objects and arrays
     const serialize = function(obj, prefix) {

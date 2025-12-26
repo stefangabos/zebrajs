@@ -52,22 +52,18 @@ $.fn.removeData = function(name) {
                 const element_data = $._data_storage.get(element);
 
                 // if we have data for this element
-                if (element_data && element_data[name] !== undefined) {
+                if (element_data && element_data[name] !== undefined)
 
                     // remove the specific property
                     delete element_data[name];
 
-                }
-
             }
 
             // try to remove from dataset
-            if (element.dataset && element.dataset[name] !== undefined) {
+            if (element.dataset && element.dataset[name] !== undefined)
 
                 // remove the data attribute
                 delete element.dataset[name];
-
-            }
 
         // if no name is provided, remove all data
         } else {

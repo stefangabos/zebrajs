@@ -53,32 +53,32 @@
 $.fn.animate = function(properties, duration, easing, callback) {
 
     const unitless_properties = [
-            'animationIterationCount',
-            'columnCount',
-            'fillOpacity',
-            'flex',
-            'flexGrow',
-            'flexShrink',
-            'floodOpacity',
-            'fontWeight',
-            'gridArea',
-            'gridColumn',
-            'gridColumnEnd',
-            'gridColumnStart',
-            'gridRow',
-            'gridRowEnd',
-            'gridRowStart',
-            'lineHeight',
-            'opacity',
-            'order',
-            'orphans',
-            'stopOpacity',
-            'strokeMiterlimit',
-            'strokeOpacity',
-            'widows',
-            'zIndex',
-            'zoom'
-        ];
+        'animationIterationCount',
+        'columnCount',
+        'fillOpacity',
+        'flex',
+        'flexGrow',
+        'flexShrink',
+        'floodOpacity',
+        'fontWeight',
+        'gridArea',
+        'gridColumn',
+        'gridColumnEnd',
+        'gridColumnStart',
+        'gridRow',
+        'gridRowEnd',
+        'gridRowStart',
+        'lineHeight',
+        'opacity',
+        'order',
+        'orphans',
+        'stopOpacity',
+        'strokeMiterlimit',
+        'strokeOpacity',
+        'widows',
+        'zIndex',
+        'zoom'
+    ];
 
     const animation_duration = (duration === 'fast' ? 200 : (duration === 'slow' ? 600 : (typeof duration === 'number' && duration >= 0 ? duration : 400))) / 1000;
     let animation_easing = typeof easing === 'string' ? (['ease', 'ease-in', 'ease-in-out', 'ease-out', 'linear', 'swing'].includes(easing) || easing.match(/cubic\-bezier\(.*?\)/g) ? easing : 'swing') : 'swing';
@@ -109,39 +109,39 @@ $.fn.animate = function(properties, duration, easing, callback) {
         // cleanup function that handles both transitionend and timeout scenarios
         const cleanup = function(e) {
 
-                // prevent double execution
-                if (cleanup_done) return;
-                cleanup_done = true;
+            // prevent double execution
+            if (cleanup_done) return;
+            cleanup_done = true;
 
-                // clear the timeout if it exists
-                if (timeout) clearTimeout(timeout);
+            // clear the timeout if it exists
+            if (timeout) clearTimeout(timeout);
 
-                // cleanup - remove transition property so future CSS changes don't animate unexpectedly
-                data.element.style.transition = '';
+            // cleanup - remove transition property so future CSS changes don't animate unexpectedly
+            data.element.style.transition = '';
 
-                // clean up animation data
-                // (this is used in case .stop() is called on the element)
-                if ($._data_storage) {
+            // clean up animation data
+            // (this is used in case .stop() is called on the element)
+            if ($._data_storage) {
 
-                    animation_data = $._data_storage.get(data.element);
+                animation_data = $._data_storage.get(data.element);
 
-                    // if we have this data set
-                    if (animation_data) {
+                // if we have this data set
+                if (animation_data) {
 
-                        // unset these values
-                        animation_data.zjs_animating = false;
-                        animation_data.zjs_animation_properties = null;
-                        animation_data.zjs_animation_cleanup = null;
-                        animation_data.zjs_animation_timeout = null;
-
-                    }
+                    // unset these values
+                    animation_data.zjs_animating = false;
+                    animation_data.zjs_animation_properties = null;
+                    animation_data.zjs_animation_cleanup = null;
+                    animation_data.zjs_animation_timeout = null;
 
                 }
 
-                // call user callback if provided
-                if (callback) callback.call(data.element, e);
+            }
 
-            };
+            // call user callback if provided
+            if (callback) callback.call(data.element, e);
+
+        };
 
         // initialize WeakMap storage if needed
         if (!$._data_storage) $._data_storage = new WeakMap();

@@ -58,11 +58,11 @@ $.fn.data = function(name, value) {
             // (functions, DOM elements, objects with methods)
             if (typeof value === 'function' || (typeof value === 'object' && (
 
-                    // DOM element
-                    value.nodeType ||
+                // DOM element
+                value.nodeType ||
 
-                    // array-like object with at least one DOM element
-                    (value.length !== undefined && Array.from(value).some(item => item && item.nodeType))
+                // array-like object with at least one DOM element
+                (value.length !== undefined && Array.from(value).some(item => item && item.nodeType))
 
             ))) {
 
@@ -82,12 +82,10 @@ $.fn.data = function(name, value) {
                 element_data[name] = value;
 
             // for non-complex objects
-            } else {
+            } else
 
                 // use dataset for simple values
                 element.dataset[name] = typeof value === 'object' ? JSON.stringify(value) : value;
-
-            }
 
         });
 
@@ -128,7 +126,7 @@ $.fn.data = function(name, value) {
                 value = JSON.parse(element.dataset[name]);
 
             // if the stored value is not a JSON object
-            } catch (err) {
+            } catch (e) {
 
                 // get value
                 value = element.dataset[name];

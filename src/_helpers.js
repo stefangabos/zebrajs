@@ -223,10 +223,8 @@ $.fn._dom_search = function(action, selector) {
             // and add them to the results array, skipping the current element
             result = result.concat(Array.from(selector ? parent.querySelectorAll('#' + parent.id + '>' + selector) : parent.children).filter(child => child !== element));
 
-        }
-
         // if we're looking for children
-        else if (action === 'children')
+        } else if (action === 'children')
 
             // get the element's children nodes which, optionally, match a given selector
             // and add them to the results array

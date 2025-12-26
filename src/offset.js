@@ -25,7 +25,10 @@
 $.fn.offset = function() {
 
     // return now in case of an empty selection
-    if (!this[0]) return { left: 0, top: 0 };
+    if (!this[0]) return {
+        left: 0,
+        top: 0
+    };
 
     // get the bounding box of the first element in the set of matched elements
     const box = this[0].getBoundingClientRect();

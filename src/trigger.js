@@ -43,7 +43,10 @@ $.fn.trigger = function(event_type, data) {
 
         // create the event
         // the event will bubble and it is cancelable
-        const event = new Event(event_type, { bubbles: true, cancelable: true });
+        const event = new Event(event_type, {
+            bubbles: true,
+            cancelable: true
+        });
 
         // if data is specified and is an object
         if (typeof data === 'object')
