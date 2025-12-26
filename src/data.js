@@ -56,7 +56,7 @@ $.fn.data = function(name, value) {
 
             // check if value is a complex object that can't be JSON stringified properly
             // (functions, DOM elements, objects with methods)
-            if (typeof value === 'function' || (typeof value === 'object' && (
+            if (typeof value === 'function' || (typeof value === 'object' && value !== null && (
 
                 // DOM element
                 value.nodeType ||
