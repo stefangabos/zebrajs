@@ -183,7 +183,8 @@ $.fn._dom_insert = function(content, where) {
  */
 $.fn._dom_search = function(action, selector) {
 
-    let result = [], remove_id, root, tmp;
+    let remove_id, root, tmp;
+    const result = [];
     const $this = this;
 
     // iterate through the set of matched elements
@@ -221,14 +222,14 @@ $.fn._dom_search = function(action, selector) {
 
             // get the element's parent's children nodes which, optionally, match a given selector
             // and add them to the results array, skipping the current element
-            result = result.concat(Array.from(selector ? parent.querySelectorAll('#' + parent.id + '>' + selector) : parent.children).filter(child => child !== element));
+            result.push(...Array.from(selector ? parent.querySelectorAll(`#${parent.id}>${selector}`) : parent.children).filter(child => child !== element));
 
         // if we're looking for children
         } else if (action === 'children')
 
             // get the element's children nodes which, optionally, match a given selector
             // and add them to the results array
-            result = result.concat(Array.from(selector ? root.querySelectorAll('#' + root.id + '>' + selector) : element.children));
+            result.push(...Array.from(selector ? root.querySelectorAll(`#${root.id}>${selector}`) : element.children));
 
         // if we're looking next/previous sibling
         else if (action === 'previous' || action === 'next') {
@@ -240,7 +241,7 @@ $.fn._dom_search = function(action, selector) {
             if (!selector || $(tmp).is(selector))
 
                 // add it to the results array
-                result = result.concat([tmp]);
+                result.push(tmp);
 
         }
 
