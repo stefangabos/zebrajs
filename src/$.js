@@ -4,7 +4,7 @@
 
     // we'll use this to keep track of registered event listeners
     // eslint-disable-next-line no-unused-vars
-    let event_listeners = {};
+    const event_listeners = new Map();
 
     // we'll use this when generating random IDs
     // eslint-disable-next-line no-unused-vars

@@ -140,10 +140,10 @@ $.fn.on = function(event_type, selector, data, callback, once) {
             namespace = namespace[1] || '';
 
             // if this is the first time we have this event type
-            if (undefined === event_listeners[event_type])
+            if (!event_listeners.has(event_type))
 
                 // initialize the entry for this event type
-                event_listeners[event_type] = [];
+                event_listeners.set(event_type, []);
 
             // if selector is a string
             if (typeof selector === 'string') {
@@ -227,7 +227,7 @@ $.fn.on = function(event_type, selector, data, callback, once) {
                 } else element.addEventListener(event_type, callback);
 
             // add element/callback combination to the array of events of this type
-            event_listeners[event_type].push([element, callback, namespace, actual_callback]);
+            event_listeners.get(event_type).push([element, callback, namespace, actual_callback]);
 
         });
 

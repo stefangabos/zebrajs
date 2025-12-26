@@ -63,10 +63,10 @@ $.fn._clone_data_and_events = function(element, clone) {
         elements.forEach((element, index) => {
 
             // iterate over all the existing event listeners
-            Object.keys(event_listeners).forEach(event_type => {
+            event_listeners.forEach((listeners, event_type) => {
 
                 // iterate over the events of current type
-                event_listeners[event_type].forEach(properties => {
+                listeners.forEach(properties => {
 
                     // if this is an event attached to element we've just cloned
                     if (properties[0] === element) {

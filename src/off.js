@@ -37,7 +37,7 @@
  */
 $.fn.off = function(event_type, callback) {
 
-    const event_types = event_type ? event_type.split(' ') : Object.keys(event_listeners);
+    const event_types = event_type ? event_type.split(' ') : [...event_listeners.keys()];
     const remove_all_event_handlers = !event_type;
     let namespace, index, entry, actual_event_type;
 
@@ -53,14 +53,16 @@ $.fn.off = function(event_type, callback) {
             namespace = namespace[1] || '';
 
             // if we have registered event of this type
-            if (undefined !== event_listeners[actual_event_type])
+            if (event_listeners.has(actual_event_type)) {
+
+                const listeners = event_listeners.get(actual_event_type);
 
                 // iterate through the registered events of this type
                 // we're going backwards to avoid memory leaks while iterating through an array while
                 // simultaneously splicing from it
-                for (index = event_listeners[actual_event_type].length - 1; index >= 0; index--) {
+                for (index = listeners.length - 1; index >= 0; index--) {
 
-                    entry = event_listeners[actual_event_type][index];
+                    entry = listeners[index];
 
                     // if
                     if (
@@ -81,10 +83,10 @@ $.fn.off = function(event_type, callback) {
                         element.removeEventListener(actual_event_type, entry[3] || entry[1]);
 
                         // remove entry from the event listeners array
-                        event_listeners[actual_event_type].splice(index, 1);
+                        listeners.splice(index, 1);
 
                         // if nothing left for this event type then also remove the event type's entry
-                        if (event_listeners[actual_event_type].length === 0) delete event_listeners[actual_event_type];
+                        if (listeners.length === 0) event_listeners.delete(actual_event_type);
 
                         // don't look further
                         return;
@@ -92,6 +94,8 @@ $.fn.off = function(event_type, callback) {
                     }
 
                 }
+
+            }
 
         });
 
