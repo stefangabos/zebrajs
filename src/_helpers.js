@@ -266,7 +266,7 @@ $.fn._random = function(prefix) {
     if (internal_counter > Number.MAX_VALUE) internal_counter = 0;
 
     // return a pseudo-random string by incrementing the internal counter
-    return prefix + '_' + internal_counter++;
+    return `${prefix}_${internal_counter++}`;
 
 }
 

@@ -45,7 +45,7 @@ $.fn.parents = function(selector) {
         while (!((element = element.parentNode) instanceof Document)) {
 
             // if not already in the array, add parent to the results array
-            if (!result.includes(element)) result.push(element)
+            if (!result.includes(element)) result.push(element);
 
             // if selector was specified and element matches it, don't look any further
             if (selector && _query(selector, element, 'matches')) break;

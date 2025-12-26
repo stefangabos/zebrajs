@@ -41,16 +41,13 @@
  *
  *  @private
  */
-const _query = (selector, context, mode) => {
+const _query = (selector, context = document, mode = 'all') => {
 
     // helper to warn about invalid selectors
     const err = (sel, msg) => {
         if (typeof console !== 'undefined' && console.warn)
             console.warn(`ZebraJS: Invalid selector "${sel}"${msg ? ', ' + msg : ''}`);
     };
-
-    // default to document if no context provided
-    if (!context) context = document;
 
     // default to "all" mode
     if (!mode || (mode !== 'first' && mode !== 'matches')) mode = 'all';
@@ -59,7 +56,7 @@ const _query = (selector, context, mode) => {
     // this handles the most common case: "div.foo:first", "ul > li:even", etc.
     const pseudo_pattern = /:(first|last|even|odd|eq|gt|lt|has|contains|visible|hidden|parent|header|input|text|checkbox|radio|password|submit|reset|button|file|image)\s*(\([^)]*\))?$/;
 
-    let match, pseudo_name, pseudo_arg, base_selector, elements = [], filtered = [];
+    let match, elements = [], filtered = [];
 
     try {
 
@@ -71,16 +68,14 @@ const _query = (selector, context, mode) => {
         // if the selector contains pseudo-selectors
         if ((match = selector.match(pseudo_pattern)) !== null) {
 
-            // the pseudo selector (i.e. "first")
-            pseudo_name = match[1];
-
-            // the argument of the pseudo selector (if any)
+            // the pseudo_name is the pseudo-selector (i.e. "first")
+            // pseudo_arg will be the argument of the pseudo selector (if any) (
             // i.e the "text" in ":contains(text)"
-            pseudo_arg = match[2] ? match[2].slice(1, -1) : null;
-
-            // the base CSS selector (if any) that precedes the pseudo-selector
+            // base_selector will be the base CSS selector (if any) that precedes the pseudo-selector
             // i.e. the "div > li" in "div > li:first"
-            base_selector = selector.replace(pseudo_pattern, '').trim();
+            const [, pseudo_name, pseudo_arg_raw] = match;
+            const pseudo_arg = pseudo_arg_raw?.slice(1, -1) ?? null;
+            const base_selector = selector.replace(pseudo_pattern, '').trim();
 
             // if base selector is empty after removing pseudo, use universal selector
             if (!base_selector) base_selector = '*';
@@ -195,7 +190,7 @@ const _query = (selector, context, mode) => {
                 case 'has':
 
                     // only if the argument is available
-                    if (pseudo_arg)
+                    if (pseudo_arg !== null && pseudo_arg !== undefined)
 
                         // filter for a match
                         filtered = elements.filter(el => {
@@ -212,7 +207,7 @@ const _query = (selector, context, mode) => {
                 case 'contains':
 
                     // only if the argument is available
-                    if (pseudo_arg)
+                    if (pseudo_arg !== null && pseudo_arg !== undefined)
 
                         // filter for a match
                         filtered = elements.filter(el => el.textContent.includes(pseudo_arg));

@@ -104,16 +104,15 @@ $.ajax = function(url, options) {
     // helper function to recursively serialize objects and arrays
     const serialize = function(obj, prefix) {
         const str = [];
-        let k, v, key_name;
 
-        for (k in obj)
+        for (const k in obj)
 
             if (obj.hasOwnProperty(k)) {
 
-                v = obj[k];
+                const v = obj[k];
 
                 // build the key - use prefix if available (for nested objects/arrays)
-                key_name = prefix ? prefix + '[' + k + ']' : k;
+                const key_name = prefix ? prefix + '[' + k + ']' : k;
 
                 // if value is an object or array, serialize it recursively
                 if (v !== null && typeof v === 'object' && !v.nodeType) str.push(serialize(v, key_name));

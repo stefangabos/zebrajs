@@ -37,8 +37,6 @@
  */
 $.fn.index = function(selector) {
 
-    let element, elements;
-
     // if no argument is provided
     if (undefined === selector) {
 
@@ -46,13 +44,13 @@ $.fn.index = function(selector) {
         if (this.length > 0) {
 
             // get the first element
-            element = this[0];
+            const element = this[0];
 
             // if the element has a parent
             if (element.parentNode) {
 
                 // get all child elements of the parent
-                elements = Array.from(element.parentNode.children);
+                const elements = Array.from(element.parentNode.children);
 
                 // find and return the index
                 return elements.indexOf(element);
@@ -73,10 +71,10 @@ $.fn.index = function(selector) {
         if (this.length > 0) {
 
             // get the first element
-            element = this[0];
+            const element = this[0];
 
             // get all elements matching the selector
-            elements = _query(selector, document);
+            const elements = _query(selector, document);
 
             // find and return the index
             return elements.indexOf(element);
