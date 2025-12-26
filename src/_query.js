@@ -65,8 +65,9 @@ const _query = (selector, context = document, mode = 'all') => {
 
         selector = selector.trim();
 
-        // if the selector contains pseudo-selectors
         let match;
+
+        // if the selector contains pseudo-selectors
         if ((match = selector.match(pseudo_pattern)) !== null) {
 
             // the pseudo_name is the pseudo-selector (i.e. "first")
