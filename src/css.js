@@ -100,7 +100,7 @@ $.fn.css = function(property, value) {
             if (value === false || value === null)
 
                 // remove the CSS property
-                element.style[property] = null;
+                element.style[property] = '';
 
             // set the respective style property
             else element.style[property] = value;
