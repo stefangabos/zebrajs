@@ -72,7 +72,7 @@
  */
 $.fn.on = function(event_type, selector, data, callback, once) {
 
-    let event_types, namespace, actual_callback, event_data, i;
+    let namespace, actual_callback, event_data, i;
 
     // if event_type is given as object
     if (typeof event_type === 'object') {
@@ -89,7 +89,7 @@ $.fn.on = function(event_type, selector, data, callback, once) {
     }
 
     // if more than a single event was given
-    event_types = event_type.split(' ');
+    const event_types = event_type.split(' ');
 
     // handle optional selector and data
     // case 1: selector is a function - on(event_type, callback)

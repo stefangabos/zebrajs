@@ -102,7 +102,7 @@ $.fn.animate = function(properties, duration, easing, callback) {
     // batch all style writes
     elements_data.forEach(data => {
 
-        let property, timeout, animation_data;
+        let property, animation_data;
         let cleanup_done = false;
         const final_properties = {};
 
@@ -176,7 +176,7 @@ $.fn.animate = function(properties, duration, easing, callback) {
 
         // set a timeout fallback in case transitionend never fires
         // (element removed from DOM, display:none, no actual transition, etc.)
-        timeout = setTimeout(cleanup, (animation_duration * 1000) + 50);
+        const timeout = setTimeout(cleanup, (animation_duration * 1000) + 50);
 
         // store timeout reference for .stop() method
         animation_data.zjs_animation_timeout = timeout;

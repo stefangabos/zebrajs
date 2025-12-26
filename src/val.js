@@ -31,7 +31,7 @@
  */
 $.fn.val = function(value) {
 
-    let result = [];
+    const result = [];
 
     // if "value" argument is not specified
     if (undefined === value) {

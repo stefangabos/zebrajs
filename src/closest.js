@@ -29,7 +29,7 @@
  */
 $.fn.closest = function(selector) {
 
-    let result = [];
+    const result = [];
 
     // since the checking starts with the element itself, if the element itself matches the selector return now
     if (this[0] && _query(selector, this[0], 'matches')) return this;

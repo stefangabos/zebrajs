@@ -45,20 +45,20 @@ $.fn.stop = function(clear_queue, jump_to_end) {
     // iterate over the set of matched elements
     this.forEach(element => {
 
-        let animation_data, computed_style, property, transition_property, properties_list;
+        let property, transition_property, properties_list;
         const $element = $(element);
 
         // if for whatever reason we don't have this property initialized stop now
         if (!$._data_storage) return;
 
         // get animation data stored by animate() method
-        animation_data = $._data_storage.get(element);
+        const animation_data = $._data_storage.get(element);
 
         // if no animation data found, nothing to stop
         if (!animation_data || !animation_data.zjs_animating) return;
 
         // get current computed styles to freeze or jump
-        computed_style = window.getComputedStyle(element);
+        const computed_style = window.getComputedStyle(element);
 
         // remove the "transitionend" event listener
         if (animation_data.zjs_animation_cleanup) $element.off('transitionend', animation_data.zjs_animation_cleanup);

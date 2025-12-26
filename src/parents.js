@@ -36,7 +36,7 @@
  */
 $.fn.parents = function(selector) {
 
-    let result = [];
+    const result = [];
 
     // iterate through the set of matched elements
     this.forEach(element => {

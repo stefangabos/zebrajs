@@ -39,7 +39,7 @@
  */
 $.fn.clone = function(with_data_and_events, deep_with_data_and_events) {
 
-    let result = [];
+    const result = [];
     const $this = this;
 
     // iterate over the set of matched elements
