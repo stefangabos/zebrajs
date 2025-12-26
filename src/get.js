@@ -20,7 +20,7 @@
 $.fn.get = function(index) {
 
     // handle negative indexes
-    if (index < 0) index = this.length + index;
+    if (index < 0) index = Math.max(0, elements.length + index);
 
     // return the matching DOM element
     return undefined !== this[index] ? this[index] : undefined;

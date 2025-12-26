@@ -171,7 +171,7 @@ const _query = (selector, context = document, mode = 'all') => {
                     if (pseudo_name === 'eq') {
 
                         // we're supporting negative indices (count from end)
-                        if (index < 0) index = elements.length + index;
+                        if (index < 0) index = Math.max(0, elements.length + index);
 
                         // if value is in range, extract the element at position, or empty array otherwise
                         if (index >= 0 && index < elements.length) {
