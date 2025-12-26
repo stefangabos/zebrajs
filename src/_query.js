@@ -76,7 +76,7 @@ const _query = (selector, context = document, mode = 'all') => {
             // base_selector will be the base CSS selector (if any) that precedes the pseudo-selector
             // i.e. the "div > li" in "div > li:first"
             const [, pseudo_name, pseudo_arg_raw] = match;
-            const pseudo_arg = pseudo_arg_raw?.slice(1, -1) ?? null;
+            const pseudo_arg = pseudo_arg_raw ? pseudo_arg_raw.slice(1, -1) : null;
             let base_selector = selector.replace(pseudo_pattern, '').trim();
 
             // if base selector is empty after removing pseudo, use universal selector

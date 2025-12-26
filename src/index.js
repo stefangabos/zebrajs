@@ -47,7 +47,7 @@ $.fn.index = function(selector) {
             const element = this[0];
 
             // get all child elements of the parent (or empty array if no parent)
-            const elements = Array.from(element.parentNode?.children ?? []);
+            const elements = element.parentNode ? Array.from(element.parentNode.children) : [];
 
             // find and return the index (returns -1 if empty array)
             return elements.indexOf(element);
