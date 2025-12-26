@@ -6,7 +6,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // set some data
  *  elements.data('foo', 'baz');
@@ -43,7 +43,7 @@ $.fn.data = function(name, value) {
     name = name
 
         // replace "-" followed by an ascii letter to that letter in uppercase
-        .replace(/\-([a-z])/ig, function() { return arguments[1].toUpperCase(); })
+        .replace(/\-([a-z])/ig, (match, letter) => letter.toUpperCase())
 
         // remove any left "-"
         .replace(/\-/g, '');
@@ -52,7 +52,7 @@ $.fn.data = function(name, value) {
     if (undefined !== value) {
 
         // iterate through the set of matched elements
-        this.forEach(function(element) {
+        this.forEach(element => {
 
             // check if value is a complex object that can't be JSON stringified properly
             // (functions, DOM elements, objects with methods)
@@ -62,14 +62,12 @@ $.fn.data = function(name, value) {
                     value.nodeType ||
 
                     // array-like object with at least one DOM element
-                    (value.length !== undefined && Array.prototype.some.call(value, function(item) {
-                        return item && item.nodeType;
-                    }))
+                    (value.length !== undefined && Array.from(value).some(item => item && item.nodeType))
 
             ))) {
 
                 // try to get the existing WeakMap data for the element
-                var element_data = $._data_storage.get(element);
+                let element_data = $._data_storage.get(element);
 
                 // if WeakMap data is not yet initialized
                 if (!element_data) {
@@ -103,10 +101,10 @@ $.fn.data = function(name, value) {
 
     // if we are retrieving a data value
     // iterate through the set of matched elements
-    this.some(function(element) {
+    this.some(element => {
 
         // first check if we have any data in the WeakMap associated with the element
-        var element_data = $._data_storage.get(element);
+        const element_data = $._data_storage.get(element);
 
         // if we do
         if (element_data && undefined !== element_data[name]) {

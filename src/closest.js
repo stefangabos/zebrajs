@@ -10,10 +10,10 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // get the first parent that is a div
- *  var closest = element.closest('div');
+ *  const closest = element.closest('div');
  *
  *  // chaining
  *  element.closest('div').addClass('foo');
@@ -29,22 +29,22 @@
  */
 $.fn.closest = function(selector) {
 
-    var result = [];
+    let result = [];
 
     // since the checking starts with the element itself, if the element itself matches the selector return now
-    if (this[0] && this[0].matches(selector)) return this;
+    if (this[0] && _query(selector, this[0], 'matches')) return this;
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // unless we got to the root of the DOM, get the element's parent
         while (!((element = element.parentNode) instanceof Document))
 
             // if selector was specified and element matches it, don't look any further
-            if (element.matches(selector)) {
+            if (_query(selector, element, 'matches')) {
 
                 // if not already in the array, add parent to the results array
-                if (result.indexOf(element) === -1) result.push(element);
+                if (!result.includes(element)) result.push(element);
 
                 // don't look any further
                 break;

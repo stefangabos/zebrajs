@@ -13,13 +13,13 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // get *all* the element's parent
- *  var parents = element.parents();
+ *  const parents = element.parents();
  *
  *  // get all the element's parent until the first div (including also that first div)
- *  var parents = element.parents('div');
+ *  const parents2 = element.parents('div');
  *
  *  // chaining
  *  element.parents('div').addClass('foo');
@@ -36,19 +36,19 @@
  */
 $.fn.parents = function(selector) {
 
-    var result = [];
+    let result = [];
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // unless we got to the root of the DOM, get the element's parent
         while (!((element = element.parentNode) instanceof Document)) {
 
             // if not already in the array, add parent to the results array
-            if (result.indexOf(element) === -1) result.push(element)
+            if (!result.includes(element)) result.push(element)
 
             // if selector was specified and element matches it, don't look any further
-            if (selector && element.matches(selector)) break;
+            if (selector && _query(selector, element, 'matches')) break;
 
         }
 

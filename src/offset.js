@@ -11,10 +11,10 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // get the element's position, relative to the offset parent
- *  var offset = element.offset()
+ *  const offset = element.offset()
  *
  *  @return {object}    Returns an object with the `left` and `top` properties.
  *
@@ -28,7 +28,7 @@ $.fn.offset = function() {
     if (!this[0]) return { left: 0, top: 0 };
 
     // get the bounding box of the first element in the set of matched elements
-    var box = this[0].getBoundingClientRect();
+    const box = this[0].getBoundingClientRect();
 
     // return the object with the offset
     return {

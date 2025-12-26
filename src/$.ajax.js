@@ -10,10 +10,10 @@
  *          foo: 'baz',
  *          bar: 'bax'
  *      },
- *      error: function() {
+ *      error: () => {
  *          alert('error!');
  *      },
- *      success: function() {
+ *      success: () => {
  *          alert('success!');
  *      }
  *  });
@@ -42,7 +42,7 @@
  */
 $.ajax = function(url, options) {
 
-    var defaults = {
+    const defaults = {
 
             async: true,
             beforeSend: null,
@@ -53,10 +53,12 @@ $.ajax = function(url, options) {
             method: 'get',
             success: null
 
-        }, httpRequest,
+        };
 
-        // this callback functions is called as the AJAX call progresses
-        callback = function() {
+    let httpRequest;
+
+    // this callback functions is called as the AJAX call progresses
+    const callback = function() {
 
             // get the request's status
             switch (httpRequest.readyState) {
@@ -74,7 +76,7 @@ $.ajax = function(url, options) {
 
                     // HTTP success status codes are in the 2xx range (200-299)
                     // also treat "304 Not Modified" as success (cached content is valid)
-                    var is_success = (httpRequest.status >= 200 && httpRequest.status < 300) || httpRequest.status === 304;
+                    const is_success = (httpRequest.status >= 200 && httpRequest.status < 300) || httpRequest.status === 304;
 
                     // if the request was successful and we have a callback function ready to handle this situation
                     if (is_success && typeof options.success === 'function')
@@ -99,31 +101,32 @@ $.ajax = function(url, options) {
 
             }
 
-        },
-
-        // helper function to recursively serialize objects and arrays
-        serialize = function(obj, prefix) {
-            var str = [], k, v, key_name;
-
-            for (k in obj)
-
-                if (obj.hasOwnProperty(k)) {
-
-                    v = obj[k];
-
-                    // build the key - use prefix if available (for nested objects/arrays)
-                    key_name = prefix ? prefix + '[' + k + ']' : k;
-
-                    // if value is an object or array, serialize it recursively
-                    if (v !== null && typeof v === 'object' && !v.nodeType) str.push(serialize(v, key_name));
-
-                    // otherwise, encode the key-value pair
-                    else str.push(encodeURIComponent(key_name) + '=' + encodeURIComponent(v));
-
-                }
-
-            return str.join('&');
         };
+
+    // helper function to recursively serialize objects and arrays
+    const serialize = function(obj, prefix) {
+        const str = [];
+        let k, v, key_name;
+
+        for (k in obj)
+
+            if (obj.hasOwnProperty(k)) {
+
+                v = obj[k];
+
+                // build the key - use prefix if available (for nested objects/arrays)
+                key_name = prefix ? prefix + '[' + k + ']' : k;
+
+                // if value is an object or array, serialize it recursively
+                if (v !== null && typeof v === 'object' && !v.nodeType) str.push(serialize(v, key_name));
+
+                // otherwise, encode the key-value pair
+                else str.push(encodeURIComponent(key_name) + '=' + encodeURIComponent(v));
+
+            }
+
+        return str.join('&');
+    };
 
     // if method is called with a single argument
     if (!options) {

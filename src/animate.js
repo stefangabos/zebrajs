@@ -5,12 +5,12 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // fade out
  *  elements.animate({
  *      opacity: 0
- *  }, 250, function() {
+ *  }, 250, () => {
  *      console.log('Animation is complete!');
  *  });
  *
@@ -52,7 +52,7 @@
  */
 $.fn.animate = function(properties, duration, easing, callback) {
 
-    var unitless_properties = [
+    const unitless_properties = [
             'animationIterationCount',
             'columnCount',
             'fillOpacity',
@@ -78,11 +78,11 @@ $.fn.animate = function(properties, duration, easing, callback) {
             'widows',
             'zIndex',
             'zoom'
-        ],
+        ];
 
-        animation_duration = (duration === 'fast' ? 200 : (duration === 'slow' ? 600 : (typeof duration === 'number' && duration >= 0 ? duration : 400))) / 1000,
-        animation_easing = typeof easing === 'string' ? (['ease', 'ease-in', 'ease-in-out', 'ease-out', 'linear', 'swing'].indexOf(easing) > -1 || easing.match(/cubic\-bezier\(.*?\)/g) ? easing : 'swing') : 'swing',
-        elements_data = [];
+    const animation_duration = (duration === 'fast' ? 200 : (duration === 'slow' ? 600 : (typeof duration === 'number' && duration >= 0 ? duration : 400))) / 1000;
+    let animation_easing = typeof easing === 'string' ? (['ease', 'ease-in', 'ease-in-out', 'ease-out', 'linear', 'swing'].includes(easing) || easing.match(/cubic\-bezier\(.*?\)/g) ? easing : 'swing') : 'swing';
+    const elements_data = [];
 
     // apply formulas for these easing
     if (animation_easing === 'linear') animation_easing = 'cubic-bezier(0.0, 0.0, 1.0, 1.0)';
@@ -92,7 +92,7 @@ $.fn.animate = function(properties, duration, easing, callback) {
     if (typeof easing === 'function') callback = easing;
 
     // batch all style reads to minimize reflows
-    this.forEach(function(element) {
+    this.forEach(element => {
         elements_data.push({
             element: element,
             styles: window.getComputedStyle(element)
@@ -100,12 +100,14 @@ $.fn.animate = function(properties, duration, easing, callback) {
     });
 
     // batch all style writes
-    elements_data.forEach(function(data) {
+    elements_data.forEach(data => {
 
-        var property, cleanup_done = false, timeout, animation_data, final_properties = {},
+        let property, timeout, animation_data;
+        let cleanup_done = false;
+        const final_properties = {};
 
-            // cleanup function that handles both transitionend and timeout scenarios
-            cleanup = function(e) {
+        // cleanup function that handles both transitionend and timeout scenarios
+        const cleanup = function(e) {
 
                 // prevent double execution
                 if (cleanup_done) return;
@@ -158,7 +160,7 @@ $.fn.animate = function(properties, duration, easing, callback) {
 
         // prepare final properties object with units added
         for (property in properties)
-            final_properties[property] = properties[property] + (!isNaN(properties[property]) && unitless_properties.indexOf(property) === -1 ? 'px' : '');
+            final_properties[property] = properties[property] + (!isNaN(properties[property]) && !unitless_properties.includes(property) ? 'px' : '');
 
         // store animation state for .stop() method
         animation_data.zjs_animating = true;

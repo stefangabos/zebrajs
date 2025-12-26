@@ -8,13 +8,13 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // get the element's parent
- *  var parent = element.parent();
+ *  const parent = element.parent();
  *
  *  // get the element's parent *only* if it is a div
- *  var parent = element.parent('div');
+ *  const parent2 = element.parent('div');
  *
  *  // chaining
  *  element.parent().addClass('foo');
@@ -31,13 +31,13 @@
  */
 $.fn.parent = function(selector) {
 
-    var result = [];
+    let result = [];
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // if not a detached element, no selector is provided or it is and the parent matches it, add element to the array
-        if (element.parentNode && (!selector || element.parentNode.matches(selector))) result.push(element.parentNode);
+        if (element.parentNode && (!selector || _query(selector, element.parentNode, 'matches'))) result.push(element.parentNode);
 
     });
 

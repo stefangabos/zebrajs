@@ -5,13 +5,13 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // get all the element's children
- *  var children_all = element.children();
+ *  const children_all = element.children();
  *
  *  // get all the "div" children of the element
- *  var children_filtered = element.children('div');
+ *  const children_filtered = element.children('div');
  *
  *  // chaining
  *  element.children('div').addClass('foo');

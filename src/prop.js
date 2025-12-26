@@ -6,7 +6,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // get the value of a property
  *  // for the first element in the set of matched elements
@@ -57,10 +57,10 @@ $.fn.prop = function(prop, value) {
     if (typeof prop === 'object')
 
         // iterate over the set of matched elements
-        this.forEach(function(element) {
+        this.forEach(element => {
 
             // iterate over the properties
-            for (var i in prop)
+            for (const i in prop)
 
                 // set each property
                 element[i] = prop[i];
@@ -74,7 +74,7 @@ $.fn.prop = function(prop, value) {
         if (undefined !== value)
 
             // iterate over the set of matched elements
-            this.forEach(function(element) {
+            this.forEach(element => {
 
                 // if value argument's value is FALSE or NULL
                 if (value === false || value === null) {

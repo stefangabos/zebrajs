@@ -6,7 +6,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // get the value of a computed style property
  *  // for the first element in the set of matched elements
@@ -54,30 +54,30 @@
  */
 $.fn.css = function(property, value) {
 
-    var i, computedStyle,
+    let i, computedStyle;
 
-        // CSS properties that don't have a unit
-        // *numeric* values for other CSS properties will be suffixed with "px", unless already suffixed with a unit
-        // list taken from https://github.com/facebook/react/blob/4131af3e4bf52f3a003537ec95a1655147c81270/src/renderers/dom/shared/CSSProperty.js#L15-L59
-        unitless_properties = [
+    // CSS properties that don't have a unit
+    // *numeric* values for other CSS properties will be suffixed with "px", unless already suffixed with a unit
+    // list taken from https://github.com/facebook/react/blob/4131af3e4bf52f3a003537ec95a1655147c81270/src/renderers/dom/shared/CSSProperty.js#L15-L59
+    const unitless_properties = [
 
-            'animationIterationCount', 'borderImageOutset', 'borderImageSlice', 'borderImageWidth', 'boxFlex',
-            'boxFlexGroup', 'boxOrdinalGroup', 'columnCount', 'columns', 'flex', 'flexGrow', 'flexPositive',
-            'flexShrink', 'flexNegative', 'flexOrder', 'gridRow', 'gridRowEnd', 'gridRowSpan', 'gridRowStart',
-            'gridColumn', 'gridColumnEnd', 'gridColumnSpan', 'gridColumnStart', 'fontWeight', 'lineClamp',
-            'lineHeight', 'opacity', 'order', 'orphans', 'tabSize', 'widows', 'zIndex', 'zoom',
+        'animationIterationCount', 'borderImageOutset', 'borderImageSlice', 'borderImageWidth', 'boxFlex',
+        'boxFlexGroup', 'boxOrdinalGroup', 'columnCount', 'columns', 'flex', 'flexGrow', 'flexPositive',
+        'flexShrink', 'flexNegative', 'flexOrder', 'gridRow', 'gridRowEnd', 'gridRowSpan', 'gridRowStart',
+        'gridColumn', 'gridColumnEnd', 'gridColumnSpan', 'gridColumnStart', 'fontWeight', 'lineClamp',
+        'lineHeight', 'opacity', 'order', 'orphans', 'tabSize', 'widows', 'zIndex', 'zoom',
 
-            // svg-related properties
-            'fillOpacity', 'floodOpacity', 'stopOpacity', 'strokeDasharray', 'strokeDashoffset',
-            'strokeMiterlimit', 'strokeOpacity', 'strokeWidth'
+        // svg-related properties
+        'fillOpacity', 'floodOpacity', 'stopOpacity', 'strokeDasharray', 'strokeDashoffset',
+        'strokeMiterlimit', 'strokeOpacity', 'strokeWidth'
 
-        ];
+    ];
 
     // if "property" is an object and "value" is not set
     if (typeof property === 'object')
 
         // iterate through the set of matched elements
-        this.forEach(function(element) {
+        this.forEach(element => {
 
             // iterate through the "properties" object
             for (i in property)
@@ -86,7 +86,7 @@ $.fn.css = function(property, value) {
                 element.style[i] = property[i] +
 
                     // if value does not have a unit provided and is not one of the unitless properties, add the "px" suffix
-                    (parseFloat(property[i]) === property[i] && unitless_properties.indexOf(i) === -1 ? 'px' : '');
+                    (parseFloat(property[i]) === property[i] && !unitless_properties.includes(i) ? 'px' : '');
 
         });
 
@@ -94,7 +94,7 @@ $.fn.css = function(property, value) {
     else if (undefined !== value)
 
         // iterate through the set of matched elements
-        this.forEach(function(element) {
+        this.forEach(element => {
 
             // if value argument's value is FALSE or NULL
             if (value === false || value === null)

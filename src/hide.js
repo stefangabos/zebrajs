@@ -5,7 +5,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('selector');
+ *  const element = $('selector');
  *
  *  // hide the element from the DOM
  *  element.hide();
@@ -19,7 +19,7 @@
 $.fn.hide = function() {
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // set the "display" property
         element.style.display = 'none';

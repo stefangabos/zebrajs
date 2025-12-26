@@ -6,7 +6,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // set a random class
  *  elements.addClass('foo');

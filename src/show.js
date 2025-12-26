@@ -5,7 +5,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('selector');
+ *  const element = $('selector');
  *
  *  // make element visible in the DOM
  *  element.show();
@@ -19,7 +19,7 @@
 $.fn.show = function() {
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // unset the "display" property
         element.style.display = '';

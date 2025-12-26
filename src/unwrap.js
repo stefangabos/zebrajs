@@ -8,7 +8,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // unwrap the element, whatever its parent may be
  *  element.unwrap();
@@ -28,7 +28,7 @@
 $.fn.unwrap = function(selector) {
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // get the element's parent, optionally filtered by a selector,
         // and replace it with the element

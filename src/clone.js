@@ -17,10 +17,10 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // clone element with data and events, including data and events of children
- *  var clones = element.clone(true, true)
+ *  const clones = element.clone(true, true)
  *
  *  // chaining - clone and insert into the body element
  *  element.clone(true, true).appendTo($('body'));
@@ -39,13 +39,14 @@
  */
 $.fn.clone = function(with_data_and_events, deep_with_data_and_events) {
 
-    var result = [], $this = this;
+    let result = [];
+    const $this = this;
 
     // iterate over the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // clone the element (together with its children)
-        var clone = element.cloneNode(true);
+        const clone = element.cloneNode(true);
 
         // add to array
         result.push(clone);
@@ -54,10 +55,10 @@ $.fn.clone = function(with_data_and_events, deep_with_data_and_events) {
         if (with_data_and_events) {
 
             // iterate over all the existing event listeners
-            Object.keys(event_listeners).forEach(function(event_type) {
+            Object.keys(event_listeners).forEach(event_type => {
 
                 // iterate over the events of current type
-                event_listeners[event_type].forEach(function(properties) {
+                event_listeners[event_type].forEach(properties => {
 
                     // if this is an event attached to element we've just cloned
                     if (with_data_and_events && properties[0] === element) {
@@ -75,16 +76,16 @@ $.fn.clone = function(with_data_and_events, deep_with_data_and_events) {
             if ($._data_storage) {
 
                 // do we have complex objects stored for the element?
-                var element_data = $._data_storage.get(element);
+                const element_data = $._data_storage.get(element);
 
                 // if we do
                 if (element_data) {
 
                     // create a shallow copy of the data object
                     // objects, arrays, and functions are shared (not deep cloned)
-                    var cloned_data = {}, key;
+                    const cloned_data = {};
 
-                    for (key in element_data)
+                    for (const key in element_data)
                         cloned_data[key] = element_data[key];
 
                     // store the cloned data for the cloned element

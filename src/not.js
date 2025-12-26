@@ -30,9 +30,7 @@ $.fn.not = function(selector) {
         if (Array.isArray(selector))
 
             // filter results
-            return !selector.filter(function(current_selector) {
-                return $(element).is(current_selector);
-            }).length;
+            return !selector.filter(current_selector => $(element).is(current_selector)).length;
 
         // otherwise use "is" to  filter results
         return !$(element).is(selector);

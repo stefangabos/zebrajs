@@ -6,13 +6,13 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // find the element's div descendants
- *  var target = element.find('div');
+ *  const target = element.find('div');
  *
  *  // this is equivalent with the above
- *  var target = $('div', element);
+ *  const target2 = $('div', element);
  *
  *  // chaining
  *  element.find('div').addClass('foo');
@@ -29,16 +29,16 @@
  */
 $.fn.find = function(selector) {
 
-    var result = [];
+    let result = [];
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // if selector is a ZebraJS object
         if (typeof selector === 'object' && selector.version)
 
             // iterate through the elements in the object
-            selector.forEach(function(wrapped) {
+            selector.forEach(wrapped => {
 
                 // if the elements are the same, add it to the results array
                 if (wrapped.isSameNode(element)) result.push(element);
@@ -53,15 +53,13 @@ $.fn.find = function(selector) {
 
         // selector is a string
         // get the descendants of the element that match the selector, and add them to the results array
-        } else result = result.concat(Array.prototype.slice.call(element.querySelectorAll(selector)));
+        } else result = result.concat(_query(selector, element));
 
     });
 
     // when it finds no elements, "querySelector" returns "null"
     // we'll filter those out now
-    result = result.filter(function(entry) {
-        return entry !== null;
-    });
+    result = result.filter(entry => entry !== null);
 
     // return the resulting array as a ZebraJS object
     return this._add_prev_object($(result));

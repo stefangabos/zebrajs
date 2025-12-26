@@ -1,4 +1,3 @@
-/* global _process_pseudo_selector */
 (function() {
 
     'use strict';
@@ -21,25 +20,25 @@
     *   @example
     *
     *   // select an element by ID
-    *   var element = $('#foo');
+    *   const element = $('#foo');
     *
     *   // select element by class name
-    *   var elements = $('.foo');
+    *   const elements = $('.foo');
     *
     *   // select elements by using JavaScript
-    *   var elements = $(document.querySelectorAll('.foo'));
+    *   const elements = $(document.querySelectorAll('.foo'));
     *
     *   // use CSS selectors
-    *   var elements = $('input[type=text]');
+    *   const elements = $('input[type=text]');
     *
     *   // create elements
-    *   var element = $('<div>').addClass('foo').appendTo($('body'));
+    *   const element = $('<div>').addClass('foo').appendTo($('body'));
     *
     *   // SECURITY WARNING: When creating HTML elements from strings, NEVER use untrusted user input directly.
     *   // This could lead to Cross-Site Scripting (XSS) attacks.
     *
     *   // UNSAFE - user input could contain malicious code:
-    *   // var userInput = '<img src=x onerror=alert(1)>';
+    *   // const userInput = '<img src=x onerror=alert(1)>';
     *   // $(userInput);  // XSS vulnerability!
     *
     *   // SAFE - create elements programmatically and set user data via methods:
@@ -47,7 +46,7 @@
     *   // $('<img>').attr('src', userInput);  // Safely set attributes
     *
     *   // SAFE - sanitize user input with a library like DOMPurify before creating HTML:
-    *   // var sanitized = DOMPurify.sanitize(userInput);
+    *   // const sanitized = DOMPurify.sanitize(userInput);
     *   // $(sanitized);
     *
     *   @param  {mixed}     selector        A selector to filter DOM elements from the current document. It can be a
@@ -88,7 +87,7 @@
         if (typeof selector === 'string')
 
             // if it seems that we want to *create* an HTML node
-            if (selector.indexOf('<') === 0 && selector.indexOf('>') > 1 && selector.length > 2) {
+            if (selector.startsWith('<') && selector.indexOf('>') > 1 && selector.length > 2) {
 
                 // create a dummy container
                 parent = document.createElement('div');
@@ -116,54 +115,13 @@
                 if (selector.match(/^\#[^\s]+$/)) elements.push(parent.querySelector(selector));
 
                 // if the "first_only" argument is set
-                else if (first_only)
+                else if (first_only) {
 
-                    try {
+                    result = _query(selector, parent, 'first');
+                    if (result) elements.push(result);
 
-                        // check for pseudo-selectors first
-                        result = _process_pseudo_selector(selector, parent);
-
-                        // if a pseudo-selector was used use that as the result
-                        if (result !== null && result.length > 0) elements.push(result[0]);
-
-                        // if no pseudo-selector was used use standard CSS selector
-                        else if (result === null) elements.push(parent.querySelector(selector));
-
-                    // if something went wrong (not a valid CSS selector)
-                    } catch (e) {
-
-                        // if "console" is available
-                        if (typeof console !== 'undefined' && console.warn)
-
-                            // show the warning there
-                            console.warn('ZebraJS: Invalid selector "' + selector + '"', e.message);
-
-                    }
-
-                // if the "first" argument is not set
-                else
-
-                    try {
-
-                        // check for pseudo-selectors first
-                        result = _process_pseudo_selector(selector, parent);
-
-                        // if a pseudo-selector was used use that as the result
-                        if (result !== null && result.length > 0) elements = result;
-
-                        // if no pseudo-selector was used use standard CSS selector
-                        else if (result === null) elements = Array.from(parent.querySelectorAll(selector));
-
-                    // if something went wrong (not a valid CSS selector)
-                    } catch (e) {
-
-                        // if "console" is available
-                        if (typeof console !== 'undefined' && console.warn)
-
-                            // show the warning there
-                            console.warn('ZebraJS: Invalid selector "' + selector + '"', e.message);
-
-                    }
+                // if we need all elements
+                } else elements = _query(selector, parent);
 
             }
 
@@ -177,7 +135,7 @@
         else if (selector instanceof NodeList) elements = Array.from(selector);
 
         // if selector is an array of DOM elements, add them to the elements array
-        else if (Array.isArray(selector)) elements = [...elements, ...selector];
+        else if (Array.isArray(selector)) elements = [...selector];
 
         // if the selector is a ZebraJS object, simply return it
         else if (typeof selector === 'object' && selector.version) return selector;
@@ -200,7 +158,7 @@
 
     };
 
-    // import "_pseudo_selectors.js"
+    // import "_query.js"
     // import "_helpers.js"
     // import "$.ajax.js"
     // import "$.each.js"
@@ -266,30 +224,6 @@
     // import "val.js"
     // import "width.js"
     // import "wrap.js"
-
-    // for browsers that do not support Element.matches() or Element.matchesSelector(), but carry support for
-    // document.querySelectorAll(), a polyfill exists:
-    if (!Element.prototype.matches)
-
-        Element.prototype.matches =
-
-            Element.prototype.matchesSelector ||
-            Element.prototype.mozMatchesSelector ||
-            Element.prototype.msMatchesSelector ||
-            Element.prototype.oMatchesSelector ||
-            Element.prototype.webkitMatchesSelector ||
-
-            function(s) {
-
-                const matches = (this.document || this.ownerDocument).querySelectorAll(s);
-                let i = matches.length;
-
-                // eslint-disable-next-line no-empty
-                while (--i >= 0 && matches.item(i) !== this) {}
-
-                return i > -1;
-
-            };
 
     // this is where we make the $ object available globally
     window.$ = window.jQuery = $;

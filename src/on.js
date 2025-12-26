@@ -5,10 +5,10 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // create a function
- *  var callback = function(e) {
+ *  const callback = e => {
  *      console.log('clicked!');
  *  }
  *
@@ -16,41 +16,41 @@
  *  element.on('click', callback);
  *
  *  // handle clicks on element using an anonymous function
- *  element.on('click', function(e) {
+ *  element.on('click', e => {
  *      console.log('clicked!');
  *  });
  *
  *  // namespacing, so that you can remove only certain events
- *  element.on('click.namespace', function(e) {
+ *  element.on('click.namespace', e => {
  *      console.log('clicked!');
  *  });
  *
  *  // passing data to the event handler
- *  element.on('click', { foo: 'bar' }, function(e) {
+ *  element.on('click', { foo: 'bar' }, e => {
  *      console.log(e.data.foo); // 'bar'
  *  });
  *
  *  // using delegation
  *  // handle clicks on all the "div" elements
  *  // that are children of the element
- *  element.on('click', 'div', function(e) {
+ *  element.on('click', 'div', e => {
  *      console.log('clicked!');
  *  });
  *
  *  // using delegation with data
- *  element.on('click', 'div', { userId: 123 }, function(e) {
+ *  element.on('click', 'div', { userId: 123 }, e => {
  *      console.log(e.data.userId); // 123
  *  });
  *
  *  // chaining
- *  element.on('click', function() {
+ *  element.on('click', () => {
  *      console.log('clicked!');
  *  }).addClass('foo');
  *
  *  // multiple events
  *  element.on({
- *      mouseenter: function() { ... },
- *      mouseleave: function() { ... }
+ *      mouseenter: () => { ... },
+ *      mouseleave: () => { ... }
  *  });
  *
  *  @param  {string}    event_type  One or more space-separated event types and optional namespaces, such as "click" or
@@ -72,7 +72,7 @@
  */
 $.fn.on = function(event_type, selector, data, callback, once) {
 
-    var event_types, namespace, actual_callback, event_data, i;
+    let event_types, namespace, actual_callback, event_data, i;
 
     // if event_type is given as object
     if (typeof event_type === 'object') {
@@ -112,7 +112,7 @@ $.fn.on = function(event_type, selector, data, callback, once) {
         data = undefined;
 
     // case 3: selector is a string
-    } else if (typeof selector === 'string') {
+    } else if (typeof selector === 'string')
 
         // if data is a function - on(event_type, selector, callback)
         if (typeof data === 'function') {
@@ -122,19 +122,15 @@ $.fn.on = function(event_type, selector, data, callback, once) {
             data = undefined;
 
         // if data is an object - on(event_type, selector, data, callback)
-        } else if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+        } else if (typeof data === 'object' && data !== null && !Array.isArray(data))
 
             event_data = data;
 
-        }
-
-    }
-
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // iterate through the event types we have to attach the handler to
-        event_types.forEach(function(original_event) {
+        event_types.forEach(original_event => {
 
             actual_callback = false;
 
@@ -163,13 +159,13 @@ $.fn.on = function(event_type, selector, data, callback, once) {
 
                     // walk up the DOM tree from e.target to "this" (the element the listener is attached to)
                     // to find an element that matches the selector
-                    var target = e.target;
+                    let target = e.target;
 
                     // as long as we didn't yet find the element the listener is attached to
                     while (target && target !== this) {
 
                         // if the element matches the selector
-                        if (target.matches(selector)) {
+                        if (_query(selector, target, 'matches')) {
 
                             // call the callback with the matched element as 'this'
                             callback.call(target, e);
@@ -210,7 +206,7 @@ $.fn.on = function(event_type, selector, data, callback, once) {
                 element.addEventListener(event_type, actual_callback);
 
             // registering of default event listeners
-            } else {
+            } else
 
                 // if we have event data, wrap the callback
                 if (event_data) {
@@ -229,8 +225,6 @@ $.fn.on = function(event_type, selector, data, callback, once) {
 
                 // no event data, register callback directly
                 } else element.addEventListener(event_type, callback);
-
-            }
 
             // add element/callback combination to the array of events of this type
             event_listeners[event_type].push([element, callback, namespace, actual_callback]);

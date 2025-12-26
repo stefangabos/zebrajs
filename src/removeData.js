@@ -8,7 +8,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // set some data
  *  element.data('foo', 'bar');
@@ -31,7 +31,7 @@
 $.fn.removeData = function(name) {
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // if a specific name is provided
         if (undefined !== name) {
@@ -41,7 +41,7 @@ $.fn.removeData = function(name) {
             name = name
 
                 // replace "-" followed by an ascii letter to that letter in uppercase
-                .replace(/\-([a-z])/ig, function() { return arguments[1].toUpperCase(); })
+                .replace(/\-([a-z])/ig, (match, letter) => letter.toUpperCase())
 
                 // remove any left "-"
                 .replace(/\-/g, '');
@@ -49,7 +49,7 @@ $.fn.removeData = function(name) {
             // try to remove from WeakMap storage
             if ($._data_storage) {
 
-                var element_data = $._data_storage.get(element);
+                const element_data = $._data_storage.get(element);
 
                 // if we have data for this element
                 if (element_data && element_data[name] !== undefined) {
@@ -79,10 +79,10 @@ $.fn.removeData = function(name) {
             if (element.dataset) {
 
                 // get all data attribute names
-                var keys = Object.keys(element.dataset);
+                const keys = Object.keys(element.dataset);
 
                 // remove each one
-                keys.forEach(function(key) {
+                keys.forEach(key => {
                     delete element.dataset[key];
                 });
 

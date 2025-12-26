@@ -11,10 +11,10 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // get the element's position, relative to the offset parent
- *  var position = element.position()
+ *  const position = element.position()
  *
  *  @return {object}    Returns an object with the `left` and `top` properties.
  *

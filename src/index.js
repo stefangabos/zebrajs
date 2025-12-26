@@ -15,17 +15,17 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('li');
+ *  const elements = $('li');
  *
  *  // get the index of the first element among its siblings
- *  var index = elements.index();
+ *  let index = elements.index();
  *
  *  // get the index of the first element within a selector
- *  var index = elements.index('.active');
+ *  index = elements.index('.active');
  *
  *  // get the index of a specific element within the set
- *  var element = $('li.active');
- *  var index = elements.index(element);
+ *  const element = $('li.active');
+ *  index = elements.index(element);
  *
  *  @param  {mixed}     [selector]  Can be a selector, a DOM element, or a {@link ZebraJS} object.
  *
@@ -37,7 +37,7 @@
  */
 $.fn.index = function(selector) {
 
-    var element, elements, i;
+    let element, elements;
 
     // if no argument is provided
     if (undefined === selector) {
@@ -52,7 +52,7 @@ $.fn.index = function(selector) {
             if (element.parentNode) {
 
                 // get all child elements of the parent
-                elements = Array.prototype.slice.call(element.parentNode.children);
+                elements = Array.from(element.parentNode.children);
 
                 // find and return the index
                 return elements.indexOf(element);
@@ -76,7 +76,7 @@ $.fn.index = function(selector) {
             element = this[0];
 
             // get all elements matching the selector
-            elements = Array.prototype.slice.call(document.querySelectorAll(selector));
+            elements = _query(selector, document);
 
             // find and return the index
             return elements.indexOf(element);
@@ -89,28 +89,19 @@ $.fn.index = function(selector) {
     }
 
     // if a DOM element is provided
-    if (selector instanceof Element) {
+    if (selector instanceof Element)
 
         // find the index of this element in the current set
-        for (i = 0; i < this.length; i++)
-            if (this[i] === selector) return i;
-
-        // not found
-        return -1;
-
-    }
+        return this.findIndex(el => el === selector);
 
     // if a ZebraJS object is provided
     if (typeof selector === 'object' && selector.version) {
 
         // if the object has elements
-        if (selector.length > 0) {
+        if (selector.length > 0)
 
             // find the index of the first element in the current set
-            for (i = 0; i < this.length; i++)
-                if (this[i] === selector[0]) return i;
-
-        }
+            return this.findIndex(el => el === selector[0]);
 
         // not found
         return -1;

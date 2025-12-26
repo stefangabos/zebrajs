@@ -19,10 +19,10 @@ $.fn._class = function(action, class_names) {
     class_names = class_names.split(' ');
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // iterate through the class names to add
-        class_names.forEach(function(class_name) {
+        class_names.forEach(class_name => {
 
             // add or remove class(es)
             element.classList[action === 'add' || (action === 'toggle' && !element.classList.contains(class_name)) ? 'add' : 'remove'](class_name);
@@ -52,21 +52,21 @@ $.fn._class = function(action, class_names) {
 $.fn._clone_data_and_events = function(element, clone) {
 
     // get the original element's and the clone's children
-    var elements = Array.prototype.slice.call(element.children),
-        clones = Array.prototype.slice.call(clone.children),
+    const elements = Array.from(element.children),
+        clones = Array.from(clone.children),
         $this = this;
 
     // if the original element's has any children
     if (elements && elements.length)
 
         // iterate over the original element's children
-        elements.forEach(function(element, index) {
+        elements.forEach((element, index) => {
 
             // iterate over all the existing event listeners
-            Object.keys(event_listeners).forEach(function(event_type) {
+            Object.keys(event_listeners).forEach(event_type => {
 
                 // iterate over the events of current type
-                event_listeners[event_type].forEach(function(properties) {
+                event_listeners[event_type].forEach(properties => {
 
                     // if this is an event attached to element we've just cloned
                     if (properties[0] === element) {
@@ -115,17 +115,17 @@ $.fn._clone_data_and_events = function(element, clone) {
  */
 $.fn._dom_insert = function(content, where) {
 
-    var $this = this;
+    const $this = this;
 
     // make a ZebraJS object out of whatever given as content
     content = $(content);
 
     // iterate through the set of matched elements
-    this.forEach(function(element, element_index) {
+    this.forEach((element, element_index) => {
 
         // since content is an array of DOM elements or text nodes
         // iterate over the array
-        content.forEach(function(item) {
+        content.forEach(item => {
 
             // where the content needs to be moved in the DOM
             switch (where) {
@@ -183,10 +183,11 @@ $.fn._dom_insert = function(content, where) {
  */
 $.fn._dom_search = function(action, selector) {
 
-    var result = [], remove_id, root, tmp, $this = this;
+    let result = [], remove_id, root, tmp;
+    const $this = this;
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         remove_id = false;
 
@@ -216,16 +217,11 @@ $.fn._dom_search = function(action, selector) {
         if (action === 'siblings') {
 
             // cache parent node to avoid multiple property accesses
-            var parent = element.parentNode;
+            const parent = element.parentNode;
 
             // get the element's parent's children nodes which, optionally, match a given selector
-            // and add them to the results array
-            result = result.concat(Array.prototype.filter.call(selector ? parent.querySelectorAll('#' + parent.id + '>' + selector) : parent.children, function(child) {
-
-                // skip the current element
-                return child !== element;
-
-            }));
+            // and add them to the results array, skipping the current element
+            result = result.concat(Array.from(selector ? parent.querySelectorAll('#' + parent.id + '>' + selector) : parent.children).filter(child => child !== element));
 
         }
 
@@ -234,7 +230,7 @@ $.fn._dom_search = function(action, selector) {
 
             // get the element's children nodes which, optionally, match a given selector
             // and add them to the results array
-            result = result.concat(Array.prototype.slice.call(selector ? root.querySelectorAll('#' + root.id + '>' + selector) : element.children));
+            result = result.concat(Array.from(selector ? root.querySelectorAll('#' + root.id + '>' + selector) : element.children));
 
         // if we're looking next/previous sibling
         else if (action === 'previous' || action === 'next') {

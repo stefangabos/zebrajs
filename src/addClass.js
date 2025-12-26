@@ -5,7 +5,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // add a single class
  *  elements.addClass('foo');

@@ -18,7 +18,7 @@
  *      console.log(index + ': ' + value);
  *  });
  *
- *  var obj = {
+ *  const obj = {
  *      prop1:  'value1',
  *      prop2:  'value2'
  *  };
@@ -34,7 +34,7 @@
  */
 $.each = function(array, callback) {
 
-    var key;
+    let key;
 
     // if argument is an array
     if (Array.isArray(array) || (array.length !== undefined && typeof array !== 'string')) {

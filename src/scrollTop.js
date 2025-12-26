@@ -9,7 +9,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var body = $('body');
+ *  const body = $('body');
  *
  *  // get the vertical scroll of the body
  *  body.scrollTop();
@@ -36,7 +36,7 @@ $.fn.scrollTop = function(value) {
     if (undefined === value) return this[0] instanceof Window || this[0] instanceof Document ? document.documentElement.scrollTop : this[0].scrollTop;
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // set the scrollTop value for each element
         // apply "parseFloat" in case is provided as string or suffixed with "px"

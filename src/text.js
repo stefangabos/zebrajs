@@ -6,14 +6,14 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // set the text content for all the matched elements
  *  elements.text('Hello');
  *
  *  // get the text content of the first element in the
  *  // set of matched elements (including its descendants)
- *  var content = elements.text();
+ *  const content = elements.text();
  *
  *  // chaining
  *  elements.text('Hello').addClass('foo');
@@ -36,7 +36,7 @@ $.fn.text = function(content) {
     if (undefined !== content)
 
         // iterate through the set of matched elements
-        this.forEach(function(element) {
+        this.forEach(element => {
 
             // set the text content of each element
             element.textContent = content;

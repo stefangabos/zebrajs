@@ -9,14 +9,14 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // set the HTML content for all the matched elements
  *  elements.html('<p>Hello</p>');
  *
  *  // get the HTML content of the first
  *  // element in the set of matched elements
- *  var content = elements.html();
+ *  const content = elements.html();
  *
  *  // chaining
  *  elements.html('<p>Hello</p>').addClass('foo');
@@ -39,7 +39,7 @@ $.fn.html = function(content) {
     if (undefined !== content)
 
         // iterate through the set of matched elements
-        this.forEach(function(element) {
+        this.forEach(element => {
 
             // set the HTML content of each element
             element.innerHTML = content;

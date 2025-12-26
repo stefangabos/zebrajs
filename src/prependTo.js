@@ -16,7 +16,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var parent = $('#selector');
+ *  const parent = $('#selector');
  *
  *  // prepend a div that we create on the fly
  *  $('<div>').text('hello').prependTo(parent);

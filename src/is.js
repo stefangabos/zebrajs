@@ -2,13 +2,14 @@
  *  Checks the current matched set of elements against a selector, element or ZebraJS object and returns `true` if at
  *  least one of these elements matches the given arguments.
  *
- *  > Note that, unlike jQuery, when matching selectors, this method matches only valid CSS selectors!
+ *  Supports both standard CSS selectors and jQuery filtering pseudo-selectors like `:visible`, `:hidden`, `:has()`,
+ *  `:contains()`, `:header`, `:input`, etc.
  *
  *  @example
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // returns true if the element is a "select" element
  *  console.log(element.is('select'))
@@ -25,16 +26,16 @@
  */
 $.fn.is = function(selector) {
 
-    var result = false;
+    let result = false;
 
     // iterate over the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // if
         if (
 
             // selector is a CSS selector and the current element matches the selector OR
-            (typeof selector === 'string' && element.matches(selector)) ||
+            (typeof selector === 'string' && _query(selector, element, 'matches')) ||
 
             // selector is a ZebraJS object and the current element matches the first element in the set of matched elements OR
             (typeof selector === 'object' && selector.version && element === selector[0]) ||

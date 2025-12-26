@@ -5,7 +5,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // find spans, add a class to them, then go back to the original selection
  *  element.find('span')

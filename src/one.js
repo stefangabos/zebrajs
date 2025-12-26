@@ -6,10 +6,10 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // create a function
- *  var callback = function(e) {
+ *  const callback = function(e) {
  *      console.log('clicked!');
  *  }
  *

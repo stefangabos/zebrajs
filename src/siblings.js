@@ -5,13 +5,13 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // get all the siblings of the element
- *  var siblings_all = element.siblings();
+ *  const siblings_all = element.siblings();
  *
  *  // get all the "div" siblings of the element
- *  var siblings_filtered = element.siblings('div');
+ *  const siblings_filtered = element.siblings('div');
  *
  *  // since this method returns a ZebraJS object
  *  element.siblings('div').addClass('foo');

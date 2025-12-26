@@ -6,7 +6,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // get the value of an attribute for the first
  *  // element in the set of matched elements
@@ -57,10 +57,10 @@ $.fn.attr = function(attribute, value) {
     if (typeof attribute === 'object')
 
         // iterate over the set of matched elements
-        this.forEach(function(element) {
+        this.forEach(element => {
 
             // iterate over the attributes
-            for (var i in attribute)
+            for (const i in attribute)
 
                 // set each attribute
                 element.setAttribute(i, attribute[i]);
@@ -74,7 +74,7 @@ $.fn.attr = function(attribute, value) {
         if (undefined !== value)
 
             // iterate over the set of matched elements
-            this.forEach(function(element) {
+            this.forEach(element => {
 
                 // if value argument's value is FALSE or NULL
                 if (value === false || value === null)

@@ -9,7 +9,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('#selector');
+ *  const elements = $('#selector');
  *
  *  // start an animation
  *  elements.animate({
@@ -43,9 +43,10 @@
 $.fn.stop = function(clear_queue, jump_to_end) {
 
     // iterate over the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
-        var animation_data, computed_style, property, $element = $(element), transition_property, properties_list;
+        let animation_data, computed_style, property, transition_property, properties_list;
+        const $element = $(element);
 
         // if for whatever reason we don't have this property initialized stop now
         if (!$._data_storage) return;
@@ -89,15 +90,13 @@ $.fn.stop = function(clear_queue, jump_to_end) {
                 properties_list = transition_property.split(', ');
 
                 // apply current computed values
-                properties_list.forEach(function(prop) {
+                properties_list.forEach(prop => {
 
                     // skip 'all' and 'none' keywords
                     if (prop !== 'all' && prop !== 'none') {
 
                         // convert CSS property name (e.g., 'margin-left') to camelCase (e.g., 'marginLeft')
-                        prop = prop.replace(/\-([a-z])/g, function() {
-                            return arguments[1].toUpperCase();
-                        });
+                        prop = prop.replace(/\-([a-z])/g, (match, letter) => letter.toUpperCase());
 
                         // apply the current computed value
                         element.style[prop] = computed_style[prop];

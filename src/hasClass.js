@@ -5,10 +5,10 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // check if matched elements have a certain class
- *  var class_exists = elements.hasClass('foo');
+ *  const class_exists = elements.hasClass('foo');
  *
  *  // chaining
  *  elements.toggleClass('foo');
@@ -24,13 +24,7 @@
  */
 $.fn.hasClass = function(class_name) {
 
-    // iterate through the set of matched elements
-    for (var i = 0; i < this.length; i++)
-
-        // if sought class exists, return TRUE
-        if (this[i].classList.contains(class_name)) return true;
-
-    // return FALSE if we get this far
-    return false;
+    // return TRUE if any element has the class
+    return this.some(element => element.classList.contains(class_name));
 
 }

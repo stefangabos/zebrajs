@@ -17,7 +17,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var target = $('#selector');
+ *  const target = $('#selector');
  *
  *  // insert a div that we create on the fly
  *  target.after($('<div>').text('hello'));

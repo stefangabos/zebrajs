@@ -5,12 +5,12 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('selector');
+ *  const element = $('selector');
  *
  *  // get the value of the first element in the list of matched elements
  *  // (if "element" was a select box with multiple selections allowed,
  *  // the returned value would be an array)
- *  var value = element.val();
+ *  const value = element.val();
  *
  *  // set the element's value
  *  element.val('foo');
@@ -31,7 +31,7 @@
  */
 $.fn.val = function(value) {
 
-    var result = [];
+    let result = [];
 
     // if "value" argument is not specified
     if (undefined === value) {
@@ -40,7 +40,7 @@ $.fn.val = function(value) {
         if (this[0] && this[0].tagName.toLowerCase() === 'select' && this[0].multiple) {
 
             // add each selected option to the results array
-            Array.prototype.slice.call(this[0].options).map(function(elem) {
+            Array.from(this[0].options).forEach(elem => {
 
                 if (elem.selected && !elem.disabled) result.push(elem.value)
 
@@ -58,7 +58,7 @@ $.fn.val = function(value) {
 
     // if "value" argument is specified
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // if value is not an array
         if (!Array.isArray(value))
@@ -67,7 +67,7 @@ $.fn.val = function(value) {
             element.value = value;
 
         // if value is an array, the current element is an checkbox/radio input and its value is in the array
-        else if (element.tagName.toLowerCase() === 'input' && element.type && (element.type === 'checkbox' || element.type === 'radio') && element.value && value.indexOf(element.value) > -1)
+        else if (element.tagName.toLowerCase() === 'input' && element.type && (element.type === 'checkbox' || element.type === 'radio') && element.value && value.includes(element.value))
 
             // mark the element as checked
             element.checked = true;
@@ -76,9 +76,9 @@ $.fn.val = function(value) {
         else if (element.tagName.toLowerCase() === 'select' && element.multiple)
 
             // set the "selected" attribute to each matching option
-            Array.prototype.slice.call(element.options).map(function(elem) {
+            Array.from(element.options).forEach(elem => {
 
-                if (value.indexOf(elem.value) > -1) elem.selected = true;
+                if (value.includes(elem.value)) elem.selected = true;
 
             });
 

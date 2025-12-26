@@ -28,7 +28,7 @@
 $.fn.each = function(callback) {
 
     // iterate through the set of matched elements
-    for (var i = 0; i < this.length; i++)
+    for (let i = 0; i < this.length; i++)
 
         //  apply the callback function
         if (callback.call(this[i], i, this[i]) === false) return;

@@ -6,13 +6,13 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // get the previous sibling
- *  var prev = element.prev();
+ *  const prev = element.prev();
  *
  *  // get the previous sibling only if it matches the selector
- *  var prev = element.prev('div');
+ *  const prev2 = element.prev('div');
  *
  *  // since this method returns a ZebraJS object
  *  element.prev().addClass('foo');

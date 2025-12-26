@@ -9,10 +9,10 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // remove elements from the DOM
- *  var detached = element.detach();
+ *  const detached = element.detach();
  *
  *  // add them back, together with data and events,
  *  // to the end of the body element
@@ -26,13 +26,13 @@
 */
 $.fn.detach = function() {
 
-    var result = [];
+    let result = [];
 
     // iterate over the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // the ZebraJS object
-        var $element = $(element);
+        const $element = $(element);
 
         // clone the element (deep with data and events and add it to the results array)
         result = result.concat($element.clone(true, true));

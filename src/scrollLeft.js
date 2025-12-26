@@ -9,7 +9,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var body = $('body');
+ *  const body = $('body');
  *
  *  // get the horizontal scroll of the body
  *  body.scrollLeft();
@@ -36,7 +36,7 @@ $.fn.scrollLeft = function(value) {
     if (undefined === value) return this[0] instanceof Window || this[0] instanceof Document ? document.documentElement.scrollLeft : this[0].scrollLeft;
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // set the scrollLeft value for each element
         // apply "parseFloat" in case is provided as string or suffixed with "px"

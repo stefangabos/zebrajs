@@ -6,13 +6,13 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // get the next sibling
- *  var next = element.next();
+ *  const next = element.next();
  *
  *  // get the following sibling only if it matches the selector
- *  var next = element.next('div');
+ *  const next2 = element.next('div');
  *
  *  // chaining
  *  element.next().addClass('foo');

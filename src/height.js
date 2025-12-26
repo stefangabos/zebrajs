@@ -9,7 +9,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // returns the content height of the first element in the set of matched elements
  *  elements.height();
@@ -65,12 +65,12 @@ $.fn.height = function(height) {
         );
 
     // get the first element's height, top/bottom padding and borders
-    var styles = window.getComputedStyle(this[0]),
-        offset_height = this[0].offsetHeight,
-        border_top_width = parseFloat(styles.borderTopWidth),
-        border_bottom_width = parseFloat(styles.borderBottomWidth),
-        padding_top = parseFloat(styles.paddingTop),
-        padding_bottom = parseFloat(styles.paddingBottom);
+    const styles = window.getComputedStyle(this[0]);
+    const offset_height = this[0].offsetHeight;
+    const border_top_width = parseFloat(styles.borderTopWidth);
+    const border_bottom_width = parseFloat(styles.borderBottomWidth);
+    const padding_top = parseFloat(styles.paddingTop);
+    const padding_bottom = parseFloat(styles.paddingBottom);
 
     // return height
     return offset_height - border_bottom_width - border_top_width - padding_top - padding_bottom;

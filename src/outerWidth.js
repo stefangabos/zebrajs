@@ -10,10 +10,10 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('selector');
+ *  const element = $('selector');
  *
  *  // get the element's outer width
- *  var height = element.outerWidth();
+ *  const height = element.outerWidth();
  *
  *  @param  {boolean}   [include_margins]   If set to `TRUE`, the result will also include **left** and **right**
  *                                          margins.
@@ -27,7 +27,7 @@
 $.fn.outerWidth = function(include_margins) {
 
     // get computed styles only if we need to include margins
-    var computed_styles = include_margins ? window.getComputedStyle(this[0]) : null;
+    const computed_styles = include_margins ? window.getComputedStyle(this[0]) : null;
 
     // return outer width (content + padding + border)
     return this[0].offsetWidth +

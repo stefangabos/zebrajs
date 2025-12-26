@@ -9,7 +9,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // handle clicks on element
  *  element.on('click', function(e) {
@@ -39,17 +39,17 @@
 $.fn.trigger = function(event_type, data) {
 
     // iterate through the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
         // create the event
         // the event will bubble and it is cancelable
-        var event = new Event(event_type, { bubbles: true, cancelable: true });
+        const event = new Event(event_type, { bubbles: true, cancelable: true });
 
         // if data is specified and is an object
         if (typeof data === 'object')
 
             // iterate over the object's keys
-            Object.keys(data).forEach(function(key) {
+            Object.keys(data).forEach(key => {
 
                 // attach them to the event object
                 event[key] = data[key];

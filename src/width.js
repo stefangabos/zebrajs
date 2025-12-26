@@ -9,7 +9,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // returns the content width of the first element in the set of matched elements
  *  elements.width();
@@ -65,12 +65,12 @@ $.fn.width = function(width) {
         );
 
     // get the first element's width, left/right padding and borders
-    var styles = window.getComputedStyle(this[0]),
-        offset_width = this[0].offsetWidth,
-        border_left_width = parseFloat(styles.borderLeftWidth),
-        border_right_width = parseFloat(styles.borderRightWidth),
-        padding_left = parseFloat(styles.paddingLeft),
-        padding_right = parseFloat(styles.paddingRight);
+    const styles = window.getComputedStyle(this[0]);
+    const offset_width = this[0].offsetWidth;
+    const border_left_width = parseFloat(styles.borderLeftWidth);
+    const border_right_width = parseFloat(styles.borderRightWidth);
+    const padding_left = parseFloat(styles.paddingLeft);
+    const padding_right = parseFloat(styles.paddingRight);
 
     // return width
     return offset_width - border_left_width - border_right_width - padding_left - padding_right;

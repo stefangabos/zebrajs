@@ -10,7 +10,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var element = $('#selector');
+ *  const element = $('#selector');
  *
  *  // remove the element, its children, and all attached event
  *  // handlers and data attributes associated with the elements
@@ -25,21 +25,19 @@
 $.fn.remove = function() {
 
     // iterate over the set of matched elements
-    this.forEach(function(element) {
+    this.forEach(element => {
 
-        var
+        // the element as a ZebraJS object
+        const $element = $(element);
 
-            // the element as a ZebraJS object
-            $element = $(element),
-
-            // the element's children
-            children = Array.prototype.slice.call(element.querySelectorAll('*'));
+        // the element's children
+        const children = Array.from(element.querySelectorAll('*'));
 
         // iterate over the element's children
-        children.forEach(function(child) {
+        children.forEach(child => {
 
             // the child's ZebraJS form
-            var $child = $(child);
+            let $child = $(child);
 
             // remove all event handlers
             $child.off();
@@ -54,9 +52,6 @@ $.fn.remove = function() {
 
         // remove element from the DOM (including children)
         if (element.parentNode) element.parentNode.removeChild(element);
-
-        // nullify the object to free memory
-        $element = null;
 
     });
 

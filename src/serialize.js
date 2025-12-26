@@ -13,10 +13,10 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var form = $('#form');
+ *  const form = $('#form');
  *
  *  // serialize form's elements and their values
- *  var serialized = form.serialize();
+ *  const serialized = form.serialize();
  *
  *  @return {string}    Returns the serialized form as a query string that could be sent to a server in an Ajax request.
  *
@@ -29,22 +29,23 @@ $.fn.serialize = function() {
     // return quickly if an empty selection
     if (!this[0]) return '';
 
-    var form = this[0], result = [];
+    const form = this[0];
+    const result = [];
 
     // if element is a form
     if (typeof form === 'object' && form.nodeName.toUpperCase() === 'FORM')
 
         // iterate over the form's elements
-        Array.prototype.slice.call(form.elements).forEach(function(control) {
+        Array.from(form.elements).forEach(control => {
 
             // if element has a name, it is not disabled and it is not a "file", a "reset", a "submit" not a "button"
-            if (control.name && !control.disabled && ['file', 'reset', 'submit', 'button'].indexOf(control.type) === -1)
+            if (control.name && !control.disabled && !['file', 'reset', 'submit', 'button'].includes(control.type))
 
                 // if element is a multiple select
                 if (control.type === 'select-multiple')
 
                     // iterate over the available options
-                    Array.prototype.slice.call(control.options).forEach(function(option) {
+                    Array.from(control.options).forEach(option => {
 
                         // add each selected option to the result
                         if (option.selected) result.push(encodeURIComponent(control.name) + '=' + encodeURIComponent(option.value))
@@ -52,7 +53,7 @@ $.fn.serialize = function() {
                     });
 
                 // if not a radio or a checkbox, or a checked radio/checkbox
-                else if (['checkbox', 'radio'].indexOf(control.type) === -1 || control.checked)
+                else if (!['checkbox', 'radio'].includes(control.type) || control.checked)
 
                     // add to result
                     result.push(encodeURIComponent(control.name) + '=' + encodeURIComponent(control.value));

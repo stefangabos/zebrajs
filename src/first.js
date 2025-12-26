@@ -5,10 +5,10 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // returns the first element from the list of matched elements, as a ZebraJS object
- *  var first = elements.first();
+ *  const first = elements.first();
  *
  *  @return {ZebraJS}   Returns the first element from the list of matched elements, as a ZebraJS object
  *

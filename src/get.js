@@ -5,7 +5,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('selector');
+ *  const elements = $('selector');
  *
  *  // this gets the second DOM element from the list of matched elements
  *  elements.get(1);

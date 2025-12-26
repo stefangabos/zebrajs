@@ -5,7 +5,7 @@
  *
  *  // always cache selectors
  *  // to avoid DOM scanning over and over again
- *  var elements = $('.selector');
+ *  const elements = $('.selector');
  *
  *  // assuming there are 6 elements in the set of matched elements
  *  // add the "foo" class to the 5th element
