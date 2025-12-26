@@ -86,7 +86,7 @@ const _query = (selector, context = document, mode = 'all') => {
             if (mode === 'matches') {
 
                 // if we have a positional pseudo-selector
-                if (mode === 'matches' && ['first', 'last', 'even', 'odd', 'eq', 'gt', 'lt'].includes(pseudo_name)) {
+                if (['first', 'last', 'even', 'odd', 'eq', 'gt', 'lt'].includes(pseudo_name)) {
 
                     err(`:${pseudo_name}`, 'positional pseudo-selectors not supported in .matches() context');
 
