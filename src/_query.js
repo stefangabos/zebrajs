@@ -56,7 +56,7 @@ const _query = (selector, context = document, mode = 'all') => {
     // this handles the most common case: "div.foo:first", "ul > li:even", etc.
     const pseudo_pattern = /:(first|last|even|odd|eq|gt|lt|has|contains|visible|hidden|parent|header|input|text|checkbox|radio|password|submit|reset|button|file|image)\s*(\([^)]*\))?$/;
 
-    let match, elements = [], filtered = [];
+    let elements = [], filtered = [];
 
     try {
 
@@ -66,6 +66,7 @@ const _query = (selector, context = document, mode = 'all') => {
         selector = selector.trim();
 
         // if the selector contains pseudo-selectors
+        let match;
         if ((match = selector.match(pseudo_pattern)) !== null) {
 
             // the pseudo_name is the pseudo-selector (i.e. "first")
@@ -75,7 +76,7 @@ const _query = (selector, context = document, mode = 'all') => {
             // i.e. the "div > li" in "div > li:first"
             const [, pseudo_name, pseudo_arg_raw] = match;
             const pseudo_arg = pseudo_arg_raw?.slice(1, -1) ?? null;
-            const base_selector = selector.replace(pseudo_pattern, '').trim();
+            let base_selector = selector.replace(pseudo_pattern, '').trim();
 
             // if base selector is empty after removing pseudo, use universal selector
             if (!base_selector) base_selector = '*';
