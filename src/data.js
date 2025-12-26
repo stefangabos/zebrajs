@@ -84,8 +84,24 @@ $.fn.data = function(name, value) {
             // for non-complex objects
             } else
 
-                // use dataset for simple values
-                element.dataset[name] = typeof value === 'object' ? JSON.stringify(value) : value;
+                try {
+
+                    // use dataset for simple values
+                    element.dataset[name] = typeof value === 'object' ? JSON.stringify(value) : value;
+
+                // if JSON.stringify fails (e.g., circular reference), fall back to WeakMap
+                } catch (e) {
+
+                    let element_data = $._data_storage.get(element);
+
+                    if (!element_data) {
+                        element_data = {};
+                        $._data_storage.set(element, element_data);
+                    }
+
+                    element_data[name] = value;
+
+                }
 
         });
 
