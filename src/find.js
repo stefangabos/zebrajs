@@ -53,7 +53,7 @@ $.fn.find = function(selector) {
 
         // selector is a string
         // get the descendants of the element that match the selector, and add them to the results array
-        } else result = result.concat(_query(selector, element));
+        } else result.push(..._query(selector, element));
 
     });
 
