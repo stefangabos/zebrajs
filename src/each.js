@@ -19,7 +19,7 @@
  *
  *  });
  *
- *  @return {undefined}
+ *  @return {void}
  *
  *  @memberof   ZebraJS
  *  @alias      each

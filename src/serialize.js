@@ -5,7 +5,9 @@
  *  > Only "successful controls" are serialized to the string. No submit button value is serialized since the form was
  *  not submitted using a button. For a form element's value to be included in the serialized string, the element must
  *  have a name attribute. Values from checkboxes and radio buttons (inputs of type "radio" or "checkbox") are included
- *  only if they are checked. Data from file select elements is not serialized.
+ *  only if they are checked. Data from file select elements is not serialized. Image inputs (`type="image"`) are
+ *  serialized by their value attribute if present, but click coordinates (.x/.y) are not included since this is
+ *  programmatic serialization, not an actual form submission.
  *
  *  This method creates a text string in standard URL-encoded notation.
  *

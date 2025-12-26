@@ -64,6 +64,8 @@
  *
  *  @param  {function}  callback    A function to execute when the event is triggered.
  *
+ *  @param  {boolean}   [once]      Whether the callback should be called a single time only
+ *
  *  @return {ZebraJS}   Returns the set of matched elements.
  *
  *  @memberof   ZebraJS
