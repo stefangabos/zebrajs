@@ -96,13 +96,15 @@ module.exports = function(grunt) {
                 strict:     false,      //  requires all functions to run in ECMAScript 5's strict mode
                 asi:        true,       //  suppresses warnings about missing semicolons
                 globals: {              //  white list of global variables that are not formally defined in the source code
-                    '$':                true,
-                    'alert':            true,
-                    'console':          true,
-                    'elements':         true,
-                    'internal_counter': true,
-                    'event_listeners':  true,
-                    'WeakMap':          true
+                    '$':                    true,
+                    '_query':               true,
+                    'alert':                true,
+                    'console':              true,
+                    'elements':             true,
+                    'internal_counter':     true,
+                    'event_listeners':      true,
+                    'unitless_properties':  true,
+                    'WeakMap':              true
                 },
                 browser:    true,       //  defines globals exposed by modern browsers (like `document` and `navigator`)
                 bitwise:    true,       //  prohibits the use of bitwise operators such as ^ (XOR), | (OR) and others
@@ -112,7 +114,8 @@ module.exports = function(grunt) {
                 latedef:    true,       //  this option prohibits the use of a variable before it was defined
                 nonew:      true,       //  this option prohibits the use of constructor functions without assigning them to a variable
                 loopfunc:   true,       //  allow functions to be defined inside loops
-                undef:      true        //  this option prohibits the use of explicitly undeclared variables
+                undef:      true,       //  this option prohibits the use of explicitly undeclared variables
+                esversion:  6
             },
             library: {
                 src: ['src/**/*.js']
@@ -218,6 +221,33 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['includes:library', 'sass', 'eslint', 'jshint', 'jsdoc', 'uglify', 'copy', 'includes:site', 'watch']);
+    // Custom task to escape backslashes in embedded source
+    grunt.registerTask('escape-backslashes', 'Escape backslashes in application.min.js', function() {
+        const fs = require('fs');
+        const filePath = 'docs/download/public/javascript/application.min.js';
+        let content = fs.readFileSync(filePath, 'utf8');
+
+        // Find the pattern where source variable is assigned
+        // It should match something like: O='(()=>{...very long string...})();'.replace(...)
+        const regex = /([a-zA-Z])='(\(\(\)=>\{[\s\S]+?\}\)\(\);)'\.replace\(/;
+        const match = content.match(regex);
+
+        if (match) {
+            const varName = match[1];
+            const sourceContent = match[2];
+            const escapedSource = sourceContent.replace(/\\/g, '\\\\');
+            const originalAssignment = varName + "='" + sourceContent + "'.replace(";
+            const newAssignment = varName + "='" + escapedSource + "'.replace(";
+            content = content.replace(originalAssignment, newAssignment);
+            fs.writeFileSync(filePath, content, 'utf8');
+            grunt.log.ok('Backslashes escaped successfully in variable: ' + varName);
+        } else {
+            grunt.log.error('Could not find source assignment pattern to escape');
+        }
+    });
+
+    grunt.registerTask('build-site', ['uglify:site', 'includes:site', 'escape-backslashes']);
+    grunt.registerTask('default', ['includes:library', 'sass', 'eslint', 'jshint', 'jsdoc', 'uglify', 'copy', 'build-site', 'watch']);
 
 };
+

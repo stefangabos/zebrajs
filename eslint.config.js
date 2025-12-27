@@ -77,7 +77,8 @@ module.exports = [{
         "no-unused-vars": [1, {
             "vars": "all",
             "args": "after-used",
-            "varsIgnorePattern": "[$]this"
+            "varsIgnorePattern": "[$]this",
+            "caughtErrors": "none"
         }],
         "no-useless-concat": 1,
         "no-whitespace-before-property": 1,
@@ -85,7 +86,12 @@ module.exports = [{
         "object-property-newline": ["warn", {
             "allowMultiplePropertiesPerLine": false
         }],
-        "one-var": ["warn", "always"],
+        "one-var": "off",
+        "prefer-const": ["error", {
+            "destructuring": "all",
+            "ignoreReadBeforeAssign": false
+        }],
+        "no-const-assign": "error",
         "radix": ["warn", "always"],
         "semi-spacing": ["warn", {
             "before": false,
