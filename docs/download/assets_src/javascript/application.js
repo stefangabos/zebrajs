@@ -14,36 +14,58 @@ $(document).ready(function() {
         checkboxes,
         downloadable_content = $('textarea'),
 
-        // todo: this needs to be built automatically
+        // dependencies between methods - updated to match current source code
         dependencies = {
+            // Class-related methods
             'addClass':     ['_class'],
+            'removeClass':  ['_class'],
+            'toggleClass':  ['_class'],
+
+            // DOM insertion methods
             'after':        ['_dom_insert'],
-            'ajax':         ['extend'],
             'append':       ['_dom_insert'],
             'appendTo':     ['_dom_insert'],
             'before':       ['_dom_insert'],
-            'children':     ['_dom_search', '_random'],
-            'clone':        ['_clone_data_and_events'],
-            'detach':       ['_clone_data_and_events', 'clone', 'remove'],
-            'eq':           ['get'],
-            'height':       ['css'],
             'insertAfter':  ['_dom_insert'],
             'insertBefore': ['_dom_insert'],
-            'next':         ['_dom_search', '_random', 'is'],
-            'not':          ['is'],
             'prepend':      ['_dom_insert'],
             'prependTo':    ['_dom_insert'],
-            'prev':         ['_dom_search', '_random', 'is'],
-            'removeClass':  ['_class'],
             'replaceWith':  ['_dom_insert'],
-            'siblings':     ['_dom_search', '_random'],
-            'toggleClass':  ['_class'],
-            'unwrap':       ['replaceWith', '_dom_insert', 'parent'],
+            'wrap':         ['_dom_insert'],
+
+            // Traversal/navigation methods
+            'children':     ['_dom_search', '_add_prev_object'],
+            'siblings':     ['_dom_search', '_add_prev_object'],
+            'next':         ['_dom_search', '_add_prev_object'],
+            'prev':         ['_dom_search', '_add_prev_object'],
+            'first':        ['_add_prev_object'],
+            'eq':           ['get', '_add_prev_object'],
+            'not':          ['is', '_add_prev_object'],
+            'closest':      ['_add_prev_object'],
+            'parent':       ['_add_prev_object'],
+            'parents':      ['_add_prev_object'],
+            'find':         ['_add_prev_object'],
+
+            // Element manipulation methods
+            'clone':        ['on', '_clone_data_and_events'],
+            'detach':       ['clone', 'remove'],
+            'remove':       ['off'],
+            'unwrap':       ['parent', 'replaceWith'],
+
+            // Dimension methods
+            'height':       ['css'],
             'width':        ['css'],
-            'wrap':         ['_dom_insert']
+
+            // CSS and animation methods (these need the unitless properties array)
+            'css':          ['_unitless_array'],
+            'animate':      ['one', '_unitless_array'],
+            'stop':         ['off'],
+
+            // Event methods
+            'one':          ['on']
         },
 
-        reversed_dependencies = {}, methods = {}, private_methods = {}, helper_methods = {}, script_header, script_footer,
+        reversed_dependencies = {}, methods = {}, private_methods = {}, helper_methods = {}, script_header, script_footer, unitless_array = '',
 
         // extract all the available methods
         extract_methods = function() {
@@ -59,7 +81,7 @@ $(document).ready(function() {
                 tmp += source[i];
 
                 // if we're not looking for a matching closing bracket and we found a method
-                if (matching_brackets === false && (matches = tmp.match(/\b[a-z]{1}(\.fn)?\.([^\=]+?)=function\([^\)]*?\)\{/))) {
+                if (matching_brackets === false && (matches = tmp.match(/[a-z$]{1}(\.fn)?\.([^\=]+?)\s*=\s*function\([^\)]*?\)\s*\{/))) {
 
                     // we start looking for the matching closing bracket
                     tmp = '';
@@ -80,7 +102,7 @@ $(document).ready(function() {
                     is_helper_method = matches[0].indexOf('.fn') === -1;
 
                     // this is the method's name
-                    method_name = matches[0].match(/^[a-z]{1}\.(fn\.)?(.*?)\=/)[2];
+                    method_name = matches[0].match(/^[a-z$]{1}\.(fn\.)?(.*?)\s*=/)[2];
 
                     // is this a method_name method? (starting with an underscore)
                     is_private_method = method_name.indexOf('_') === 0;
@@ -104,6 +126,19 @@ $(document).ready(function() {
 
             // the end of the main script - everything after the last method
             script_footer = tmp;
+
+            // extract the unitless properties array (between last method and script_footer)
+            var arrayMatch = script_footer.match(/,(\["animationIterationCount"[^\]]+\])/);
+            if (arrayMatch) {
+                unitless_array = arrayMatch[1];
+                // remove the array from script_footer so it's not duplicated
+                script_footer = script_footer.replace(',' + unitless_array, '');
+            } else {
+                // fallback: hardcode the unitless array if extraction fails
+                unitless_array = '["animationIterationCount","borderImageOutset","borderImageSlice","borderImageWidth","boxFlex","boxFlexGroup","boxOrdinalGroup","columnCount","columns","flex","flexGrow","flexNegative","flexOrder","flexPositive","flexShrink","fontWeight","lineClamp","lineHeight","gridArea","gridColumn","gridColumnEnd","gridColumnSpan","gridColumnStart","gridRow","gridRowEnd","gridRowSpan","gridRowStart","opacity","order","orphans","tabSize","widows","zIndex","zoom","fillOpacity","floodOpacity","stopOpacity","strokeDasharray","strokeDashoffset","strokeMiterlimit","strokeOpacity","strokeWidth"]';
+            }
+            // always store it for the dependency system
+            helper_methods['_unitless_array'] = unitless_array;
 
         },
 
@@ -195,8 +230,13 @@ $(document).ready(function() {
                     // if this is not the "$" module (which we're adding via script_header and script_footer)
                     if (id !== '$')
 
+                        // special handling for unitless array
+                        if (id === '_unitless_array') {
+                            if (unitless_array) helper_methods_code += (helper_methods_code !== '' ? ',' : '') + unitless_array;
+                        }
+
                         // helper methods go to the end, so add them to a different place
-                        if ($(this).next('strong').text().match(/^\$/) && helper_methods[id]) helper_methods_code += (helper_methods_code !== '' ? ',' : '') + helper_methods[id];
+                        else if ($(this).next('strong').text().match(/^\$/) && helper_methods[id]) helper_methods_code += (helper_methods_code !== '' ? ',' : '') + helper_methods[id];
 
                         // add module's source to the existing source code
                         else code += ',' + (id.indexOf('_') === 0 ? private_methods[id] : methods[id]);
@@ -206,7 +246,7 @@ $(document).ready(function() {
 
             });
 
-            // add helper methods, if any, and the script's footer
+            // add helper methods and the script's footer
             code += ',' + helper_methods_code + (helper_methods_code === '' ? script_footer.substring(1) : script_footer);
 
             // if we have a global object name
@@ -230,7 +270,9 @@ $(document).ready(function() {
     block = $('.well', $(parse_template({
         method: '$',
         size: script_header.length + script_footer.length,
-        prefix: ''
+        prefix: '',
+        readonly: '',
+        doclink: ''
 
     // ...and add it to the section of required modules
     }))).appendTo($('.required-modules'));
@@ -245,11 +287,15 @@ $(document).ready(function() {
     // iterate over the available public methods
     Object.keys(methods).sort().forEach(function(i) {
 
+        var method_name = methods[i].match(/^[a-z$]{1}\.fn\.(.*?)\s*=/)[1];
+
         // generate the HTML for the module, based on the template
         block = $(parse_template({
-            method: methods[i].match(/^[a-z]{1}\.fn\.(.*?)\=/)[1],
+            method: method_name,
             size: methods[i].length + 1, // the ',' prefix
-            prefix: ''
+            prefix: '',
+            readonly: '',
+            doclink: ' | <a href="../ZebraJS.html#' + method_name + '">documentation</a>'
 
         // ...and add it to the section of optional modules
         })).appendTo(modules_container);
@@ -259,11 +305,18 @@ $(document).ready(function() {
     // iterate over the available helper methods
     Object.keys(helper_methods).sort().forEach(function(i) {
 
+        // skip the unitless array - it will be added as a private method
+        if (i === '_unitless_array') return;
+
+        var method_name = helper_methods[i].match(/^[a-z$]{1}\.(.*?)\s*=/)[1];
+
         // generate the HTML for the module, based on the template
         block = $(parse_template({
-            method: helper_methods[i].match(/^[a-z]{1}\.(.*?)\=/)[1],
+            method: method_name,
             size: helper_methods[i].length + 1, // the ',' prefix
-            prefix: '$.'
+            prefix: '$.',
+            readonly: '',
+            doclink: ' | <a href="../ZebraJS.html#' + method_name + '">documentation</a>'
 
         // ...and add it to the section of optional modules
         })).appendTo(helper_modules_container);
@@ -273,16 +326,32 @@ $(document).ready(function() {
     // iterate over the available private methods
     Object.keys(private_methods).sort().forEach(function(i) {
 
+        var method_name = private_methods[i].match(/^[a-z$]{1}\.fn\.(.*?)\s*=/)[1];
+
         // generate the HTML for the module, based on the template
         block = $(parse_template({
-            method: private_methods[i].match(/^[a-z]{1}\.fn\.(.*?)\=/)[1],
+            method: method_name,
             size: private_methods[i].length + 1, // the ',' prefix
-            prefix: ''
+            prefix: '',
+            readonly: 'readonly',
+            doclink: ''
 
         // ...and add it to the section of optional modules
         })).appendTo(private_modules_container);
 
     });
+
+    // add the unitless array as a special private "method" - always visible
+    block = $(parse_template({
+        method: 'unitless properties',
+        size: unitless_array ? unitless_array.length + 1 : 584, // fallback if extraction fails
+        prefix: '',
+        readonly: 'readonly',
+        doclink: ''
+    })).appendTo(private_modules_container);
+
+    // Update the checkbox ID to match the dependency system
+    $('input', block).attr('id', 'method__unitless_array');
 
     // the wells containing the checkboxes
     wells = $('.well');
