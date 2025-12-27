@@ -14,9 +14,10 @@ $(document).ready(function() {
         checkboxes,
         downloadable_content = $('textarea'),
 
-        // dependencies between methods - updated to match current source code
+        // dependencies between methods
         dependencies = {
-            // Class-related methods
+
+            // class-related methods
             'addClass':     ['_class'],
             'removeClass':  ['_class'],
             'toggleClass':  ['_class'],
@@ -33,7 +34,7 @@ $(document).ready(function() {
             'replaceWith':  ['_dom_insert'],
             'wrap':         ['_dom_insert'],
 
-            // Traversal/navigation methods
+            // traversal/navigation methods
             'children':     ['_dom_search', '_add_prev_object'],
             'siblings':     ['_dom_search', '_add_prev_object'],
             'next':         ['_dom_search', '_add_prev_object'],
@@ -46,26 +47,27 @@ $(document).ready(function() {
             'parents':      ['_add_prev_object'],
             'find':         ['_add_prev_object'],
 
-            // Element manipulation methods
+            // element manipulation methods
             'clone':        ['on', '_clone_data_and_events'],
             'detach':       ['clone', 'remove'],
             'remove':       ['off'],
             'unwrap':       ['parent', 'replaceWith'],
 
-            // Dimension methods
+            // dimension methods
             'height':       ['css'],
             'width':        ['css'],
 
             // CSS and animation methods (these need the unitless properties array)
-            'css':          ['_unitless_array'],
-            'animate':      ['one', '_unitless_array'],
+            'css':          ['_unitless_properties'],
+            'animate':      ['one', '_unitless_properties'],
             'stop':         ['off'],
 
             // Event methods
             'one':          ['on']
+
         },
 
-        reversed_dependencies = {}, methods = {}, private_methods = {}, helper_methods = {}, script_header, script_footer, unitless_array = '',
+        reversed_dependencies = {}, methods = {}, private_methods = {}, helper_methods = {}, script_header, script_footer, unitless_properties = '',
 
         // extract all the available methods
         extract_methods = function() {
@@ -127,18 +129,8 @@ $(document).ready(function() {
             // the end of the main script - everything after the last method
             script_footer = tmp;
 
-            // extract the unitless properties array (between last method and script_footer)
-            var arrayMatch = script_footer.match(/,(\["animationIterationCount"[^\]]+\])/);
-            if (arrayMatch) {
-                unitless_array = arrayMatch[1];
-                // remove the array from script_footer so it's not duplicated
-                script_footer = script_footer.replace(',' + unitless_array, '');
-            } else {
-                // fallback: hardcode the unitless array if extraction fails
-                unitless_array = '["animationIterationCount","borderImageOutset","borderImageSlice","borderImageWidth","boxFlex","boxFlexGroup","boxOrdinalGroup","columnCount","columns","flex","flexGrow","flexNegative","flexOrder","flexPositive","flexShrink","fontWeight","lineClamp","lineHeight","gridArea","gridColumn","gridColumnEnd","gridColumnSpan","gridColumnStart","gridRow","gridRowEnd","gridRowSpan","gridRowStart","opacity","order","orphans","tabSize","widows","zIndex","zoom","fillOpacity","floodOpacity","stopOpacity","strokeDasharray","strokeDashoffset","strokeMiterlimit","strokeOpacity","strokeWidth"]';
-            }
-            // always store it for the dependency system
-            helper_methods['_unitless_array'] = unitless_array;
+            // extract the unitless properties array
+            unitless_properties = source.match(/,(\["animationIterationCount"[^\]]+\])/)[1];
 
         },
 
@@ -231,8 +223,8 @@ $(document).ready(function() {
                     if (id !== '$')
 
                         // special handling for unitless array
-                        if (id === '_unitless_array') {
-                            if (unitless_array) helper_methods_code += (helper_methods_code !== '' ? ',' : '') + unitless_array;
+                        if (id === '_unitless_properties') {
+                            if (unitless_properties) helper_methods_code += (helper_methods_code !== '' ? ',' : '') + unitless_properties;
                         }
 
                         // helper methods go to the end, so add them to a different place
@@ -305,9 +297,6 @@ $(document).ready(function() {
     // iterate over the available helper methods
     Object.keys(helper_methods).sort().forEach(function(i) {
 
-        // skip the unitless array - it will be added as a private method
-        if (i === '_unitless_array') return;
-
         var method_name = helper_methods[i].match(/^[a-z$]{1}\.(.*?)\s*=/)[1];
 
         // generate the HTML for the module, based on the template
@@ -316,7 +305,7 @@ $(document).ready(function() {
             size: helper_methods[i].length + 1, // the ',' prefix
             prefix: '$.',
             readonly: '',
-            doclink: ' | <a href="../ZebraJS.html#' + method_name + '">documentation</a>'
+            doclink: ' | <a href="../ZebraJS.html#$.' + method_name + '">documentation</a>'
 
         // ...and add it to the section of optional modules
         })).appendTo(helper_modules_container);
@@ -341,17 +330,17 @@ $(document).ready(function() {
 
     });
 
-    // add the unitless array as a special private "method" - always visible
+    // add the unitless array
     block = $(parse_template({
-        method: 'unitless properties',
-        size: unitless_array ? unitless_array.length + 1 : 584, // fallback if extraction fails
+        method: '_unitless_properties',
+        size: unitless_properties.length + 1,
         prefix: '',
-        readonly: 'readonly',
+        readonly: '',
         doclink: ''
     })).appendTo(private_modules_container);
 
-    // Update the checkbox ID to match the dependency system
-    $('input', block).attr('id', 'method__unitless_array');
+    // update the checkbox ID to match the dependency system
+    $('input', block).attr('id', 'method__unitless_properties');
 
     // the wells containing the checkboxes
     wells = $('.well');
