@@ -6,11 +6,36 @@
 
 [![npm](https://img.shields.io/npm/v/@stefangabos/zebra_js)](https://www.npmjs.com/package/@stefangabos/zebra_js) [![Total](https://img.shields.io/npm/dt/@stefangabos/zebra_js)](https://www.npmjs.com/package/@stefangabos/zebra_js) [![Monthly](https://img.shields.io/npm/dm/@stefangabos/zebra_js)](https://www.npmjs.com/package/@stefangabos/zebra_js) [![](https://data.jsdelivr.com/v1/package/npm/@stefangabos/zebra_js/badge)](https://www.jsdelivr.com/package/npm/@stefangabos/zebra_js) [![License](https://img.shields.io/npm/l/@stefangabos/zebra_js)](https://github.com/stefangabos/@stefangabos/zebra_js/blob/master/LICENSE.md)
 
-A truly modular, jQuery compatible, ultra-lightweight (**13Kb minified, 4Kb gzipped**), JavaScript micro-library for modern browsers (IE 10+) meant to simplify the interaction with the DOM in the *post-jQuery* world, now that there are there are less and less differences between how browsers handle various JavaScript-related aspects and offer native support for most of the things that [jQuery](http://jquery.com/) had to tackle and take care for us, behind the scenes, since its first release [back in 2006](https://en.wikipedia.org/wiki/JQuery).
+**ZebraJS** is a truly modular, jQuery-compatible, ultra-lightweight (**~20Kb minified, ~7Kb gzipped**) JavaScript micro-library designed for modern browsers. It brings the familiar, intuitive syntax of jQuery to the modern web while leveraging native browser capabilities for superior performance and a dramatically smaller footprint.
 
-Nevertheless, the need for a library to handle common tasks needed when interacting with the DOM becomes obvious for anyone writing JavaScript on a daily basis, as there's quite some code to write to handle various aspects of DOM manipulation.
+In today's web development landscape, browsers have converged on standards and natively support many features that jQuery pioneered. However, writing vanilla JavaScript for DOM manipulation remains verbose and repetitive. ZebraJS bridges this gap perfectly - offering jQuery's developer-friendly API powered by modern, efficient native browser methods.
 
-**ZebraJS** retains [jQuery](http://jquery.com/)'s intuitive and simple syntax but the code behind is largely inspired from the excellent [You Don't Need jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery) GitHub repository as well as the documentation on [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web), and makes use of the modern browsers' improved support for manipulating DOM elements. Also, in line with the modern age's pursuit for byte saving, ZebraJS allows you to build [customized versions](https://stefangabos.github.io/zebrajs/download/) of the library and include just the bits you need.
+## :zap: Why ZebraJS?
+
+### Lightweight & Modular
+- **Drastically smaller** than jQuery - full library is only ~20Kb minified (~7Kb gzipped)
+- **Truly modular** - build custom versions with only the methods you need via the [online builder](https://stefangabos.github.io/zebrajs/download/)
+- **Tree-shakeable** when used with modern bundlers
+- Perfect for projects where jQuery is overkill but vanilla JS is too verbose
+
+### jQuery-Compatible Syntax
+- **Familiar API** - if you know jQuery, you know ZebraJS
+- **Drop-in replacement** for many common jQuery use cases
+- **Easy migration** from jQuery projects without rewriting your code
+- Retains the intuitive chaining and selector syntax developers love
+
+### Modern & Performant
+- **Native browser APIs** under the hood for optimal performance
+- **Modern ES6+ syntax** - leverages arrow functions, template literals, and other modern JavaScript features
+- Built for **modern browsers** without legacy baggage
+- Leverages **querySelector/querySelectorAll** for fast, standards-based DOM selection
+- Clean, maintainable codebase inspired by [You Don't Need jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery)
+
+### Production-Ready
+- **Well-documented** with comprehensive API documentation
+- **Actively maintained** with regular updates
+- **NPM package** available for easy integration
+- **CDN-hosted** via JSDelivr for quick prototyping
 
 ## :notebook_with_decorative_cover: Documentation
 
@@ -75,7 +100,7 @@ Once you grab hold of one or more elements (we call this *wrapping elements* bec
 
 I use this to fuel my (small) pet projects where jQuery is overkill and plain JavaScript is too verbose. Also, more often than not, I just need very little from jQuery, and hence the modular approach.
 
-Keep in mind that this library is currently in its infancy so adjust your expectations accordingly.
+Keep in mind that this library is currently work-in-progress so adjust your expectations accordingly.
 
 ## Contributing
 
